@@ -30,12 +30,6 @@ export default function HeroSection() {
 
       {/* Content */}
       <div className="container-custom relative z-10 text-center pt-20">
-        <ScrollReveal delay={0}>
-          <span className="inline-block px-4 py-1.5 rounded-full bg-accent text-accent-foreground text-sm font-semibold mb-6 shadow-lg shadow-accent/20">
-            ⭐ Terakreditasi {siteSettings.akreditasi}
-          </span>
-        </ScrollReveal>
-
         <ScrollReveal delay={0.1}>
           <p className="text-white/80 text-base md:text-lg mb-2 font-medium">
             Selamat Datang di
