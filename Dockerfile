@@ -5,7 +5,7 @@ WORKDIR /app
 
 # Install deps (layer caching)
 COPY package.json package-lock.json* ./
-RUN npm ci --omit=dev
+RUN npm ci
 
 COPY . .
 
