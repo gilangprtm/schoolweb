@@ -139,9 +139,9 @@ export default function Footer() {
                 >
                   <MapPin className="size-4 mt-0.5 shrink-0 text-neutral-500 group-hover:text-primary transition-colors" />
                   <span>
-                    Jl. Pendidikan No. 17, Denpasar,
+                    Jl. Nagasari, Penatih, Kec. Denpasar Tim.,
                     <br />
-                    Denpasar, Bali 80235
+                    Kota Denpasar, Bali
                   </span>
                 </a>
               </li>
@@ -174,19 +174,15 @@ export default function Footer() {
             <div className="space-y-2 text-sm text-neutral-400">
               <div className="flex justify-between">
                 <span>Senin — Kamis</span>
-                <span className="text-neutral-300">07:00 — 15:00</span>
+                <span className="text-neutral-300">07:00 — 14:00</span>
               </div>
               <div className="flex justify-between">
                 <span>Jumat</span>
-                <span className="text-neutral-300">07:00 — 11:30</span>
-              </div>
-              <div className="flex justify-between">
-                <span>Sabtu</span>
                 <span className="text-neutral-300">07:00 — 12:00</span>
               </div>
               <div className="flex justify-between">
-                <span>Minggu</span>
-                <span className="text-neutral-300">Tutup</span>
+                <span>Sabtu — Minggu</span>
+                <span className="text-neutral-300">Libur</span>
               </div>
             </div>
             <div className="mt-6">
