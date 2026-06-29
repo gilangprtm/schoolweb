@@ -5,12 +5,12 @@
 - Verdict: corpus is large enough that graph structure adds value.
 
 ## Summary
-- 831 nodes · 1333 edges · 107 communities (56 shown, 51 thin omitted)
-- Extraction: 98% EXTRACTED · 2% INFERRED · 0% AMBIGUOUS · INFERRED: 25 edges (avg confidence: 0.81)
+- 821 nodes · 1478 edges · 95 communities (46 shown, 49 thin omitted)
+- Extraction: 98% EXTRACTED · 2% INFERRED · 0% AMBIGUOUS · INFERRED: 35 edges (avg confidence: 0.81)
 - Token cost: 0 input · 0 output
 
 ## Graph Freshness
-- Built from commit: `4288c39e`
+- Built from commit: `347d2118`
 - Run `git rev-parse HEAD` and compare to check if the graph is stale.
 - Run `graphify update .` after code changes (no API cost).
 
@@ -87,38 +87,29 @@
 - [[_COMMUNITY_Community 71|Community 71]]
 - [[_COMMUNITY_Community 72|Community 72]]
 - [[_COMMUNITY_Community 73|Community 73]]
-- [[_COMMUNITY_Community 74|Community 74]]
-- [[_COMMUNITY_Community 75|Community 75]]
-- [[_COMMUNITY_Community 76|Community 76]]
-- [[_COMMUNITY_Community 77|Community 77]]
 - [[_COMMUNITY_Community 78|Community 78]]
 - [[_COMMUNITY_Community 79|Community 79]]
-- [[_COMMUNITY_Community 80|Community 80]]
 - [[_COMMUNITY_Community 81|Community 81]]
 - [[_COMMUNITY_Community 82|Community 82]]
+- [[_COMMUNITY_Community 86|Community 86]]
 - [[_COMMUNITY_Community 87|Community 87]]
 - [[_COMMUNITY_Community 88|Community 88]]
 - [[_COMMUNITY_Community 89|Community 89]]
 - [[_COMMUNITY_Community 90|Community 90]]
-- [[_COMMUNITY_Community 91|Community 91]]
 - [[_COMMUNITY_Community 92|Community 92]]
-- [[_COMMUNITY_Community 93|Community 93]]
 - [[_COMMUNITY_Community 94|Community 94]]
 - [[_COMMUNITY_Community 95|Community 95]]
-- [[_COMMUNITY_Community 96|Community 96]]
 - [[_COMMUNITY_Community 97|Community 97]]
 - [[_COMMUNITY_Community 98|Community 98]]
 - [[_COMMUNITY_Community 99|Community 99]]
 - [[_COMMUNITY_Community 100|Community 100]]
 - [[_COMMUNITY_Community 101|Community 101]]
 - [[_COMMUNITY_Community 102|Community 102]]
-- [[_COMMUNITY_Community 103|Community 103]]
-- [[_COMMUNITY_Community 104|Community 104]]
 - [[_COMMUNITY_Community 106|Community 106]]
 
 ## God Nodes (most connected - your core abstractions)
-1. `cn()` - 51 edges
-2. `useToast()` - 39 edges
+1. `cn()` - 55 edges
+2. `useToast()` - 41 edges
 3. `Button()` - 25 edges
 4. `PageHeader()` - 23 edges
 5. `Input()` - 19 edges
@@ -131,14 +122,14 @@
 ## Surprising Connections (you probably didn't know these)
 - `Technology Stack (Next.js, PostgreSQL, Tailwind, Drizzle, Better Auth)` --shares_data_with--> `Frontend Implementation Plan`  [INFERRED]
   PRD.md → FRONTEND_PLAN.md
-- `Server Components to PostgreSQL Data Flow` --conceptually_related_to--> `Coolify VPS Full-Stack Architecture`  [INFERRED]
-  FRONTEND_PLAN.md → PRD.md
-- `AchievementDetailPage()` --calls--> `formatDate()`  [INFERRED]
-  src/app/(public)/prestasi/[slug]/page.tsx → src/lib/utils.ts
-- `AkunEditPage()` --calls--> `useToast()`  [INFERRED]
-  src/app/admin/akun/[id]/page.tsx → src/components/admin/ui/Toast.tsx
-- `AkunBaruPage()` --calls--> `useToast()`  [INFERRED]
-  src/app/admin/akun/baru/page.tsx → src/components/admin/ui/Toast.tsx
+- `BeritaPage()` --calls--> `useToast()`  [INFERRED]
+  src/app/admin/berita/page.tsx → src/components/admin/ui/Toast.tsx
+- `FasilitasPage()` --calls--> `useToast()`  [INFERRED]
+  src/app/admin/fasilitas/page.tsx → src/components/admin/ui/Toast.tsx
+- `GaleriPage()` --calls--> `useToast()`  [INFERRED]
+  src/app/admin/galeri/page.tsx → src/components/admin/ui/Toast.tsx
+- `PrestasiPage()` --calls--> `useToast()`  [INFERRED]
+  src/app/admin/prestasi/page.tsx → src/components/admin/ui/Toast.tsx
 
 ## Import Cycles
 - None detected.
@@ -147,23 +138,23 @@
 - **Graphify Pipeline Stages** — graphify_skill_pipeline, graphify_extraction, graphify_community_analysis [EXTRACTED 1.00]
 - **School Website Public Frontend** — frontend_landing_pages, frontend_shared_components, frontend_home_page, frontend_data_flow, frontend_plan_design_system [INFERRED 0.95]
 
-## Communities (107 total, 51 thin omitted)
+## Communities (95 total, 49 thin omitted)
 
 ### Community 0 - "App Pages & Shared UI"
-Cohesion: 0.09
-Nodes (20): MobileMenuProps, NavItem, NAV_ITEMS, Navbar(), cn(), EmptyState(), EmptyStateProps, Pagination() (+12 more)
+Cohesion: 0.06
+Nodes (30): navItems, Sidebar(), SidebarProps, StatCard(), StatCardProps, MobileMenuProps, NavItem, NAV_ITEMS (+22 more)
 
 ### Community 1 - "Staff & Homepage Data"
 Cohesion: 0.18
-Nodes (8): HeroSection(), LocationSection(), HIGHLIGHTS, WelcomeSection(), CTAButton(), CTAButtonProps, SectionHeading(), SectionHeadingProps
+Nodes (10): getAllSettings(), getActiveStaff(), HeroSection(), LocationSection(), HIGHLIGHTS, WelcomeSection(), CTAButton(), CTAButtonProps (+2 more)
 
 ### Community 2 - "Content Pages & Galleries"
-Cohesion: 0.12
-Nodes (19): FacilityGalleryProps, PhotoAlbum(), VideoItem(), AchievementCategory, ContactMessage, FacilityPhoto, Gallery, GalleryType (+11 more)
+Cohesion: 0.14
+Nodes (13): getAllPages(), getPageById(), getPageBySlug(), requireAuth(), updatePage(), pages, PageUpdateSchema, Page (+5 more)
 
 ### Community 3 - "Achievements System"
-Cohesion: 0.06
-Nodes (56): DeleteDialog(), DeleteDialogProps, EmptyState(), EmptyStateProps, BreadcrumbLink, PageHeader(), PageHeaderProps, Akun (+48 more)
+Cohesion: 0.13
+Nodes (26): BreadcrumbLink, PageHeader(), PageHeaderProps, AkunBaruPage(), BeritaBaruPage(), FasilitasBaruPage(), GaleriBaruPage(), GuruBaruPage() (+18 more)
 
 ### Community 4 - "Dependencies & Build"
 Cohesion: 0.05
@@ -178,19 +169,19 @@ Cohesion: 0.10
 Nodes (19): compilerOptions, allowJs, esModuleInterop, incremental, isolatedModules, jsx, lib, module (+11 more)
 
 ### Community 7 - "Facilities System"
-Cohesion: 0.24
-Nodes (8): CATEGORY_FILTERS, NewsSection(), formatDate(), truncate(), Badge(), BadgeProps, variantStyles, BeritaDetailPage()
+Cohesion: 0.46
+Nodes (6): getLatestPosts(), getPostBySlug(), NewsSection(), formatDate(), truncate(), BeritaDetailPage()
 
 ### Community 8 - "News System"
-Cohesion: 0.20
-Nodes (9): 12. Rencana Implementasi (Roadmap Singkat), 13. Catatan Tambahan, 1. Overview, 2. Requirements, 3. Core Features, 4. User Flow, 5. Architecture, 7. Tech Stack (+1 more)
+Cohesion: 0.09
+Nodes (28): getPosts(), getAllStaff(), DeleteDialog(), DeleteDialogProps, EmptyState(), EmptyStateProps, Akun, AkunPage() (+20 more)
 
 ### Community 9 - "Profile & Navigation"
-Cohesion: 0.13
-Nodes (13): addFacilityPhoto(), createFacility(), deleteFacility(), deleteFacilityPhoto(), requireAuth(), updateFacility(), ALLOWED_TYPES, deleteFile() (+5 more)
+Cohesion: 0.10
+Nodes (30): addFacilityPhoto(), createFacility(), deleteFacility(), deleteFacilityPhoto(), getFacilityById(), getFacilityCount(), requireAuth(), updateFacility() (+22 more)
 
 ### Community 10 - "Layout & Branding"
-Cohesion: 0.15
+Cohesion: 0.13
 Nodes (5): metadata, FOOTER_LINKS, SOCIAL_LINKS, inter, outfit
 
 ### Community 11 - "Project Planning Docs"
@@ -214,12 +205,12 @@ Cohesion: 0.04
 Nodes (46): 10. Aksesibilitas (a11y), 11. Data Flow (Frontend ↔ Database), 12. Catatan Implementasi, 1. Tech Stack & Setup, 2.1 Color Palette, 2.2 Typography Scale, 2.3 Spacing & Layout, 2.4 Breakpoints (Tailwind Default) (+38 more)
 
 ### Community 56 - "Community 56"
-Cohesion: 0.09
+Cohesion: 0.08
 Nodes (22): 10. Sebelum Mulai — Checklist, 1. Overview, 2. Tech Stack Tambahan, 3. Database Schema (11 tabel), 4. Authentication (Better Auth), 5. Admin Layout, 6. Fase Implementasi, 7. Komponen Dashboard (reusable) (+14 more)
 
 ### Community 57 - "Community 57"
-Cohesion: 0.20
-Nodes (10): 8.2.1 Dashboard (Ringkasan), 8.2.2 Halaman, 8.2.3 Berita & Pengumuman, 8.2.4 Guru & Staf, 8.2.5 Prestasi, 8.2.6 Fasilitas, 8.2.7 Galeri, 8.2.8 Pesan Masuk (+2 more)
+Cohesion: 0.04
+Nodes (49): 10.1 Jenis Prestasi, 10.2 Tingkat Prestasi (Level), 10.3 Peringkat Kejuaraan (Champion), 10.4 Database Schema, 10.5 Tampilan Highlight Prestasi di Homepage, 10.6 Halaman Daftar Prestasi Lengkap, 10.7 Fitur CRUD pada Dashboard Admin, 10. Modul Prestasi (+41 more)
 
 ### Community 58 - "Community 58"
 Cohesion: 0.22
@@ -246,124 +237,96 @@ Cohesion: 0.50
 Nodes (3): For --cluster-only, For --update (incremental re-extraction), graphify reference: incremental update and cluster-only
 
 ### Community 71 - "Community 71"
-Cohesion: 0.20
-Nodes (8): catColor, quickActions, RecentMessage, RecentPost, StatItem, statusColor, StatCard(), StatCardProps
+Cohesion: 0.18
+Nodes (9): getAchievementCount(), getGalleryCount(), getStaffCount(), catColor, quickActions, RecentMessage, RecentPost, StatItem (+1 more)
 
 ### Community 72 - "Community 72"
 Cohesion: 0.22
 Nodes (8): Architecture, Commands, Current Status, Design System, Key Files, Project Rules, Schoolweb — Website Profil Sekolah, Stack
 
 ### Community 73 - "Community 73"
-Cohesion: 0.25
-Nodes (8): 10.1 Jenis Prestasi, 10.2 Tingkat Prestasi (Level), 10.3 Peringkat Kejuaraan (Champion), 10.4 Database Schema, 10.5 Tampilan Highlight Prestasi di Homepage, 10.6 Halaman Daftar Prestasi Lengkap, 10.7 Fitur CRUD pada Dashboard Admin, 10. Modul Prestasi
-
-### Community 74 - "Community 74"
-Cohesion: 0.33
-Nodes (6): 11.1 Kategori Fasilitas, 11.2 Database Schema, 11.3 Halaman Fasilitas Publik, 11.4 Fitur CRUD pada Dashboard Admin, 11.5 Highlight Fasilitas di Homepage (Opsional), 11. Modul Fasilitas
-
-### Community 75 - "Community 75"
-Cohesion: 0.33
-Nodes (6): 6.1 Tabel Dasar, 6.2 Modul Guru & Staf, 6.3 Modul Prestasi, 6.4 Modul Fasilitas, 6.5 Entity Relationship Diagram, 6. Database Schema
-
-### Community 76 - "Community 76"
-Cohesion: 0.40
-Nodes (5): 8.1 Struktur Menu Dashboard, 8.3 Alur Pengelolaan Konten, 8.4 Hak Akses Admin, 8.5 Use Case Utama, 8. Dashboard Admin — Spesifikasi Lengkap
-
-### Community 77 - "Community 77"
-Cohesion: 0.40
-Nodes (5): 9.1 Informasi yang Ditampilkan ke Publik, 9.2 Database Schema, 9.3 Fitur CRUD pada Dashboard Admin, 9.4 Slug Auto-Generation, 9. Modul Guru & Staf
+Cohesion: 0.20
+Nodes (9): FacilityGalleryProps, AchievementCategory, ContactMessage, FacilityPhoto, GalleryType, Media, StaffRole, User (+1 more)
 
 ### Community 78 - "Community 78"
 Cohesion: 0.60
 Nodes (4): convertGDriveUrl(), ImageUrlInput(), ImageUrlInputProps, isValidImageUrl()
 
+### Community 86 - "Community 86"
+Cohesion: 0.22
+Nodes (4): CATEGORY_FILTERS, EmptyState(), EmptyStateProps, PostCategory
+
 ### Community 87 - "Community 87"
-Cohesion: 0.21
-Nodes (9): formatLevel(), getChampionEmoji(), getLevelBadgeColor(), CATEGORY_FILTERS, LEVEL_FILTERS, AchievementDetailPage(), InfoBox(), AchievementChampion (+1 more)
+Cohesion: 0.19
+Nodes (12): getAchievementBySlug(), getAchievements(), getFeaturedAchievements(), AchievementHighlight(), formatLevel(), getChampionEmoji(), getLevelBadgeColor(), CATEGORY_FILTERS (+4 more)
 
 ### Community 88 - "Community 88"
-Cohesion: 0.50
-Nodes (3): FilterPill, FilterPills(), FilterPillsProps
+Cohesion: 0.22
+Nodes (5): ROLE_FILTERS, FilterPill, FilterPills(), FilterPillsProps, Staff
 
 ### Community 89 - "Community 89"
-Cohesion: 0.21
-Nodes (8): CATEGORY_FILTERS, getFacilityCategoryLabel(), getFacilityIcon(), ImageWithFallback(), ImageWithFallbackProps, FacilityDetailPage(), Facility, FacilityCategory
+Cohesion: 0.23
+Nodes (11): getFacilities(), getFacilityBySlug(), getFeaturedFacilities(), CATEGORY_FILTERS, FacilityHighlight(), getFacilityCategoryLabel(), getFacilityIcon(), ImageWithFallback() (+3 more)
 
 ### Community 90 - "Community 90"
-Cohesion: 0.14
-Nodes (6): ROLE_FILTERS, MiniHeroBanner(), MiniHeroBannerProps, directionMap, ScrollRevealProps, Textarea()
-
-### Community 91 - "Community 91"
-Cohesion: 0.33
-Nodes (4): navItems, Sidebar(), SidebarProps, ToastProvider()
+Cohesion: 0.15
+Nodes (8): MISI, TIMELINE, TUJUAN, WAKASEK, MiniHeroBanner(), MiniHeroBannerProps, directionMap, ScrollRevealProps
 
 ### Community 92 - "Community 92"
 Cohesion: 0.15
-Nodes (11): requireAuth(), updatePage(), requireSuperAdmin(), updateSettings(), { GET, POST }, client, db, pages (+3 more)
-
-### Community 93 - "Community 93"
-Cohesion: 0.29
-Nodes (4): MISI, TIMELINE, TUJUAN, WAKASEK
+Nodes (10): createContact(), requireSuperAdmin(), updateSettings(), { GET, POST }, client, db, settings, auth (+2 more)
 
 ### Community 94 - "Community 94"
-Cohesion: 0.29
-Nodes (4): Breadcrumb(), BreadcrumbItem, BreadcrumbProps, StaffDetailPage()
+Cohesion: 0.22
+Nodes (8): getStaffBySlug(), Badge(), BadgeProps, variantStyles, Breadcrumb(), BreadcrumbItem, BreadcrumbProps, StaffDetailPage()
 
 ### Community 95 - "Community 95"
-Cohesion: 0.11
-Nodes (18): AchievementInput, AchievementUpdateInput, ChangePasswordInput, ContactInput, CreateUserInput, FacilityInput, FacilityUpdateInput, GalleryInput (+10 more)
-
-### Community 96 - "Community 96"
-Cohesion: 0.21
-Nodes (11): addMediaToGallery(), addVideoToGallery(), createGallery(), deleteGallery(), deleteMedia(), requireAuth(), updateGallery(), updateMediaCaption() (+3 more)
+Cohesion: 0.10
+Nodes (20): AchievementInput, AchievementUpdateInput, ChangePasswordInput, ContactInput, CreateUserInput, FacilityInput, FacilityUpdateInput, GalleryInput (+12 more)
 
 ### Community 97 - "Community 97"
 Cohesion: 0.21
 Nodes (11): changePassword(), createUser(), deleteUser(), getUserById(), getUsers(), requireAuth(), requireSuperAdmin(), updateUserRole() (+3 more)
 
 ### Community 98 - "Community 98"
-Cohesion: 0.14
-Nodes (13): accounts, facilities, facilitiesRelations, facilityPhotos, facilityPhotosRelations, galleries, galleriesRelations, media (+5 more)
+Cohesion: 0.15
+Nodes (13): accounts, facilitiesRelations, facilityPhotosRelations, galleries, galleriesRelations, media, mediaRelations, sessions (+5 more)
 
 ### Community 99 - "Community 99"
-Cohesion: 0.19
-Nodes (7): createAchievement(), deleteAchievement(), requireAuth(), updateAchievement(), achievements, AchievementSchema, AchievementUpdateSchema
+Cohesion: 0.31
+Nodes (8): createAchievement(), deleteAchievement(), getAchievementById(), requireAuth(), updateAchievement(), achievements, AchievementSchema, AchievementUpdateSchema
 
 ### Community 100 - "Community 100"
-Cohesion: 0.19
-Nodes (7): createPost(), deletePost(), requireAuth(), updatePost(), posts, PostSchema, PostUpdateSchema
+Cohesion: 0.27
+Nodes (9): createPost(), deletePost(), getPostById(), getPostCount(), requireAuth(), updatePost(), posts, PostSchema (+1 more)
 
 ### Community 101 - "Community 101"
-Cohesion: 0.19
-Nodes (7): createStaff(), deleteStaff(), requireAuth(), updateStaff(), staff, StaffSchema, StaffUpdateSchema
+Cohesion: 0.31
+Nodes (8): createStaff(), deleteStaff(), getStaffById(), requireAuth(), updateStaff(), staff, StaffSchema, StaffUpdateSchema
 
 ### Community 102 - "Community 102"
-Cohesion: 0.24
-Nodes (6): deleteContact(), markAllAsRead(), markAsRead(), requireAuth(), contacts, ContactSchema
-
-### Community 103 - "Community 103"
-Cohesion: 0.83
-Nodes (3): generateKey(), hashPassword(), main()
+Cohesion: 0.23
+Nodes (10): deleteContact(), getContacts(), getUnreadCount(), markAllAsRead(), markAsRead(), requireAuth(), contacts, ContactSchema (+2 more)
 
 ## Knowledge Gaps
-- **381 isolated node(s):** `{ GET, POST }`, `authClient`, `client`, `sessions`, `accounts` (+376 more)
+- **383 isolated node(s):** `$schema`, `style`, `rsc`, `tsx`, `config` (+378 more)
   These have ≤1 connection - possible missing edges or undocumented components.
-- **51 thin communities (<3 nodes) omitted from report** — run `graphify query` to explore isolated nodes.
+- **49 thin communities (<3 nodes) omitted from report** — run `graphify query` to explore isolated nodes.
 
 ## Suggested Questions
 _Questions this graph is uniquely positioned to answer:_
 
-- **Why does `SiteSettings` connect `Community 92` to `Community 90`, `Content Pages & Galleries`?**
-  _High betweenness centrality (0.132) - this node is a cross-community bridge._
-- **Why does `cn()` connect `App Pages & Shared UI` to `Staff & Homepage Data`, `Content Pages & Galleries`, `Achievements System`, `Facilities System`, `Community 71`, `Community 87`, `Community 88`, `Community 89`, `Community 90`, `Community 91`, `Community 94`?**
-  _High betweenness centrality (0.039) - this node is a cross-community bridge._
-- **Why does `auth` connect `Community 92` to `Community 96`, `Community 97`, `Community 99`, `Community 100`, `Community 101`, `Community 102`, `Profile & Navigation`?**
-  _High betweenness centrality (0.024) - this node is a cross-community bridge._
-- **Are the 14 inferred relationships involving `useToast()` (e.g. with `AkunBaruPage()` and `BeritaBaruPage()`) actually correct?**
-  _`useToast()` has 14 INFERRED edges - model-reasoned connections that need verification._
-- **What connects `{ GET, POST }`, `authClient`, `client` to the rest of the system?**
-  _385 weakly-connected nodes found - possible documentation gaps or missing edges._
+- **Why does `cn()` connect `App Pages & Shared UI` to `Staff & Homepage Data`, `Content Pages & Galleries`, `Achievements System`, `Community 73`, `Community 86`, `Community 87`, `Community 88`, `Community 89`, `Community 90`, `Community 94`?**
+  _High betweenness centrality (0.034) - this node is a cross-community bridge._
+- **Why does `useToast()` connect `Achievements System` to `News System`, `Profile & Navigation`, `Content Pages & Galleries`, `Community 102`?**
+  _High betweenness centrality (0.015) - this node is a cross-community bridge._
+- **Why does `Button()` connect `Achievements System` to `App Pages & Shared UI`, `Content Pages & Galleries`, `Profile & Navigation`, `Community 86`, `Community 92`?**
+  _High betweenness centrality (0.015) - this node is a cross-community bridge._
+- **Are the 15 inferred relationships involving `useToast()` (e.g. with `AkunBaruPage()` and `BeritaBaruPage()`) actually correct?**
+  _`useToast()` has 15 INFERRED edges - model-reasoned connections that need verification._
+- **What connects `$schema`, `style`, `rsc` to the rest of the system?**
+  _387 weakly-connected nodes found - possible documentation gaps or missing edges._
 - **Should `App Pages & Shared UI` be split into smaller, more focused modules?**
-  _Cohesion score 0.0928030303030303 - nodes in this community are weakly interconnected._
+  _Cohesion score 0.06464646464646465 - nodes in this community are weakly interconnected._
 - **Should `Content Pages & Galleries` be split into smaller, more focused modules?**
-  _Cohesion score 0.11895161290322581 - nodes in this community are weakly interconnected._
+  _Cohesion score 0.14492753623188406 - nodes in this community are weakly interconnected._
