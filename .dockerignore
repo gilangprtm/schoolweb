@@ -23,6 +23,18 @@ Thumbs.db
 # Build artifacts
 .next
 out
+tsconfig.tsbuildinfo
+
+# Claude / AI agent configs
+.claude
+AGENTS.md
+CLAUDE.md
+
+# Plan documents (sudah di-cover *.md)
+# Tapi tetep explicit biar aman
+DASHBOARD_PLAN.md
+FRONTEND_PLAN.md
+PRD.md
 
 # Debug
 npm-debug.log*
