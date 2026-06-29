@@ -42,9 +42,10 @@ RUN npm install -g drizzle-kit
 
 # Buat startup script: migration dulu, baru server
 RUN echo '#!/bin/sh' > /app/start.sh \
-  && echo 'echo "⏳ Menjalankan migrasi database..."' >> /app/start.sh \
+  && echo 'echo "⏳ [SIRA] Menjalankan migrasi database..."' >> /app/start.sh \
   && echo 'npx drizzle-kit push 2>&1' >> /app/start.sh \
-  && echo 'echo "✅ Migrasi selesai. Memulai server..."' >> /app/start.sh \
+  && echo 'MIGRATION_EXIT=$?' >> /app/start.sh \
+  && echo 'echo "✅ [SIRA] Migrasi selesai (exit: $MIGRATION_EXIT). Memulai server..."' >> /app/start.sh \
   && echo 'exec node server.js' >> /app/start.sh \
   && chmod +x /app/start.sh
 
