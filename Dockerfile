@@ -9,8 +9,9 @@ RUN npm ci
 
 COPY . .
 
-# Build Next.js (standalone output for minimal runtime image)
+# Dummy DB_URL untuk build — Next.js perlu resolve module imports
 ENV NEXT_TELEMETRY_DISABLED=1
+ENV DATABASE_URL=postgresql://dummy:dummy@dummy:5432/dummy
 RUN npm run build
 
 # ── Runner stage ──
