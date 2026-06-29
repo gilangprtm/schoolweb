@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import Link from "next/link";
 import { Search, CalendarDays } from "lucide-react";
 import { Input } from "@/components/ui/input";
@@ -10,9 +10,9 @@ import Pagination from "@/components/shared/Pagination";
 import Badge from "@/components/shared/Badge";
 import ImageWithFallback from "@/components/shared/ImageWithFallback";
 import EmptyState from "@/components/shared/EmptyState";
-import { getPublishedPosts } from "@/data/posts";
+import { getPosts } from "@/lib/actions/posts";
 import { formatDate, truncate } from "@/lib/utils";
-import type { PostCategory } from "@/types";
+import type { Post, PostCategory } from "@/types";
 
 const CATEGORY_FILTERS = [
   { label: "Semua", value: "all" },
@@ -26,24 +26,31 @@ export default function NewsGrid() {
   const [category, setCategory] = useState("all");
   const [search, setSearch] = useState("");
   const [page, setPage] = useState(1);
+  const [posts, setPosts] = useState<Post[]>([]);
+  const [loading, setLoading] = useState(true);
 
-  let posts = getPublishedPosts();
+  useEffect(() => {
+    getPosts({ status: "published", limit: 500 })
+      .then((res) => setPosts(res.data.map((p: Record<string, unknown>) => ({ ...p, publishedAt: String(p.publishedAt), category: p.category as Post["category"] })) as Post[]))
+      .catch(() => setPosts([]))
+      .finally(() => setLoading(false));
+  }, []);
 
+  let filtered = posts;
   if (category !== "all") {
-    posts = posts.filter((p) => p.category === (category as PostCategory));
+    filtered = filtered.filter((p) => p.category === (category as PostCategory));
   }
-
   if (search) {
     const q = search.toLowerCase();
-    posts = posts.filter(
+    filtered = filtered.filter(
       (p) =>
         p.title.toLowerCase().includes(q) ||
         p.excerpt.toLowerCase().includes(q)
     );
   }
 
-  const totalPages = Math.ceil(posts.length / ITEMS_PER_PAGE);
-  const paginatedPosts = posts.slice(
+  const totalPages = Math.ceil(filtered.length / ITEMS_PER_PAGE);
+  const paginatedPosts = filtered.slice(
     (page - 1) * ITEMS_PER_PAGE,
     page * ITEMS_PER_PAGE
   );
@@ -77,7 +84,13 @@ export default function NewsGrid() {
         </div>
 
         {/* Grid */}
-        {paginatedPosts.length === 0 ? (
+        {loading ? (
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5">
+            {Array.from({ length: 6 }).map((_, i) => (
+              <div key={i} className="rounded-2xl bg-neutral-100 animate-pulse aspect-[4/3]" />
+            ))}
+          </div>
+        ) : paginatedPosts.length === 0 ? (
           <EmptyState
             title="Tidak ditemukan"
             description={
@@ -97,7 +110,7 @@ export default function NewsGrid() {
                 >
                   <div className="relative aspect-video overflow-hidden bg-neutral-100">
                     <ImageWithFallback
-                      src={post.image_url}
+                      src={post.imageUrl}
                       alt={post.title}
                       aspect="16/9"
                       rounded="rounded-none"
@@ -123,7 +136,7 @@ export default function NewsGrid() {
                     </p>
                     <div className="flex items-center gap-1.5 text-neutral-400 text-xs mt-auto">
                       <CalendarDays className="size-3.5" />
-                      {formatDate(post.published_at)}
+                      {formatDate(post.publishedAt)}
                     </div>
                   </div>
                 </Link>

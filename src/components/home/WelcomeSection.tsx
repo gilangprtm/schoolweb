@@ -3,10 +3,11 @@ import { ArrowRight } from "lucide-react";
 import ScrollReveal from "@/components/shared/ScrollReveal";
 import SectionHeading from "@/components/shared/SectionHeading";
 import ImageWithFallback from "@/components/shared/ImageWithFallback";
-import { getHeadmaster } from "@/data/staff";
+import { getActiveStaff } from "@/lib/actions/staff";
 
-export default function WelcomeSection() {
-  const headmaster = getHeadmaster();
+export default async function WelcomeSection() {
+  const allStaff = await getActiveStaff();
+  const headmaster = allStaff.find((s) => s.role === "headmaster");
 
   if (!headmaster) return null;
 
@@ -22,7 +23,7 @@ export default function WelcomeSection() {
             <div className="relative mx-auto md:mx-0 max-w-xs md:max-w-full">
               <div className="relative z-10">
                 <ImageWithFallback
-                  src={headmaster.photo_url}
+                  src={headmaster.photoUrl}
                   alt={headmaster.name}
                   aspect="3/4"
                   rounded="rounded-2xl"

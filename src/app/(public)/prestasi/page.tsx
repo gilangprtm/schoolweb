@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import Link from "next/link";
 import { CalendarDays, MapPin } from "lucide-react";
 import MiniHeroBanner from "@/components/shared/MiniHeroBanner";
@@ -10,13 +10,14 @@ import Pagination from "@/components/shared/Pagination";
 import Badge from "@/components/shared/Badge";
 import ImageWithFallback from "@/components/shared/ImageWithFallback";
 import EmptyState from "@/components/shared/EmptyState";
-import { getPublishedAchievements } from "@/data/achievements";
+import { getAchievements } from "@/lib/actions/achievements";
 import {
   getChampionEmoji,
   formatLevel,
   formatDate,
   getLevelBadgeColor,
 } from "@/lib/utils";
+import type { Achievement, AchievementChampion, AchievementLevel } from "@/types";
 
 const CATEGORY_FILTERS = [
   { label: "Semua", value: "all" },
@@ -41,20 +42,28 @@ export default function PrestasiPage() {
   const [level, setLevel] = useState("all");
   const [year, setYear] = useState("all");
   const [page, setPage] = useState(1);
+  const [achievements, setAchievements] = useState<Achievement[]>([]);
+  const [loading, setLoading] = useState(true);
 
-  let achievements = getPublishedAchievements();
+  useEffect(() => {
+    getAchievements({ limit: 500 })
+      .then((res) => setAchievements(res.data as Achievement[]))
+      .catch(() => setAchievements([]))
+      .finally(() => setLoading(false));
+  }, []);
 
-  if (category !== "all") achievements = achievements.filter((a) => a.category === category);
-  if (level !== "all") achievements = achievements.filter((a) => a.level === level);
-  if (year !== "all") achievements = achievements.filter((a) => a.date.startsWith(year));
+  let filtered = achievements;
+  if (category !== "all") filtered = filtered.filter((a) => a.category === category);
+  if (level !== "all") filtered = filtered.filter((a) => a.level === level);
+  if (year !== "all") filtered = filtered.filter((a) => a.date?.startsWith(year));
 
   const years = [
     "all",
-    ...new Set(achievements.map((a) => a.date.slice(0, 4))),
-  ].sort((a, b) => (a === "all" ? -1 : b.localeCompare(a)));
+    ...new Set(filtered.map((a) => a.date?.slice(0, 4)).filter(Boolean)),
+  ].sort((a, b) => (a === "all" ? -1 : (b ?? "").localeCompare(a ?? "")));
 
-  const totalPages = Math.ceil(achievements.length / ITEMS_PER_PAGE);
-  const paged = achievements.slice(
+  const totalPages = Math.ceil(filtered.length / ITEMS_PER_PAGE);
+  const paged = filtered.slice(
     (page - 1) * ITEMS_PER_PAGE,
     page * ITEMS_PER_PAGE
   );
@@ -87,12 +96,18 @@ export default function PrestasiPage() {
             >
               <option value="all">Semua Tahun</option>
               {years.filter(y => y !== "all").map((y) => (
-                <option key={y} value={y}>{y}</option>
+                <option key={y} value={y!}>{y}</option>
               ))}
             </select>
           </div>
 
-          {paged.length === 0 ? (
+          {loading ? (
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5">
+              {Array.from({ length: 6 }).map((_, i) => (
+                <div key={i} className="rounded-2xl bg-neutral-100 animate-pulse aspect-video" />
+              ))}
+            </div>
+          ) : paged.length === 0 ? (
             <EmptyState
               title="Tidak ditemukan"
               description="Belum ada prestasi yang sesuai dengan filter"
@@ -106,9 +121,9 @@ export default function PrestasiPage() {
                     className="group block bg-white rounded-2xl overflow-hidden shadow-card hover:shadow-card-hover transition-all duration-300 hover:-translate-y-1 border border-neutral-100 h-full flex flex-col"
                   >
                     <div className="relative aspect-video bg-neutral-100 overflow-hidden flex items-center justify-center">
-                      {achievement.image_url ? (
+                      {achievement.imageUrl ? (
                         <ImageWithFallback
-                          src={achievement.image_url}
+                          src={achievement.imageUrl}
                           alt={achievement.title}
                           aspect="16/9"
                           rounded="rounded-none"
@@ -116,12 +131,12 @@ export default function PrestasiPage() {
                         />
                       ) : (
                         <span className="text-6xl">
-                          {getChampionEmoji(achievement.champion)}
+                          {getChampionEmoji(achievement.champion as AchievementChampion)}
                         </span>
                       )}
                       <div className="absolute top-2 left-2">
                         <span className="text-2xl">
-                          {getChampionEmoji(achievement.champion)}
+                          {getChampionEmoji(achievement.champion as AchievementChampion)}
                         </span>
                       </div>
                     </div>
@@ -135,9 +150,9 @@ export default function PrestasiPage() {
                       </div>
                       <div className="flex flex-wrap gap-1.5 mb-3">
                         <Badge
-                          label={formatLevel(achievement.level)}
+                          label={formatLevel(achievement.level as AchievementLevel)}
                           variant="outline"
-                          className={getLevelBadgeColor(achievement.level)}
+                          className={getLevelBadgeColor(achievement.level as AchievementLevel)}
                         />
                         <Badge
                           label={
@@ -152,7 +167,7 @@ export default function PrestasiPage() {
                       </div>
                       <div className="flex items-center gap-1.5 text-neutral-400 text-xs mt-auto">
                         <CalendarDays className="size-3" />
-                        {formatDate(achievement.date)}
+                        {formatDate(achievement.date ?? "")}
                       </div>
                     </div>
                   </Link>

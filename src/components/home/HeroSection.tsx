@@ -1,17 +1,37 @@
 "use client";
 
+import { useState, useEffect } from "react";
 import Image from "next/image";
 import { Users, GraduationCap, Trophy, Building2 } from "lucide-react";
 import ScrollReveal from "@/components/shared/ScrollReveal";
 import StatsCounter from "@/components/shared/StatsCounter";
 import CTAButton from "@/components/shared/CTAButton";
-import { siteSettings } from "@/data/settings";
-import { getActiveStaff } from "@/data/staff";
-import { getPublishedAchievements } from "@/data/achievements";
+import { getAllSettings } from "@/lib/actions/settings";
+import { getActiveStaff } from "@/lib/actions/staff";
+import { getAchievements } from "@/lib/actions/achievements";
 
 export default function HeroSection() {
-  const staffCount = getActiveStaff().length;
-  const achievementCount = getPublishedAchievements().length;
+  const [schoolName, setSchoolName] = useState("SMP Negeri 17 Denpasar");
+  const [tagline, setTagline] = useState("");
+  const [staffCount, setStaffCount] = useState(0);
+  const [achievementCount, setAchievementCount] = useState(0);
+
+  useEffect(() => {
+    Promise.all([
+      getAllSettings(),
+      getActiveStaff(),
+      getAchievements({ limit: 500 }),
+    ])
+      .then(([settings, staff, achievements]) => {
+        setSchoolName(settings.schoolName);
+        setTagline(settings.tagline);
+        setStaffCount(staff.length);
+        setAchievementCount(achievements.data.length);
+      })
+      .catch(() => {
+        // Fallback: keep default values
+      });
+  }, []);
 
   return (
     <section className="relative h-screen flex items-center justify-center overflow-hidden">
@@ -38,13 +58,13 @@ export default function HeroSection() {
 
         <ScrollReveal delay={0.15}>
           <h1 className="font-heading text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-extrabold text-white mb-5 leading-tight tracking-tight drop-shadow-lg">
-            {siteSettings.schoolName}
+            {schoolName}
           </h1>
         </ScrollReveal>
 
         <ScrollReveal delay={0.2}>
           <p className="text-white/80 text-lg md:text-xl max-w-2xl mx-auto mb-8 leading-relaxed">
-            {siteSettings.tagline}
+            {tagline}
           </p>
         </ScrollReveal>
 

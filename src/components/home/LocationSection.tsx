@@ -2,10 +2,11 @@ import Link from "next/link";
 import { MapPin, Phone, Mail, ArrowRight, ExternalLink } from "lucide-react";
 import ScrollReveal from "@/components/shared/ScrollReveal";
 import SectionHeading from "@/components/shared/SectionHeading";
-import { siteSettings } from "@/data/settings";
+import { getAllSettings } from "@/lib/actions/settings";
 
-export default function LocationSection() {
-  const { address, phone, email, googleMapsEmbedUrl } = siteSettings;
+export default async function LocationSection() {
+  const settings = await getAllSettings();
+  const { address, phone, email, googleMapsEmbedUrl } = settings;
 
   return (
     <section className="section-py bg-white">

@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import Link from "next/link";
 import { motion, AnimatePresence } from "framer-motion";
 import MiniHeroBanner from "@/components/shared/MiniHeroBanner";
@@ -9,9 +9,9 @@ import ScrollReveal from "@/components/shared/ScrollReveal";
 import Badge from "@/components/shared/Badge";
 import ImageWithFallback from "@/components/shared/ImageWithFallback";
 import EmptyState from "@/components/shared/EmptyState";
-import { getPublishedFacilities } from "@/data/facilities";
+import { getFacilities } from "@/lib/actions/facilities";
 import { getFacilityIcon, getFacilityCategoryLabel } from "@/lib/utils";
-import type { FacilityCategory } from "@/types";
+import type { Facility, FacilityCategory } from "@/types";
 
 const CATEGORY_FILTERS = [
   { label: "Semua", value: "all" },
@@ -25,10 +25,19 @@ const CATEGORY_FILTERS = [
 
 export default function FasilitasPage() {
   const [category, setCategory] = useState("all");
+  const [facilities, setFacilities] = useState<Facility[]>([]);
+  const [loading, setLoading] = useState(true);
 
-  let facilities = getPublishedFacilities();
+  useEffect(() => {
+    getFacilities({ limit: 100 })
+      .then((res) => setFacilities(res.data as Facility[]))
+      .catch(() => setFacilities([]))
+      .finally(() => setLoading(false));
+  }, []);
+
+  let filtered = facilities;
   if (category !== "all") {
-    facilities = facilities.filter((f) => f.category === category);
+    filtered = filtered.filter((f) => f.category === category);
   }
 
   return (
@@ -48,7 +57,13 @@ export default function FasilitasPage() {
             />
           </div>
 
-          {facilities.length === 0 ? (
+          {loading ? (
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5">
+              {Array.from({ length: 6 }).map((_, i) => (
+                <div key={i} className="rounded-2xl bg-neutral-100 animate-pulse aspect-[4/3]" />
+              ))}
+            </div>
+          ) : filtered.length === 0 ? (
             <EmptyState
               title="Belum ada fasilitas"
               description="Fasilitas dalam kategori ini belum tersedia"
@@ -59,7 +74,7 @@ export default function FasilitasPage() {
               className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5"
             >
               <AnimatePresence mode="popLayout">
-                {facilities.map((facility, index) => (
+                {filtered.map((facility, index) => (
                   <motion.div
                     key={facility.id}
                     layout
@@ -74,7 +89,7 @@ export default function FasilitasPage() {
                     >
                       <div className="relative aspect-[4/3] overflow-hidden bg-neutral-100">
                         <ImageWithFallback
-                          src={facility.photo_url}
+                          src={facility.photoUrl}
                           alt={facility.name}
                           aspect="4/3"
                           rounded="rounded-none"
@@ -83,7 +98,7 @@ export default function FasilitasPage() {
                         <div className="absolute inset-x-0 bottom-0 h-1/2 bg-gradient-to-t from-black/60 to-transparent" />
                         <div className="absolute bottom-3 left-3">
                           <Badge
-                            label={`${getFacilityIcon(facility.category)} ${getFacilityCategoryLabel(facility.category)}`}
+                            label={`${getFacilityIcon(facility.category as FacilityCategory)} ${getFacilityCategoryLabel(facility.category as FacilityCategory)}`}
                             variant="outline"
                             className="bg-white/90 border-0"
                           />

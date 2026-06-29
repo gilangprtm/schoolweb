@@ -1,9 +1,16 @@
-import { NextResponse } from "next/server"
-import type { NextRequest } from "next/server"
+import { NextResponse } from "next/server";
+import type { NextRequest } from "next/server";
+import { auth } from "@/lib/auth";
 
-export function proxy(request: NextRequest) {
-  const { pathname } = request.nextUrl
-  const authToken = request.cookies.get("auth_token")?.value
+export async function proxy(request: NextRequest) {
+  const { pathname } = request.nextUrl;
+
+  // Get session from Better Auth
+  const session = await auth.api.getSession({
+    headers: request.headers,
+  });
+
+  const isAuthenticated = !!session?.user;
 
   // Allow public routes + static assets without auth
   const isPublic =
@@ -19,23 +26,23 @@ export function proxy(request: NextRequest) {
     pathname.startsWith("/profil") ||
     pathname.startsWith("/_next") ||
     pathname.startsWith("/api") ||
-    pathname.includes(".")
+    pathname.includes(".");
 
   // If accessing admin without auth, redirect to login
-  if (pathname.startsWith("/admin") && !authToken) {
-    const loginUrl = new URL("/login", request.url)
-    loginUrl.searchParams.set("from", pathname)
-    return NextResponse.redirect(loginUrl)
+  if (pathname.startsWith("/admin") && !isAuthenticated) {
+    const loginUrl = new URL("/login", request.url);
+    loginUrl.searchParams.set("from", pathname);
+    return NextResponse.redirect(loginUrl);
   }
 
   // If already logged in and trying to access login page, redirect to admin
-  if (pathname === "/login" && authToken) {
-    return NextResponse.redirect(new URL("/admin", request.url))
+  if (pathname === "/login" && isAuthenticated) {
+    return NextResponse.redirect(new URL("/admin", request.url));
   }
 
-  return NextResponse.next()
+  return NextResponse.next();
 }
 
 export const config = {
   matcher: ["/((?!_next/static|_next/image|favicon.ico).*)"],
-}
+};

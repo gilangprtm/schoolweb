@@ -4,12 +4,8 @@ import { useState } from "react";
 import { useRouter } from "next/navigation";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
-import { GraduationCap, Eye, EyeOff, ArrowRight } from "lucide-react";
-
-function setAuthCookie(role: string) {
-  // Fake auth: set a simple cookie for middleware to check
-  document.cookie = `auth_token=fake-token-${role}; path=/; max-age=86400; SameSite=Lax`;
-}
+import { Eye, EyeOff, ArrowRight } from "lucide-react";
+import { authClient } from "@/lib/auth-client";
 
 export default function LoginPage() {
   const router = useRouter();
@@ -25,39 +21,23 @@ export default function LoginPage() {
     const email = form.get("email") as string;
     const password = form.get("password") as string;
 
-    // Simulate API call
-    await new Promise((r) => setTimeout(r, 800));
+    try {
+      const result = await authClient.signIn.email({
+        email,
+        password,
+      });
 
-    // Fake accounts
-    const accounts: Record<
-      string,
-      { password: string; role: string; redirect: string }
-    > = {
-      "admin@sekolah.sch.id": {
-        password: "admin123",
-        role: "admin",
-        redirect: "/admin",
-      },
-      "guru@sekolah.sch.id": {
-        password: "guru123",
-        role: "guru",
-        redirect: "/admin",
-      },
-      "staff@sekolah.sch.id": {
-        password: "staff123",
-        role: "staff",
-        redirect: "/admin",
-      },
-    };
-
-    const account = accounts[email];
-    if (account && account.password === password) {
-      setAuthCookie(account.role);
-      router.push(account.redirect);
-    } else {
-      setError("Email atau password salah");
+      if (result.error) {
+        setError("Email atau password salah");
+      } else {
+        router.push("/admin");
+        router.refresh();
+      }
+    } catch {
+      setError("Terjadi kesalahan. Silakan coba lagi.");
+    } finally {
+      setLoading(false);
     }
-    setLoading(false);
   }
 
   return (
@@ -164,30 +144,6 @@ export default function LoginPage() {
               )}
             </Button>
           </form>
-
-          <div className="p-4 rounded-lg bg-neutral-100 border border-neutral-200 space-y-1">
-            <p className="text-xs font-semibold text-neutral-600 uppercase tracking-wider mb-2">
-              Akun Demo
-            </p>
-            <p className="text-xs text-neutral-500">
-              <span className="font-mono text-neutral-700">
-                admin@sekolah.sch.id
-              </span>{" "}
-              / admin123 <span className="text-neutral-400">— Admin</span>
-            </p>
-            <p className="text-xs text-neutral-500">
-              <span className="font-mono text-neutral-700">
-                guru@sekolah.sch.id
-              </span>{" "}
-              / guru123 <span className="text-neutral-400">— Guru</span>
-            </p>
-            <p className="text-xs text-neutral-500">
-              <span className="font-mono text-neutral-700">
-                staff@sekolah.sch.id
-              </span>{" "}
-              / staff123 <span className="text-neutral-400">— Staff</span>
-            </p>
-          </div>
 
           <p className="text-xs text-center text-neutral-400">
             &copy; {new Date().getFullYear()} SMP Negeri 17 Denpasar

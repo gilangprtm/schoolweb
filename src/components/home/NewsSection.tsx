@@ -5,11 +5,11 @@ import SectionHeading from "@/components/shared/SectionHeading";
 import Badge from "@/components/shared/Badge";
 import ImageWithFallback from "@/components/shared/ImageWithFallback";
 import EmptyState from "@/components/shared/EmptyState";
-import { getLatestPosts } from "@/data/posts";
+import { getLatestPosts } from "@/lib/actions/posts";
 import { formatDate, truncate } from "@/lib/utils";
 
-export default function NewsSection() {
-  const latestPosts = getLatestPosts(4);
+export default async function NewsSection() {
+  const latestPosts = await getLatestPosts(4);
   const featured = latestPosts[0];
   const sidePosts = latestPosts.slice(1, 4);
 
@@ -40,7 +40,7 @@ export default function NewsSection() {
                 >
                   <div className="relative aspect-video overflow-hidden bg-neutral-100">
                     <ImageWithFallback
-                      src={featured.image_url}
+                      src={featured.imageUrl}
                       alt={featured.title}
                       aspect="16/9"
                       rounded="rounded-none"
@@ -62,7 +62,7 @@ export default function NewsSection() {
                     </p>
                     <div className="flex items-center gap-1.5 text-neutral-400 text-xs">
                       <CalendarDays className="size-3.5" />
-                      {formatDate(featured.published_at)}
+                      {formatDate(featured.publishedAt)}
                     </div>
                   </div>
                 </Link>
@@ -79,7 +79,7 @@ export default function NewsSection() {
                 >
                   <div className="relative w-24 h-24 shrink-0 rounded-lg overflow-hidden bg-neutral-100">
                     <ImageWithFallback
-                      src={post.image_url}
+                      src={post.imageUrl}
                       alt={post.title}
                       aspect="1/1"
                       rounded="rounded-lg"
@@ -96,7 +96,7 @@ export default function NewsSection() {
                     </h4>
                     <div className="flex items-center gap-1.5 text-neutral-400 text-xs">
                       <CalendarDays className="size-3" />
-                      {formatDate(post.published_at)}
+                      {formatDate(post.publishedAt)}
                     </div>
                   </div>
                 </Link>

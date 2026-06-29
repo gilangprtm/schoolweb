@@ -1,5 +1,6 @@
 "use client"
 
+import { useState, useEffect } from "react"
 import { Card } from "@/components/ui/card"
 import { StatCard } from "@/components/admin/StatCard"
 import {
@@ -7,16 +8,14 @@ import {
   MessageSquare, ArrowRight, ArrowUpRight, Plus,
 } from "lucide-react"
 import Link from "next/link"
-
-const stats = [
-  { title: "Halaman Statis", value: "5", icon: FileText },
-  { title: "Berita & Pengumuman", value: "12", icon: Newspaper },
-  { title: "Guru & Staf", value: "24", icon: Users },
-  { title: "Prestasi", value: "18", icon: Trophy },
-  { title: "Fasilitas", value: "8", icon: Building2 },
-  { title: "Album Galeri", value: "4", icon: Image },
-  { title: "Pesan Belum Dibaca", value: "3", icon: MessageSquare },
-]
+import { getPostCount, getPosts } from "@/lib/actions/posts"
+import { getStaffCount } from "@/lib/actions/staff"
+import { getAchievementCount } from "@/lib/actions/achievements"
+import { getFacilityCount } from "@/lib/actions/facilities"
+import { getGalleryCount } from "@/lib/actions/galleries"
+import { getUnreadCount, getContacts } from "@/lib/actions/contacts"
+import { getAllPages } from "@/lib/actions/pages"
+import type { Post } from "@/types"
 
 const quickActions = [
   { label: "Tambah Berita", href: "/admin/berita/baru", icon: Newspaper, desc: "Posting berita atau pengumuman baru" },
@@ -25,39 +24,91 @@ const quickActions = [
   { label: "Kelola Fasilitas", href: "/admin/fasilitas", icon: Building2, desc: "Update sarana & prasarana" },
 ]
 
-const recentPosts = [
-  { title: "Pengumuman PPDB 2025/2026", category: "Pengumuman", date: "25 Jun 2025", status: "published" },
-  { title: "Prestasi Siswa di OSN 2025", category: "Berita", date: "20 Jun 2025", status: "published" },
-  { title: "Jadwal Ujian Akhir Semester", category: "Pengumuman", date: "18 Jun 2025", status: "draft" },
-  { title: "Kunjungan Industri ke PT. XYZ", category: "Berita", date: "15 Jun 2025", status: "published" },
-]
-
-const recentMessages = [
-  { name: "Budi Santoso", email: "budi@email.com", preview: "Saya ingin menanyakan tentang syarat pendaftaran...", date: "Hari ini, 14:30" },
-  { name: "Ani Rahmawati", email: "ani@email.com", preview: "Apakah sekolah menerima siswa pindahan?", date: "Kemarin, 09:15" },
-]
-
 const statusColor: Record<string, string> = { published: "bg-emerald-50 text-emerald-700 border-emerald-200", draft: "bg-amber-50 text-amber-700 border-amber-200" }
 const catColor: Record<string, string> = { Berita: "bg-blue-50 text-blue-700 border-blue-200", Pengumuman: "bg-orange-50 text-orange-700 border-orange-200" }
 
-function getRole(): string {
-  if (typeof document === "undefined") return "admin"
-  const match = document.cookie.match(/auth_token=fake-token-(\w+)/)
-  return match?.[1] ?? "admin"
+import type { LucideIcon } from "lucide-react";
+
+interface StatItem { title: string; value: string; icon: LucideIcon }
+
+interface RecentPost {
+  id: number
+  title: string
+  category: string
+  date: string
+  status: string
+}
+
+interface RecentMessage {
+  name: string
+  email: string
+  preview: string
+  date: string
 }
 
 export default function AdminDashboard() {
-  const role = getRole()
+  const [stats, setStats] = useState<StatItem[]>([])
+  const [recentPosts, setRecentPosts] = useState<RecentPost[]>([])
+  const [recentMessages, setRecentMessages] = useState<RecentMessage[]>([])
+  const [loading, setLoading] = useState(true)
 
-  if (role !== "admin") {
+  useEffect(() => {
+    Promise.all([
+      getPostCount(),
+      getStaffCount(),
+      getAchievementCount(),
+      getFacilityCount(),
+      getGalleryCount(),
+      getUnreadCount(),
+      getAllPages(),
+      getPosts({ limit: 5 }),
+      getContacts({ limit: 3 }),
+    ])
+      .then(([postC, staffC, achC, facC, galC, unreadC, pages, postsRes, contactsRes]) => {
+        setStats([
+          { title: "Halaman Statis", value: String(pages.length), icon: FileText },
+          { title: "Berita & Pengumuman", value: String(postC), icon: Newspaper },
+          { title: "Guru & Staf", value: String(staffC), icon: Users },
+          { title: "Prestasi", value: String(achC), icon: Trophy },
+          { title: "Fasilitas", value: String(facC), icon: Building2 },
+          { title: "Album Galeri", value: String(galC), icon: Image },
+          { title: "Pesan Belum Dibaca", value: String(unreadC), icon: MessageSquare },
+        ])
+
+        setRecentPosts(
+          (postsRes.data).map((p) => ({
+            id: p.id as number,
+            title: p.title as string,
+            category: (p.category === "news" ? "Berita" : "Pengumuman"),
+            date: new Date(String(p.publishedAt)).toLocaleDateString("id-ID", { day: "numeric", month: "short", year: "numeric" }),
+            status: p.isPublished ? "published" : "draft",
+          }))
+        )
+
+        setRecentMessages(
+          (contactsRes.data).map((m) => ({
+            name: m.name as string,
+            email: m.email as string,
+            preview: (m.message as string).slice(0, 80) + ((m.message as string).length > 80 ? "..." : ""),
+            date: new Date(String(m.createdAt)).toLocaleDateString("id-ID", { day: "numeric", month: "short", hour: "2-digit", minute: "2-digit" }),
+          }))
+        )
+      })
+      .catch(() => {})
+      .finally(() => setLoading(false))
+  }, [])
+
+  if (loading) {
     return (
-      <div className="flex items-center justify-center min-h-[60vh]">
-        <div className="text-center space-y-4">
-          <div className="w-16 h-16 mx-auto rounded-2xl bg-neutral-100 flex items-center justify-center">
-            <Users className="w-8 h-8 text-neutral-300" />
-          </div>
-          <h1 className="text-xl font-semibold text-neutral-700">Dashboard {role === "guru" ? "Guru" : "Staff"}</h1>
-          <p className="text-sm text-neutral-500 max-w-sm">Fitur untuk role ini sedang dalam pengembangan. Menu akan tersedia segera.</p>
+      <div className="space-y-8">
+        <div>
+          <div className="h-8 w-40 bg-neutral-200 animate-pulse rounded mb-2" />
+          <div className="h-4 w-64 bg-neutral-100 animate-pulse rounded" />
+        </div>
+        <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-7 gap-4">
+          {Array.from({ length: 7 }).map((_, i) => (
+            <div key={i} className="h-24 rounded-xl bg-neutral-100 animate-pulse" />
+          ))}
         </div>
       </div>
     )
@@ -88,20 +139,24 @@ export default function AdminDashboard() {
               </Link>
             </div>
             <Card className="divide-y divide-neutral-100 overflow-hidden">
-              {recentPosts.map((p, i) => (
-                <div key={i} className="flex items-center justify-between px-5 py-4 hover:bg-neutral-50/50 transition-colors">
-                  <div className="min-w-0 flex-1 mr-4">
-                    <p className="text-sm font-medium text-neutral-800 truncate">{p.title}</p>
-                    <div className="flex items-center gap-2 mt-1.5">
-                      <span className={`text-[11px] px-2 py-0.5 rounded-full font-medium border ${catColor[p.category]}`}>{p.category}</span>
-                      <span className="text-xs text-neutral-400">{p.date}</span>
+              {recentPosts.length === 0 ? (
+                <div className="px-5 py-8 text-center text-sm text-neutral-400">Belum ada postingan</div>
+              ) : (
+                recentPosts.map((p, i) => (
+                  <div key={i} className="flex items-center justify-between px-5 py-4 hover:bg-neutral-50/50 transition-colors">
+                    <div className="min-w-0 flex-1 mr-4">
+                      <p className="text-sm font-medium text-neutral-800 truncate">{p.title}</p>
+                      <div className="flex items-center gap-2 mt-1.5">
+                        <span className={`text-[11px] px-2 py-0.5 rounded-full font-medium border ${catColor[p.category]}`}>{p.category}</span>
+                        <span className="text-xs text-neutral-400">{p.date}</span>
+                      </div>
                     </div>
+                    <span className={`text-[11px] px-2.5 py-1 rounded-full font-medium border shrink-0 ${statusColor[p.status]}`}>
+                      {p.status === "published" ? "Terbit" : "Draft"}
+                    </span>
                   </div>
-                  <span className={`text-[11px] px-2.5 py-1 rounded-full font-medium border shrink-0 ${statusColor[p.status]}`}>
-                    {p.status === "published" ? "Terbit" : "Draft"}
-                  </span>
-                </div>
-              ))}
+                ))
+              )}
             </Card>
           </div>
 
@@ -140,16 +195,20 @@ export default function AdminDashboard() {
               </Link>
             </div>
             <Card className="divide-y divide-neutral-100 overflow-hidden">
-              {recentMessages.map((m, i) => (
-                <div key={i} className="px-5 py-4 hover:bg-neutral-50/50 transition-colors">
-                  <div className="flex items-start justify-between gap-2">
-                    <p className="text-sm font-medium text-neutral-800">{m.name}</p>
-                    <span className="text-[11px] text-neutral-400 shrink-0">{m.date}</span>
+              {recentMessages.length === 0 ? (
+                <div className="px-5 py-8 text-center text-sm text-neutral-400">Belum ada pesan</div>
+              ) : (
+                recentMessages.map((m, i) => (
+                  <div key={i} className="px-5 py-4 hover:bg-neutral-50/50 transition-colors">
+                    <div className="flex items-start justify-between gap-2">
+                      <p className="text-sm font-medium text-neutral-800">{m.name}</p>
+                      <span className="text-[11px] text-neutral-400 shrink-0">{m.date}</span>
+                    </div>
+                    <p className="text-xs text-neutral-400 mt-1">{m.email}</p>
+                    <p className="text-xs text-neutral-500 mt-2 line-clamp-2">{m.preview}</p>
                   </div>
-                  <p className="text-xs text-neutral-400 mt-1">{m.email}</p>
-                  <p className="text-xs text-neutral-500 mt-2 line-clamp-2">{m.preview}</p>
-                </div>
-              ))}
+                ))
+              )}
             </Card>
           </div>
 

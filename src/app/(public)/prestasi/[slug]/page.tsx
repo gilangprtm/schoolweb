@@ -5,8 +5,9 @@ import ScrollReveal from "@/components/shared/ScrollReveal";
 import Breadcrumb from "@/components/shared/Breadcrumb";
 import Badge from "@/components/shared/Badge";
 import ImageWithFallback from "@/components/shared/ImageWithFallback";
-import { getAchievementBySlug, getPublishedAchievements } from "@/data/achievements";
+import { getAchievementBySlug, getAchievements } from "@/lib/actions/achievements";
 import { getChampionEmoji, formatLevel, formatDate, getLevelBadgeColor } from "@/lib/utils";
+import type { AchievementChampion, AchievementLevel } from "@/types";
 
 export default async function AchievementDetailPage({
   params,
@@ -14,13 +15,14 @@ export default async function AchievementDetailPage({
   params: Promise<{ slug: string }>;
 }) {
   const { slug } = await params;
-  const achievement = getAchievementBySlug(slug);
+  const achievement = await getAchievementBySlug(slug);
 
   if (!achievement) {
     notFound();
   }
 
-  const related = getPublishedAchievements()
+  const allAchievements = await getAchievements({ limit: 500 });
+  const related = allAchievements.data
     .filter((a) => a.id !== achievement.id)
     .slice(0, 3);
 
@@ -34,14 +36,14 @@ export default async function AchievementDetailPage({
             className="text-white/70 mb-3"
           />
           <span className="inline-block text-5xl mb-4">
-            {getChampionEmoji(achievement.champion)}
+            {getChampionEmoji(achievement.champion as AchievementChampion)}
           </span>
           <h1 className="font-heading text-2xl md:text-4xl font-bold text-white mb-3 leading-tight">
             {achievement.title}
           </h1>
           <div className="flex flex-wrap gap-2">
             <Badge
-              label={formatLevel(achievement.level)}
+              label={formatLevel(achievement.level as AchievementLevel)}
               variant="outline"
               className="bg-white/20 text-white border-white/20"
             />
@@ -59,9 +61,9 @@ export default async function AchievementDetailPage({
           <div className="grid md:grid-cols-3 gap-8 mb-8">
             {/* Photo */}
             <div className="md:col-span-1">
-              {achievement.image_url ? (
+              {achievement.imageUrl ? (
                 <ImageWithFallback
-                  src={achievement.image_url}
+                  src={achievement.imageUrl}
                   alt={achievement.title}
                   aspect="3/4"
                   rounded="rounded-2xl"
@@ -69,7 +71,7 @@ export default async function AchievementDetailPage({
                 />
               ) : (
                 <div className="aspect-[3/4] rounded-2xl bg-neutral-100 flex items-center justify-center text-7xl">
-                  {getChampionEmoji(achievement.champion)}
+                  {getChampionEmoji(achievement.champion as AchievementChampion)}
                 </div>
               )}
             </div>
@@ -80,9 +82,9 @@ export default async function AchievementDetailPage({
                 <InfoBox label="Kategori" value={
                   achievement.category === "student" ? "Siswa" : achievement.category === "teacher" ? "Guru" : "Sekolah"
                 } />
-                <InfoBox label="Tingkat" value={formatLevel(achievement.level)} />
-                <InfoBox label="Peringkat" value={getChampionEmoji(achievement.champion) + " " + achievement.champion === "1" ? "Juara 1" : achievement.champion} />
-                <InfoBox label="Tanggal" value={formatDate(achievement.date)} />
+                <InfoBox label="Tingkat" value={formatLevel(achievement.level as AchievementLevel)} />
+                <InfoBox label="Peringkat" value={getChampionEmoji(achievement.champion as AchievementChampion) + " " + (achievement.champion === "1" ? "Juara 1" : achievement.champion)} />
+                <InfoBox label="Tanggal" value={formatDate(achievement.date ?? "")} />
               </div>
               <div>
                 <h4 className="text-sm font-semibold text-neutral-500 uppercase tracking-wider mb-1">Penyelenggara</h4>
@@ -113,9 +115,9 @@ export default async function AchievementDetailPage({
               {related.map((r, i) => (
                 <ScrollReveal key={r.id} delay={i * 0.1}>
                   <Link href={`/prestasi/${r.slug}`} className="group block bg-white rounded-xl p-4 shadow-card hover:shadow-card-hover transition-all">
-                    <span className="text-3xl">{getChampionEmoji(r.champion)}</span>
+                    <span className="text-3xl">{getChampionEmoji(r.champion as AchievementChampion)}</span>
                     <h3 className="font-heading font-semibold text-neutral-800 text-sm mt-2 line-clamp-2 group-hover:text-primary transition-colors">{r.title}</h3>
-                    <Badge label={formatLevel(r.level)} variant="outline" className={getLevelBadgeColor(r.level) + " mt-2"} />
+                    <Badge label={formatLevel(r.level as AchievementLevel)} variant="outline" className={getLevelBadgeColor(r.level as AchievementLevel) + " mt-2"} />
                   </Link>
                 </ScrollReveal>
               ))}

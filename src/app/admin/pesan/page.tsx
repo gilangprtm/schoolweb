@@ -1,25 +1,47 @@
 "use client"
 
-import { useState } from "react"
+import { useState, useEffect } from "react"
 import { PageHeader } from "@/components/admin/PageHeader"
 import { Badge } from "@/components/admin/ui/Badge"
 import { Mail, MailOpen, Trash2, ChevronDown, ChevronUp } from "lucide-react"
+import { useToast } from "@/components/admin/ui/Toast"
+import { getContacts, markAsRead, deleteContact } from "@/lib/actions/contacts"
 
-interface Message { id:number; name:string; email:string; phone:string; message:string; isRead:boolean; createdAt:string }
-
-const mock: Message[] = [
-  { id:1, name:"Budi Santoso", email:"budi@email.com", phone:"08123456789", message:"Saya ingin menanyakan tentang syarat pendaftaran siswa baru untuk tahun ajaran 2025/2026. Apakah ada tes masuk dan berapa biaya pendaftarannya?", isRead:false, createdAt:"2025-06-27" },
-  { id:2, name:"Ani Rahmawati", email:"ani@email.com", phone:"", message:"Apakah sekolah menerima siswa pindahan dari luar kota? Anak saya kelas 2 SMP dan kami baru pindah ke daerah sini.", isRead:false, createdAt:"2025-06-26" },
-  { id:3, name:"Hendra Gunawan", email:"hendra@email.com", phone:"087812345678", message:"Mohon informasi jadwal PPDB tahun ini. Kapan pendaftaran dibuka?", isRead:true, createdAt:"2025-06-25" },
-]
+interface Message {
+  id: number; name: string; email: string; phone: string | null; message: string; isRead: boolean; createdAt: Date
+}
 
 export default function PesanPage() {
   const [expanded, setExpanded] = useState<number | null>(null)
-  const [messages, setMessages] = useState(mock)
+  const [messages, setMessages] = useState<Message[]>([])
+  const [loading, setLoading] = useState(true)
+  const { toast } = useToast()
 
-  const handleClick = (id: number) => {
+  useEffect(() => {
+    getContacts({ limit: 500 })
+      .then(res => setMessages(res.data as Message[]))
+      .catch(() => setMessages([]))
+      .finally(() => setLoading(false))
+  }, [])
+
+  const handleClick = async (id: number) => {
     setExpanded(expanded === id ? null : id)
-    setMessages(prev => prev.map(m => m.id === id ? { ...m, isRead: true } : m))
+    if (!messages.find(m => m.id === id)?.isRead) {
+      try {
+        await markAsRead(id)
+        setMessages(prev => prev.map(m => m.id === id ? { ...m, isRead: true } : m))
+      } catch {}
+    }
+  }
+
+  const handleDelete = async (id: number) => {
+    try {
+      await deleteContact(id)
+      setMessages(prev => prev.filter(m => m.id !== id))
+      toast({ type: "success", title: "Pesan dihapus" })
+    } catch {
+      toast({ type: "error", title: "Gagal menghapus pesan" })
+    }
   }
 
   const unread = messages.filter(m => !m.isRead).length
@@ -28,7 +50,9 @@ export default function PesanPage() {
     <div>
       <PageHeader title={`Pesan Masuk ${unread > 0 ? `(${unread})` : ""}`} breadcrumbs={[{ label: "Dashboard", href: "/admin" }, { label: "Pesan Masuk", href: "/admin/pesan" }]} />
 
-      {messages.length === 0 ? (
+      {loading ? (
+        <div className="space-y-2">{Array.from({ length: 3 }).map((_, i) => <div key={i} className="h-16 bg-neutral-100 animate-pulse rounded-lg" />)}</div>
+      ) : messages.length === 0 ? (
         <div className="text-center py-16 text-neutral-500">Belum ada pesan masuk</div>
       ) : (
         <div className="space-y-2">
@@ -40,7 +64,7 @@ export default function PesanPage() {
                   <div className="flex items-center gap-2"><span className={`text-sm ${m.isRead ? "text-neutral-600" : "font-semibold text-neutral-800"}`}>{m.name}</span><span className="text-xs text-neutral-400">{m.email}</span></div>
                   <p className="text-xs text-neutral-500 truncate">{m.message.slice(0, 60)}...</p>
                 </div>
-                <span className="text-xs text-neutral-400 shrink-0">{new Date(m.createdAt).toLocaleDateString("id-ID")}</span>
+                <span className="text-xs text-neutral-400 shrink-0">{m.createdAt.toLocaleDateString("id-ID")}</span>
                 {expanded === m.id ? <ChevronUp className="h-4 w-4 text-neutral-400 shrink-0" /> : <ChevronDown className="h-4 w-4 text-neutral-400 shrink-0" />}
               </button>
               {expanded === m.id && (
@@ -49,12 +73,12 @@ export default function PesanPage() {
                     <div><span className="text-neutral-400">Nama:</span> <span className="text-neutral-700">{m.name}</span></div>
                     <div><span className="text-neutral-400">Email:</span> <span className="text-neutral-700">{m.email}</span></div>
                     {m.phone && <div><span className="text-neutral-400">Telepon:</span> <span className="text-neutral-700">{m.phone}</span></div>}
-                    <div><span className="text-neutral-400">Tanggal:</span> <span className="text-neutral-700">{new Date(m.createdAt).toLocaleDateString("id-ID")}</span></div>
+                    <div><span className="text-neutral-400">Tanggal:</span> <span className="text-neutral-700">{m.createdAt.toLocaleDateString("id-ID")}</span></div>
                   </div>
                   <div className="pt-2 border-t border-neutral-200">
                     <p className="text-sm text-neutral-700 whitespace-pre-wrap">{m.message}</p>
                   </div>
-                  <button className="flex items-center gap-1 text-xs text-red-500 hover:text-red-700 pt-1"><Trash2 className="h-3 w-3" /> Hapus Pesan</button>
+                  <button onClick={() => handleDelete(m.id)} className="flex items-center gap-1 text-xs text-red-500 hover:text-red-700 pt-1"><Trash2 className="h-3 w-3" /> Hapus Pesan</button>
                 </div>
               )}
             </div>

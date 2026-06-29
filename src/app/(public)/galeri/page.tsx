@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import Image from "next/image";
 import { Play } from "lucide-react";
 import { Tabs, TabsList, TabsTrigger, TabsContent } from "@/components/ui/tabs";
@@ -8,10 +8,20 @@ import MiniHeroBanner from "@/components/shared/MiniHeroBanner";
 import ScrollReveal from "@/components/shared/ScrollReveal";
 import ImageWithFallback from "@/components/shared/ImageWithFallback";
 import EmptyState from "@/components/shared/EmptyState";
-import { galleries } from "@/data/galleries";
+import { getGalleries } from "@/lib/actions/galleries";
 import type { Gallery, Media } from "@/types";
 
 export default function GaleriPage() {
+  const [galleries, setGalleries] = useState<Gallery[]>([]);
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    getGalleries()
+      .then((g) => setGalleries(g.map((item) => ({ ...item, type: item.type as Gallery["type"], createdAt: String(item.createdAt) }))))
+      .catch(() => setGalleries([]))
+      .finally(() => setLoading(false));
+  }, []);
+
   const photoAlbums = galleries.filter((g) => g.type === "photo");
   const videoAlbums = galleries.filter((g) => g.type === "video");
 
@@ -33,7 +43,13 @@ export default function GaleriPage() {
 
             {/* Photo Albums */}
             <TabsContent value="foto" className="mt-0">
-              {photoAlbums.length === 0 ? (
+              {loading ? (
+                <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-3">
+                  {Array.from({ length: 4 }).map((_, i) => (
+                    <div key={i} className="rounded-xl bg-neutral-100 animate-pulse aspect-[4/3]" />
+                  ))}
+                </div>
+              ) : photoAlbums.length === 0 ? (
                 <EmptyState title="Belum ada album foto" />
               ) : (
                 <div className="space-y-12">
@@ -48,7 +64,16 @@ export default function GaleriPage() {
 
             {/* Video Albums */}
             <TabsContent value="video" className="mt-0">
-              {videoAlbums.length === 0 ? (
+              {loading ? (
+                <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5">
+                  {Array.from({ length: 3 }).map((_, i) => (
+                    <div key={i} className="rounded-2xl p-4 bg-neutral-100 animate-pulse">
+                      <div className="h-5 w-2/3 bg-neutral-200 rounded mb-3" />
+                      <div className="aspect-video rounded-xl bg-neutral-200" />
+                    </div>
+                  ))}
+                </div>
+              ) : videoAlbums.length === 0 ? (
                 <EmptyState title="Belum ada video" />
               ) : (
                 <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5">
@@ -91,7 +116,7 @@ function PhotoAlbum({ album }: { album: Gallery }) {
           >
             <Image
               src={photo.url}
-              alt={photo.caption || `Foto ${photo.sort_order}`}
+              alt={photo.caption || `Foto ${photo.sortOrder}`}
               fill
               className="object-cover group-hover:scale-105 transition-transform duration-300"
               sizes="(max-width: 768px) 50vw, 25vw"

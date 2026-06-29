@@ -6,8 +6,9 @@ import Breadcrumb from "@/components/shared/Breadcrumb";
 import Badge from "@/components/shared/Badge";
 import ImageWithFallback from "@/components/shared/ImageWithFallback";
 import FacilityGallery from "@/components/fasilitas/FacilityGallery";
-import { getFacilityBySlug, getPublishedFacilities } from "@/data/facilities";
+import { getFacilityBySlug, getFacilities } from "@/lib/actions/facilities";
 import { getFacilityIcon, getFacilityCategoryLabel } from "@/lib/utils";
+import type { FacilityCategory } from "@/types";
 
 export default async function FacilityDetailPage({
   params,
@@ -15,13 +16,14 @@ export default async function FacilityDetailPage({
   params: Promise<{ slug: string }>;
 }) {
   const { slug } = await params;
-  const facility = getFacilityBySlug(slug);
+  const facility = await getFacilityBySlug(slug);
 
   if (!facility) {
     notFound();
   }
 
-  const relatedFacilities = getPublishedFacilities()
+  const allFacilities = await getFacilities({ limit: 100 });
+  const relatedFacilities = allFacilities.data
     .filter((f) => f.category === facility.category && f.id !== facility.id)
     .slice(0, 3);
 
@@ -31,7 +33,7 @@ export default async function FacilityDetailPage({
       <section className="relative min-h-[30vh] md:min-h-[35vh] flex items-end bg-neutral-900">
         <div className="absolute inset-0">
           <ImageWithFallback
-            src={facility.photo_url}
+            src={facility.photoUrl}
             alt={facility.name}
             fill
             rounded="rounded-none"
@@ -48,7 +50,7 @@ export default async function FacilityDetailPage({
             className="text-white/70 mb-3"
           />
           <Badge
-            label={`${getFacilityIcon(facility.category)} ${getFacilityCategoryLabel(facility.category)}`}
+            label={`${getFacilityIcon(facility.category as FacilityCategory)} ${getFacilityCategoryLabel(facility.category as FacilityCategory)}`}
             variant="outline"
             className="bg-white/20 text-white border-white/20 mb-3"
           />
@@ -70,12 +72,12 @@ export default async function FacilityDetailPage({
           </ScrollReveal>
 
           {/* Photo Gallery */}
-          {facility.facility_photos && facility.facility_photos.length > 0 && (
+          {facility.photos && facility.photos.length > 0 && (
             <div className="mt-12 pt-8 border-t border-neutral-200">
               <h2 className="font-heading text-xl font-bold text-neutral-800 mb-6">
                 Galeri Foto
               </h2>
-              <FacilityGallery photos={facility.facility_photos} />
+              <FacilityGallery photos={facility.photos} />
             </div>
           )}
 
@@ -107,7 +109,7 @@ export default async function FacilityDetailPage({
                   >
                     <div className="relative aspect-[4/3] overflow-hidden bg-neutral-100">
                       <ImageWithFallback
-                        src={rf.photo_url}
+                        src={rf.photoUrl}
                         alt={rf.name}
                         aspect="4/3"
                         rounded="rounded-none"
@@ -115,7 +117,7 @@ export default async function FacilityDetailPage({
                       />
                       <div className="absolute bottom-2 left-2">
                         <Badge
-                          label={`${getFacilityIcon(rf.category)} ${getFacilityCategoryLabel(rf.category)}`}
+                          label={`${getFacilityIcon(rf.category as FacilityCategory)} ${getFacilityCategoryLabel(rf.category as FacilityCategory)}`}
                           variant="outline"
                           className="bg-white/90 border-0 text-xs"
                         />

@@ -1,6 +1,6 @@
 // ============================================
 // TypeScript Interfaces — Website Profil Sekolah
-// Maps to PostgreSQL schema defined in PRD.md
+// Maps to Drizzle ORM schema (camelCase keys)
 // ============================================
 
 // ── Settings ──
@@ -29,8 +29,8 @@ export interface Page {
   id: number;
   title: string;
   slug: string;
-  content: string; // HTML from TipTap editor
-  updated_at: string;
+  content: string; // HTML
+  updatedAt: string;
 }
 
 // ── Posts (Berita & Pengumuman) ──
@@ -40,12 +40,12 @@ export interface Post {
   id: number;
   title: string;
   slug: string;
-  content: string; // HTML from TipTap
+  content: string; // HTML
   excerpt: string;
-  image_url: string;
+  imageUrl: string;
   category: PostCategory;
-  is_published: boolean;
-  published_at: string; // ISO date string
+  isPublished: boolean;
+  publishedAt: string; // ISO date string
 }
 
 // ── Staff (Guru & Staf) ──
@@ -56,14 +56,14 @@ export interface Staff {
   name: string;
   slug: string;
   role: StaffRole;
-  subject?: string; // Mata pelajaran (hanya untuk guru)
-  photo_url: string;
+  subject?: string | null;
+  photoUrl: string;
   education: string;
   bio: string;
-  email: string;
-  phone?: string; // Internal, tidak ditampilkan publik
-  sort_order: number;
-  is_active: boolean;
+  email: string | null;
+  phone?: string | null;
+  sortOrder: number;
+  isActive: boolean;
 }
 
 // ── Achievements (Prestasi) ──
@@ -84,11 +84,11 @@ export interface Achievement {
   category: AchievementCategory;
   level: AchievementLevel;
   champion: AchievementChampion;
-  organizer: string;
-  date: string; // YYYY-MM-DD
-  image_url: string;
-  is_featured: boolean;
-  is_published: boolean;
+  organizer: string | null;
+  date: string | null; // YYYY-MM-DD
+  imageUrl: string;
+  isFeatured: boolean;
+  isPublished: boolean;
 }
 
 // ── Facilities (Fasilitas) ──
@@ -106,20 +106,20 @@ export interface Facility {
   slug: string;
   description: string;
   category: FacilityCategory;
-  photo_url: string;
-  is_featured: boolean;
-  sort_order: number;
-  is_published: boolean;
-  facility_photos?: FacilityPhoto[];
+  photoUrl: string;
+  isFeatured: boolean;
+  sortOrder: number;
+  isPublished: boolean;
+  photos?: FacilityPhoto[];
 }
 
 export interface FacilityPhoto {
   id: number;
-  facility_id: number;
+  facilityId: number;
   filename: string;
   url: string;
   caption: string;
-  sort_order: number;
+  sortOrder: number;
 }
 
 // ── Galleries ──
@@ -131,16 +131,16 @@ export interface Gallery {
   description: string;
   type: GalleryType;
   media: Media[];
-  created_at: string;
+  createdAt: string;
 }
 
 export interface Media {
   id: number;
-  gallery_id: number;
-  filename?: string;
+  galleryId: number;
+  filename?: string | null;
   url: string;
   caption: string;
-  sort_order: number;
+  sortOrder: number;
 }
 
 // ── Contacts ──
@@ -151,11 +151,11 @@ export interface ContactMessage {
   message: string;
 }
 
-// ── Users (for admin dashboard, not used in frontend yet) ──
+// ── Users (for admin dashboard) ──
 export type UserRole = "superadmin" | "admin";
 
 export interface User {
-  id: number;
+  id: string; // Better Auth uses UUID strings
   name: string;
   email: string;
   role: UserRole;

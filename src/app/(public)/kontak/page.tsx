@@ -1,19 +1,28 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { MapPin, Phone, Mail, Clock, Send, CheckCircle } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import MiniHeroBanner from "@/components/shared/MiniHeroBanner";
 import ScrollReveal from "@/components/shared/ScrollReveal";
-import { siteSettings } from "@/data/settings";
+import { getAllSettings } from "@/lib/actions/settings";
+import { createContact } from "@/lib/actions/contacts";
+import type { SiteSettings } from "@/types";
 
 export default function KontakPage() {
   const [form, setForm] = useState({ name: "", email: "", phone: "", message: "" });
   const [submitted, setSubmitted] = useState(false);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
+  const [settings, setSettings] = useState<SiteSettings | null>(null);
+
+  useEffect(() => {
+    getAllSettings()
+      .then(setSettings)
+      .catch(() => {});
+  }, []);
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     setForm({ ...form, [e.target.name]: e.target.value });
@@ -33,11 +42,20 @@ export default function KontakPage() {
     }
 
     setLoading(true);
-    // Simulated API call
-    await new Promise((resolve) => setTimeout(resolve, 1500));
-    setLoading(false);
-    setSubmitted(true);
-    setForm({ name: "", email: "", phone: "", message: "" });
+    try {
+      const formData = new FormData();
+      formData.append("name", form.name);
+      formData.append("email", form.email);
+      formData.append("phone", form.phone);
+      formData.append("message", form.message);
+      await createContact(formData);
+      setSubmitted(true);
+      setForm({ name: "", email: "", phone: "", message: "" });
+    } catch {
+      setError("Gagal mengirim pesan. Silakan coba lagi.");
+    } finally {
+      setLoading(false);
+    }
   };
 
   return (
@@ -54,47 +72,49 @@ export default function KontakPage() {
             {/* Contact Info */}
             <ScrollReveal className="md:col-span-2" direction="left">
               <div className="space-y-6">
-                <ContactItem icon={MapPin} title="Alamat" content={siteSettings.address} />
+                <ContactItem icon={MapPin} title="Alamat" content={settings?.address ?? ""} />
                 <ContactItem
                   icon={Phone}
                   title="Telepon"
-                  content={siteSettings.phone}
-                  href={`tel:${siteSettings.phone.replace(/[^0-9+]/g, "")}`}
+                  content={settings?.phone ?? ""}
+                  href={`tel:${(settings?.phone ?? "").replace(/[^0-9+]/g, "")}`}
                 />
                 <ContactItem
                   icon={Mail}
                   title="Email"
-                  content={siteSettings.email}
-                  href={`mailto:${siteSettings.email}`}
+                  content={settings?.email ?? ""}
+                  href={`mailto:${settings?.email ?? ""}`}
                 />
-                <ContactItem icon={Clock} title="Jam Operasional" content={siteSettings.jamOperasional} />
+                <ContactItem icon={Clock} title="Jam Operasional" content={settings?.jamOperasional ?? ""} />
 
                 {/* Social */}
-                <div className="pt-4">
-                  <h4 className="text-sm font-semibold text-neutral-500 uppercase tracking-wider mb-3">
-                    Media Sosial
-                  </h4>
-                  <div className="flex gap-2">
-                    {siteSettings.social.facebook && (
-                      <a href={siteSettings.social.facebook} target="_blank" rel="noopener noreferrer"
-                        className="size-10 rounded-lg bg-neutral-100 hover:bg-primary hover:text-white text-neutral-600 flex items-center justify-center transition-all">
-                        f
-                      </a>
-                    )}
-                    {siteSettings.social.instagram && (
-                      <a href={siteSettings.social.instagram} target="_blank" rel="noopener noreferrer"
-                        className="size-10 rounded-lg bg-neutral-100 hover:bg-primary hover:text-white text-neutral-600 flex items-center justify-center transition-all">
-                        ig
-                      </a>
-                    )}
-                    {siteSettings.social.youtube && (
-                      <a href={siteSettings.social.youtube} target="_blank" rel="noopener noreferrer"
-                        className="size-10 rounded-lg bg-neutral-100 hover:bg-primary hover:text-white text-neutral-600 flex items-center justify-center transition-all">
-                        yt
-                      </a>
-                    )}
+                {settings?.social && (
+                  <div className="pt-4">
+                    <h4 className="text-sm font-semibold text-neutral-500 uppercase tracking-wider mb-3">
+                      Media Sosial
+                    </h4>
+                    <div className="flex gap-2">
+                      {settings.social.facebook && (
+                        <a href={settings.social.facebook} target="_blank" rel="noopener noreferrer"
+                          className="size-10 rounded-lg bg-neutral-100 hover:bg-primary hover:text-white text-neutral-600 flex items-center justify-center transition-all">
+                          f
+                        </a>
+                      )}
+                      {settings.social.instagram && (
+                        <a href={settings.social.instagram} target="_blank" rel="noopener noreferrer"
+                          className="size-10 rounded-lg bg-neutral-100 hover:bg-primary hover:text-white text-neutral-600 flex items-center justify-center transition-all">
+                          ig
+                        </a>
+                      )}
+                      {settings.social.youtube && (
+                        <a href={settings.social.youtube} target="_blank" rel="noopener noreferrer"
+                          className="size-10 rounded-lg bg-neutral-100 hover:bg-primary hover:text-white text-neutral-600 flex items-center justify-center transition-all">
+                          yt
+                        </a>
+                      )}
+                    </div>
                   </div>
-                </div>
+                )}
               </div>
             </ScrollReveal>
 
@@ -167,23 +187,25 @@ export default function KontakPage() {
       </section>
 
       {/* Map */}
-      <section className="bg-white pb-16">
-        <div className="container-custom">
-          <div className="aspect-[21/9] md:aspect-[21/9] aspect-video rounded-2xl overflow-hidden shadow-lg bg-neutral-100 relative">
-            <iframe
-              src={siteSettings.googleMapsEmbedUrl}
-              width="100%"
-              height="100%"
-              style={{ border: 0 }}
-              allowFullScreen
-              loading="lazy"
-              referrerPolicy="no-referrer-when-downgrade"
-              title="Lokasi SMP Negeri 17 Denpasar"
-              className="absolute inset-0"
-            />
+      {settings?.googleMapsEmbedUrl && (
+        <section className="bg-white pb-16">
+          <div className="container-custom">
+            <div className="aspect-[21/9] md:aspect-[21/9] aspect-video rounded-2xl overflow-hidden shadow-lg bg-neutral-100 relative">
+              <iframe
+                src={settings.googleMapsEmbedUrl}
+                width="100%"
+                height="100%"
+                style={{ border: 0 }}
+                allowFullScreen
+                loading="lazy"
+                referrerPolicy="no-referrer-when-downgrade"
+                title="Lokasi SMP Negeri 17 Denpasar"
+                className="absolute inset-0"
+              />
+            </div>
           </div>
-        </div>
-      </section>
+        </section>
+      )}
     </>
   );
 }

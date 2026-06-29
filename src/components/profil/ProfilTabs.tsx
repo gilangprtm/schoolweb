@@ -1,17 +1,30 @@
 "use client";
 
+import { useState, useEffect } from "react";
 import { useSearchParams, useRouter } from "next/navigation";
 import { Tabs, TabsList, TabsTrigger, TabsContent } from "@/components/ui/tabs";
 import ScrollReveal from "@/components/shared/ScrollReveal";
-import { getPageBySlug } from "@/data/pages";
+import { getPageBySlug } from "@/lib/actions/pages";
+import type { Page } from "@/types";
 
 export default function ProfilTabs() {
   const searchParams = useSearchParams();
   const router = useRouter();
   const tab = searchParams.get("tab") || "visi-misi";
 
-  const visiMisi = getPageBySlug("visi-misi");
-  const sejarah = getPageBySlug("sejarah");
+  const [visiMisi, setVisiMisi] = useState<Page | null>(null);
+  const [sejarah, setSejarah] = useState<Page | null>(null);
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    Promise.all([getPageBySlug("visi-misi"), getPageBySlug("sejarah")])
+      .then(([vm, sj]) => {
+        setVisiMisi(vm ? { ...vm, updatedAt: String(vm.updatedAt) } as Page : null);
+        setSejarah(sj ? { ...sj, updatedAt: String(sj.updatedAt) } as Page : null);
+      })
+      .catch(() => {})
+      .finally(() => setLoading(false));
+  }, []);
 
   const handleTabChange = (value: string) => {
     router.push(`/profil?tab=${value}`, { scroll: false });
@@ -33,7 +46,13 @@ export default function ProfilTabs() {
         </TabsList>
 
         <TabsContent value="visi-misi" className="mt-0">
-          {visiMisi ? (
+          {loading ? (
+            <div className="animate-pulse space-y-3 py-6">
+              <div className="h-4 bg-neutral-200 rounded w-3/4" />
+              <div className="h-4 bg-neutral-200 rounded w-full" />
+              <div className="h-4 bg-neutral-200 rounded w-2/3" />
+            </div>
+          ) : visiMisi ? (
             <div
               className="prose-content"
               dangerouslySetInnerHTML={{ __html: visiMisi.content }}
@@ -46,7 +65,13 @@ export default function ProfilTabs() {
         </TabsContent>
 
         <TabsContent value="sejarah" className="mt-0">
-          {sejarah ? (
+          {loading ? (
+            <div className="animate-pulse space-y-3 py-6">
+              <div className="h-4 bg-neutral-200 rounded w-3/4" />
+              <div className="h-4 bg-neutral-200 rounded w-full" />
+              <div className="h-4 bg-neutral-200 rounded w-2/3" />
+            </div>
+          ) : sejarah ? (
             <div
               className="prose-content"
               dangerouslySetInnerHTML={{ __html: sejarah.content }}

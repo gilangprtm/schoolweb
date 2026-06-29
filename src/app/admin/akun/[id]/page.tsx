@@ -1,146 +1,46 @@
 "use client"
 
-import { useState } from "react"
-import { useRouter } from "next/navigation"
+import { useState, useEffect } from "react"
+import { useRouter, useParams } from "next/navigation"
 import { PageHeader } from "@/components/admin/PageHeader"
 import { Select } from "@/components/admin/ui/Select"
-import { useToast } from "@/components/admin/ui/Toast"
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
-
-const mockAkun = {
-  id: 2,
-  name: "Budi Santoso, S.Pd.",
-  email: "guru@sekolah.sch.id",
-  role: "guru" as const,
-  isActive: true,
-  createdAt: "2025-06-01",
-}
+import { getUserById, updateUserRole } from "@/lib/actions/users"
 
 export default function AkunEditPage() {
-  const router = useRouter()
-  const { toast } = useToast()
-  const [name, setName] = useState(mockAkun.name)
-  const [email, setEmail] = useState(mockAkun.email)
-  const [role, setRole] = useState<string>(mockAkun.role)
-  const [password, setPassword] = useState("")
-  const [isActive, setIsActive] = useState(mockAkun.isActive)
+  const router = useRouter(); const params = useParams(); const id = params.id as string
+  const [name, setName] = useState(""); const [email, setEmail] = useState("")
+  const [role, setRole] = useState<"superadmin" | "admin">("admin"); const [loading, setLoading] = useState(true)
 
-  const handleSubmit = (e: React.FormEvent) => {
+  useEffect(() => {
+    getUserById(id).then(u => {
+      if (u) { setName(u.name || ""); setEmail(u.email || ""); setRole((u.role as "superadmin" | "admin") || "admin") }
+      setLoading(false)
+    }).catch(() => setLoading(false))
+  }, [id])
+
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
-    toast({ type: "success", title: "Akun diperbarui" })
-    router.push("/admin/akun")
+    try {
+      await updateUserRole(id, role)
+    } catch {}
+    router.push("/admin/akun"); router.refresh()
   }
+
+  if (loading) return <div className="space-y-6"><div className="h-8 w-40 bg-neutral-200 animate-pulse rounded" /><div className="h-96 bg-neutral-100 animate-pulse rounded-xl" /></div>
 
   return (
     <div className="space-y-6">
-      <PageHeader
-        title="Edit Akun"
-        breadcrumbs={[
-          { label: "Dashboard", href: "/admin" },
-          { label: "Akun", href: "/admin/akun" },
-          { label: "Edit", href: "#" },
-        ]}
-      />
-
+      <PageHeader title="Edit Akun" breadcrumbs={[{ label: "Dashboard", href: "/admin" }, { label: "Akun", href: "/admin/akun" }, { label: name, href: "#" }]} />
       <form onSubmit={handleSubmit} className="max-w-3xl space-y-6">
-        {/* Informasi Akun */}
         <div className="rounded-xl border border-neutral-200 bg-white p-6 space-y-5">
-          <h2 className="text-sm font-semibold text-neutral-900 uppercase tracking-wider">
-            Informasi Akun
-          </h2>
-
-          <div className="space-y-2">
-            <label className="text-sm font-medium text-neutral-700">
-              Nama <span className="text-red-500">*</span>
-            </label>
-            <Input
-              placeholder="Nama lengkap"
-              value={name}
-              onChange={(e) => setName(e.target.value)}
-              required
-            />
-          </div>
-
-          <div className="space-y-2">
-            <label className="text-sm font-medium text-neutral-700">
-              Email <span className="text-red-500">*</span>
-            </label>
-            <Input
-              type="email"
-              placeholder="nama@sekolah.sch.id"
-              value={email}
-              onChange={(e) => setEmail(e.target.value)}
-              required
-            />
-          </div>
-
-          <div className="grid sm:grid-cols-2 gap-4">
-            <div className="space-y-2">
-              <label className="text-sm font-medium text-neutral-700">
-                Role <span className="text-red-500">*</span>
-              </label>
-              <Select
-                value={role}
-                onChange={setRole}
-                options={[
-                  { value: "admin", label: "Admin" },
-                  { value: "guru", label: "Guru" },
-                  { value: "staff", label: "Staff" },
-                ]}
-              />
-            </div>
-
-            <div className="space-y-2">
-              <label className="text-sm font-medium text-neutral-700">Password</label>
-              <Input
-                type="password"
-                placeholder="Kosongkan jika tidak ingin mengubah"
-                value={password}
-                onChange={(e) => setPassword(e.target.value)}
-              />
-            </div>
-          </div>
+          <h2 className="text-sm font-semibold text-neutral-900 uppercase tracking-wider">Informasi Akun</h2>
+          <div className="space-y-2"><label className="text-sm font-medium text-neutral-700">Nama</label><Input value={name} disabled /></div>
+          <div className="space-y-2"><label className="text-sm font-medium text-neutral-700">Email</label><Input type="email" value={email} disabled /></div>
+          <div className="space-y-2"><label className="text-sm font-medium text-neutral-700">Role</label><Select value={role} onChange={(v) => setRole(v as "superadmin" | "admin")} options={[{ value: "admin", label: "Admin" }, { value: "superadmin", label: "Super Admin" }]} /></div>
         </div>
-
-        {/* Pengaturan */}
-        <div className="rounded-xl border border-neutral-200 bg-white p-6 space-y-5">
-          <h2 className="text-sm font-semibold text-neutral-900 uppercase tracking-wider">
-            Pengaturan
-          </h2>
-
-          <div className="space-y-2">
-            <label className="text-sm font-medium text-neutral-700">Status Aktif</label>
-            <div className="flex items-center gap-3 pt-1">
-              <button
-                type="button"
-                role="switch"
-                aria-checked={isActive}
-                onClick={() => setIsActive(!isActive)}
-                className={`relative inline-flex h-6 w-11 shrink-0 cursor-pointer rounded-full border-2 border-transparent transition-colors duration-200 focus:outline-none focus:ring-2 focus:ring-primary/20 ${
-                  isActive ? "bg-emerald-500" : "bg-neutral-300"
-                }`}
-              >
-                <span
-                  className={`pointer-events-none inline-block h-5 w-5 transform rounded-full bg-white shadow-sm ring-0 transition-transform duration-200 ${
-                    isActive ? "translate-x-5" : "translate-x-0"
-                  }`}
-                />
-              </button>
-              <span className="text-sm text-neutral-500">
-                {isActive ? "Aktif" : "Nonaktif"}
-              </span>
-            </div>
-          </div>
-        </div>
-
-        {/* Actions */}
-        <div className="flex items-center gap-3">
-          <Button type="submit">Simpan Perubahan</Button>
-          <Button type="button" variant="outline" onClick={() => router.back()}>
-            Batal
-          </Button>
-        </div>
+        <div className="flex items-center gap-3"><Button type="submit">Simpan Perubahan</Button><Button type="button" variant="outline" onClick={() => router.back()}>Batal</Button></div>
       </form>
     </div>
   )

@@ -5,11 +5,12 @@ import SectionHeading from "@/components/shared/SectionHeading";
 import Badge from "@/components/shared/Badge";
 import ImageWithFallback from "@/components/shared/ImageWithFallback";
 import EmptyState from "@/components/shared/EmptyState";
-import { getFeaturedFacilities } from "@/data/facilities";
+import { getFeaturedFacilities } from "@/lib/actions/facilities";
 import { getFacilityIcon, getFacilityCategoryLabel } from "@/lib/utils";
+import type { FacilityCategory } from "@/types";
 
-export default function FacilityHighlight() {
-  const facilities = getFeaturedFacilities().slice(0, 6);
+export default async function FacilityHighlight() {
+  const facilities = (await getFeaturedFacilities(6));
 
   return (
     <section className="section-py bg-neutral-50">
@@ -37,7 +38,7 @@ export default function FacilityHighlight() {
                 >
                   <div className="relative aspect-[4/3] overflow-hidden bg-neutral-100">
                     <ImageWithFallback
-                      src={facility.photo_url}
+                      src={facility.photoUrl}
                       alt={facility.name}
                       aspect="4/3"
                       rounded="rounded-none"
@@ -47,7 +48,7 @@ export default function FacilityHighlight() {
                     <div className="absolute inset-x-0 bottom-0 h-1/2 bg-gradient-to-t from-black/60 to-transparent" />
                     <div className="absolute bottom-3 left-3 right-3">
                       <Badge
-                        label={`${getFacilityIcon(facility.category)} ${getFacilityCategoryLabel(facility.category)}`}
+                        label={`${getFacilityIcon(facility.category as FacilityCategory)} ${getFacilityCategoryLabel(facility.category as FacilityCategory)}`}
                         variant="outline"
                         className="bg-white/90 border-0"
                       />

@@ -5,7 +5,7 @@ import ScrollReveal from "@/components/shared/ScrollReveal";
 import Breadcrumb from "@/components/shared/Breadcrumb";
 import Badge from "@/components/shared/Badge";
 import ImageWithFallback from "@/components/shared/ImageWithFallback";
-import { getPostBySlug, getLatestPosts } from "@/data/posts";
+import { getPostBySlug, getLatestPosts } from "@/lib/actions/posts";
 import { formatDate } from "@/lib/utils";
 
 export default async function BeritaDetailPage({
@@ -14,13 +14,15 @@ export default async function BeritaDetailPage({
   params: Promise<{ slug: string }>;
 }) {
   const { slug } = await params;
-  const post = getPostBySlug(slug);
+  const post = await getPostBySlug(slug);
 
   if (!post) {
     notFound();
   }
 
-  const relatedPosts = getLatestPosts(3, post.id);
+  const relatedPosts = (await getLatestPosts(5)).filter(
+    (rp) => rp.id !== post.id
+  ).slice(0, 3);
 
   return (
     <article>
@@ -28,7 +30,7 @@ export default async function BeritaDetailPage({
       <section className="relative min-h-[35vh] md:min-h-[40vh] flex items-end bg-neutral-900">
         <div className="absolute inset-0">
           <ImageWithFallback
-            src={post.image_url}
+            src={post.imageUrl}
             alt={post.title}
             fill
             rounded="rounded-none"
@@ -53,7 +55,7 @@ export default async function BeritaDetailPage({
           </h1>
           <div className="flex items-center gap-2 text-white/70 text-sm">
             <CalendarDays className="size-4" />
-            {formatDate(post.published_at)}
+            {formatDate(post.publishedAt)}
           </div>
         </div>
       </section>
@@ -97,7 +99,7 @@ export default async function BeritaDetailPage({
                   >
                     <div className="relative aspect-video overflow-hidden bg-neutral-100">
                       <ImageWithFallback
-                        src={rp.image_url}
+                        src={rp.imageUrl}
                         alt={rp.title}
                         aspect="16/9"
                         rounded="rounded-none"
@@ -110,7 +112,7 @@ export default async function BeritaDetailPage({
                       </h3>
                       <div className="flex items-center gap-1.5 text-neutral-400 text-xs mt-2">
                         <CalendarDays className="size-3" />
-                        {formatDate(rp.published_at)}
+                        {formatDate(rp.publishedAt)}
                       </div>
                     </div>
                   </Link>

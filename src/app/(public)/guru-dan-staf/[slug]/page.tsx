@@ -5,7 +5,7 @@ import ScrollReveal from "@/components/shared/ScrollReveal";
 import Breadcrumb from "@/components/shared/Breadcrumb";
 import Badge from "@/components/shared/Badge";
 import ImageWithFallback from "@/components/shared/ImageWithFallback";
-import { getStaffBySlug, getRelatedStaff } from "@/data/staff";
+import { getStaffBySlug, getActiveStaff } from "@/lib/actions/staff";
 
 export default async function StaffDetailPage({
   params,
@@ -13,13 +13,17 @@ export default async function StaffDetailPage({
   params: Promise<{ slug: string }>;
 }) {
   const { slug } = await params;
-  const person = getStaffBySlug(slug);
+  const person = await getStaffBySlug(slug);
 
   if (!person) {
     notFound();
   }
 
-  const related = getRelatedStaff(person.role, person.id, 4);
+  const allStaff = await getActiveStaff();
+  const related = allStaff
+    .filter((r) => r.role === person.role && r.id !== person.id)
+    .slice(0, 4);
+
   const roleLabel =
     person.role === "headmaster"
       ? "Kepala Sekolah"
@@ -45,7 +49,7 @@ export default async function StaffDetailPage({
             <div className="flex flex-col sm:flex-row gap-6 items-center sm:items-start">
               {/* Photo */}
               <div className="size-36 md:size-44 rounded-2xl overflow-hidden shrink-0 shadow-lg">
-                <ImageWithFallback src={person.photo_url} alt={person.name} aspect="1/1" rounded="rounded-2xl" />
+                <ImageWithFallback src={person.photoUrl} alt={person.name} aspect="1/1" rounded="rounded-2xl" />
               </div>
 
               {/* Info */}
@@ -62,13 +66,15 @@ export default async function StaffDetailPage({
                 {person.subject && (
                   <p className="text-neutral-500 font-medium mb-3">{person.subject}</p>
                 )}
-                <a
-                  href={`mailto:${person.email}`}
-                  className="inline-flex items-center gap-2 text-primary hover:text-primary-700 text-sm transition-colors"
-                >
-                  <Mail className="size-4" />
-                  {person.email}
-                </a>
+                {person.email && (
+                  <a
+                    href={`mailto:${person.email}`}
+                    className="inline-flex items-center gap-2 text-primary hover:text-primary-700 text-sm transition-colors"
+                  >
+                    <Mail className="size-4" />
+                    {person.email}
+                  </a>
+                )}
               </div>
             </div>
           </div>
@@ -125,7 +131,7 @@ export default async function StaffDetailPage({
                     className="group block text-center bg-white rounded-2xl p-4 shadow-card hover:shadow-card-hover transition-all hover:-translate-y-1"
                   >
                     <div className="size-20 rounded-full overflow-hidden mx-auto mb-2">
-                      <ImageWithFallback src={r.photo_url} alt={r.name} aspect="1/1" rounded="rounded-full" />
+                      <ImageWithFallback src={r.photoUrl} alt={r.name} aspect="1/1" rounded="rounded-full" />
                     </div>
                     <h3 className="font-heading font-semibold text-neutral-800 text-xs group-hover:text-primary transition-colors line-clamp-2">
                       {r.name}

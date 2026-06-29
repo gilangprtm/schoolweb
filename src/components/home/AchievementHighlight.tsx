@@ -5,11 +5,12 @@ import SectionHeading from "@/components/shared/SectionHeading";
 import Badge from "@/components/shared/Badge";
 import ImageWithFallback from "@/components/shared/ImageWithFallback";
 import EmptyState from "@/components/shared/EmptyState";
-import { getFeaturedAchievements } from "@/data/achievements";
+import { getFeaturedAchievements } from "@/lib/actions/achievements";
 import { getChampionEmoji, formatLevel, truncate } from "@/lib/utils";
+import type { AchievementChampion, AchievementLevel } from "@/types";
 
-export default function AchievementHighlight() {
-  const achievements = getFeaturedAchievements().slice(0, 4);
+export default async function AchievementHighlight() {
+  const achievements = (await getFeaturedAchievements(4));
 
   return (
     <section className="section-py bg-primary-light">
@@ -37,11 +38,11 @@ export default function AchievementHighlight() {
                 >
                   <div className="relative aspect-[4/3] bg-neutral-100 overflow-hidden">
                     <span className="absolute top-3 left-3 z-10 text-4xl drop-shadow-md">
-                      {getChampionEmoji(achievement.champion)}
+                      {getChampionEmoji(achievement.champion as AchievementChampion)}
                     </span>
-                    {achievement.image_url ? (
+                    {achievement.imageUrl ? (
                       <ImageWithFallback
-                        src={achievement.image_url}
+                        src={achievement.imageUrl}
                         alt={achievement.title}
                         aspect="4/3"
                         rounded="rounded-none"
@@ -59,7 +60,7 @@ export default function AchievementHighlight() {
                     </h3>
                     <div className="flex flex-wrap gap-1.5">
                       <Badge
-                        label={formatLevel(achievement.level)}
+                        label={formatLevel(achievement.level as AchievementLevel)}
                         variant={
                           achievement.level === "nasional" ||
                           achievement.level === "internasional"
