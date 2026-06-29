@@ -9,8 +9,11 @@ RUN npm ci
 
 COPY . .
 
-# Build Next.js (standalone output for minimal runtime image)
+# Dummy DB_URL untuk build — Next.js perlu resolve module imports
+# Limit memory biar ga OOM di VPS 1-2GB
 ENV NEXT_TELEMETRY_DISABLED=1
+ENV NODE_OPTIONS="--max-old-space-size=1024"
+ENV DATABASE_URL=postgresql://dummy:dummy@dummy:5432/dummy
 RUN npm run build
 
 # ── Runner stage ──
