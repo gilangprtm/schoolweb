@@ -1,16 +1,16 @@
-# Graph Report - schoolweb  (2026-06-27)
+# Graph Report - schoolweb  (2026-06-29)
 
 ## Corpus Check
-- 123 files · ~428,836 words
+- 137 files · ~436,612 words
 - Verdict: corpus is large enough that graph structure adds value.
 
 ## Summary
-- 709 nodes · 1157 edges · 87 communities (38 shown, 49 thin omitted)
-- Extraction: 97% EXTRACTED · 3% INFERRED · 0% AMBIGUOUS · INFERRED: 37 edges (avg confidence: 0.81)
+- 671 nodes · 1063 edges · 96 communities (45 shown, 51 thin omitted)
+- Extraction: 98% EXTRACTED · 2% INFERRED · 0% AMBIGUOUS · INFERRED: 25 edges (avg confidence: 0.81)
 - Token cost: 0 input · 0 output
 
 ## Graph Freshness
-- Built from commit: `339816bb`
+- Built from commit: `b77dd4ca`
 - Run `git rev-parse HEAD` and compare to check if the graph is stale.
 - Run `graphify update .` after code changes (no API cost).
 
@@ -96,10 +96,19 @@
 - [[_COMMUNITY_Community 80|Community 80]]
 - [[_COMMUNITY_Community 81|Community 81]]
 - [[_COMMUNITY_Community 82|Community 82]]
+- [[_COMMUNITY_Community 87|Community 87]]
+- [[_COMMUNITY_Community 88|Community 88]]
+- [[_COMMUNITY_Community 89|Community 89]]
+- [[_COMMUNITY_Community 90|Community 90]]
+- [[_COMMUNITY_Community 91|Community 91]]
+- [[_COMMUNITY_Community 92|Community 92]]
+- [[_COMMUNITY_Community 93|Community 93]]
+- [[_COMMUNITY_Community 94|Community 94]]
+- [[_COMMUNITY_Community 95|Community 95]]
 
 ## God Nodes (most connected - your core abstractions)
 1. `cn()` - 51 edges
-2. `useToast()` - 41 edges
+2. `useToast()` - 39 edges
 3. `Button()` - 25 edges
 4. `PageHeader()` - 23 edges
 5. `Input()` - 19 edges
@@ -112,14 +121,14 @@
 ## Surprising Connections (you probably didn't know these)
 - `Technology Stack (Next.js, PostgreSQL, Tailwind, Drizzle, Better Auth)` --shares_data_with--> `Frontend Implementation Plan`  [INFERRED]
   PRD.md → FRONTEND_PLAN.md
-- `BeritaPage()` --calls--> `useToast()`  [INFERRED]
-  src/app/admin/berita/page.tsx → src/components/admin/ui/Toast.tsx
 - `FasilitasPage()` --calls--> `useToast()`  [INFERRED]
   src/app/admin/fasilitas/page.tsx → src/components/admin/ui/Toast.tsx
 - `GaleriPage()` --calls--> `useToast()`  [INFERRED]
   src/app/admin/galeri/page.tsx → src/components/admin/ui/Toast.tsx
 - `PrestasiPage()` --calls--> `useToast()`  [INFERRED]
   src/app/admin/prestasi/page.tsx → src/components/admin/ui/Toast.tsx
+- `Server Components to PostgreSQL Data Flow` --conceptually_related_to--> `Coolify VPS Full-Stack Architecture`  [INFERRED]
+  FRONTEND_PLAN.md → PRD.md
 
 ## Import Cycles
 - None detected.
@@ -128,27 +137,27 @@
 - **Graphify Pipeline Stages** — graphify_skill_pipeline, graphify_extraction, graphify_community_analysis [EXTRACTED 1.00]
 - **School Website Public Frontend** — frontend_landing_pages, frontend_shared_components, frontend_home_page, frontend_data_flow, frontend_plan_design_system [INFERRED 0.95]
 
-## Communities (87 total, 49 thin omitted)
+## Communities (96 total, 51 thin omitted)
 
 ### Community 0 - "App Pages & Shared UI"
-Cohesion: 0.05
-Nodes (31): MobileMenuProps, NavItem, NAV_ITEMS, Navbar(), cn(), MISI, TIMELINE, TUJUAN (+23 more)
+Cohesion: 0.16
+Nodes (7): MobileMenuProps, NavItem, NAV_ITEMS, Navbar(), Pagination(), PaginationProps, buttonVariants
 
 ### Community 1 - "Staff & Homepage Data"
-Cohesion: 0.12
-Nodes (18): siteSettings, getActiveStaff(), getHeadmaster(), getRelatedStaff(), getStaffByRole(), getStaffBySlug(), staff, GuruStaffPage() (+10 more)
+Cohesion: 0.17
+Nodes (8): HeroSection(), LocationSection(), HIGHLIGHTS, WelcomeSection(), CTAButton(), CTAButtonProps, StatsCounter(), StatsCounterProps
 
 ### Community 2 - "Content Pages & Galleries"
-Cohesion: 0.09
-Nodes (26): galleries, getPageBySlug(), pages, FacilityGalleryProps, PhotoAlbum(), VideoItem(), ProfilTabs(), Achievement (+18 more)
+Cohesion: 0.10
+Nodes (21): FacilityGalleryProps, CATEGORY_FILTERS, PhotoAlbum(), VideoItem(), AchievementCategory, ContactMessage, Facility, FacilityPhoto (+13 more)
 
 ### Community 3 - "Achievements System"
-Cohesion: 0.12
-Nodes (29): BreadcrumbLink, PageHeader(), PageHeaderProps, AkunBaruPage(), BeritaBaruPage(), FasilitasBaruPage(), GaleriBaruPage(), GuruBaruPage() (+21 more)
+Cohesion: 0.11
+Nodes (26): BreadcrumbLink, PageHeader(), PageHeaderProps, AkunBaruPage(), BeritaBaruPage(), FasilitasBaruPage(), GaleriBaruPage(), GuruBaruPage() (+18 more)
 
 ### Community 4 - "Dependencies & Build"
-Cohesion: 0.06
-Nodes (30): dependencies, @base-ui/react, class-variance-authority, clsx, framer-motion, lucide-react, next, react (+22 more)
+Cohesion: 0.05
+Nodes (42): dependencies, @base-ui/react, better-auth, class-variance-authority, clsx, drizzle-orm, framer-motion, lucide-react (+34 more)
 
 ### Community 5 - "Shadcn UI Config"
 Cohesion: 0.09
@@ -159,16 +168,16 @@ Cohesion: 0.10
 Nodes (19): compilerOptions, allowJs, esModuleInterop, incremental, isolatedModules, jsx, lib, module (+11 more)
 
 ### Community 7 - "Facilities System"
-Cohesion: 0.07
-Nodes (48): CATEGORY_FILTERS, NewsGrid(), achievements, getAchievementBySlug(), getFeaturedAchievements(), getPublishedAchievements(), facilities, getFacilityBySlug() (+40 more)
+Cohesion: 0.17
+Nodes (9): CATEGORY_FILTERS, NewsSection(), formatDate(), truncate(), ImageWithFallback(), ImageWithFallbackProps, SectionHeading(), SectionHeadingProps (+1 more)
 
 ### Community 8 - "News System"
 Cohesion: 0.20
 Nodes (9): 12. Rencana Implementasi (Roadmap Singkat), 13. Catatan Tambahan, 1. Overview, 2. Requirements, 3. Core Features, 4. User Flow, 5. Architecture, 7. Tech Stack (+1 more)
 
 ### Community 9 - "Profile & Navigation"
-Cohesion: 0.07
-Nodes (41): DeleteDialog(), DeleteDialogProps, EmptyState(), EmptyStateProps, Akun, AkunPage(), mockAkun, roleLabels (+33 more)
+Cohesion: 0.09
+Nodes (29): DeleteDialog(), DeleteDialogProps, EmptyState(), EmptyStateProps, Akun, AkunPage(), roleLabels, roleVariant (+21 more)
 
 ### Community 10 - "Layout & Branding"
 Cohesion: 0.15
@@ -227,8 +236,8 @@ Cohesion: 0.50
 Nodes (3): For --cluster-only, For --update (incremental re-extraction), graphify reference: incremental update and cluster-only
 
 ### Community 71 - "Community 71"
-Cohesion: 0.12
-Nodes (14): AdminDashboard(), catColor, getRole(), quickActions, recentMessages, recentPosts, stats, statusColor (+6 more)
+Cohesion: 0.20
+Nodes (8): catColor, quickActions, RecentMessage, RecentPost, StatItem, statusColor, StatCard(), StatCardProps
 
 ### Community 72 - "Community 72"
 Cohesion: 0.22
@@ -258,25 +267,53 @@ Nodes (5): 9.1 Informasi yang Ditampilkan ke Publik, 9.2 Database Schema, 9.3 Fi
 Cohesion: 0.60
 Nodes (4): convertGDriveUrl(), ImageUrlInput(), ImageUrlInputProps, isValidImageUrl()
 
+### Community 87 - "Community 87"
+Cohesion: 0.24
+Nodes (9): formatLevel(), getChampionEmoji(), getLevelBadgeColor(), CATEGORY_FILTERS, LEVEL_FILTERS, AchievementDetailPage(), InfoBox(), AchievementChampion (+1 more)
+
+### Community 88 - "Community 88"
+Cohesion: 0.22
+Nodes (12): cn(), FilterPill, FilterPills(), FilterPillsProps, Card(), CardAction(), CardContent(), CardDescription() (+4 more)
+
+### Community 89 - "Community 89"
+Cohesion: 0.29
+Nodes (7): getFacilityCategoryLabel(), getFacilityIcon(), Badge(), BadgeProps, variantStyles, FacilityDetailPage(), FacilityCategory
+
+### Community 90 - "Community 90"
+Cohesion: 0.18
+Nodes (6): ROLE_FILTERS, MiniHeroBanner(), MiniHeroBannerProps, directionMap, ScrollRevealProps, Staff
+
+### Community 91 - "Community 91"
+Cohesion: 0.33
+Nodes (4): navItems, Sidebar(), SidebarProps, ToastProvider()
+
+### Community 93 - "Community 93"
+Cohesion: 0.29
+Nodes (4): MISI, TIMELINE, TUJUAN, WAKASEK
+
+### Community 94 - "Community 94"
+Cohesion: 0.29
+Nodes (4): Breadcrumb(), BreadcrumbItem, BreadcrumbProps, StaffDetailPage()
+
 ## Knowledge Gaps
-- **354 isolated node(s):** `Stack`, `Commands`, `Architecture`, `Design System`, `Project Rules` (+349 more)
+- **347 isolated node(s):** `nextConfig`, `name`, `version`, `private`, `dev` (+342 more)
   These have ≤1 connection - possible missing edges or undocumented components.
-- **49 thin communities (<3 nodes) omitted from report** — run `graphify query` to explore isolated nodes.
+- **51 thin communities (<3 nodes) omitted from report** — run `graphify query` to explore isolated nodes.
 
 ## Suggested Questions
 _Questions this graph is uniquely positioned to answer:_
 
-- **Why does `cn()` connect `App Pages & Shared UI` to `Staff & Homepage Data`, `Content Pages & Galleries`, `Achievements System`, `Facilities System`, `Community 71`, `Profile & Navigation`?**
-  _High betweenness centrality (0.068) - this node is a cross-community bridge._
-- **Why does `Button()` connect `Achievements System` to `App Pages & Shared UI`, `Facilities System`?**
-  _High betweenness centrality (0.025) - this node is a cross-community bridge._
-- **Why does `Input()` connect `Achievements System` to `App Pages & Shared UI`, `Facilities System`?**
-  _High betweenness centrality (0.017) - this node is a cross-community bridge._
-- **Are the 17 inferred relationships involving `useToast()` (e.g. with `AkunBaruPage()` and `BeritaBaruPage()`) actually correct?**
-  _`useToast()` has 17 INFERRED edges - model-reasoned connections that need verification._
-- **What connects `Stack`, `Commands`, `Architecture` to the rest of the system?**
-  _358 weakly-connected nodes found - possible documentation gaps or missing edges._
-- **Should `App Pages & Shared UI` be split into smaller, more focused modules?**
-  _Cohesion score 0.05185185185185185 - nodes in this community are weakly interconnected._
-- **Should `Staff & Homepage Data` be split into smaller, more focused modules?**
-  _Cohesion score 0.11827956989247312 - nodes in this community are weakly interconnected._
+- **Why does `cn()` connect `Community 88` to `App Pages & Shared UI`, `Staff & Homepage Data`, `Content Pages & Galleries`, `Achievements System`, `Community 71`, `Facilities System`, `Profile & Navigation`, `Community 89`, `Community 90`, `Community 91`, `Community 92`, `Community 94`, `Community 95`?**
+  _High betweenness centrality (0.048) - this node is a cross-community bridge._
+- **Why does `Button()` connect `Achievements System` to `App Pages & Shared UI`, `Community 88`, `Community 92`, `Community 95`?**
+  _High betweenness centrality (0.019) - this node is a cross-community bridge._
+- **Why does `useToast()` connect `Achievements System` to `Profile & Navigation`?**
+  _High betweenness centrality (0.014) - this node is a cross-community bridge._
+- **Are the 14 inferred relationships involving `useToast()` (e.g. with `AkunBaruPage()` and `BeritaBaruPage()`) actually correct?**
+  _`useToast()` has 14 INFERRED edges - model-reasoned connections that need verification._
+- **What connects `nextConfig`, `name`, `version` to the rest of the system?**
+  _351 weakly-connected nodes found - possible documentation gaps or missing edges._
+- **Should `Content Pages & Galleries` be split into smaller, more focused modules?**
+  _Cohesion score 0.09915966386554621 - nodes in this community are weakly interconnected._
+- **Should `Achievements System` be split into smaller, more focused modules?**
+  _Cohesion score 0.11248185776487664 - nodes in this community are weakly interconnected._
