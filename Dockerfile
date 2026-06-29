@@ -37,15 +37,21 @@ COPY --from=builder --chown=nextjs:nodejs /app/.next/static ./.next/static
 COPY --from=builder /app/src/lib/db ./src/lib/db
 COPY --from=builder /app/drizzle.config.ts ./
 
-# Install drizzle-kit untuk auto-migration di startup
-RUN npm install -g drizzle-kit
+# Copy seed scripts
+COPY --from=builder /app/scripts ./scripts
 
-# Buat startup script: migration dulu, baru server
+# Install drizzle-kit & tsx untuk auto-migration & seed di startup
+RUN npm install -g drizzle-kit tsx
+
+# Buat startup script: migration dulu, seed, baru server
 RUN echo '#!/bin/sh' > /app/start.sh \
   && echo 'echo "⏳ [SIRA] Menjalankan migrasi database..."' >> /app/start.sh \
   && echo 'npx drizzle-kit push 2>&1' >> /app/start.sh \
   && echo 'MIGRATION_EXIT=$?' >> /app/start.sh \
-  && echo 'echo "✅ [SIRA] Migrasi selesai (exit: $MIGRATION_EXIT). Memulai server..."' >> /app/start.sh \
+  && echo 'echo "⏳ [SIRA] Menjalankan seed data..."' >> /app/start.sh \
+  && echo 'npx tsx scripts/seed.ts 2>&1' >> /app/start.sh \
+  && echo 'SEED_EXIT=$?' >> /app/start.sh \
+  && echo "echo '✅ [SIRA] Setup selesai (migration: $MIGRATION_EXIT, seed: $SEED_EXIT). Memulai server...'" >> /app/start.sh \
   && echo 'exec node server.js' >> /app/start.sh \
   && chmod +x /app/start.sh
 
