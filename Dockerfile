@@ -9,11 +9,11 @@ RUN npm ci
 
 COPY . .
 
-# Dummy DB_URL untuk build — Next.js perlu resolve module imports
-# Limit memory biar ga OOM di VPS 1-2GB
+# Real DB_URL untuk build — module imports perlu DB terhubung
+# (dengan force-dynamic, ga ada page yg query saat build)
 ENV NEXT_TELEMETRY_DISABLED=1
 ENV NODE_OPTIONS="--max-old-space-size=1024"
-ENV DATABASE_URL=postgresql://dummy:dummy@dummy:5432/dummy
+ENV DATABASE_URL=postgres://postgres:***@tepji0kn9cd339vpuypd95nd:5432/schoolweb
 RUN npm run build
 
 # ── Runner stage ──
