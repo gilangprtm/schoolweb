@@ -24,6 +24,7 @@ WORKDIR /app
 ENV NODE_ENV=production
 ENV NEXT_TELEMETRY_DISABLED=1
 ENV PORT=3000
+ENV DATABASE_URL=postgres://postgres:qSPqg9Ls2k@tepji0kn9cd339vpuypd95nd:5432/schoolweb
 
 RUN addgroup --system --gid 1001 nodejs \
   && adduser --system --uid 1001 nextjs
