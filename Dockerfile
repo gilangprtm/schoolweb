@@ -45,6 +45,10 @@ COPY --from=builder /app/scripts/migrate.mjs ./scripts/migrate.mjs
 COPY --from=builder /app/scripts/start.sh ./start.sh
 RUN chmod +x ./start.sh
 
+# Fix: Next.js standalone output sometimes misses DB drivers
+COPY --from=builder /app/node_modules/postgres ./node_modules/postgres
+COPY --from=builder /app/node_modules/drizzle-orm ./node_modules/drizzle-orm
+
 USER nextjs
 EXPOSE 3000
 
