@@ -42,6 +42,11 @@ const nextConfig: NextConfig = {
   typescript: {
     ignoreBuildErrors: true,
   },
+  experimental: {
+    // Memaksa Next.js menggunakan 1 core CPU saat build untuk menghindari spike memory
+    cpus: 1,
+    workerThreads: false,
+  },
 };
 
 export default nextConfig;
