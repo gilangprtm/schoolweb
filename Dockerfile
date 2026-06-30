@@ -52,8 +52,8 @@ RUN echo '#!/bin/sh' > /app/start.sh \
   && echo 'export DATABASE_URL="${DATABASE_URL:-}"' >> /app/start.sh \
   && echo 'echo "  📌 DATABASE_URL ada: $(echo $DATABASE_URL | cut -c1-30)..."' >> /app/start.sh \
   && echo 'echo "  📌 CWD: $(pwd)"' >> /app/start.sh \
-  && echo 'echo "  📌 ls drizzle.config.ts: $(ls -la drizzle.config.ts 2>&1)"' >> /app/start.sh \
-  && echo 'npx drizzle-kit push 2>&1' >> /app/start.sh \
+  && echo 'echo "  📌 Migrate script: $(ls -la scripts/migrate-direct.ts 2>&1)"' >> /app/start.sh \
+  && echo 'npx tsx scripts/migrate-direct.ts 2>&1' >> /app/start.sh \
   && echo 'MIGRATION_EXIT=$?' >> /app/start.sh \
   && echo 'echo "⏳ [SIRA] Hasil migrasi: exit=$MIGRATION_EXIT"' >> /app/start.sh \
   && echo 'echo "⏳ [SIRA] Menjalankan seed data..."' >> /app/start.sh \
