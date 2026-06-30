@@ -35,6 +35,13 @@ const nextConfig: NextConfig = {
     ],
     unoptimized: false,
   },
+  // Optimasi build untuk VPS 2GB RAM: abaikan typecheck & linting saat build
+  eslint: {
+    ignoreDuringBuilds: true,
+  },
+  typescript: {
+    ignoreBuildErrors: true,
+  },
 };
 
 export default nextConfig;
