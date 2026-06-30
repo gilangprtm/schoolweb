@@ -10,7 +10,16 @@ COPY . .
 
 ENV NEXT_TELEMETRY_DISABLED=1
 ENV NODE_OPTIONS="--max-old-space-size=512"
-ENV DATABASE_URL=postgres://postgres:***@localhost:5432/schoolweb
+
+# Build-time args — injected via GitHub Actions secrets or Coolify Build Arguments
+ARG DATABASE_URL
+ARG BETTER_AUTH_SECRET
+ARG BETTER_AUTH_URL
+
+ENV DATABASE_URL=${DATABASE_URL}
+ENV BETTER_AUTH_SECRET=${BETTER_AUTH_SECRET}
+ENV BETTER_AUTH_URL=${BETTER_AUTH_URL}
+
 RUN npm run build
 
 # ── Runner stage ──
@@ -21,25 +30,25 @@ WORKDIR /app
 ENV NODE_ENV=production
 ENV NEXT_TELEMETRY_DISABLED=1
 ENV PORT=3000
-ENV DATABASE_URL=postgres://postgres:***@tepji0kn9cd339vpuypd95nd:5432/schoolweb
 
 RUN addgroup --system --gid 1001 nodejs \
   && adduser --system --uid 1001 nextjs
 
+# Copy standalone build output
 COPY --from=builder /app/public ./public
 COPY --from=builder --chown=nextjs:nodejs /app/.next/standalone ./
 COPY --from=builder --chown=nextjs:nodejs /app/.next/static ./.next/static
-COPY --from=builder /app/src/lib/db ./src/lib/db
-COPY --from=builder /app/drizzle.config.ts ./
-COPY --from=builder /app/scripts ./scripts
 
-RUN npm install -g drizzle-kit tsx
-
-RUN echo '#!/bin/sh' > /app/start.sh \
-  && echo 'echo "⏳ [SIRA] Migrasi...seed...server"' >> /app/start.sh \
-  && echo 'npx tsx scripts/migrate-direct.ts 2>/dev/null; npx tsx scripts/seed.ts 2>/dev/null; exec node server.js' >> /app/start.sh \
-  && chmod +x /app/start.sh
+# Copy migration files (plain JS + SQL files only — no tsx needed)
+COPY --from=builder /app/src/lib/db/migrations ./src/lib/db/migrations
+COPY --from=builder /app/scripts/migrate.mjs ./scripts/migrate.mjs
+COPY --from=builder /app/scripts/start.sh ./start.sh
+RUN chmod +x ./start.sh
 
 USER nextjs
 EXPOSE 3000
-CMD ["/app/start.sh"]
+
+HEALTHCHECK --interval=30s --timeout=5s --start-period=10s --retries=3 \
+  CMD wget -qO- http://localhost:3000/ || exit 1
+
+CMD ["./start.sh"]

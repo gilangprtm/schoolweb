@@ -8,8 +8,8 @@ if (!databaseUrl) {
   throw new Error("DATABASE_URL environment variable is not set");
 }
 
-// Disable prefetch as it's not supported for transactions
-const client = postgres(databaseUrl, { prepare: false });
+// Limit connections for low-memory environments (2GB VPS)
+const client = postgres(databaseUrl, { prepare: false, max: 5, idle_timeout: 20 });
 
 export const db = drizzle(client, { schema });
 export { schema };
