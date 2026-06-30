@@ -3,17 +3,19 @@ FROM node:22-alpine AS builder
 
 WORKDIR /app
 
+# DB_URL bisa di-override via --build-arg (untuk GitHub Actions build)
+ARG DATABASE_URL=postgres://postgres:***@tepji0kn9cd339vpuypd95nd:5432/schoolweb
+
 # Install deps (layer caching)
 COPY package.json package-lock.json* ./
 RUN npm ci
 
 COPY . .
 
-# Real DB_URL untuk build — module imports perlu DB terhubung
-# (dengan force-dynamic, ga ada page yg query saat build)
+# Build — pake memory lebih kecil biar ga makan resource VPS
 ENV NEXT_TELEMETRY_DISABLED=1
-ENV NODE_OPTIONS="--max-old-space-size=1024"
-ENV DATABASE_URL=postgres://postgres:iF2zBLddqOpQHDT1OYbjx67QYaRvE9bd9hYw46OVK6fKsH395HPRLNKvLuigtu6s@tepji0kn9cd339vpuypd95nd:5432/schoolweb
+ENV NODE_OPTIONS="--max-old-space-size=768"
+ENV DATABASE_URL=$DATABASE_URL
 RUN npm run build
 
 # ── Runner stage ──
