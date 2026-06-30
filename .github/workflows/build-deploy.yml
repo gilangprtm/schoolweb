@@ -1,4 +1,4 @@
-name: Build & Deploy
+name: Build & Push Image
 
 on:
   push:
@@ -29,20 +29,18 @@ jobs:
       - name: Install dependencies
         run: npm ci
 
-      - name: Build Next.js (pakai DB dummy — ga ada query pas build)
+      - name: Build Next.js
         run: npm run build
         env:
           NODE_OPTIONS: "--max-old-space-size=4096"
           NEXT_TELEMETRY_DISABLED: 1
-          # DB_URL dummy — aman karena force-dynamic
-          DATABASE_URL: "postgres://postgres:dummy@localhost:5432/schoolweb"
 
       - name: Log in to GitHub Container Registry
         uses: docker/login-action@v3
         with:
           registry: ${{ env.REGISTRY }}
           username: ${{ github.actor }}
-          password: ${{ secrets.GITHUB_TOKEN }}
+          password: ${{ secrets.PAT_TOKEN }}
 
       - name: Extract metadata for Docker
         id: meta
@@ -61,6 +59,5 @@ jobs:
           push: true
           tags: ${{ steps.meta.outputs.tags }}
           labels: ${{ steps.meta.outputs.labels }}
-          # Build-stage butuh DB_URL untuk compile
           build-args: |
-            DATABASE_URL=postgres://postgres:dummy@localhost:5432/schoolweb
+            DATABASE_URL=postgres://postgres:***@localhost:5432/schoolweb

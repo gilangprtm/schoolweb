@@ -48,18 +48,13 @@ RUN npm install -g drizzle-kit tsx
 
 # Buat startup script: migration dulu, seed, baru server
 RUN echo '#!/bin/sh' > /app/start.sh \
-  && echo 'echo "⏳ [SIRA] Menjalankan migrasi database..."' >> /app/start.sh \
-  && echo 'export DATABASE_URL="${DATABASE_URL:-}"' >> /app/start.sh \
-  && echo 'echo "  📌 DATABASE_URL ada: $(echo $DATABASE_URL | cut -c1-30)..."' >> /app/start.sh \
-  && echo 'echo "  📌 CWD: $(pwd)"' >> /app/start.sh \
-  && echo 'echo "  📌 Migrate script: $(ls -la scripts/migrate-direct.ts 2>&1)"' >> /app/start.sh \
+  && echo 'echo "⏳ [SIRA] Migrasi database..."' >> /app/start.sh \
   && echo 'npx tsx scripts/migrate-direct.ts 2>&1' >> /app/start.sh \
   && echo 'MIGRATION_EXIT=$?' >> /app/start.sh \
-  && echo 'echo "⏳ [SIRA] Hasil migrasi: exit=$MIGRATION_EXIT"' >> /app/start.sh \
-  && echo 'echo "⏳ [SIRA] Menjalankan seed data..."' >> /app/start.sh \
+  && echo 'echo "⏳ [SIRA] Seed data..."' >> /app/start.sh \
   && echo 'npx tsx scripts/seed.ts 2>&1' >> /app/start.sh \
   && echo 'SEED_EXIT=$?' >> /app/start.sh \
-  && echo "echo '✅ [SIRA] Setup selesai (migration: $MIGRATION_EXIT, seed: $SEED_EXIT). Memulai server...'" >> /app/start.sh \
+  && echo "echo '✅ [SIRA] Setup selesai (migration: $MIGRATION_EXIT, seed: $SEED_EXIT).'" >> /app/start.sh \
   && echo 'exec node server.js' >> /app/start.sh \
   && chmod +x /app/start.sh
 
