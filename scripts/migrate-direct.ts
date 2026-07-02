@@ -41,8 +41,9 @@ async function main() {
         await sql.unsafe(statements[i]);
         console.log(`  ✅ [${i + 1}/${statements.length}] OK`);
       } catch (err) {
+        const error = err as { code?: string };
         // Skip error kalo tabel udah ada
-        if (err.code === '42P07') { // relation already exists
+        if (error.code === '42P07') { // relation already exists
           console.log(`  ⏭️ [${i + 1}/${statements.length}] Sudah ada, skip`);
         } else {
           throw err;
@@ -54,9 +55,10 @@ async function main() {
     await sql.end();
     process.exit(0);
   } catch (err) {
-    console.error(`❌ [SIRA-MIGRATE] Gagal:`, err.message);
-    if (err.code) console.error(`  Code: ${err.code}`);
-    if (err.query) console.error(`  Query: ${err.query.substring(0, 100)}`);
+    const error = err as { message?: string; code?: string; query?: string };
+    console.error(`❌ [SIRA-MIGRATE] Gagal:`, error.message);
+    if (error.code) console.error(`  Code: ${error.code}`);
+    if (error.query) console.error(`  Query: ${error.query.substring(0, 100)}`);
     await sql.end().catch(() => {});
     process.exit(1);
   }
