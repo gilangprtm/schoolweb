@@ -1,8 +1,10 @@
-name: Build & Push Image
+name: CI — Test, Build & Deploy
 
 on:
   push:
     branches: [master, dev]
+  pull_request:
+    branches: [master]
   workflow_dispatch:
 
 env:
@@ -10,15 +12,74 @@ env:
   IMAGE_NAME: ${{ github.repository }}
 
 jobs:
-  build-and-push:
+  test:
     runs-on: ubuntu-latest
+    services:
+      postgres:
+        image: postgres:16-alpine
+        env:
+          POSTGRES_DB: schoolweb_test
+          POSTGRES_PASSWORD: test
+        ports: ['5432:5432']
+        options: >-
+          --health-cmd pg_isready
+          --health-interval 10s
+          --health-timeout 5s
+          --health-retries 5
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+          cache: 'npm'
+
+      - run: npm ci
+
+      - name: Setup test DB
+        run: |
+          cp .env.example .env
+          echo "DATABASE_URL=postgresql://postgres:***@localhost:5432/schoolweb_test" >> .env
+        env:
+          DATABASE_URL: postgresql://postgres:***@localhost:5432/schoolweb_test
+
+      - run: npx drizzle-kit push
+        env:
+          DATABASE_URL: postgresql://postgres:***@localhost:5432/schoolweb_test
+
+      - run: npm run lint
+        continue-on-error: true
+
+      - run: npm run build
+        env:
+          NEXT_TELEMETRY_DISABLED: 1
+
+      - name: Run Playwright E2E
+        run: npx playwright test
+        env:
+          BASE_URL: http://localhost:3000
+          TEST_ADMIN_EMAIL: admin@sekolah.sch.id
+          TEST_ADMIN_PASSWORD: admin123
+
+      - uses: actions/upload-artifact@v4
+        if: failure()
+        with:
+          name: test-results
+          path: |
+            playwright-report/
+            test-results/
+
+  build-and-push:
+    needs: test
+    runs-on: ubuntu-latest
+    if: github.event_name == 'push' || github.event_name == 'workflow_dispatch'
     permissions:
       contents: read
       packages: write
 
     steps:
-      - name: Checkout repo
-        uses: actions/checkout@v4
+      - uses: actions/checkout@v4
 
       - name: Log in to GitHub Container Registry
         uses: docker/login-action@v3
@@ -27,7 +88,7 @@ jobs:
           username: ${{ github.actor }}
           password: ${{ secrets.PAT_TOKEN }}
 
-      - name: Extract metadata for Docker
+      - name: Docker metadata
         id: meta
         uses: docker/metadata-action@v5
         with:
@@ -37,7 +98,7 @@ jobs:
             type=ref,event=branch
             type=raw,value=latest,enable={{is_default_branch}}
 
-      - name: Build and push Docker image
+      - name: Build and push
         uses: docker/build-push-action@v5
         with:
           context: .
@@ -48,3 +109,14 @@ jobs:
             DATABASE_URL=${{ secrets.DATABASE_URL }}
             BETTER_AUTH_SECRET=${{ secrets.BETTER_AUTH_SECRET }}
             BETTER_AUTH_URL=${{ secrets.BETTER_AUTH_URL }}
+
+  deploy:
+    needs: build-and-push
+    runs-on: ubuntu-latest
+    if: github.ref == 'refs/heads/master'
+    steps:
+      - name: Trigger Coolify deploy
+        run: |
+          curl -X POST "${{ secrets.COOLIFY_URL }}/api/v1/deploy?uuid=${{ secrets.COOLIFY_APP_UUID }}&force_rebuild=false" \
+            -H "Authorization: Bearer *** secrets.COOLIFY_API_TOKEN }}" \
+            -H "Content-Type: application/json"
