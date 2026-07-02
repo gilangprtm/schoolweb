@@ -955,8 +955,13 @@
     "semantic_hash": ""
   },
   "vitest.config.ts": {
-    "mtime": 1782966007.4773278,
-    "ast_hash": "2a6f65602701253b7bd4a94f9654783a",
+    "mtime": 1782966110.2360463,
+    "ast_hash": "e94ee948dea5304dc1051a4711fcd49e",
+    "semantic_hash": ""
+  },
+  "tests/integration/api.test.ts": {
+    "mtime": 1782966075.2669675,
+    "ast_hash": "f819ce60aee25d822df16b4c8f2c4c65",
     "semantic_hash": ""
   }
 }

@@ -1,16 +1,16 @@
 # Graph Report - schoolweb  (2026-07-02)
 
 ## Corpus Check
-- 165 files · ~513,184 words
+- 166 files · ~513,472 words
 - Verdict: corpus is large enough that graph structure adds value.
 
 ## Summary
-- 945 nodes · 1593 edges · 120 communities (68 shown, 52 thin omitted)
+- 946 nodes · 1593 edges · 121 communities (69 shown, 52 thin omitted)
 - Extraction: 98% EXTRACTED · 2% INFERRED · 0% AMBIGUOUS · INFERRED: 35 edges (avg confidence: 0.81)
 - Token cost: 0 input · 0 output
 
 ## Graph Freshness
-- Built from commit: `39dab21b`
+- Built from commit: `fc524836`
 - Run `git rev-parse HEAD` and compare to check if the graph is stale.
 - Run `graphify update .` after code changes (no API cost).
 
@@ -156,7 +156,7 @@
 - **Graphify Pipeline Stages** — graphify_skill_pipeline, graphify_extraction, graphify_community_analysis [EXTRACTED 1.00]
 - **School Website Public Frontend** — frontend_landing_pages, frontend_shared_components, frontend_home_page, frontend_data_flow, frontend_plan_design_system [INFERRED 0.95]
 
-## Communities (120 total, 52 thin omitted)
+## Communities (121 total, 52 thin omitted)
 
 ### Community 0 - "App Pages & Shared UI"
 Cohesion: 0.06

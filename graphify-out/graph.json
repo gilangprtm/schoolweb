@@ -35,504 +35,14 @@
   },
   "nodes": [
     {
-      "label": "package.json",
+      "label": "api.test.ts",
       "file_type": "code",
-      "source_file": "package.json",
+      "source_file": "tests/integration/api.test.ts",
       "source_location": "L1",
       "_origin": "ast",
-      "id": "package",
-      "community": 4,
-      "norm_label": "package.json"
-    },
-    {
-      "label": "name",
-      "file_type": "code",
-      "source_file": "package.json",
-      "source_location": "L2",
-      "_origin": "ast",
-      "id": "package_name",
-      "community": 4,
-      "norm_label": "name"
-    },
-    {
-      "label": "version",
-      "file_type": "code",
-      "source_file": "package.json",
-      "source_location": "L3",
-      "_origin": "ast",
-      "id": "package_version",
-      "community": 4,
-      "norm_label": "version"
-    },
-    {
-      "label": "private",
-      "file_type": "code",
-      "source_file": "package.json",
-      "source_location": "L4",
-      "_origin": "ast",
-      "id": "package_private",
-      "community": 4,
-      "norm_label": "private"
-    },
-    {
-      "label": "scripts",
-      "file_type": "code",
-      "source_file": "package.json",
-      "source_location": "L5",
-      "_origin": "ast",
-      "id": "package_scripts",
-      "community": 4,
-      "norm_label": "scripts"
-    },
-    {
-      "label": "dev",
-      "file_type": "code",
-      "source_file": "package.json",
-      "source_location": "L6",
-      "_origin": "ast",
-      "id": "package_scripts_dev",
-      "community": 4,
-      "norm_label": "dev"
-    },
-    {
-      "label": "build",
-      "file_type": "code",
-      "source_file": "package.json",
-      "source_location": "L7",
-      "_origin": "ast",
-      "id": "package_scripts_build",
-      "community": 4,
-      "norm_label": "build"
-    },
-    {
-      "label": "start",
-      "file_type": "code",
-      "source_file": "package.json",
-      "source_location": "L8",
-      "_origin": "ast",
-      "id": "package_scripts_start",
-      "community": 4,
-      "norm_label": "start"
-    },
-    {
-      "label": "lint",
-      "file_type": "code",
-      "source_file": "package.json",
-      "source_location": "L9",
-      "_origin": "ast",
-      "id": "package_scripts_lint",
-      "community": 4,
-      "norm_label": "lint"
-    },
-    {
-      "label": "db:generate",
-      "file_type": "code",
-      "source_file": "package.json",
-      "source_location": "L10",
-      "_origin": "ast",
-      "id": "package_scripts_db_generate",
-      "community": 4,
-      "norm_label": "db:generate"
-    },
-    {
-      "label": "db:push",
-      "file_type": "code",
-      "source_file": "package.json",
-      "source_location": "L11",
-      "_origin": "ast",
-      "id": "package_scripts_db_push",
-      "community": 4,
-      "norm_label": "db:push"
-    },
-    {
-      "label": "db:seed",
-      "file_type": "code",
-      "source_file": "package.json",
-      "source_location": "L12",
-      "_origin": "ast",
-      "id": "package_scripts_db_seed",
-      "community": 4,
-      "norm_label": "db:seed"
-    },
-    {
-      "label": "db:setup",
-      "file_type": "code",
-      "source_file": "package.json",
-      "source_location": "L13",
-      "_origin": "ast",
-      "id": "package_scripts_db_setup",
-      "community": 4,
-      "norm_label": "db:setup"
-    },
-    {
-      "label": "test",
-      "file_type": "code",
-      "source_file": "package.json",
-      "source_location": "L14",
-      "_origin": "ast",
-      "id": "package_scripts_test",
-      "community": 4,
-      "norm_label": "test"
-    },
-    {
-      "label": "test:ui",
-      "file_type": "code",
-      "source_file": "package.json",
-      "source_location": "L15",
-      "_origin": "ast",
-      "id": "package_scripts_test_ui",
-      "community": 4,
-      "norm_label": "test:ui"
-    },
-    {
-      "label": "test:unit",
-      "file_type": "code",
-      "source_file": "package.json",
-      "source_location": "L16",
-      "_origin": "ast",
-      "id": "package_scripts_test_unit",
-      "community": 4,
-      "norm_label": "test:unit"
-    },
-    {
-      "label": "dependencies",
-      "file_type": "code",
-      "source_file": "package.json",
-      "source_location": "L18",
-      "_origin": "ast",
-      "id": "package_dependencies",
-      "community": 4,
-      "norm_label": "dependencies"
-    },
-    {
-      "label": "@base-ui/react",
-      "file_type": "code",
-      "source_file": "package.json",
-      "source_location": "L19",
-      "_origin": "ast",
-      "id": "package_dependencies_base_ui_react",
-      "community": 4,
-      "norm_label": "@base-ui/react"
-    },
-    {
-      "label": "better-auth",
-      "file_type": "code",
-      "source_file": "package.json",
-      "source_location": "L20",
-      "_origin": "ast",
-      "id": "package_dependencies_better_auth",
-      "community": 4,
-      "norm_label": "better-auth"
-    },
-    {
-      "label": "class-variance-authority",
-      "file_type": "code",
-      "source_file": "package.json",
-      "source_location": "L21",
-      "_origin": "ast",
-      "id": "package_dependencies_class_variance_authority",
-      "community": 4,
-      "norm_label": "class-variance-authority"
-    },
-    {
-      "label": "clsx",
-      "file_type": "code",
-      "source_file": "package.json",
-      "source_location": "L22",
-      "_origin": "ast",
-      "id": "package_dependencies_clsx",
-      "community": 4,
-      "norm_label": "clsx"
-    },
-    {
-      "label": "drizzle-orm",
-      "file_type": "code",
-      "source_file": "package.json",
-      "source_location": "L23",
-      "_origin": "ast",
-      "id": "package_dependencies_drizzle_orm",
-      "community": 4,
-      "norm_label": "drizzle-orm"
-    },
-    {
-      "label": "framer-motion",
-      "file_type": "code",
-      "source_file": "package.json",
-      "source_location": "L24",
-      "_origin": "ast",
-      "id": "package_dependencies_framer_motion",
-      "community": 4,
-      "norm_label": "framer-motion"
-    },
-    {
-      "label": "lucide-react",
-      "file_type": "code",
-      "source_file": "package.json",
-      "source_location": "L25",
-      "_origin": "ast",
-      "id": "package_dependencies_lucide_react",
-      "community": 4,
-      "norm_label": "lucide-react"
-    },
-    {
-      "label": "next",
-      "file_type": "code",
-      "source_file": "package.json",
-      "source_location": "L26",
-      "_origin": "ast",
-      "id": "package_dependencies_next",
-      "community": 4,
-      "norm_label": "next"
-    },
-    {
-      "label": "postgres",
-      "file_type": "code",
-      "source_file": "package.json",
-      "source_location": "L27",
-      "_origin": "ast",
-      "id": "package_dependencies_postgres",
-      "community": 4,
-      "norm_label": "postgres"
-    },
-    {
-      "label": "react",
-      "file_type": "code",
-      "source_file": "package.json",
-      "source_location": "L28",
-      "_origin": "ast",
-      "id": "package_dependencies_react",
-      "community": 4,
-      "norm_label": "react"
-    },
-    {
-      "label": "react-dom",
-      "file_type": "code",
-      "source_file": "package.json",
-      "source_location": "L29",
-      "_origin": "ast",
-      "id": "package_dependencies_react_dom",
-      "community": 4,
-      "norm_label": "react-dom"
-    },
-    {
-      "label": "shadcn",
-      "file_type": "code",
-      "source_file": "package.json",
-      "source_location": "L30",
-      "_origin": "ast",
-      "id": "package_dependencies_shadcn",
-      "community": 4,
-      "norm_label": "shadcn"
-    },
-    {
-      "label": "tailwind-merge",
-      "file_type": "code",
-      "source_file": "package.json",
-      "source_location": "L31",
-      "_origin": "ast",
-      "id": "package_dependencies_tailwind_merge",
-      "community": 4,
-      "norm_label": "tailwind-merge"
-    },
-    {
-      "label": "tw-animate-css",
-      "file_type": "code",
-      "source_file": "package.json",
-      "source_location": "L32",
-      "_origin": "ast",
-      "id": "package_dependencies_tw_animate_css",
-      "community": 4,
-      "norm_label": "tw-animate-css"
-    },
-    {
-      "label": "yet-another-react-lightbox",
-      "file_type": "code",
-      "source_file": "package.json",
-      "source_location": "L33",
-      "_origin": "ast",
-      "id": "package_dependencies_yet_another_react_lightbox",
-      "community": 4,
-      "norm_label": "yet-another-react-lightbox"
-    },
-    {
-      "label": "zod",
-      "file_type": "code",
-      "source_file": "package.json",
-      "source_location": "L34",
-      "_origin": "ast",
-      "id": "package_dependencies_zod",
-      "community": 4,
-      "norm_label": "zod"
-    },
-    {
-      "label": "devDependencies",
-      "file_type": "code",
-      "source_file": "package.json",
-      "source_location": "L36",
-      "_origin": "ast",
-      "id": "package_devdependencies",
-      "community": 4,
-      "norm_label": "devdependencies"
-    },
-    {
-      "label": "@playwright/test",
-      "file_type": "code",
-      "source_file": "package.json",
-      "source_location": "L37",
-      "_origin": "ast",
-      "id": "package_devdependencies_playwright_test",
-      "community": 4,
-      "norm_label": "@playwright/test"
-    },
-    {
-      "label": "@tailwindcss/postcss",
-      "file_type": "code",
-      "source_file": "package.json",
-      "source_location": "L38",
-      "_origin": "ast",
-      "id": "package_devdependencies_tailwindcss_postcss",
-      "community": 4,
-      "norm_label": "@tailwindcss/postcss"
-    },
-    {
-      "label": "@types/node",
-      "file_type": "code",
-      "source_file": "package.json",
-      "source_location": "L39",
-      "_origin": "ast",
-      "id": "package_devdependencies_types_node",
-      "community": 4,
-      "norm_label": "@types/node"
-    },
-    {
-      "label": "@types/pg",
-      "file_type": "code",
-      "source_file": "package.json",
-      "source_location": "L40",
-      "_origin": "ast",
-      "id": "package_devdependencies_types_pg",
-      "community": 4,
-      "norm_label": "@types/pg"
-    },
-    {
-      "label": "@types/react",
-      "file_type": "code",
-      "source_file": "package.json",
-      "source_location": "L41",
-      "_origin": "ast",
-      "id": "package_devdependencies_types_react",
-      "community": 4,
-      "norm_label": "@types/react"
-    },
-    {
-      "label": "@types/react-dom",
-      "file_type": "code",
-      "source_file": "package.json",
-      "source_location": "L42",
-      "_origin": "ast",
-      "id": "package_devdependencies_types_react_dom",
-      "community": 4,
-      "norm_label": "@types/react-dom"
-    },
-    {
-      "label": "bcryptjs",
-      "file_type": "code",
-      "source_file": "package.json",
-      "source_location": "L43",
-      "_origin": "ast",
-      "id": "package_devdependencies_bcryptjs",
-      "community": 4,
-      "norm_label": "bcryptjs"
-    },
-    {
-      "label": "drizzle-kit",
-      "file_type": "code",
-      "source_file": "package.json",
-      "source_location": "L44",
-      "_origin": "ast",
-      "id": "package_devdependencies_drizzle_kit",
-      "community": 4,
-      "norm_label": "drizzle-kit"
-    },
-    {
-      "label": "eslint",
-      "file_type": "code",
-      "source_file": "package.json",
-      "source_location": "L45",
-      "_origin": "ast",
-      "id": "package_devdependencies_eslint",
-      "community": 4,
-      "norm_label": "eslint"
-    },
-    {
-      "label": "eslint-config-next",
-      "file_type": "code",
-      "source_file": "package.json",
-      "source_location": "L46",
-      "_origin": "ast",
-      "id": "package_devdependencies_eslint_config_next",
-      "community": 4,
-      "norm_label": "eslint-config-next"
-    },
-    {
-      "label": "tailwindcss",
-      "file_type": "code",
-      "source_file": "package.json",
-      "source_location": "L47",
-      "_origin": "ast",
-      "id": "package_devdependencies_tailwindcss",
-      "community": 4,
-      "norm_label": "tailwindcss"
-    },
-    {
-      "label": "tsx",
-      "file_type": "code",
-      "source_file": "package.json",
-      "source_location": "L48",
-      "_origin": "ast",
-      "id": "package_devdependencies_tsx",
-      "community": 4,
-      "norm_label": "tsx"
-    },
-    {
-      "label": "typescript",
-      "file_type": "code",
-      "source_file": "package.json",
-      "source_location": "L49",
-      "_origin": "ast",
-      "id": "package_devdependencies_typescript",
-      "community": 4,
-      "norm_label": "typescript"
-    },
-    {
-      "label": "vitest",
-      "file_type": "code",
-      "source_file": "package.json",
-      "source_location": "L50",
-      "_origin": "ast",
-      "id": "package_devdependencies_vitest",
-      "community": 4,
-      "norm_label": "vitest"
-    },
-    {
-      "label": "utils.test.ts",
-      "file_type": "code",
-      "source_file": "tests/unit/utils.test.ts",
-      "source_location": "L1",
-      "_origin": "ast",
-      "id": "unit_utils_test",
-      "community": 87,
-      "norm_label": "utils.test.ts"
-    },
-    {
-      "label": "validations.test.ts",
-      "file_type": "code",
-      "source_file": "tests/unit/validations.test.ts",
-      "source_location": "L1",
-      "_origin": "ast",
-      "id": "unit_validations_test",
-      "community": 95,
-      "norm_label": "validations.test.ts"
+      "id": "integration_api_test",
+      "community": 71,
+      "norm_label": "api.test.ts"
     },
     {
       "label": "vitest.config.ts",
@@ -543,6 +53,506 @@
       "id": "vitest_config",
       "community": 8,
       "norm_label": "vitest.config.ts"
+    },
+    {
+      "label": "package.json",
+      "file_type": "code",
+      "source_file": "package.json",
+      "source_location": "L1",
+      "_origin": "ast",
+      "community": 4,
+      "norm_label": "package.json",
+      "id": "package"
+    },
+    {
+      "label": "name",
+      "file_type": "code",
+      "source_file": "package.json",
+      "source_location": "L2",
+      "_origin": "ast",
+      "community": 4,
+      "norm_label": "name",
+      "id": "package_name"
+    },
+    {
+      "label": "version",
+      "file_type": "code",
+      "source_file": "package.json",
+      "source_location": "L3",
+      "_origin": "ast",
+      "community": 4,
+      "norm_label": "version",
+      "id": "package_version"
+    },
+    {
+      "label": "private",
+      "file_type": "code",
+      "source_file": "package.json",
+      "source_location": "L4",
+      "_origin": "ast",
+      "community": 4,
+      "norm_label": "private",
+      "id": "package_private"
+    },
+    {
+      "label": "scripts",
+      "file_type": "code",
+      "source_file": "package.json",
+      "source_location": "L5",
+      "_origin": "ast",
+      "community": 4,
+      "norm_label": "scripts",
+      "id": "package_scripts"
+    },
+    {
+      "label": "dev",
+      "file_type": "code",
+      "source_file": "package.json",
+      "source_location": "L6",
+      "_origin": "ast",
+      "community": 4,
+      "norm_label": "dev",
+      "id": "package_scripts_dev"
+    },
+    {
+      "label": "build",
+      "file_type": "code",
+      "source_file": "package.json",
+      "source_location": "L7",
+      "_origin": "ast",
+      "community": 4,
+      "norm_label": "build",
+      "id": "package_scripts_build"
+    },
+    {
+      "label": "start",
+      "file_type": "code",
+      "source_file": "package.json",
+      "source_location": "L8",
+      "_origin": "ast",
+      "community": 4,
+      "norm_label": "start",
+      "id": "package_scripts_start"
+    },
+    {
+      "label": "lint",
+      "file_type": "code",
+      "source_file": "package.json",
+      "source_location": "L9",
+      "_origin": "ast",
+      "community": 4,
+      "norm_label": "lint",
+      "id": "package_scripts_lint"
+    },
+    {
+      "label": "db:generate",
+      "file_type": "code",
+      "source_file": "package.json",
+      "source_location": "L10",
+      "_origin": "ast",
+      "community": 4,
+      "norm_label": "db:generate",
+      "id": "package_scripts_db_generate"
+    },
+    {
+      "label": "db:push",
+      "file_type": "code",
+      "source_file": "package.json",
+      "source_location": "L11",
+      "_origin": "ast",
+      "community": 4,
+      "norm_label": "db:push",
+      "id": "package_scripts_db_push"
+    },
+    {
+      "label": "db:seed",
+      "file_type": "code",
+      "source_file": "package.json",
+      "source_location": "L12",
+      "_origin": "ast",
+      "community": 4,
+      "norm_label": "db:seed",
+      "id": "package_scripts_db_seed"
+    },
+    {
+      "label": "db:setup",
+      "file_type": "code",
+      "source_file": "package.json",
+      "source_location": "L13",
+      "_origin": "ast",
+      "community": 4,
+      "norm_label": "db:setup",
+      "id": "package_scripts_db_setup"
+    },
+    {
+      "label": "test",
+      "file_type": "code",
+      "source_file": "package.json",
+      "source_location": "L14",
+      "_origin": "ast",
+      "community": 4,
+      "norm_label": "test",
+      "id": "package_scripts_test"
+    },
+    {
+      "label": "test:ui",
+      "file_type": "code",
+      "source_file": "package.json",
+      "source_location": "L15",
+      "_origin": "ast",
+      "community": 4,
+      "norm_label": "test:ui",
+      "id": "package_scripts_test_ui"
+    },
+    {
+      "label": "test:unit",
+      "file_type": "code",
+      "source_file": "package.json",
+      "source_location": "L16",
+      "_origin": "ast",
+      "community": 4,
+      "norm_label": "test:unit",
+      "id": "package_scripts_test_unit"
+    },
+    {
+      "label": "dependencies",
+      "file_type": "code",
+      "source_file": "package.json",
+      "source_location": "L18",
+      "_origin": "ast",
+      "community": 4,
+      "norm_label": "dependencies",
+      "id": "package_dependencies"
+    },
+    {
+      "label": "@base-ui/react",
+      "file_type": "code",
+      "source_file": "package.json",
+      "source_location": "L19",
+      "_origin": "ast",
+      "community": 4,
+      "norm_label": "@base-ui/react",
+      "id": "package_dependencies_base_ui_react"
+    },
+    {
+      "label": "better-auth",
+      "file_type": "code",
+      "source_file": "package.json",
+      "source_location": "L20",
+      "_origin": "ast",
+      "community": 4,
+      "norm_label": "better-auth",
+      "id": "package_dependencies_better_auth"
+    },
+    {
+      "label": "class-variance-authority",
+      "file_type": "code",
+      "source_file": "package.json",
+      "source_location": "L21",
+      "_origin": "ast",
+      "community": 4,
+      "norm_label": "class-variance-authority",
+      "id": "package_dependencies_class_variance_authority"
+    },
+    {
+      "label": "clsx",
+      "file_type": "code",
+      "source_file": "package.json",
+      "source_location": "L22",
+      "_origin": "ast",
+      "community": 4,
+      "norm_label": "clsx",
+      "id": "package_dependencies_clsx"
+    },
+    {
+      "label": "drizzle-orm",
+      "file_type": "code",
+      "source_file": "package.json",
+      "source_location": "L23",
+      "_origin": "ast",
+      "community": 4,
+      "norm_label": "drizzle-orm",
+      "id": "package_dependencies_drizzle_orm"
+    },
+    {
+      "label": "framer-motion",
+      "file_type": "code",
+      "source_file": "package.json",
+      "source_location": "L24",
+      "_origin": "ast",
+      "community": 4,
+      "norm_label": "framer-motion",
+      "id": "package_dependencies_framer_motion"
+    },
+    {
+      "label": "lucide-react",
+      "file_type": "code",
+      "source_file": "package.json",
+      "source_location": "L25",
+      "_origin": "ast",
+      "community": 4,
+      "norm_label": "lucide-react",
+      "id": "package_dependencies_lucide_react"
+    },
+    {
+      "label": "next",
+      "file_type": "code",
+      "source_file": "package.json",
+      "source_location": "L26",
+      "_origin": "ast",
+      "community": 4,
+      "norm_label": "next",
+      "id": "package_dependencies_next"
+    },
+    {
+      "label": "postgres",
+      "file_type": "code",
+      "source_file": "package.json",
+      "source_location": "L27",
+      "_origin": "ast",
+      "community": 4,
+      "norm_label": "postgres",
+      "id": "package_dependencies_postgres"
+    },
+    {
+      "label": "react",
+      "file_type": "code",
+      "source_file": "package.json",
+      "source_location": "L28",
+      "_origin": "ast",
+      "community": 4,
+      "norm_label": "react",
+      "id": "package_dependencies_react"
+    },
+    {
+      "label": "react-dom",
+      "file_type": "code",
+      "source_file": "package.json",
+      "source_location": "L29",
+      "_origin": "ast",
+      "community": 4,
+      "norm_label": "react-dom",
+      "id": "package_dependencies_react_dom"
+    },
+    {
+      "label": "shadcn",
+      "file_type": "code",
+      "source_file": "package.json",
+      "source_location": "L30",
+      "_origin": "ast",
+      "community": 4,
+      "norm_label": "shadcn",
+      "id": "package_dependencies_shadcn"
+    },
+    {
+      "label": "tailwind-merge",
+      "file_type": "code",
+      "source_file": "package.json",
+      "source_location": "L31",
+      "_origin": "ast",
+      "community": 4,
+      "norm_label": "tailwind-merge",
+      "id": "package_dependencies_tailwind_merge"
+    },
+    {
+      "label": "tw-animate-css",
+      "file_type": "code",
+      "source_file": "package.json",
+      "source_location": "L32",
+      "_origin": "ast",
+      "community": 4,
+      "norm_label": "tw-animate-css",
+      "id": "package_dependencies_tw_animate_css"
+    },
+    {
+      "label": "yet-another-react-lightbox",
+      "file_type": "code",
+      "source_file": "package.json",
+      "source_location": "L33",
+      "_origin": "ast",
+      "community": 4,
+      "norm_label": "yet-another-react-lightbox",
+      "id": "package_dependencies_yet_another_react_lightbox"
+    },
+    {
+      "label": "zod",
+      "file_type": "code",
+      "source_file": "package.json",
+      "source_location": "L34",
+      "_origin": "ast",
+      "community": 4,
+      "norm_label": "zod",
+      "id": "package_dependencies_zod"
+    },
+    {
+      "label": "devDependencies",
+      "file_type": "code",
+      "source_file": "package.json",
+      "source_location": "L36",
+      "_origin": "ast",
+      "community": 4,
+      "norm_label": "devdependencies",
+      "id": "package_devdependencies"
+    },
+    {
+      "label": "@playwright/test",
+      "file_type": "code",
+      "source_file": "package.json",
+      "source_location": "L37",
+      "_origin": "ast",
+      "community": 4,
+      "norm_label": "@playwright/test",
+      "id": "package_devdependencies_playwright_test"
+    },
+    {
+      "label": "@tailwindcss/postcss",
+      "file_type": "code",
+      "source_file": "package.json",
+      "source_location": "L38",
+      "_origin": "ast",
+      "community": 4,
+      "norm_label": "@tailwindcss/postcss",
+      "id": "package_devdependencies_tailwindcss_postcss"
+    },
+    {
+      "label": "@types/node",
+      "file_type": "code",
+      "source_file": "package.json",
+      "source_location": "L39",
+      "_origin": "ast",
+      "community": 4,
+      "norm_label": "@types/node",
+      "id": "package_devdependencies_types_node"
+    },
+    {
+      "label": "@types/pg",
+      "file_type": "code",
+      "source_file": "package.json",
+      "source_location": "L40",
+      "_origin": "ast",
+      "community": 4,
+      "norm_label": "@types/pg",
+      "id": "package_devdependencies_types_pg"
+    },
+    {
+      "label": "@types/react",
+      "file_type": "code",
+      "source_file": "package.json",
+      "source_location": "L41",
+      "_origin": "ast",
+      "community": 4,
+      "norm_label": "@types/react",
+      "id": "package_devdependencies_types_react"
+    },
+    {
+      "label": "@types/react-dom",
+      "file_type": "code",
+      "source_file": "package.json",
+      "source_location": "L42",
+      "_origin": "ast",
+      "community": 4,
+      "norm_label": "@types/react-dom",
+      "id": "package_devdependencies_types_react_dom"
+    },
+    {
+      "label": "bcryptjs",
+      "file_type": "code",
+      "source_file": "package.json",
+      "source_location": "L43",
+      "_origin": "ast",
+      "community": 4,
+      "norm_label": "bcryptjs",
+      "id": "package_devdependencies_bcryptjs"
+    },
+    {
+      "label": "drizzle-kit",
+      "file_type": "code",
+      "source_file": "package.json",
+      "source_location": "L44",
+      "_origin": "ast",
+      "community": 4,
+      "norm_label": "drizzle-kit",
+      "id": "package_devdependencies_drizzle_kit"
+    },
+    {
+      "label": "eslint",
+      "file_type": "code",
+      "source_file": "package.json",
+      "source_location": "L45",
+      "_origin": "ast",
+      "community": 4,
+      "norm_label": "eslint",
+      "id": "package_devdependencies_eslint"
+    },
+    {
+      "label": "eslint-config-next",
+      "file_type": "code",
+      "source_file": "package.json",
+      "source_location": "L46",
+      "_origin": "ast",
+      "community": 4,
+      "norm_label": "eslint-config-next",
+      "id": "package_devdependencies_eslint_config_next"
+    },
+    {
+      "label": "tailwindcss",
+      "file_type": "code",
+      "source_file": "package.json",
+      "source_location": "L47",
+      "_origin": "ast",
+      "community": 4,
+      "norm_label": "tailwindcss",
+      "id": "package_devdependencies_tailwindcss"
+    },
+    {
+      "label": "tsx",
+      "file_type": "code",
+      "source_file": "package.json",
+      "source_location": "L48",
+      "_origin": "ast",
+      "community": 4,
+      "norm_label": "tsx",
+      "id": "package_devdependencies_tsx"
+    },
+    {
+      "label": "typescript",
+      "file_type": "code",
+      "source_file": "package.json",
+      "source_location": "L49",
+      "_origin": "ast",
+      "community": 4,
+      "norm_label": "typescript",
+      "id": "package_devdependencies_typescript"
+    },
+    {
+      "label": "vitest",
+      "file_type": "code",
+      "source_file": "package.json",
+      "source_location": "L50",
+      "_origin": "ast",
+      "community": 4,
+      "norm_label": "vitest",
+      "id": "package_devdependencies_vitest"
+    },
+    {
+      "label": "utils.test.ts",
+      "file_type": "code",
+      "source_file": "tests/unit/utils.test.ts",
+      "source_location": "L1",
+      "_origin": "ast",
+      "community": 87,
+      "norm_label": "utils.test.ts",
+      "id": "unit_utils_test"
+    },
+    {
+      "label": "validations.test.ts",
+      "file_type": "code",
+      "source_file": "tests/unit/validations.test.ts",
+      "source_location": "L1",
+      "_origin": "ast",
+      "community": 95,
+      "norm_label": "validations.test.ts",
+      "id": "unit_validations_test"
     },
     {
       "label": "auth.spec.ts",
@@ -9832,9 +9842,9 @@
       "source_file": "package.json",
       "source_location": "L16",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "package_scripts",
-      "target": "package_scripts_test_unit",
-      "confidence_score": 1.0
+      "target": "package_scripts_test_unit"
     },
     {
       "relation": "contains",
@@ -10132,9 +10142,9 @@
       "source_file": "package.json",
       "source_location": "L50",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "package_devdependencies",
-      "target": "package_devdependencies_vitest",
-      "confidence_score": 1.0
+      "target": "package_devdependencies_vitest"
     },
     {
       "relation": "imports",
@@ -10143,9 +10153,9 @@
       "source_file": "tests/unit/utils.test.ts",
       "source_location": "L2",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "unit_utils_test",
-      "target": "lib_utils_cn",
-      "confidence_score": 1.0
+      "target": "lib_utils_cn"
     },
     {
       "relation": "imports",
@@ -10154,9 +10164,9 @@
       "source_file": "tests/unit/utils.test.ts",
       "source_location": "L2",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "unit_utils_test",
-      "target": "lib_utils_formatchampion",
-      "confidence_score": 1.0
+      "target": "lib_utils_formatchampion"
     },
     {
       "relation": "imports",
@@ -10165,9 +10175,9 @@
       "source_file": "tests/unit/utils.test.ts",
       "source_location": "L2",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "unit_utils_test",
-      "target": "lib_utils_formatdate",
-      "confidence_score": 1.0
+      "target": "lib_utils_formatdate"
     },
     {
       "relation": "imports",
@@ -10176,9 +10186,9 @@
       "source_file": "tests/unit/utils.test.ts",
       "source_location": "L2",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "unit_utils_test",
-      "target": "lib_utils_formatlevel",
-      "confidence_score": 1.0
+      "target": "lib_utils_formatlevel"
     },
     {
       "relation": "imports",
@@ -10187,9 +10197,9 @@
       "source_file": "tests/unit/utils.test.ts",
       "source_location": "L2",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "unit_utils_test",
-      "target": "lib_utils_formatmonthyear",
-      "confidence_score": 1.0
+      "target": "lib_utils_formatmonthyear"
     },
     {
       "relation": "imports",
@@ -10198,9 +10208,9 @@
       "source_file": "tests/unit/utils.test.ts",
       "source_location": "L2",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "unit_utils_test",
-      "target": "lib_utils_getchampionemoji",
-      "confidence_score": 1.0
+      "target": "lib_utils_getchampionemoji"
     },
     {
       "relation": "imports",
@@ -10209,9 +10219,9 @@
       "source_file": "tests/unit/utils.test.ts",
       "source_location": "L2",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "unit_utils_test",
-      "target": "lib_utils_getfacilitycategorylabel",
-      "confidence_score": 1.0
+      "target": "lib_utils_getfacilitycategorylabel"
     },
     {
       "relation": "imports",
@@ -10220,9 +10230,9 @@
       "source_file": "tests/unit/utils.test.ts",
       "source_location": "L2",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "unit_utils_test",
-      "target": "lib_utils_getfacilityicon",
-      "confidence_score": 1.0
+      "target": "lib_utils_getfacilityicon"
     },
     {
       "relation": "imports",
@@ -10231,9 +10241,9 @@
       "source_file": "tests/unit/utils.test.ts",
       "source_location": "L2",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "unit_utils_test",
-      "target": "lib_utils_getlevelbadgecolor",
-      "confidence_score": 1.0
+      "target": "lib_utils_getlevelbadgecolor"
     },
     {
       "relation": "imports",
@@ -10242,9 +10252,9 @@
       "source_file": "tests/unit/utils.test.ts",
       "source_location": "L2",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "unit_utils_test",
-      "target": "lib_utils_slugify",
-      "confidence_score": 1.0
+      "target": "lib_utils_slugify"
     },
     {
       "relation": "imports",
@@ -10253,9 +10263,9 @@
       "source_file": "tests/unit/utils.test.ts",
       "source_location": "L2",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "unit_utils_test",
-      "target": "lib_utils_truncate",
-      "confidence_score": 1.0
+      "target": "lib_utils_truncate"
     },
     {
       "relation": "imports",
@@ -10264,9 +10274,9 @@
       "source_file": "tests/unit/validations.test.ts",
       "source_location": "L2",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "unit_validations_test",
-      "target": "lib_validations_changepasswordschema",
-      "confidence_score": 1.0
+      "target": "lib_validations_changepasswordschema"
     },
     {
       "relation": "imports",
@@ -10275,9 +10285,9 @@
       "source_file": "tests/unit/validations.test.ts",
       "source_location": "L2",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "unit_validations_test",
-      "target": "lib_validations_contactschema",
-      "confidence_score": 1.0
+      "target": "lib_validations_contactschema"
     },
     {
       "relation": "imports",
@@ -10286,9 +10296,9 @@
       "source_file": "tests/unit/validations.test.ts",
       "source_location": "L2",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "unit_validations_test",
-      "target": "lib_validations_createuserschema",
-      "confidence_score": 1.0
+      "target": "lib_validations_createuserschema"
     },
     {
       "relation": "imports",
@@ -10297,9 +10307,9 @@
       "source_file": "tests/unit/validations.test.ts",
       "source_location": "L2",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "unit_validations_test",
-      "target": "lib_validations_postschema",
-      "confidence_score": 1.0
+      "target": "lib_validations_postschema"
     },
     {
       "relation": "imports_from",
@@ -26476,5 +26486,5 @@
       "source_file": "FRONTEND_PLAN.md"
     }
   ],
-  "built_at_commit": "39dab21bec8d44e09cb82937963a75c4b92d604a"
+  "built_at_commit": "fc524836297e92d0798fd63f70caf4dbbde8e212"
 }
