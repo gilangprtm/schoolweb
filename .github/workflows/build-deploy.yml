@@ -51,6 +51,8 @@ jobs:
       - run: npm run lint
         continue-on-error: true
 
+      - run: npm run test:unit
+
       - run: npm run build
         env:
           NEXT_TELEMETRY_DISABLED: 1
