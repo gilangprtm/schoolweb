@@ -65,7 +65,7 @@ schoolweb/
 
 ## Deployment
 
-- **Production**: https://smpn17denpasar.edjavu.cloud
+- **Production**: https://smpn17denpasar.my.id
 - **CI/CD**: GitHub Actions → Docker → Coolify
 - **Pipeline**: lint → test:unit → build → test:e2e → deploy
 

@@ -860,8 +860,8 @@
     "semantic_hash": ""
   },
   ".github/workflows/build-deploy.yml": {
-    "mtime": 1782962509.6952841,
-    "ast_hash": "989a5686b45d83703e8bd3a3edff3a1c",
+    "mtime": 1782966314.8374743,
+    "ast_hash": "a1ccd27faf1394252e6d299fce89e319",
     "semantic_hash": ""
   },
   "implementation_plan.md": {
@@ -962,6 +962,16 @@
   "tests/integration/api.test.ts": {
     "mtime": 1782966075.2669675,
     "ast_hash": "f819ce60aee25d822df16b4c8f2c4c65",
+    "semantic_hash": ""
+  },
+  "src/app/robots.ts": {
+    "mtime": 1782966232.1071494,
+    "ast_hash": "a3090744647f17c0a91caf09751ddc9a",
+    "semantic_hash": ""
+  },
+  "src/app/sitemap.ts": {
+    "mtime": 1782966222.4780705,
+    "ast_hash": "bde1e92fe05cd473fd490ce0de47778b",
     "semantic_hash": ""
   }
 }

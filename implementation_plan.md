@@ -168,6 +168,6 @@ docker exec <container> node scripts/migrate.js
 
 ### Manual
 - Deploy ke Coolify via GHCR pull
-- Verifikasi app accessible di `https://smpn17denpasar.edjavu.cloud`
+- Verifikasi app accessible di `https://smpn17denpasar.my.id`
 - Cek migration log di container logs
 - Cek RAM usage via `docker stats` — target: < 300MB untuk app container
