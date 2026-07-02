@@ -1,6 +1,5 @@
 'use client';
 
-import * as Sentry from '@sentry/nextjs';
 import { useEffect } from 'react';
 
 export default function GlobalError({
@@ -11,16 +10,22 @@ export default function GlobalError({
   reset: () => void;
 }) {
   useEffect(() => {
-    Sentry.captureException(error);
+    // Sentry capture (uncomment after installing @sentry/nextjs):
+    // import * as Sentry from '@sentry/nextjs';
+    // Sentry.captureException(error);
+    console.error('Global error:', error);
   }, [error]);
 
   return (
     <html>
       <body>
-        <div style={{ padding: '2rem', textAlign: 'center' }}>
+        <div style={{ padding: '2rem', textAlign: 'center', fontFamily: 'system-ui' }}>
           <h1>Terjadi Kesalahan</h1>
-          <p>Maaf, halaman ini tidak dapat ditampilkan.</p>
-          <button onClick={reset} style={{ marginTop: '1rem', padding: '0.5rem 1rem' }}>
+          <p>Maaf, halaman ini tidak dapat ditampilkan. Silakan coba lagi.</p>
+          <button
+            onClick={reset}
+            style={{ marginTop: '1rem', padding: '0.5rem 1rem', cursor: 'pointer' }}
+          >
             Coba Lagi
           </button>
         </div>

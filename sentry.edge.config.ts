@@ -1,8 +1,10 @@
-import * as Sentry from '@sentry/nextjs';
-
-Sentry.init({
-  dsn: process.env.NEXT_PUBLIC_SENTRY_DSN,
-  tracesSampleRate: 0.1,
-  environment: process.env.NODE_ENV || 'development',
-  enabled: process.env.NODE_ENV === 'production',
-});
+// Sentry edge config — ready to use after:
+// npm install @sentry/nextjs
+//
+// import * as Sentry from '@sentry/nextjs';
+// Sentry.init({
+//   dsn: process.env.NEXT_PUBLIC_SENTRY_DSN,
+//   tracesSampleRate: 0.1,
+//   environment: process.env.NODE_ENV || 'development',
+//   enabled: process.env.NODE_ENV === 'production',
+// });
