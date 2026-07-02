@@ -25,8 +25,8 @@
     "semantic_hash": ""
   },
   "package.json": {
-    "mtime": 1782962310.6328,
-    "ast_hash": "576de2ba8921e8fbdd23f680735c6821",
+    "mtime": 1782966049.6843724,
+    "ast_hash": "4ac46d4f9f74358fcb9380ab0efc5e2a",
     "semantic_hash": ""
   },
   "postcss.config.mjs": {
@@ -942,6 +942,21 @@
   "scripts/db-optimize.sql": {
     "mtime": 1782965501.6633675,
     "ast_hash": "97f89b2a79552fa0a5fc9c39f1e79274",
+    "semantic_hash": ""
+  },
+  "tests/unit/utils.test.ts": {
+    "mtime": 1782966007.3873026,
+    "ast_hash": "7a8912c13a954e141142c5a6026920e7",
+    "semantic_hash": ""
+  },
+  "tests/unit/validations.test.ts": {
+    "mtime": 1782966007.389628,
+    "ast_hash": "8a068b5819ef6b34f244d8e1c6a030c7",
+    "semantic_hash": ""
+  },
+  "vitest.config.ts": {
+    "mtime": 1782966007.4773278,
+    "ast_hash": "2a6f65602701253b7bd4a94f9654783a",
     "semantic_hash": ""
   }
 }
