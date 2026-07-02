@@ -20,8 +20,8 @@
     "semantic_hash": "dfa1f5f6a7037bf39dc510f30b180002"
   },
   "next.config.ts": {
-    "mtime": 1782962854.2244036,
-    "ast_hash": "2cfbaf18b1a4d0361a4403c3d5d772f6",
+    "mtime": 1782965684.2753947,
+    "ast_hash": "a33275ca1897e881c79eb1bbd80256de",
     "semantic_hash": ""
   },
   "package.json": {
@@ -795,13 +795,13 @@
     "semantic_hash": ""
   },
   "e2e/tests/auth.spec.ts": {
-    "mtime": 1782964684.9228926,
-    "ast_hash": "288da32e7b9c1e84e2c12baa0245ae42",
+    "mtime": 1782964919.3823643,
+    "ast_hash": "626a7ac8fc5ec342022fcd029829c8a0",
     "semantic_hash": ""
   },
   "e2e/tests/berita-crud.spec.ts": {
-    "mtime": 1782964684.2912338,
-    "ast_hash": "8e26bb0b384208f83e01485b8f0dcbc5",
+    "mtime": 1782964919.6242726,
+    "ast_hash": "995e47b78cc7138c19a465c023b90cd5",
     "semantic_hash": ""
   },
   "playwright.config.ts": {
@@ -937,6 +937,11 @@
   "playwright-report/data/d1a911cac9bf6a9db8362999a1ce8758417a4426.md": {
     "mtime": 1782964846.5616863,
     "ast_hash": "d959c8b616288109d9200555a242c5fa",
+    "semantic_hash": ""
+  },
+  "scripts/db-optimize.sql": {
+    "mtime": 1782965501.6633675,
+    "ast_hash": "97f89b2a79552fa0a5fc9c39f1e79274",
     "semantic_hash": ""
   }
 }
