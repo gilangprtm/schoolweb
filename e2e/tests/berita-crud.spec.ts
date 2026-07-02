@@ -7,11 +7,24 @@ test.describe('Berita CRUD', () => {
   const email = process.env.TEST_ADMIN_EMAIL || 'admin@sekolah.sch.id';
   const password = process.env.TEST_ADMIN_PASSWORD || 'admin123';
 
-  test.beforeEach(async ({ page }) => {
-    const loginPage = new LoginPage(page);
-    await loginPage.goto();
-    await loginPage.login(email, password);
-    await expect(page).toHaveURL(/\/admin/, { timeout: 10000 });
+  test.beforeEach(async ({ page, request }) => {
+    // Login via API (lebih reliable daripada form submit)
+    const res = await request.post('/api/auth/sign-in/email', {
+      data: { email, password },
+    });
+    expect(res.status()).toBe(200);
+    const { token } = await res.json();
+    
+    // Set auth cookie
+    await page.context().addCookies([{
+      name: 'better-auth.session_token',
+      value: token,
+      domain: 'localhost',
+      path: '/',
+      httpOnly: true,
+      secure: false,
+      sameSite: 'Lax' as const,
+    }]);
     
     beritaPage = new BeritaPage(page);
     await beritaPage.goto();

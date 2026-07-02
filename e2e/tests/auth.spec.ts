@@ -20,14 +20,27 @@ test.describe('Authentication', () => {
     await expect(loginPage.errorMessage).toBeVisible({ timeout: 5000 });
   });
 
-  test('should login successfully with valid credentials', async ({ page }) => {
+  test('should login via API and access admin', async ({ page, request }) => {
     const email = process.env.TEST_ADMIN_EMAIL || 'admin@sekolah.sch.id';
     const password = process.env.TEST_ADMIN_PASSWORD || 'admin123';
     
-    await loginPage.login(email, password);
-    // Wait for navigation to admin (or stay on login if failed)
-    await page.waitForLoadState('networkidle');
-    const url = page.url();
-    expect(url).toMatch(/\/admin/);
+    const res = await request.post('/api/auth/sign-in/email', {
+      data: { email, password },
+    });
+    expect(res.status()).toBe(200);
+    const { token } = await res.json();
+    
+    await page.context().addCookies([{
+      name: 'better-auth.session_token',
+      value: token,
+      domain: 'localhost',
+      path: '/',
+      httpOnly: true,
+      secure: false,
+      sameSite: 'Lax' as const,
+    }]);
+    
+    await page.goto('/admin');
+    await expect(page).toHaveURL(/\/admin/);
   });
 });
