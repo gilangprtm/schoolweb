@@ -9,7 +9,7 @@ RUN npm ci 2>/dev/null || npm install --no-audit --no-fund
 COPY . .
 
 ENV NEXT_TELEMETRY_DISABLED=1
-ENV NODE_OPTIONS="--max-old-space-size=384"
+ENV NODE_OPTIONS="--max-old-space-size=1024"
 
 # Build-time args — injected via Coolify
 ARG DATABASE_URL
