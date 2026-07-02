@@ -7,7 +7,7 @@
 # Test info
 
 - Name: tests\berita-crud.spec.ts >> Berita CRUD >> should create new berita
-- Location: e2e\tests\berita-crud.spec.ts:42:7
+- Location: e2e\tests\berita-crud.spec.ts:43:7
 
 # Error details
 

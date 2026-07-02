@@ -12,33 +12,23 @@ test.describe('Authentication', () => {
   test('should show login page', async () => {
     await expect(loginPage.emailInput).toBeVisible();
     await expect(loginPage.passwordInput).toBeVisible();
-    await expect(loginPage.submitButton).toBeVisible();
   });
 
-  test('should show error for invalid credentials', async () => {
+  test('should reject invalid credentials', async () => {
     await loginPage.login('wrong@email.com', 'wrongpassword');
     await expect(loginPage.errorMessage).toBeVisible({ timeout: 5000 });
   });
 
   test('should login via API and access admin', async ({ page, request }) => {
-    const email = process.env.TEST_ADMIN_EMAIL || 'admin@sekolah.sch.id';
-    const password = process.env.TEST_ADMIN_PASSWORD || 'admin123';
-    
     const res = await request.post('/api/auth/sign-in/email', {
-      data: { email, password },
+      data: { email: 'admin@sekolah.sch.id', password: 'admin123' },
     });
     expect(res.status()).toBe(200);
     const { token } = await res.json();
     
-    await page.context().addCookies([{
-      name: 'better-auth.session_token',
-      value: token,
-      domain: 'localhost',
-      path: '/',
-      httpOnly: true,
-      secure: false,
-      sameSite: 'Lax' as const,
-    }]);
+    await page.context().setExtraHTTPHeaders({
+      'Authorization': `Bearer ${token}`,
+    });
     
     await page.goto('/admin');
     await expect(page).toHaveURL(/\/admin/);

@@ -7,7 +7,7 @@
 # Test info
 
 - Name: tests\auth.spec.ts >> Authentication >> should login via API and access admin
-- Location: e2e\tests\auth.spec.ts:23:7
+- Location: e2e\tests\auth.spec.ts:22:7
 
 # Error details
 
@@ -54,38 +54,28 @@ Call log:
   12 |   test('should show login page', async () => {
   13 |     await expect(loginPage.emailInput).toBeVisible();
   14 |     await expect(loginPage.passwordInput).toBeVisible();
-  15 |     await expect(loginPage.submitButton).toBeVisible();
-  16 |   });
-  17 | 
-  18 |   test('should show error for invalid credentials', async () => {
-  19 |     await loginPage.login('wrong@email.com', 'wrongpassword');
-  20 |     await expect(loginPage.errorMessage).toBeVisible({ timeout: 5000 });
-  21 |   });
-  22 | 
-  23 |   test('should login via API and access admin', async ({ page, request }) => {
-  24 |     const email = process.env.TEST_ADMIN_EMAIL || 'admin@sekolah.sch.id';
-  25 |     const password = process.env.TEST_ADMIN_PASSWORD || 'admin123';
-  26 |     
-  27 |     const res = await request.post('/api/auth/sign-in/email', {
-  28 |       data: { email, password },
-  29 |     });
-  30 |     expect(res.status()).toBe(200);
-  31 |     const { token } = await res.json();
+  15 |   });
+  16 | 
+  17 |   test('should reject invalid credentials', async () => {
+  18 |     await loginPage.login('wrong@email.com', 'wrongpassword');
+  19 |     await expect(loginPage.errorMessage).toBeVisible({ timeout: 5000 });
+  20 |   });
+  21 | 
+  22 |   test('should login via API and access admin', async ({ page, request }) => {
+  23 |     const res = await request.post('/api/auth/sign-in/email', {
+  24 |       data: { email: 'admin@sekolah.sch.id', password: 'admin123' },
+  25 |     });
+  26 |     expect(res.status()).toBe(200);
+  27 |     const { token } = await res.json();
+  28 |     
+  29 |     await page.context().setExtraHTTPHeaders({
+  30 |       'Authorization': `Bearer ${token}`,
+  31 |     });
   32 |     
-  33 |     await page.context().addCookies([{
-  34 |       name: 'better-auth.session_token',
-  35 |       value: token,
-  36 |       domain: 'localhost',
-  37 |       path: '/',
-  38 |       httpOnly: true,
-  39 |       secure: false,
-  40 |       sameSite: 'Lax' as const,
-  41 |     }]);
-  42 |     
-  43 |     await page.goto('/admin');
-> 44 |     await expect(page).toHaveURL(/\/admin/);
+  33 |     await page.goto('/admin');
+> 34 |     await expect(page).toHaveURL(/\/admin/);
      |                        ^ Error: expect(page).toHaveURL(expected) failed
-  45 |   });
-  46 | });
-  47 | 
+  35 |   });
+  36 | });
+  37 | 
 ```
