@@ -15,12 +15,12 @@
 Error: expect(page).toHaveURL(expected) failed
 
 Expected pattern: /\/admin/
-Received string:  "http://localhost:3000/login?from=%2Fadmin%2Flogin"
+Received string:  "http://localhost:3000/login"
 Timeout: 10000ms
 
 Call log:
   - Expect "toHaveURL" with timeout 10000ms
-    23 × unexpected value "http://localhost:3000/login?from=%2Fadmin%2Flogin"
+    23 × unexpected value "http://localhost:3000/login"
 
 ```
 

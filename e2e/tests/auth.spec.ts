@@ -25,6 +25,9 @@ test.describe('Authentication', () => {
     const password = process.env.TEST_ADMIN_PASSWORD || 'admin123';
     
     await loginPage.login(email, password);
-    await expect(page).toHaveURL(/\/admin/, { timeout: 10000 });
+    // Wait for navigation to admin (or stay on login if failed)
+    await page.waitForLoadState('networkidle');
+    const url = page.url();
+    expect(url).toMatch(/\/admin/);
   });
 });
