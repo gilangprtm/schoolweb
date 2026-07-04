@@ -3,15 +3,21 @@
 import { useState } from "react"
 import { useRouter } from "next/navigation"
 import { PageHeader } from "@/components/admin/PageHeader"
-import { Select } from "@/components/admin/ui/Select"
+import { TextField, SelectField } from "@/components/admin/forms"
 import { Button } from "@/components/ui/button"
-import { Input } from "@/components/ui/input"
 import { createUser } from "@/lib/actions/users"
+
+const roleOptions = [
+  { value: "admin", label: "Admin" },
+  { value: "superadmin", label: "Super Admin" },
+]
 
 export default function AkunBaruPage() {
   const router = useRouter()
-  const [name, setName] = useState(""); const [email, setEmail] = useState("")
-  const [role, setRole] = useState<string>("admin"); const [password, setPassword] = useState("")
+  const [name, setName] = useState("")
+  const [email, setEmail] = useState("")
+  const [role, setRole] = useState<string>("admin")
+  const [password, setPassword] = useState("")
   const [loading, setLoading] = useState(false)
 
   const handleSubmit = async (e: React.FormEvent) => {
@@ -28,17 +34,22 @@ export default function AkunBaruPage() {
   return (
     <div className="space-y-6">
       <PageHeader title="Tambah Akun" breadcrumbs={[{ label: "Dashboard", href: "/admin" }, { label: "Akun", href: "/admin/akun" }, { label: "Tambah", href: "#" }]} />
-      <form onSubmit={handleSubmit} className="max-w-3xl space-y-6">
-        <div className="rounded-xl border border-neutral-200 bg-white p-6 space-y-5">
-          <h2 className="text-sm font-semibold text-neutral-900 uppercase tracking-wider">Informasi Akun</h2>
-          <div className="space-y-2"><label className="text-sm font-medium text-neutral-700">Nama <span className="text-red-500">*</span></label><Input placeholder="Nama lengkap" value={name} onChange={e => setName(e.target.value)} required /></div>
-          <div className="space-y-2"><label className="text-sm font-medium text-neutral-700">Email <span className="text-red-500">*</span></label><Input type="email" placeholder="nama@sekolah.sch.id" value={email} onChange={e => setEmail(e.target.value)} required /></div>
+      <form onSubmit={handleSubmit} className="max-w-3xl mx-auto space-y-6">
+        <div className="rounded-xl border border-border bg-card p-6 space-y-5">
+          <h2 className="text-sm font-semibold text-foreground uppercase tracking-wider">Informasi Akun</h2>
+
+          <TextField label="Nama" value={name} onChange={setName} placeholder="Nama lengkap" required />
+          <TextField label="Email" value={email} onChange={setEmail} type="email" placeholder="nama@sekolah.sch.id" required />
+
           <div className="grid sm:grid-cols-2 gap-4">
-            <div className="space-y-2"><label className="text-sm font-medium text-neutral-700">Role <span className="text-red-500">*</span></label><Select value={role} onChange={setRole} options={[{ value: "admin", label: "Admin" }, { value: "superadmin", label: "Super Admin" }]} /></div>
-            <div className="space-y-2"><label className="text-sm font-medium text-neutral-700">Password <span className="text-red-500">*</span></label><Input type="password" placeholder="Minimal 8 karakter" value={password} onChange={e => setPassword(e.target.value)} required /></div>
+            <SelectField label="Role" value={role} onChange={setRole} options={roleOptions} required />
+            <TextField label="Password" value={password} onChange={setPassword} type="password" placeholder="Minimal 8 karakter" required minLength={8} />
           </div>
         </div>
-        <div className="flex items-center gap-3"><Button type="submit" disabled={loading}>Simpan</Button><Button type="button" variant="outline" onClick={() => router.back()}>Batal</Button></div>
+        <div className="flex items-center gap-3">
+          <Button type="submit" disabled={loading}>{loading ? "Menyimpan..." : "Simpan"}</Button>
+          <Button type="button" variant="outline" onClick={() => router.back()}>Batal</Button>
+        </div>
       </form>
     </div>
   )

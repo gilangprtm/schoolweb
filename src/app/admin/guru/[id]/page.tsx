@@ -42,7 +42,7 @@ export default function GuruEditPage() {
   return (
     <div className="space-y-6">
       <PageHeader title="Edit Guru / Staf" breadcrumbs={[{ label: "Dashboard", href: "/admin" }, { label: "Guru & Staf", href: "/admin/guru" }, { label: "Edit", href: "#" }]} />
-      <form onSubmit={handleSubmit} className="max-w-3xl space-y-6">
+      <form onSubmit={handleSubmit} className="max-w-3xl mx-auto space-y-6">
         <div className="rounded-xl border border-neutral-200 bg-white p-6 space-y-5">
           <h2 className="text-sm font-semibold text-neutral-900 uppercase tracking-wider">Informasi</h2>
           <div className="space-y-2"><label className="text-sm font-medium text-neutral-700">Nama <span className="text-red-500">*</span></label><Input value={name} onChange={e => setName(e.target.value)} required /></div>

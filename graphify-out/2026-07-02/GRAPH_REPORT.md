@@ -5,12 +5,12 @@
 - Verdict: corpus is large enough that graph structure adds value.
 
 ## Summary
-- 957 nodes · 1602 edges · 126 communities (74 shown, 52 thin omitted)
+- 991 nodes · 1635 edges · 132 communities (78 shown, 54 thin omitted)
 - Extraction: 98% EXTRACTED · 2% INFERRED · 0% AMBIGUOUS · INFERRED: 35 edges (avg confidence: 0.81)
 - Token cost: 0 input · 0 output
 
 ## Graph Freshness
-- Built from commit: `4fe7323b`
+- Built from commit: `be999800`
 - Run `git rev-parse HEAD` and compare to check if the graph is stale.
 - Run `graphify update .` after code changes (no API cost).
 
@@ -127,6 +127,12 @@
 - [[_COMMUNITY_Community 122|Community 122]]
 - [[_COMMUNITY_Community 123|Community 123]]
 - [[_COMMUNITY_Community 125|Community 125]]
+- [[_COMMUNITY_Community 126|Community 126]]
+- [[_COMMUNITY_Community 127|Community 127]]
+- [[_COMMUNITY_Community 128|Community 128]]
+- [[_COMMUNITY_Community 129|Community 129]]
+- [[_COMMUNITY_Community 130|Community 130]]
+- [[_COMMUNITY_Community 131|Community 131]]
 
 ## God Nodes (most connected - your core abstractions)
 1. `cn()` - 56 edges
@@ -143,14 +149,14 @@
 ## Surprising Connections (you probably didn't know these)
 - `Technology Stack (Next.js, PostgreSQL, Tailwind, Drizzle, Better Auth)` --shares_data_with--> `Frontend Implementation Plan`  [INFERRED]
   PRD.md → FRONTEND_PLAN.md
+- `GaleriDetailPage()` --calls--> `useToast()`  [INFERRED]
+  src/app/admin/galeri/[id]/page.tsx → src/components/admin/ui/Toast.tsx
 - `Server Components to PostgreSQL Data Flow` --conceptually_related_to--> `Coolify VPS Full-Stack Architecture`  [INFERRED]
   FRONTEND_PLAN.md → PRD.md
 - `StaffDetailPage()` --calls--> `getActiveStaff()`  [INFERRED]
   src/app/(public)/guru-dan-staf/[slug]/page.tsx → src/lib/actions/staff.ts
 - `AchievementDetailPage()` --calls--> `formatDate()`  [INFERRED]
   src/app/(public)/prestasi/[slug]/page.tsx → src/lib/utils.ts
-- `AkunEditPage()` --calls--> `useToast()`  [INFERRED]
-  src/app/admin/akun/[id]/page.tsx → src/components/admin/ui/Toast.tsx
 
 ## Import Cycles
 - None detected.
@@ -159,11 +165,11 @@
 - **Graphify Pipeline Stages** — graphify_skill_pipeline, graphify_extraction, graphify_community_analysis [EXTRACTED 1.00]
 - **School Website Public Frontend** — frontend_landing_pages, frontend_shared_components, frontend_home_page, frontend_data_flow, frontend_plan_design_system [INFERRED 0.95]
 
-## Communities (126 total, 52 thin omitted)
+## Communities (132 total, 54 thin omitted)
 
 ### Community 0 - "App Pages & Shared UI"
-Cohesion: 0.06
-Nodes (35): createContact(), MobileMenuProps, NavItem, NAV_ITEMS, Navbar(), cn(), Breadcrumb(), EmptyState() (+27 more)
+Cohesion: 0.12
+Nodes (20): cn(), Breadcrumb(), EmptyState(), ImageWithFallback(), MiniHeroBanner(), Pagination(), SectionHeading(), StatsCounter() (+12 more)
 
 ### Community 1 - "Staff & Homepage Data"
 Cohesion: 0.16
@@ -174,8 +180,8 @@ Cohesion: 0.83
 Nodes (3): generateKey(), hashPassword(), main()
 
 ### Community 3 - "Achievements System"
-Cohesion: 0.07
-Nodes (53): getGalleries(), DeleteDialog(), DeleteDialogProps, EmptyState(), EmptyStateProps, BreadcrumbLink, PageHeader(), PageHeaderProps (+45 more)
+Cohesion: 0.06
+Nodes (57): getGalleries(), getPosts(), getAllStaff(), DeleteDialog(), DeleteDialogProps, EmptyState(), EmptyStateProps, BreadcrumbLink (+49 more)
 
 ### Community 4 - "Dependencies & Build"
 Cohesion: 0.12
@@ -266,8 +272,8 @@ Cohesion: 0.14
 Nodes (14): scripts, build, db:generate, db:push, db:seed, db:setup, dev, lint (+6 more)
 
 ### Community 77 - "Community 77"
-Cohesion: 0.14
-Nodes (13): accounts, facilities, facilitiesRelations, facilityPhotos, facilityPhotosRelations, galleries, galleriesRelations, media (+5 more)
+Cohesion: 0.11
+Nodes (18): getPageById(), requireAuth(), updatePage(), accounts, facilities, facilitiesRelations, facilityPhotos, facilityPhotosRelations (+10 more)
 
 ### Community 78 - "Community 78"
 Cohesion: 0.60
@@ -278,8 +284,8 @@ Cohesion: 0.19
 Nodes (16): getAchievementBySlug(), getAchievements(), getFeaturedAchievements(), AchievementHighlight(), formatChampion(), formatLevel(), formatMonthYear(), getChampionEmoji() (+8 more)
 
 ### Community 88 - "Community 88"
-Cohesion: 0.20
-Nodes (9): FacilityGalleryProps, AchievementCategory, ContactMessage, FacilityPhoto, GalleryType, Media, StaffRole, User (+1 more)
+Cohesion: 0.22
+Nodes (8): FacilityGalleryProps, AchievementCategory, ContactMessage, FacilityPhoto, GalleryType, StaffRole, User, UserRole
 
 ### Community 89 - "Community 89"
 Cohesion: 0.50
@@ -290,12 +296,12 @@ Cohesion: 0.29
 Nodes (4): MISI, TIMELINE, TUJUAN, WAKASEK
 
 ### Community 92 - "Community 92"
-Cohesion: 0.24
-Nodes (7): requireSuperAdmin(), updateSettings(), { GET, POST }, client, db, auth, config
+Cohesion: 0.22
+Nodes (8): requireSuperAdmin(), updateSettings(), { GET, POST }, client, db, auth, config, SiteSettings
 
 ### Community 94 - "Community 94"
-Cohesion: 0.36
-Nodes (10): addMediaToGallery(), addVideoToGallery(), createGallery(), deleteGallery(), deleteMedia(), getGalleryById(), requireAuth(), updateGallery() (+2 more)
+Cohesion: 0.32
+Nodes (11): addMediaToGallery(), addVideoToGallery(), createGallery(), deleteGallery(), deleteMedia(), getGalleryById(), requireAuth(), updateGallery() (+3 more)
 
 ### Community 95 - "Community 95"
 Cohesion: 0.09
@@ -303,7 +309,7 @@ Nodes (24): AchievementInput, AchievementUpdateInput, ChangePasswordInput, Chang
 
 ### Community 96 - "Community 96"
 Cohesion: 0.08
-Nodes (30): getAchievementCount(), deleteContact(), getContacts(), getUnreadCount(), markAllAsRead(), markAsRead(), requireAuth(), getFacilityCount() (+22 more)
+Nodes (22): getAchievementCount(), createContact(), deleteContact(), getContacts(), getUnreadCount(), markAllAsRead(), markAsRead(), requireAuth() (+14 more)
 
 ### Community 97 - "Community 97"
 Cohesion: 0.40
@@ -326,8 +332,8 @@ Cohesion: 0.40
 Nodes (4): Error details, Instructions, Test info, Test source
 
 ### Community 102 - "Community 102"
-Cohesion: 0.23
-Nodes (11): getFacilities(), getFacilityBySlug(), getFeaturedFacilities(), CATEGORY_FILTERS, FacilityHighlight(), getFacilityCategoryLabel(), getFacilityIcon(), ImageWithFallbackProps (+3 more)
+Cohesion: 0.24
+Nodes (10): getFacilities(), getFacilityBySlug(), getFeaturedFacilities(), CATEGORY_FILTERS, FacilityHighlight(), getFacilityCategoryLabel(), getFacilityIcon(), EmptyStateProps (+2 more)
 
 ### Community 103 - "Community 103"
 Cohesion: 0.40
@@ -350,12 +356,12 @@ Cohesion: 0.33
 Nodes (5): Error details, Instructions, Page snapshot, Test info, Test source
 
 ### Community 111 - "Community 111"
-Cohesion: 0.26
-Nodes (10): getLatestPosts(), getPostBySlug(), getStaffBySlug(), NewsSection(), formatDate(), Badge(), BadgeProps, variantStyles (+2 more)
+Cohesion: 0.24
+Nodes (6): getStaffBySlug(), ROLE_FILTERS, Badge(), BadgeProps, variantStyles, StaffDetailPage()
 
 ### Community 112 - "Community 112"
-Cohesion: 0.13
-Nodes (8): CATEGORY_FILTERS, ROLE_FILTERS, EmptyStateProps, FilterPill, FilterPillsProps, PaginationProps, PostCategory, Staff
+Cohesion: 0.20
+Nodes (6): CATEGORY_FILTERS, FilterPill, FilterPills(), FilterPillsProps, PaginationProps, PostCategory
 
 ### Community 113 - "Community 113"
 Cohesion: 0.40
@@ -377,10 +383,6 @@ Nodes (4): Error details, Instructions, Test info, Test source
 Cohesion: 0.40
 Nodes (4): Error details, Instructions, Test info, Test source
 
-### Community 118 - "Community 118"
-Cohesion: 0.22
-Nodes (8): getAllPages(), getPageById(), getPageBySlug(), requireAuth(), updatePage(), pages, PageUpdateSchema, Page
-
 ### Community 120 - "Community 120"
 Cohesion: 0.33
 Nodes (5): Error details, Instructions, Page snapshot, Test info, Test source
@@ -398,28 +400,48 @@ Cohesion: 0.40
 Nodes (4): Error details, Instructions, Test info, Test source
 
 ### Community 125 - "Community 125"
+Cohesion: 0.27
+Nodes (9): createStaff(), deleteStaff(), getStaffById(), getStaffCount(), requireAuth(), updateStaff(), staff, StaffSchema (+1 more)
+
+### Community 126 - "Community 126"
+Cohesion: 0.06
+Nodes (33): 10. Runner stage pakai ARG → ENV yang sebenarnya tidak perlu, 1. Dockerfile — Optimasi Production Runner, 1. Seed berjalan SETIAP kali container restart, 2. Migration Script — Auto-detect semua file SQL, 2. Migration script hardcode 1 file saja, 3. Error di-suppress (`2>/dev/null`), 3. GitHub Actions — Build + Push Pre-built Image, 4. Database Connection — Limit Pool Size (+25 more)
+
+### Community 127 - "Community 127"
 Cohesion: 0.24
-Nodes (10): createStaff(), deleteStaff(), getAllStaff(), getStaffById(), getStaffCount(), requireAuth(), updateStaff(), staff (+2 more)
+Nodes (7): getPageBySlug(), Media, Tabs(), TabsContent(), TabsList(), tabsListVariants, TabsTrigger()
+
+### Community 128 - "Community 128"
+Cohesion: 0.31
+Nodes (8): createPost(), deletePost(), getPostById(), getPostCount(), requireAuth(), updatePost(), posts, PostUpdateSchema
+
+### Community 129 - "Community 129"
+Cohesion: 0.42
+Nodes (6): getLatestPosts(), getPostBySlug(), NewsSection(), formatDate(), ImageWithFallbackProps, BeritaDetailPage()
+
+### Community 130 - "Community 130"
+Cohesion: 0.29
+Nodes (4): MobileMenuProps, NavItem, NAV_ITEMS, Navbar()
 
 ## Knowledge Gaps
-- **468 isolated node(s):** `Tech Stack`, `Quick Start`, `Testing`, `Project Structure`, `Deployment` (+463 more)
+- **490 isolated node(s):** `Tech Stack`, `Quick Start`, `Testing`, `Project Structure`, `Deployment` (+485 more)
   These have ≤1 connection - possible missing edges or undocumented components.
-- **52 thin communities (<3 nodes) omitted from report** — run `graphify query` to explore isolated nodes.
+- **54 thin communities (<3 nodes) omitted from report** — run `graphify query` to explore isolated nodes.
 
 ## Suggested Questions
 _Questions this graph is uniquely positioned to answer:_
 
-- **Why does `cn()` connect `App Pages & Shared UI` to `Community 96`, `Staff & Homepage Data`, `Achievements System`, `Community 102`, `Community 111`, `Community 112`, `Community 114`, `Community 115`, `Community 87`, `Community 88`?**
-  _High betweenness centrality (0.026) - this node is a cross-community bridge._
-- **Why does `useToast()` connect `Achievements System` to `App Pages & Shared UI`, `Community 96`, `Community 94`?**
+- **Why does `cn()` connect `App Pages & Shared UI` to `Community 96`, `Staff & Homepage Data`, `Community 130`, `Community 129`, `Community 131`, `Achievements System`, `Community 102`, `Community 111`, `Community 112`, `Community 114`, `Community 115`, `Community 87`, `Community 88`, `Community 127`?**
+  _High betweenness centrality (0.024) - this node is a cross-community bridge._
+- **Why does `useToast()` connect `Achievements System` to `Community 96`, `Community 94`?**
   _High betweenness centrality (0.011) - this node is a cross-community bridge._
-- **Why does `Button()` connect `Achievements System` to `App Pages & Shared UI`, `Community 112`, `Community 94`?**
-  _High betweenness centrality (0.011) - this node is a cross-community bridge._
+- **Why does `Button()` connect `Achievements System` to `Community 96`, `App Pages & Shared UI`, `Community 130`, `Community 102`, `Community 112`, `Community 94`?**
+  _High betweenness centrality (0.010) - this node is a cross-community bridge._
 - **Are the 15 inferred relationships involving `useToast()` (e.g. with `AkunBaruPage()` and `BeritaBaruPage()`) actually correct?**
   _`useToast()` has 15 INFERRED edges - model-reasoned connections that need verification._
 - **What connects `Tech Stack`, `Quick Start`, `Testing` to the rest of the system?**
-  _472 weakly-connected nodes found - possible documentation gaps or missing edges._
+  _494 weakly-connected nodes found - possible documentation gaps or missing edges._
 - **Should `App Pages & Shared UI` be split into smaller, more focused modules?**
-  _Cohesion score 0.05925925925925926 - nodes in this community are weakly interconnected._
+  _Cohesion score 0.11956521739130435 - nodes in this community are weakly interconnected._
 - **Should `Achievements System` be split into smaller, more focused modules?**
-  _Cohesion score 0.06896551724137931 - nodes in this community are weakly interconnected._
+  _Cohesion score 0.06473960821786909 - nodes in this community are weakly interconnected._

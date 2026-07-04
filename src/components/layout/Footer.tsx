@@ -1,20 +1,8 @@
 import Image from "next/image";
 import Link from "next/link";
 import { MapPin, Phone, Mail } from "lucide-react";
+import { getAllSettings } from "@/lib/actions/settings";
 
-const FOOTER_LINKS = [
-  { label: "Beranda", href: "/" },
-  { label: "Profil & Sejarah", href: "/profil" },
-  { label: "Berita", href: "/berita" },
-  { label: "SPMB", href: "https://denpasar.spmb.id/" },
-  { label: "Galeri", href: "/galeri" },
-  { label: "Guru & Staf", href: "/guru-dan-staf" },
-  { label: "Fasilitas", href: "/fasilitas" },
-  { label: "Prestasi", href: "/prestasi" },
-  { label: "Kontak", href: "/kontak" },
-];
-
-// Simple SVG social icons (lucide-react doesn't include brand icons)
 function SocialIcon({ children, label }: { children: React.ReactNode; label: string }) {
   return (
     <svg viewBox="0 0 24 24" fill="currentColor" className="size-4" aria-label={label}>
@@ -47,15 +35,38 @@ const TiktokIcon = () => (
   </SocialIcon>
 );
 
-const SOCIAL_LINKS = [
-  { label: "Facebook", href: "https://facebook.com", icon: FacebookIcon },
-  { label: "Instagram", href: "https://instagram.com", icon: InstagramIcon },
-  { label: "YouTube", href: "https://youtube.com", icon: YoutubeIcon },
-  { label: "TikTok", href: "https://tiktok.com", icon: TiktokIcon },
+const SOCIAL_ICON_MAP: Record<string, React.FC> = {
+  facebook: FacebookIcon,
+  instagram: InstagramIcon,
+  youtube: YoutubeIcon,
+  tiktok: TiktokIcon,
+};
+
+const FOOTER_LINKS = [
+  { label: "Beranda", href: "/" },
+  { label: "Profil & Sejarah", href: "/profil" },
+  { label: "Berita", href: "/berita" },
+  { label: "SPMB", href: "https://denpasar.spmb.id/" },
+  { label: "Galeri", href: "/galeri" },
+  { label: "Guru & Staf", href: "/guru-dan-staf" },
+  { label: "Fasilitas", href: "/fasilitas" },
+  { label: "Prestasi", href: "/prestasi" },
+  { label: "Kontak", href: "/kontak" },
 ];
 
-export default function Footer() {
+const SOCIAL_ORDER = ["facebook", "instagram", "youtube", "tiktok"];
+
+export default async function Footer() {
+  const settings = await getAllSettings();
   const currentYear = new Date().getFullYear();
+
+  const socialItems = SOCIAL_ORDER
+    .filter((key) => settings.social[key as keyof typeof settings.social])
+    .map((key) => ({
+      label: key.charAt(0).toUpperCase() + key.slice(1),
+      href: settings.social[key as keyof typeof settings.social],
+      Icon: SOCIAL_ICON_MAP[key as keyof typeof SOCIAL_ICON_MAP],
+    }));
 
   return (
     <footer className="bg-neutral-900 text-neutral-300">
@@ -85,23 +96,20 @@ export default function Footer() {
               Mencetak generasi unggul, berkarakter, dan berprestasi untuk
               menyongsong masa depan Indonesia yang gemilang.
             </p>
-            {/* Social Icons */}
+            {/* Social Icons from DB */}
             <div className="flex items-center gap-2">
-              {SOCIAL_LINKS.map((social) => {
-                const Icon = social.icon;
-                return (
-                  <a
-                    key={social.label}
-                    href={social.href}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="size-10 rounded-lg bg-neutral-800 hover:bg-primary hover:text-white text-neutral-400 flex items-center justify-center transition-all duration-200"
-                    aria-label={social.label}
-                  >
-                    <Icon />
-                  </a>
-                );
-              })}
+              {socialItems.map((social) => (
+                <a
+                  key={social.label}
+                  href={social.href}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="size-10 rounded-lg bg-neutral-800 hover:bg-primary hover:text-white text-neutral-400 flex items-center justify-center transition-all duration-200"
+                  aria-label={social.label}
+                >
+                  <social.Icon />
+                </a>
+              ))}
             </div>
           </div>
 
@@ -124,45 +132,47 @@ export default function Footer() {
             </ul>
           </div>
 
-          {/* Column 3: Kontak */}
+          {/* Column 3: Kontak dari DB */}
           <div>
             <h4 className="font-heading font-semibold text-white mb-4 text-sm uppercase tracking-wider">
               Kontak
             </h4>
             <ul className="space-y-3">
-              <li>
-                <a
-                  href="https://maps.google.com"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="flex items-start gap-3 text-neutral-400 hover:text-white text-sm transition-colors duration-200 group"
-                >
-                  <MapPin className="size-4 mt-0.5 shrink-0 text-neutral-500 group-hover:text-primary transition-colors" />
-                  <span>
-                    Jl. Nagasari, Penatih, Kec. Denpasar Tim.,
-                    <br />
-                    Kota Denpasar, Bali
-                  </span>
-                </a>
-              </li>
-              <li>
-                <a
-                  href="tel:+62218023567"
-                  className="flex items-center gap-3 text-neutral-400 hover:text-white text-sm transition-colors duration-200 group"
-                >
-                  <Phone className="size-4 shrink-0 text-neutral-500 group-hover:text-primary transition-colors" />
-                  <span>(021) 123-4567</span>
-                </a>
-              </li>
-              <li>
-                <a
-                  href="mailto:info@smpn17denpasar.sch.id"
-                  className="flex items-center gap-3 text-neutral-400 hover:text-white text-sm transition-colors duration-200 group"
-                >
-                  <Mail className="size-4 shrink-0 text-neutral-500 group-hover:text-primary transition-colors" />
-                  <span>info@smpn17denpasar.sch.id</span>
-                </a>
-              </li>
+              {settings.address && (
+                <li>
+                  <a
+                    href={`https://maps.google.com/maps?q=${encodeURIComponent(settings.address)}`}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="flex items-start gap-3 text-neutral-400 hover:text-white text-sm transition-colors duration-200 group"
+                  >
+                    <MapPin className="size-4 mt-0.5 shrink-0 text-neutral-500 group-hover:text-primary transition-colors" />
+                    <span>{settings.address}</span>
+                  </a>
+                </li>
+              )}
+              {settings.phone && (
+                <li>
+                  <a
+                    href={`tel:${settings.phone.replace(/\s/g, "")}`}
+                    className="flex items-center gap-3 text-neutral-400 hover:text-white text-sm transition-colors duration-200 group"
+                  >
+                    <Phone className="size-4 shrink-0 text-neutral-500 group-hover:text-primary transition-colors" />
+                    <span>{settings.phone}</span>
+                  </a>
+                </li>
+              )}
+              {settings.email && (
+                <li>
+                  <a
+                    href={`mailto:${settings.email}`}
+                    className="flex items-center gap-3 text-neutral-400 hover:text-white text-sm transition-colors duration-200 group"
+                  >
+                    <Mail className="size-4 shrink-0 text-neutral-500 group-hover:text-primary transition-colors" />
+                    <span>{settings.email}</span>
+                  </a>
+                </li>
+              )}
             </ul>
           </div>
 
@@ -201,7 +211,7 @@ export default function Footer() {
       <div className="border-t border-neutral-800">
         <div className="container-custom py-5 flex flex-col sm:flex-row items-center justify-between gap-3 text-sm text-neutral-500">
           <p>
-            &copy; {currentYear} SMP Negeri 17 Denpasar. Hak cipta dilindungi.
+            &copy; {currentYear} {settings.schoolName}. Hak cipta dilindungi.
           </p>
           <p>
             Dikembangkan dengan ❤️ untuk pendidikan Indonesia

@@ -125,14 +125,354 @@
       "norm_label": "features"
     },
     {
+      "label": "implementation_plan.md",
+      "file_type": "document",
+      "source_file": "implementation_plan.md",
+      "source_location": "L1",
+      "_origin": "ast",
+      "id": "implementation_plan",
+      "community": 126,
+      "norm_label": "implementation_plan.md"
+    },
+    {
+      "label": "Audit & Optimasi Deployment SchoolWeb (2GB RAM VPS)",
+      "file_type": "document",
+      "source_file": "implementation_plan.md",
+      "source_location": "L1",
+      "_origin": "ast",
+      "id": "implementation_plan_audit_optimasi_deployment_schoolweb_2gb_ram_vps",
+      "community": 126,
+      "norm_label": "audit & optimasi deployment schoolweb (2gb ram vps)"
+    },
+    {
+      "label": "\ud83d\udd0d Hasil Audit \u2014 Temuan Masalah",
+      "file_type": "document",
+      "source_file": "implementation_plan.md",
+      "source_location": "L7",
+      "_origin": "ast",
+      "id": "implementation_plan_hasil_audit_temuan_masalah",
+      "community": 126,
+      "norm_label": "\ud83d\udd0d hasil audit \u2014 temuan masalah"
+    },
+    {
+      "label": "\ud83d\udd34 Kritis (Harus Diperbaiki)",
+      "file_type": "document",
+      "source_file": "implementation_plan.md",
+      "source_location": "L9",
+      "_origin": "ast",
+      "id": "implementation_plan_kritis_harus_diperbaiki",
+      "community": 126,
+      "norm_label": "\ud83d\udd34 kritis (harus diperbaiki)"
+    },
+    {
+      "label": "1. Seed berjalan SETIAP kali container restart",
+      "file_type": "document",
+      "source_file": "implementation_plan.md",
+      "source_location": "L11",
+      "_origin": "ast",
+      "id": "implementation_plan_1_seed_berjalan_setiap_kali_container_restart",
+      "community": 126,
+      "norm_label": "1. seed berjalan setiap kali container restart"
+    },
+    {
+      "label": "2. Migration script hardcode 1 file saja",
+      "file_type": "document",
+      "source_file": "implementation_plan.md",
+      "source_location": "L18",
+      "_origin": "ast",
+      "id": "implementation_plan_2_migration_script_hardcode_1_file_saja",
+      "community": 126,
+      "norm_label": "2. migration script hardcode 1 file saja"
+    },
+    {
+      "label": "3. Error di-suppress (`2>/dev/null`)",
+      "file_type": "document",
+      "source_file": "implementation_plan.md",
+      "source_location": "L21",
+      "_origin": "ast",
+      "id": "implementation_plan_3_error_di_suppress_2_dev_null",
+      "community": 126,
+      "norm_label": "3. error di-suppress (`2>/dev/null`)"
+    },
+    {
+      "label": "4. `npm install -g drizzle-kit tsx` di runner image",
+      "file_type": "document",
+      "source_file": "implementation_plan.md",
+      "source_location": "L27",
+      "_origin": "ast",
+      "id": "implementation_plan_4_npm_install_g_drizzle_kit_tsx_di_runner_image",
+      "community": 126,
+      "norm_label": "4. `npm install -g drizzle-kit tsx` di runner image"
+    },
+    {
+      "label": "5. GitHub Actions workflow tidak konsisten",
+      "file_type": "document",
+      "source_file": "implementation_plan.md",
+      "source_location": "L32",
+      "_origin": "ast",
+      "id": "implementation_plan_5_github_actions_workflow_tidak_konsisten",
+      "community": 126,
+      "norm_label": "5. github actions workflow tidak konsisten"
+    },
+    {
+      "label": "6. `seed.ts` import `dotenv/config` \u2014 tapi `dotenv` bukan dependency",
+      "file_type": "document",
+      "source_file": "implementation_plan.md",
+      "source_location": "L35",
+      "_origin": "ast",
+      "id": "implementation_plan_6_seed_ts_import_dotenv_config_tapi_dotenv_bukan_dependency",
+      "community": 126,
+      "norm_label": "6. `seed.ts` import `dotenv/config` \u2014 tapi `dotenv` bukan dependency"
+    },
+    {
+      "label": "\ud83d\udfe1 Sedang (Sebaiknya Diperbaiki)",
+      "file_type": "document",
+      "source_file": "implementation_plan.md",
+      "source_location": "L40",
+      "_origin": "ast",
+      "id": "implementation_plan_sedang_sebaiknya_diperbaiki",
+      "community": 126,
+      "norm_label": "\ud83d\udfe1 sedang (sebaiknya diperbaiki)"
+    },
+    {
+      "label": "7. Docker-compose tidak include app service",
+      "file_type": "document",
+      "source_file": "implementation_plan.md",
+      "source_location": "L42",
+      "_origin": "ast",
+      "id": "implementation_plan_7_docker_compose_tidak_include_app_service",
+      "community": 126,
+      "norm_label": "7. docker-compose tidak include app service"
+    },
+    {
+      "label": "8. DB connection pool tidak dikonfigurasi",
+      "file_type": "document",
+      "source_file": "implementation_plan.md",
+      "source_location": "L45",
+      "_origin": "ast",
+      "id": "implementation_plan_8_db_connection_pool_tidak_dikonfigurasi",
+      "community": 126,
+      "norm_label": "8. db connection pool tidak dikonfigurasi"
+    },
+    {
+      "label": "9. File duplikat: `migrate-raw.js` dan `migrate-direct.ts`",
+      "file_type": "document",
+      "source_file": "implementation_plan.md",
+      "source_location": "L48",
+      "_origin": "ast",
+      "id": "implementation_plan_9_file_duplikat_migrate_raw_js_dan_migrate_direct_ts",
+      "community": 126,
+      "norm_label": "9. file duplikat: `migrate-raw.js` dan `migrate-direct.ts`"
+    },
+    {
+      "label": "10. Runner stage pakai ARG \u2192 ENV yang sebenarnya tidak perlu",
+      "file_type": "document",
+      "source_file": "implementation_plan.md",
+      "source_location": "L51",
+      "_origin": "ast",
+      "id": "implementation_plan_10_runner_stage_pakai_arg_env_yang_sebenarnya_tidak_perlu",
+      "community": 126,
+      "norm_label": "10. runner stage pakai arg \u2192 env yang sebenarnya tidak perlu"
+    },
+    {
+      "label": "\ud83d\udfe2 Sudah Baik",
+      "file_type": "document",
+      "source_file": "implementation_plan.md",
+      "source_location": "L56",
+      "_origin": "ast",
+      "id": "implementation_plan_sudah_baik",
+      "community": 126,
+      "norm_label": "\ud83d\udfe2 sudah baik"
+    },
+    {
+      "label": "\ud83d\udcd0 Proposed Changes",
+      "file_type": "document",
+      "source_file": "implementation_plan.md",
+      "source_location": "L66",
+      "_origin": "ast",
+      "id": "implementation_plan_proposed_changes",
+      "community": 126,
+      "norm_label": "\ud83d\udcd0 proposed changes"
+    },
+    {
+      "label": "Optimasi untuk VPS 2GB RAM",
+      "file_type": "document",
+      "source_file": "implementation_plan.md",
+      "source_location": "L68",
+      "_origin": "ast",
+      "id": "implementation_plan_optimasi_untuk_vps_2gb_ram",
+      "community": 126,
+      "norm_label": "optimasi untuk vps 2gb ram"
+    },
+    {
+      "label": "1. Dockerfile \u2014 Optimasi Production Runner",
+      "file_type": "document",
+      "source_file": "implementation_plan.md",
+      "source_location": "L75",
+      "_origin": "ast",
+      "id": "implementation_plan_1_dockerfile_optimasi_production_runner",
+      "community": 126,
+      "norm_label": "1. dockerfile \u2014 optimasi production runner"
+    },
+    {
+      "label": "[MODIFY] [Dockerfile](file:///c:/Users/USER/Documents/GP/Project-AI/schoolweb/Dockerfile)",
+      "file_type": "document",
+      "source_file": "implementation_plan.md",
+      "source_location": "L77",
+      "_origin": "ast",
+      "id": "implementation_plan_modify_dockerfile_file_c_users_user_documents_gp_project_ai_schoolweb_dockerfile",
+      "community": 126,
+      "norm_label": "[modify] [dockerfile](file:///c:/users/user/documents/gp/project-ai/schoolweb/dockerfile)"
+    },
+    {
+      "label": "2. Migration Script \u2014 Auto-detect semua file SQL",
+      "file_type": "document",
+      "source_file": "implementation_plan.md",
+      "source_location": "L90",
+      "_origin": "ast",
+      "id": "implementation_plan_2_migration_script_auto_detect_semua_file_sql",
+      "community": 126,
+      "norm_label": "2. migration script \u2014 auto-detect semua file sql"
+    },
+    {
+      "label": "[MODIFY] [migrate-direct.ts](file:///c:/Users/USER/Documents/GP/Project-AI/schoolweb/scripts/migrate-direct.ts) \u2192 `migrate.js`",
+      "file_type": "document",
+      "source_file": "implementation_plan.md",
+      "source_location": "L92",
+      "_origin": "ast",
+      "id": "implementation_plan_modify_migrate_direct_ts_file_c_users_user_documents_gp_project_ai_schoolweb_scripts_migrate_direct_ts_migrate_js",
+      "community": 126,
+      "norm_label": "[modify] [migrate-direct.ts](file:///c:/users/user/documents/gp/project-ai/schoolweb/scripts/migrate-direct.ts) \u2192 `migrate.js`"
+    },
+    {
+      "label": "3. GitHub Actions \u2014 Build + Push Pre-built Image",
+      "file_type": "document",
+      "source_file": "implementation_plan.md",
+      "source_location": "L102",
+      "_origin": "ast",
+      "id": "implementation_plan_3_github_actions_build_push_pre_built_image",
+      "community": 126,
+      "norm_label": "3. github actions \u2014 build + push pre-built image"
+    },
+    {
+      "label": "[MODIFY] [build-deploy.yml](file:///c:/Users/USER/Documents/GP/Project-AI/schoolweb/.github/workflows/build-deploy.yml)",
+      "file_type": "document",
+      "source_file": "implementation_plan.md",
+      "source_location": "L104",
+      "_origin": "ast",
+      "id": "implementation_plan_modify_build_deploy_yml_file_c_users_user_documents_gp_project_ai_schoolweb_github_workflows_build_deploy_yml",
+      "community": 126,
+      "norm_label": "[modify] [build-deploy.yml](file:///c:/users/user/documents/gp/project-ai/schoolweb/.github/workflows/build-deploy.yml)"
+    },
+    {
+      "label": "4. Database Connection \u2014 Limit Pool Size",
+      "file_type": "document",
+      "source_file": "implementation_plan.md",
+      "source_location": "L113",
+      "_origin": "ast",
+      "id": "implementation_plan_4_database_connection_limit_pool_size",
+      "community": 126,
+      "norm_label": "4. database connection \u2014 limit pool size"
+    },
+    {
+      "label": "[MODIFY] [index.ts](file:///c:/Users/USER/Documents/GP/Project-AI/schoolweb/src/lib/db/index.ts)",
+      "file_type": "document",
+      "source_file": "implementation_plan.md",
+      "source_location": "L115",
+      "_origin": "ast",
+      "id": "implementation_plan_modify_index_ts_file_c_users_user_documents_gp_project_ai_schoolweb_src_lib_db_index_ts",
+      "community": 126,
+      "norm_label": "[modify] [index.ts](file:///c:/users/user/documents/gp/project-ai/schoolweb/src/lib/db/index.ts)"
+    },
+    {
+      "label": "5. Cleanup File Duplikat",
+      "file_type": "document",
+      "source_file": "implementation_plan.md",
+      "source_location": "L121",
+      "_origin": "ast",
+      "id": "implementation_plan_5_cleanup_file_duplikat",
+      "community": 126,
+      "norm_label": "5. cleanup file duplikat"
+    },
+    {
+      "label": "[DELETE] [migrate-raw.js](file:///c:/Users/USER/Documents/GP/Project-AI/schoolweb/scripts/migrate-raw.js)",
+      "file_type": "document",
+      "source_file": "implementation_plan.md",
+      "source_location": "L123",
+      "_origin": "ast",
+      "id": "implementation_plan_delete_migrate_raw_js_file_c_users_user_documents_gp_project_ai_schoolweb_scripts_migrate_raw_js",
+      "community": 126,
+      "norm_label": "[delete] [migrate-raw.js](file:///c:/users/user/documents/gp/project-ai/schoolweb/scripts/migrate-raw.js)"
+    },
+    {
+      "label": "[DELETE] [seed.sql](file:///c:/Users/USER/Documents/GP/Project-AI/schoolweb/scripts/seed.sql)",
+      "file_type": "document",
+      "source_file": "implementation_plan.md",
+      "source_location": "L124",
+      "_origin": "ast",
+      "id": "implementation_plan_delete_seed_sql_file_c_users_user_documents_gp_project_ai_schoolweb_scripts_seed_sql",
+      "community": 126,
+      "norm_label": "[delete] [seed.sql](file:///c:/users/user/documents/gp/project-ai/schoolweb/scripts/seed.sql)"
+    },
+    {
+      "label": "Arsitektur Deployment yang Direkomendasikan",
+      "file_type": "document",
+      "source_file": "implementation_plan.md",
+      "source_location": "L130",
+      "_origin": "ast",
+      "id": "implementation_plan_arsitektur_deployment_yang_direkomendasikan",
+      "community": 126,
+      "norm_label": "arsitektur deployment yang direkomendasikan"
+    },
+    {
+      "label": "Open Questions",
+      "file_type": "document",
+      "source_file": "implementation_plan.md",
+      "source_location": "L148",
+      "_origin": "ast",
+      "id": "implementation_plan_open_questions",
+      "community": 126,
+      "norm_label": "open questions"
+    },
+    {
+      "label": "Verification Plan",
+      "file_type": "document",
+      "source_file": "implementation_plan.md",
+      "source_location": "L157",
+      "_origin": "ast",
+      "id": "implementation_plan_verification_plan",
+      "community": 126,
+      "norm_label": "verification plan"
+    },
+    {
+      "label": "Automated",
+      "file_type": "document",
+      "source_file": "implementation_plan.md",
+      "source_location": "L159",
+      "_origin": "ast",
+      "id": "implementation_plan_automated",
+      "community": 126,
+      "norm_label": "automated"
+    },
+    {
+      "label": "Manual",
+      "file_type": "document",
+      "source_file": "implementation_plan.md",
+      "source_location": "L169",
+      "_origin": "ast",
+      "id": "implementation_plan_manual",
+      "community": 126,
+      "norm_label": "manual"
+    },
+    {
       "label": "robots.ts",
       "file_type": "code",
       "source_file": "src/app/robots.ts",
       "source_location": "L1",
       "_origin": "ast",
+      "id": "app_robots",
       "community": 119,
-      "norm_label": "robots.ts",
-      "id": "app_robots"
+      "norm_label": "robots.ts"
     },
     {
       "label": "robots()",
@@ -140,9 +480,9 @@
       "source_file": "src/app/robots.ts",
       "source_location": "L3",
       "_origin": "ast",
+      "id": "app_robots_robots",
       "community": 119,
-      "norm_label": "robots()",
-      "id": "app_robots_robots"
+      "norm_label": "robots()"
     },
     {
       "label": "sitemap.ts",
@@ -150,9 +490,9 @@
       "source_file": "src/app/sitemap.ts",
       "source_location": "L1",
       "_origin": "ast",
+      "id": "app_sitemap",
       "community": 124,
-      "norm_label": "sitemap.ts",
-      "id": "app_sitemap"
+      "norm_label": "sitemap.ts"
     },
     {
       "label": "sitemap()",
@@ -160,9 +500,39 @@
       "source_file": "src/app/sitemap.ts",
       "source_location": "L3",
       "_origin": "ast",
+      "id": "app_sitemap_sitemap",
       "community": 124,
-      "norm_label": "sitemap()",
-      "id": "app_sitemap_sitemap"
+      "norm_label": "sitemap()"
+    },
+    {
+      "label": "auth-client.ts",
+      "file_type": "code",
+      "source_file": "src/lib/auth-client.ts",
+      "source_location": "L1",
+      "_origin": "ast",
+      "id": "lib_auth_client",
+      "community": 115,
+      "norm_label": "auth-client.ts"
+    },
+    {
+      "label": "authClient",
+      "file_type": "code",
+      "source_file": "src/lib/auth-client.ts",
+      "source_location": "L3",
+      "_origin": "ast",
+      "id": "lib_auth_client_authclient",
+      "community": 115,
+      "norm_label": "authclient"
+    },
+    {
+      "label": "{ signIn, signOut, signUp, useSession }",
+      "file_type": "code",
+      "source_file": "src/lib/auth-client.ts",
+      "source_location": "L7",
+      "_origin": "ast",
+      "id": "lib_auth_client_signin_signout_signup_usesession",
+      "community": 106,
+      "norm_label": "{ signin, signout, signup, usesession }"
     },
     {
       "label": "package.json",
@@ -2240,7 +2610,7 @@
       "source_file": "src/app/(public)/berita/[slug]/page.tsx",
       "source_location": "L1",
       "_origin": "ast",
-      "community": 111,
+      "community": 129,
       "norm_label": "page.tsx",
       "id": "src_app_public_berita_slug_page_tsx_slug_page"
     },
@@ -2250,7 +2620,7 @@
       "source_file": "src/app/(public)/berita/[slug]/page.tsx",
       "source_location": "L11",
       "_origin": "ast",
-      "community": 111,
+      "community": 129,
       "norm_label": "beritadetailpage()",
       "id": "slug_page_beritadetailpage"
     },
@@ -2330,7 +2700,7 @@
       "source_file": "src/app/(public)/galeri/page.tsx",
       "source_location": "L1",
       "_origin": "ast",
-      "community": 0,
+      "community": 127,
       "norm_label": "page.tsx",
       "id": "src_app_public_galeri_page_tsx_galeri_page"
     },
@@ -2340,7 +2710,7 @@
       "source_file": "src/app/(public)/galeri/page.tsx",
       "source_location": "L14",
       "_origin": "ast",
-      "community": 0,
+      "community": 127,
       "norm_label": "galeripage()",
       "id": "src_app_public_galeri_page_tsx_galeri_page_galeripage"
     },
@@ -2350,7 +2720,7 @@
       "source_file": "src/app/(public)/galeri/page.tsx",
       "source_location": "L103",
       "_origin": "ast",
-      "community": 0,
+      "community": 127,
       "norm_label": "photoalbum()",
       "id": "galeri_page_photoalbum"
     },
@@ -2360,7 +2730,7 @@
       "source_file": "src/app/(public)/galeri/page.tsx",
       "source_location": "L151",
       "_origin": "ast",
-      "community": 0,
+      "community": 127,
       "norm_label": "videoitem()",
       "id": "galeri_page_videoitem"
     },
@@ -2390,7 +2760,7 @@
       "source_file": "src/app/(public)/guru-dan-staf/page.tsx",
       "source_location": "L1",
       "_origin": "ast",
-      "community": 112,
+      "community": 111,
       "norm_label": "page.tsx",
       "id": "guru_dan_staf_page"
     },
@@ -2400,7 +2770,7 @@
       "source_file": "src/app/(public)/guru-dan-staf/page.tsx",
       "source_location": "L15",
       "_origin": "ast",
-      "community": 112,
+      "community": 111,
       "norm_label": "role_filters",
       "id": "guru_dan_staf_page_role_filters"
     },
@@ -2410,7 +2780,7 @@
       "source_file": "src/app/(public)/guru-dan-staf/page.tsx",
       "source_location": "L22",
       "_origin": "ast",
-      "community": 112,
+      "community": 111,
       "norm_label": "gurustaffpage()",
       "id": "guru_dan_staf_page_gurustaffpage"
     },
@@ -2420,7 +2790,7 @@
       "source_file": "src/app/(public)/guru-dan-staf/page.tsx",
       "source_location": "L144",
       "_origin": "ast",
-      "community": 112,
+      "community": 111,
       "norm_label": "staffcard()",
       "id": "guru_dan_staf_page_staffcard"
     },
@@ -2430,7 +2800,7 @@
       "source_file": "src/app/(public)/kontak/page.tsx",
       "source_location": "L1",
       "_origin": "ast",
-      "community": 0,
+      "community": 96,
       "norm_label": "page.tsx",
       "id": "kontak_page"
     },
@@ -2440,7 +2810,7 @@
       "source_file": "src/app/(public)/kontak/page.tsx",
       "source_location": "L14",
       "_origin": "ast",
-      "community": 0,
+      "community": 96,
       "norm_label": "kontakpage()",
       "id": "kontak_page_kontakpage"
     },
@@ -2450,7 +2820,7 @@
       "source_file": "src/app/(public)/kontak/page.tsx",
       "source_location": "L213",
       "_origin": "ast",
-      "community": 0,
+      "community": 96,
       "norm_label": "contactitem()",
       "id": "kontak_page_contactitem"
     },
@@ -2900,7 +3270,7 @@
       "source_file": "src/app/admin/galeri/[id]/page.tsx",
       "source_location": "L13",
       "_origin": "ast",
-      "community": 3,
+      "community": 94,
       "norm_label": "galeridetailpage()",
       "id": "id_page_galeridetailpage"
     },
@@ -3170,7 +3540,7 @@
       "source_file": "src/app/admin/pengaturan/page.tsx",
       "source_location": "L1",
       "_origin": "ast",
-      "community": 0,
+      "community": 3,
       "norm_label": "page.tsx",
       "id": "pengaturan_page"
     },
@@ -4050,7 +4420,7 @@
       "source_file": "src/components/home/NewsSection.tsx",
       "source_location": "L1",
       "_origin": "ast",
-      "community": 111,
+      "community": 129,
       "norm_label": "newssection.tsx",
       "id": "home_newssection"
     },
@@ -4060,7 +4430,7 @@
       "source_file": "src/components/home/NewsSection.tsx",
       "source_location": "L11",
       "_origin": "ast",
-      "community": 111,
+      "community": 129,
       "norm_label": "newssection()",
       "id": "home_newssection_newssection"
     },
@@ -4210,7 +4580,7 @@
       "source_file": "src/components/layout/MobileMenu.tsx",
       "source_location": "L1",
       "_origin": "ast",
-      "community": 0,
+      "community": 130,
       "norm_label": "mobilemenu.tsx",
       "id": "layout_mobilemenu"
     },
@@ -4220,7 +4590,7 @@
       "source_file": "src/components/layout/MobileMenu.tsx",
       "source_location": "L10",
       "_origin": "ast",
-      "community": 0,
+      "community": 130,
       "norm_label": "navitem",
       "id": "layout_mobilemenu_navitem"
     },
@@ -4230,7 +4600,7 @@
       "source_file": "src/components/layout/MobileMenu.tsx",
       "source_location": "L16",
       "_origin": "ast",
-      "community": 0,
+      "community": 130,
       "norm_label": "mobilemenuprops",
       "id": "layout_mobilemenu_mobilemenuprops"
     },
@@ -4240,7 +4610,7 @@
       "source_file": "src/components/layout/MobileMenu.tsx",
       "source_location": "L23",
       "_origin": "ast",
-      "community": 0,
+      "community": 130,
       "norm_label": "mobilemenu()",
       "id": "layout_mobilemenu_mobilemenu"
     },
@@ -4250,7 +4620,7 @@
       "source_file": "src/components/layout/Navbar.tsx",
       "source_location": "L1",
       "_origin": "ast",
-      "community": 0,
+      "community": 130,
       "norm_label": "navbar.tsx",
       "id": "layout_navbar"
     },
@@ -4260,7 +4630,7 @@
       "source_file": "src/components/layout/Navbar.tsx",
       "source_location": "L13",
       "_origin": "ast",
-      "community": 0,
+      "community": 130,
       "norm_label": "nav_items",
       "id": "layout_navbar_nav_items"
     },
@@ -4270,7 +4640,7 @@
       "source_file": "src/components/layout/Navbar.tsx",
       "source_location": "L30",
       "_origin": "ast",
-      "community": 0,
+      "community": 130,
       "norm_label": "navbar()",
       "id": "layout_navbar_navbar"
     },
@@ -4280,7 +4650,7 @@
       "source_file": "src/components/profil/ProfilTabs.tsx",
       "source_location": "L1",
       "_origin": "ast",
-      "community": 0,
+      "community": 127,
       "norm_label": "profiltabs.tsx",
       "id": "profil_profiltabs"
     },
@@ -4290,7 +4660,7 @@
       "source_file": "src/components/profil/ProfilTabs.tsx",
       "source_location": "L10",
       "_origin": "ast",
-      "community": 0,
+      "community": 127,
       "norm_label": "profiltabs()",
       "id": "profil_profiltabs_profiltabs"
     },
@@ -4410,7 +4780,7 @@
       "source_file": "src/components/shared/EmptyState.tsx",
       "source_location": "L1",
       "_origin": "ast",
-      "community": 112,
+      "community": 102,
       "norm_label": "emptystate.tsx",
       "id": "shared_emptystate"
     },
@@ -4420,7 +4790,7 @@
       "source_file": "src/components/shared/EmptyState.tsx",
       "source_location": "L7",
       "_origin": "ast",
-      "community": 112,
+      "community": 102,
       "norm_label": "emptystateprops",
       "id": "shared_emptystate_emptystateprops"
     },
@@ -4470,7 +4840,7 @@
       "source_file": "src/components/shared/FilterPills.tsx",
       "source_location": "L18",
       "_origin": "ast",
-      "community": 0,
+      "community": 112,
       "norm_label": "filterpills()",
       "id": "shared_filterpills_filterpills"
     },
@@ -4480,7 +4850,7 @@
       "source_file": "src/components/shared/ImageWithFallback.tsx",
       "source_location": "L1",
       "_origin": "ast",
-      "community": 102,
+      "community": 129,
       "norm_label": "imagewithfallback.tsx",
       "id": "shared_imagewithfallback"
     },
@@ -4490,7 +4860,7 @@
       "source_file": "src/components/shared/ImageWithFallback.tsx",
       "source_location": "L8",
       "_origin": "ast",
-      "community": 102,
+      "community": 129,
       "norm_label": "imagewithfallbackprops",
       "id": "shared_imagewithfallback_imagewithfallbackprops"
     },
@@ -4670,7 +5040,7 @@
       "source_file": "src/components/ui/badge.tsx",
       "source_location": "L1",
       "_origin": "ast",
-      "community": 0,
+      "community": 131,
       "norm_label": "badge.tsx",
       "id": "src_components_ui_badge_tsx_ui_badge"
     },
@@ -4680,7 +5050,7 @@
       "source_file": "src/components/ui/badge.tsx",
       "source_location": "L7",
       "_origin": "ast",
-      "community": 0,
+      "community": 131,
       "norm_label": "badgevariants",
       "id": "ui_badge_badgevariants"
     },
@@ -4690,7 +5060,7 @@
       "source_file": "src/components/ui/badge.tsx",
       "source_location": "L30",
       "_origin": "ast",
-      "community": 0,
+      "community": 131,
       "norm_label": "badge()",
       "id": "src_components_ui_badge_tsx_ui_badge_badge"
     },
@@ -4850,7 +5220,7 @@
       "source_file": "src/components/ui/tabs.tsx",
       "source_location": "L1",
       "_origin": "ast",
-      "community": 0,
+      "community": 127,
       "norm_label": "tabs.tsx",
       "id": "ui_tabs"
     },
@@ -4860,7 +5230,7 @@
       "source_file": "src/components/ui/tabs.tsx",
       "source_location": "L8",
       "_origin": "ast",
-      "community": 0,
+      "community": 127,
       "norm_label": "tabs()",
       "id": "ui_tabs_tabs"
     },
@@ -4870,7 +5240,7 @@
       "source_file": "src/components/ui/tabs.tsx",
       "source_location": "L26",
       "_origin": "ast",
-      "community": 0,
+      "community": 127,
       "norm_label": "tabslistvariants",
       "id": "ui_tabs_tabslistvariants"
     },
@@ -4880,7 +5250,7 @@
       "source_file": "src/components/ui/tabs.tsx",
       "source_location": "L41",
       "_origin": "ast",
-      "community": 0,
+      "community": 127,
       "norm_label": "tabslist()",
       "id": "ui_tabs_tabslist"
     },
@@ -4890,7 +5260,7 @@
       "source_file": "src/components/ui/tabs.tsx",
       "source_location": "L56",
       "_origin": "ast",
-      "community": 0,
+      "community": 127,
       "norm_label": "tabstrigger()",
       "id": "ui_tabs_tabstrigger"
     },
@@ -4900,7 +5270,7 @@
       "source_file": "src/components/ui/tabs.tsx",
       "source_location": "L72",
       "_origin": "ast",
-      "community": 0,
+      "community": 127,
       "norm_label": "tabscontent()",
       "id": "ui_tabs_tabscontent"
     },
@@ -4910,7 +5280,7 @@
       "source_file": "src/components/ui/textarea.tsx",
       "source_location": "L1",
       "_origin": "ast",
-      "community": 0,
+      "community": 96,
       "norm_label": "textarea.tsx",
       "id": "ui_textarea"
     },
@@ -4920,7 +5290,7 @@
       "source_file": "src/components/ui/textarea.tsx",
       "source_location": "L5",
       "_origin": "ast",
-      "community": 0,
+      "community": 96,
       "norm_label": "textarea()",
       "id": "ui_textarea_textarea"
     },
@@ -5050,7 +5420,7 @@
       "source_file": "src/lib/actions/contacts.ts",
       "source_location": "L23",
       "_origin": "ast",
-      "community": 0,
+      "community": 96,
       "norm_label": "createcontact()",
       "id": "actions_contacts_createcontact"
     },
@@ -5370,7 +5740,7 @@
       "source_file": "src/lib/actions/pages.ts",
       "source_location": "L1",
       "_origin": "ast",
-      "community": 118,
+      "community": 77,
       "norm_label": "pages.ts",
       "id": "actions_pages"
     },
@@ -5380,7 +5750,7 @@
       "source_file": "src/lib/actions/pages.ts",
       "source_location": "L12",
       "_origin": "ast",
-      "community": 118,
+      "community": 77,
       "norm_label": "requireauth()",
       "id": "actions_pages_requireauth"
     },
@@ -5390,7 +5760,7 @@
       "source_file": "src/lib/actions/pages.ts",
       "source_location": "L24",
       "_origin": "ast",
-      "community": 118,
+      "community": 127,
       "norm_label": "getpagebyslug()",
       "id": "actions_pages_getpagebyslug"
     },
@@ -5410,7 +5780,7 @@
       "source_file": "src/lib/actions/pages.ts",
       "source_location": "L37",
       "_origin": "ast",
-      "community": 118,
+      "community": 77,
       "norm_label": "getpagebyid()",
       "id": "actions_pages_getpagebyid"
     },
@@ -5420,7 +5790,7 @@
       "source_file": "src/lib/actions/pages.ts",
       "source_location": "L48",
       "_origin": "ast",
-      "community": 118,
+      "community": 77,
       "norm_label": "updatepage()",
       "id": "actions_pages_updatepage"
     },
@@ -5430,7 +5800,7 @@
       "source_file": "src/lib/actions/posts.ts",
       "source_location": "L1",
       "_origin": "ast",
-      "community": 96,
+      "community": 128,
       "norm_label": "posts.ts",
       "id": "actions_posts"
     },
@@ -5440,7 +5810,7 @@
       "source_file": "src/lib/actions/posts.ts",
       "source_location": "L14",
       "_origin": "ast",
-      "community": 96,
+      "community": 128,
       "norm_label": "requireauth()",
       "id": "actions_posts_requireauth"
     },
@@ -5450,7 +5820,7 @@
       "source_file": "src/lib/actions/posts.ts",
       "source_location": "L26",
       "_origin": "ast",
-      "community": 96,
+      "community": 3,
       "norm_label": "getposts()",
       "id": "actions_posts_getposts"
     },
@@ -5460,7 +5830,7 @@
       "source_file": "src/lib/actions/posts.ts",
       "source_location": "L76",
       "_origin": "ast",
-      "community": 96,
+      "community": 128,
       "norm_label": "getpostbyid()",
       "id": "actions_posts_getpostbyid"
     },
@@ -5470,7 +5840,7 @@
       "source_file": "src/lib/actions/posts.ts",
       "source_location": "L81",
       "_origin": "ast",
-      "community": 111,
+      "community": 129,
       "norm_label": "getpostbyslug()",
       "id": "actions_posts_getpostbyslug"
     },
@@ -5480,7 +5850,7 @@
       "source_file": "src/lib/actions/posts.ts",
       "source_location": "L90",
       "_origin": "ast",
-      "community": 111,
+      "community": 129,
       "norm_label": "getlatestposts()",
       "id": "actions_posts_getlatestposts"
     },
@@ -5490,7 +5860,7 @@
       "source_file": "src/lib/actions/posts.ts",
       "source_location": "L99",
       "_origin": "ast",
-      "community": 96,
+      "community": 128,
       "norm_label": "getpostcount()",
       "id": "actions_posts_getpostcount"
     },
@@ -5500,7 +5870,7 @@
       "source_file": "src/lib/actions/posts.ts",
       "source_location": "L109",
       "_origin": "ast",
-      "community": 96,
+      "community": 128,
       "norm_label": "createpost()",
       "id": "actions_posts_createpost"
     },
@@ -5510,7 +5880,7 @@
       "source_file": "src/lib/actions/posts.ts",
       "source_location": "L131",
       "_origin": "ast",
-      "community": 96,
+      "community": 128,
       "norm_label": "updatepost()",
       "id": "actions_posts_updatepost"
     },
@@ -5520,7 +5890,7 @@
       "source_file": "src/lib/actions/posts.ts",
       "source_location": "L167",
       "_origin": "ast",
-      "community": 96,
+      "community": 128,
       "norm_label": "deletepost()",
       "id": "actions_posts_deletepost"
     },
@@ -5620,7 +5990,7 @@
       "source_file": "src/lib/actions/staff.ts",
       "source_location": "L46",
       "_origin": "ast",
-      "community": 125,
+      "community": 3,
       "norm_label": "getallstaff()",
       "id": "actions_staff_getallstaff"
     },
@@ -5775,26 +6145,6 @@
       "id": "actions_users_changepassword"
     },
     {
-      "label": "auth-client.ts",
-      "file_type": "code",
-      "source_file": "src/lib/auth-client.ts",
-      "source_location": "L1",
-      "_origin": "ast",
-      "community": 115,
-      "norm_label": "auth-client.ts",
-      "id": "lib_auth_client"
-    },
-    {
-      "label": "authClient",
-      "file_type": "code",
-      "source_file": "src/lib/auth-client.ts",
-      "source_location": "L3",
-      "_origin": "ast",
-      "community": 115,
-      "norm_label": "authclient",
-      "id": "lib_auth_client_authclient"
-    },
-    {
       "label": "auth.ts",
       "file_type": "code",
       "source_file": "src/lib/auth.ts",
@@ -5900,7 +6250,7 @@
       "source_file": "src/lib/db/schema.ts",
       "source_location": "L74",
       "_origin": "ast",
-      "community": 118,
+      "community": 77,
       "norm_label": "pages",
       "id": "db_schema_pages"
     },
@@ -5910,7 +6260,7 @@
       "source_file": "src/lib/db/schema.ts",
       "source_location": "L86",
       "_origin": "ast",
-      "community": 96,
+      "community": 128,
       "norm_label": "posts",
       "id": "db_schema_posts"
     },
@@ -6170,7 +6520,7 @@
       "source_file": "src/lib/utils.ts",
       "source_location": "L19",
       "_origin": "ast",
-      "community": 111,
+      "community": 129,
       "norm_label": "formatdate()",
       "id": "lib_utils_formatdate"
     },
@@ -6290,7 +6640,7 @@
       "source_file": "src/lib/validations.ts",
       "source_location": "L18",
       "_origin": "ast",
-      "community": 96,
+      "community": 128,
       "norm_label": "postupdateschema",
       "id": "lib_validations_postupdateschema"
     },
@@ -6380,7 +6730,7 @@
       "source_file": "src/lib/validations.ts",
       "source_location": "L97",
       "_origin": "ast",
-      "community": 118,
+      "community": 77,
       "norm_label": "pageupdateschema",
       "id": "lib_validations_pageupdateschema"
     },
@@ -6640,7 +6990,7 @@
       "source_file": "src/types/index.ts",
       "source_location": "L7",
       "_origin": "ast",
-      "community": 0,
+      "community": 92,
       "norm_label": "sitesettings",
       "id": "types_index_sitesettings"
     },
@@ -6670,7 +7020,7 @@
       "source_file": "src/types/index.ts",
       "source_location": "L39",
       "_origin": "ast",
-      "community": 96,
+      "community": 3,
       "norm_label": "post",
       "id": "types_index_post"
     },
@@ -6690,7 +7040,7 @@
       "source_file": "src/types/index.ts",
       "source_location": "L54",
       "_origin": "ast",
-      "community": 112,
+      "community": 3,
       "norm_label": "staff",
       "id": "types_index_staff"
     },
@@ -6750,7 +7100,7 @@
       "source_file": "src/types/index.ts",
       "source_location": "L103",
       "_origin": "ast",
-      "community": 102,
+      "community": 3,
       "norm_label": "facility",
       "id": "types_index_facility"
     },
@@ -6790,7 +7140,7 @@
       "source_file": "src/types/index.ts",
       "source_location": "L137",
       "_origin": "ast",
-      "community": 88,
+      "community": 127,
       "norm_label": "media",
       "id": "types_index_media"
     },
@@ -8995,16 +9345,6 @@
       "id": "prd_13_catatan_tambahan"
     },
     {
-      "label": "{ signIn, signOut, signUp, useSession }",
-      "file_type": "code",
-      "source_file": "src/lib/auth-client.ts",
-      "source_location": "L7",
-      "_origin": "ast",
-      "community": 106,
-      "norm_label": "{ signin, signout, signup, usesession }",
-      "id": "lib_auth_client_signin_signout_signup_usesession"
-    },
-    {
       "label": "School Profile Website PRD",
       "file_type": "document",
       "source_file": "PRD.md",
@@ -9792,9 +10132,9 @@
       "source_file": "README.md",
       "source_location": "L1",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "readme",
-      "target": "readme_schoolweb_smp_negeri_17_denpasar",
-      "confidence_score": 1.0
+      "target": "readme_schoolweb_smp_negeri_17_denpasar"
     },
     {
       "relation": "contains",
@@ -9802,9 +10142,9 @@
       "source_file": "README.md",
       "source_location": "L72",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "readme_schoolweb_smp_negeri_17_denpasar",
-      "target": "readme_admin_access",
-      "confidence_score": 1.0
+      "target": "readme_admin_access"
     },
     {
       "relation": "contains",
@@ -9812,9 +10152,9 @@
       "source_file": "README.md",
       "source_location": "L66",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "readme_schoolweb_smp_negeri_17_denpasar",
-      "target": "readme_deployment",
-      "confidence_score": 1.0
+      "target": "readme_deployment"
     },
     {
       "relation": "contains",
@@ -9822,9 +10162,9 @@
       "source_file": "README.md",
       "source_location": "L78",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "readme_schoolweb_smp_negeri_17_denpasar",
-      "target": "readme_features",
-      "confidence_score": 1.0
+      "target": "readme_features"
     },
     {
       "relation": "contains",
@@ -9832,9 +10172,9 @@
       "source_file": "README.md",
       "source_location": "L43",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "readme_schoolweb_smp_negeri_17_denpasar",
-      "target": "readme_project_structure",
-      "confidence_score": 1.0
+      "target": "readme_project_structure"
     },
     {
       "relation": "contains",
@@ -9842,9 +10182,9 @@
       "source_file": "README.md",
       "source_location": "L17",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "readme_schoolweb_smp_negeri_17_denpasar",
-      "target": "readme_quick_start",
-      "confidence_score": 1.0
+      "target": "readme_quick_start"
     },
     {
       "relation": "contains",
@@ -9852,9 +10192,9 @@
       "source_file": "README.md",
       "source_location": "L5",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "readme_schoolweb_smp_negeri_17_denpasar",
-      "target": "readme_tech_stack",
-      "confidence_score": 1.0
+      "target": "readme_tech_stack"
     },
     {
       "relation": "contains",
@@ -9862,8 +10202,338 @@
       "source_file": "README.md",
       "source_location": "L34",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "readme_schoolweb_smp_negeri_17_denpasar",
-      "target": "readme_testing",
+      "target": "readme_testing"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "implementation_plan.md",
+      "source_location": "L1",
+      "weight": 1.0,
+      "source": "implementation_plan",
+      "target": "implementation_plan_audit_optimasi_deployment_schoolweb_2gb_ram_vps",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "implementation_plan.md",
+      "source_location": "L130",
+      "weight": 1.0,
+      "source": "implementation_plan_audit_optimasi_deployment_schoolweb_2gb_ram_vps",
+      "target": "implementation_plan_arsitektur_deployment_yang_direkomendasikan",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "implementation_plan.md",
+      "source_location": "L7",
+      "weight": 1.0,
+      "source": "implementation_plan_audit_optimasi_deployment_schoolweb_2gb_ram_vps",
+      "target": "implementation_plan_hasil_audit_temuan_masalah",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "implementation_plan.md",
+      "source_location": "L148",
+      "weight": 1.0,
+      "source": "implementation_plan_audit_optimasi_deployment_schoolweb_2gb_ram_vps",
+      "target": "implementation_plan_open_questions",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "implementation_plan.md",
+      "source_location": "L66",
+      "weight": 1.0,
+      "source": "implementation_plan_audit_optimasi_deployment_schoolweb_2gb_ram_vps",
+      "target": "implementation_plan_proposed_changes",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "implementation_plan.md",
+      "source_location": "L157",
+      "weight": 1.0,
+      "source": "implementation_plan_audit_optimasi_deployment_schoolweb_2gb_ram_vps",
+      "target": "implementation_plan_verification_plan",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "implementation_plan.md",
+      "source_location": "L9",
+      "weight": 1.0,
+      "source": "implementation_plan_hasil_audit_temuan_masalah",
+      "target": "implementation_plan_kritis_harus_diperbaiki",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "implementation_plan.md",
+      "source_location": "L40",
+      "weight": 1.0,
+      "source": "implementation_plan_hasil_audit_temuan_masalah",
+      "target": "implementation_plan_sedang_sebaiknya_diperbaiki",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "implementation_plan.md",
+      "source_location": "L56",
+      "weight": 1.0,
+      "source": "implementation_plan_hasil_audit_temuan_masalah",
+      "target": "implementation_plan_sudah_baik",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "implementation_plan.md",
+      "source_location": "L11",
+      "weight": 1.0,
+      "source": "implementation_plan_kritis_harus_diperbaiki",
+      "target": "implementation_plan_1_seed_berjalan_setiap_kali_container_restart",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "implementation_plan.md",
+      "source_location": "L18",
+      "weight": 1.0,
+      "source": "implementation_plan_kritis_harus_diperbaiki",
+      "target": "implementation_plan_2_migration_script_hardcode_1_file_saja",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "implementation_plan.md",
+      "source_location": "L21",
+      "weight": 1.0,
+      "source": "implementation_plan_kritis_harus_diperbaiki",
+      "target": "implementation_plan_3_error_di_suppress_2_dev_null",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "implementation_plan.md",
+      "source_location": "L27",
+      "weight": 1.0,
+      "source": "implementation_plan_kritis_harus_diperbaiki",
+      "target": "implementation_plan_4_npm_install_g_drizzle_kit_tsx_di_runner_image",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "implementation_plan.md",
+      "source_location": "L32",
+      "weight": 1.0,
+      "source": "implementation_plan_kritis_harus_diperbaiki",
+      "target": "implementation_plan_5_github_actions_workflow_tidak_konsisten",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "implementation_plan.md",
+      "source_location": "L35",
+      "weight": 1.0,
+      "source": "implementation_plan_kritis_harus_diperbaiki",
+      "target": "implementation_plan_6_seed_ts_import_dotenv_config_tapi_dotenv_bukan_dependency",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "implementation_plan.md",
+      "source_location": "L51",
+      "weight": 1.0,
+      "source": "implementation_plan_sedang_sebaiknya_diperbaiki",
+      "target": "implementation_plan_10_runner_stage_pakai_arg_env_yang_sebenarnya_tidak_perlu",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "implementation_plan.md",
+      "source_location": "L42",
+      "weight": 1.0,
+      "source": "implementation_plan_sedang_sebaiknya_diperbaiki",
+      "target": "implementation_plan_7_docker_compose_tidak_include_app_service",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "implementation_plan.md",
+      "source_location": "L45",
+      "weight": 1.0,
+      "source": "implementation_plan_sedang_sebaiknya_diperbaiki",
+      "target": "implementation_plan_8_db_connection_pool_tidak_dikonfigurasi",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "implementation_plan.md",
+      "source_location": "L48",
+      "weight": 1.0,
+      "source": "implementation_plan_sedang_sebaiknya_diperbaiki",
+      "target": "implementation_plan_9_file_duplikat_migrate_raw_js_dan_migrate_direct_ts",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "implementation_plan.md",
+      "source_location": "L75",
+      "weight": 1.0,
+      "source": "implementation_plan_proposed_changes",
+      "target": "implementation_plan_1_dockerfile_optimasi_production_runner",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "implementation_plan.md",
+      "source_location": "L90",
+      "weight": 1.0,
+      "source": "implementation_plan_proposed_changes",
+      "target": "implementation_plan_2_migration_script_auto_detect_semua_file_sql",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "implementation_plan.md",
+      "source_location": "L102",
+      "weight": 1.0,
+      "source": "implementation_plan_proposed_changes",
+      "target": "implementation_plan_3_github_actions_build_push_pre_built_image",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "implementation_plan.md",
+      "source_location": "L113",
+      "weight": 1.0,
+      "source": "implementation_plan_proposed_changes",
+      "target": "implementation_plan_4_database_connection_limit_pool_size",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "implementation_plan.md",
+      "source_location": "L121",
+      "weight": 1.0,
+      "source": "implementation_plan_proposed_changes",
+      "target": "implementation_plan_5_cleanup_file_duplikat",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "implementation_plan.md",
+      "source_location": "L68",
+      "weight": 1.0,
+      "source": "implementation_plan_proposed_changes",
+      "target": "implementation_plan_optimasi_untuk_vps_2gb_ram",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "implementation_plan.md",
+      "source_location": "L77",
+      "weight": 1.0,
+      "source": "implementation_plan_1_dockerfile_optimasi_production_runner",
+      "target": "implementation_plan_modify_dockerfile_file_c_users_user_documents_gp_project_ai_schoolweb_dockerfile",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "implementation_plan.md",
+      "source_location": "L92",
+      "weight": 1.0,
+      "source": "implementation_plan_2_migration_script_auto_detect_semua_file_sql",
+      "target": "implementation_plan_modify_migrate_direct_ts_file_c_users_user_documents_gp_project_ai_schoolweb_scripts_migrate_direct_ts_migrate_js",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "implementation_plan.md",
+      "source_location": "L104",
+      "weight": 1.0,
+      "source": "implementation_plan_3_github_actions_build_push_pre_built_image",
+      "target": "implementation_plan_modify_build_deploy_yml_file_c_users_user_documents_gp_project_ai_schoolweb_github_workflows_build_deploy_yml",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "implementation_plan.md",
+      "source_location": "L115",
+      "weight": 1.0,
+      "source": "implementation_plan_4_database_connection_limit_pool_size",
+      "target": "implementation_plan_modify_index_ts_file_c_users_user_documents_gp_project_ai_schoolweb_src_lib_db_index_ts",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "implementation_plan.md",
+      "source_location": "L123",
+      "weight": 1.0,
+      "source": "implementation_plan_5_cleanup_file_duplikat",
+      "target": "implementation_plan_delete_migrate_raw_js_file_c_users_user_documents_gp_project_ai_schoolweb_scripts_migrate_raw_js",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "implementation_plan.md",
+      "source_location": "L124",
+      "weight": 1.0,
+      "source": "implementation_plan_5_cleanup_file_duplikat",
+      "target": "implementation_plan_delete_seed_sql_file_c_users_user_documents_gp_project_ai_schoolweb_scripts_seed_sql",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "implementation_plan.md",
+      "source_location": "L159",
+      "weight": 1.0,
+      "source": "implementation_plan_verification_plan",
+      "target": "implementation_plan_automated",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "implementation_plan.md",
+      "source_location": "L169",
+      "weight": 1.0,
+      "source": "implementation_plan_verification_plan",
+      "target": "implementation_plan_manual",
       "confidence_score": 1.0
     },
     {
@@ -9885,6 +10555,60 @@
       "confidence_score": 1.0,
       "source": "app_sitemap",
       "target": "app_sitemap_sitemap"
+    },
+    {
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "src/app/admin/layout.tsx",
+      "source_location": "L7",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "admin_layout",
+      "target": "lib_auth_client"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "src/lib/auth-client.ts",
+      "source_location": "L3",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "lib_auth_client",
+      "target": "lib_auth_client_authclient"
+    },
+    {
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "src/app/(auth)/login/page.tsx",
+      "source_location": "L8",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "login_page",
+      "target": "lib_auth_client"
+    },
+    {
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "src/app/admin/layout.tsx",
+      "source_location": "L7",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "admin_layout",
+      "target": "lib_auth_client_authclient"
+    },
+    {
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "src/app/(auth)/login/page.tsx",
+      "source_location": "L8",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "login_page",
+      "target": "lib_auth_client_authclient"
     },
     {
       "relation": "contains",
@@ -11810,28 +12534,6 @@
       "confidence_score": 1.0,
       "source": "auth_layout",
       "target": "auth_layout_authlayout"
-    },
-    {
-      "relation": "imports_from",
-      "context": "import",
-      "confidence": "EXTRACTED",
-      "source_file": "src/app/(auth)/login/page.tsx",
-      "source_location": "L8",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "login_page",
-      "target": "lib_auth_client"
-    },
-    {
-      "relation": "imports",
-      "context": "import",
-      "confidence": "EXTRACTED",
-      "source_file": "src/app/(auth)/login/page.tsx",
-      "source_location": "L8",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "login_page",
-      "target": "lib_auth_client_authclient"
     },
     {
       "relation": "contains",
@@ -16651,28 +17353,6 @@
       "confidence_score": 1.0,
       "source": "admin_layout",
       "target": "admin_sidebar_sidebar"
-    },
-    {
-      "relation": "imports_from",
-      "context": "import",
-      "confidence": "EXTRACTED",
-      "source_file": "src/app/admin/layout.tsx",
-      "source_location": "L7",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "admin_layout",
-      "target": "lib_auth_client"
-    },
-    {
-      "relation": "imports",
-      "context": "import",
-      "confidence": "EXTRACTED",
-      "source_file": "src/app/admin/layout.tsx",
-      "source_location": "L7",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "admin_layout",
-      "target": "lib_auth_client_authclient"
     },
     {
       "relation": "imports_from",
@@ -23344,16 +24024,6 @@
       "target": "actions_users_requiresuperadmin"
     },
     {
-      "relation": "contains",
-      "confidence": "EXTRACTED",
-      "source_file": "src/lib/auth-client.ts",
-      "source_location": "L3",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "lib_auth_client",
-      "target": "lib_auth_client_authclient"
-    },
-    {
       "relation": "imports_from",
       "context": "import",
       "confidence": "EXTRACTED",
@@ -26686,5 +27356,5 @@
       "source_file": "FRONTEND_PLAN.md"
     }
   ],
-  "built_at_commit": "4fe7323be49384f5070dab317a009b311a673691"
+  "built_at_commit": "be999800a2fc4c688b12ff22954514e17ead85f9"
 }

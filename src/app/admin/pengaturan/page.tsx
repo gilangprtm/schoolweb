@@ -69,7 +69,7 @@ export default function PengaturanPage() {
   return (
     <div className="space-y-6">
       <PageHeader title="Pengaturan" breadcrumbs={[{ label: "Dashboard", href: "/admin" }, { label: "Pengaturan", href: "/admin/pengaturan" }]} />
-      <Tabs defaultValue="identitas" className="w-full max-w-3xl">
+      <Tabs defaultValue="identitas" className="w-full max-w-3xl mx-auto">
         <TabsList className="w-full flex rounded-xl bg-neutral-100 p-1 mb-6">
           <TabsTrigger value="identitas" className="flex-1 rounded-lg text-sm">🏫 Identitas</TabsTrigger>
           <TabsTrigger value="sosmed" className="flex-1 rounded-lg text-sm">🌐 Sosmed</TabsTrigger>

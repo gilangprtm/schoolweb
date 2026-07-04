@@ -11,15 +11,18 @@ interface StatCardProps {
 
 export function StatCard({ title, value, icon: Icon, trend, className }: StatCardProps) {
   return (
-    <div className={cn("flex items-center gap-4 rounded-lg border border-neutral-200 bg-white p-4 shadow-sm", className)}>
-      <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-lg bg-primary/10">
+    <div className={cn(
+      "group relative flex items-center gap-4 rounded-2xl border border-border bg-card p-4 shadow-sm transition-all duration-200 hover:shadow-md hover:border-primary/20",
+      className
+    )}>
+      <div className="flex h-11 w-11 shrink-0 items-center justify-center rounded-xl bg-primary/10 transition-colors group-hover:bg-primary/15">
         <Icon className="h-5 w-5 text-primary" />
       </div>
       <div className="min-w-0 flex-1">
-        <p className="text-xs text-neutral-500">{title}</p>
-        <p className="text-xl font-bold text-neutral-800" style={{ fontFamily: "Outfit, sans-serif" }}>{value}</p>
+        <p className="text-xs font-medium text-muted-foreground">{title}</p>
+        <p className="text-2xl font-bold text-card-foreground tracking-tight">{value}</p>
         {trend && (
-          <p className={cn("text-xs font-medium", trend.positive ? "text-emerald-600" : "text-red-600")}>
+          <p className={cn("text-xs font-medium mt-0.5", trend.positive ? "text-emerald-600" : "text-red-500")}>
             {trend.positive ? "↑" : "↓"} {trend.value}
           </p>
         )}

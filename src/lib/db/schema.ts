@@ -210,6 +210,18 @@ export const settings = pgTable(
 );
 
 // ═══════════════════════════════════════════
+// School Profile (Visi, Misi, Sejarah)
+// ═══════════════════════════════════════════
+
+export const schoolProfile = pgTable("school_profile", {
+  id: serial("id").primaryKey(),
+  visi: text("visi").notNull().default(""),
+  misi: text("misi").notNull().default("[]"), // JSON array of strings
+  sejarah: text("sejarah").notNull().default(""),
+  updatedAt: timestamp("updated_at").notNull().defaultNow(),
+});
+
+// ═══════════════════════════════════════════
 // Relations
 // ═══════════════════════════════════════════
 

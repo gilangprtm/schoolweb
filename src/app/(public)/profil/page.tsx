@@ -1,8 +1,11 @@
 import { Target, Flag, MapPin, Building2 } from "lucide-react";
 import MiniHeroBanner from "@/components/shared/MiniHeroBanner";
 import ScrollReveal from "@/components/shared/ScrollReveal";
+import { getSchoolProfile } from "@/lib/actions/school-profile";
 
-export default function ProfilPage() {
+export default async function ProfilPage() {
+  const profile = await getSchoolProfile();
+
   return (
     <>
       <MiniHeroBanner
@@ -30,9 +33,8 @@ export default function ProfilPage() {
                   </h2>
                 </div>
                 <blockquote className="text-lg md:text-xl text-neutral-700 font-medium leading-relaxed italic border-l-4 border-primary pl-6 py-2">
-                  Terwujudnya peserta didik yang unggul dalam prestasi,
-                  berkarakter mulia, berwawasan lingkungan, dan mampu bersaing
-                  di era global.
+                  {profile.visi ||
+                    "Terwujudnya peserta didik yang unggul dalam prestasi, berkarakter mulia, berwawasan lingkungan, dan mampu bersaing di era global."}
                 </blockquote>
               </div>
             </div>
@@ -51,7 +53,19 @@ export default function ProfilPage() {
               </div>
 
               <div className="grid sm:grid-cols-2 gap-4">
-                {MISI.map((item, i) => (
+                {(profile.misi.length > 0
+                  ? profile.misi
+                  : [
+                      "Mewujudkan pembelajaran berkualitas yang inovatif, kreatif, dan menyenangkan berbasis teknologi informasi dan komunikasi.",
+                      "Mengembangkan potensi peserta didik secara optimal melalui kegiatan akademik dan non-akademik yang terprogram.",
+                      "Menanamkan nilai-nilai karakter dan budi pekerti luhur melalui pembiasaan, keteladanan, dan budaya sekolah.",
+                      "Menciptakan lingkungan sekolah yang bersih, hijau, aman, dan nyaman sebagai sumber belajar.",
+                      "Meningkatkan kompetensi pendidik dan tenaga kependidikan secara berkelanjutan melalui pelatihan dan pengembangan profesional.",
+                      "Membangun kemitraan dengan orang tua, masyarakat, dan berbagai pemangku kepentingan untuk mendukung kemajuan sekolah.",
+                      "Mengembangkan budaya literasi dan numerasi di seluruh warga sekolah.",
+                      "Membekali peserta didik dengan keterampilan abad 21: berpikir kritis, kreativitas, kolaborasi, dan komunikasi.",
+                    ]
+                ).map((item, i) => (
                   <div
                     key={i}
                     className="group flex gap-4 bg-neutral-50 hover:bg-white rounded-2xl p-5 border border-neutral-100 hover:border-primary-100 hover:shadow-card transition-all duration-300"
@@ -60,36 +74,6 @@ export default function ProfilPage() {
                       {i + 1}
                     </div>
                     <p className="text-neutral-600 text-sm leading-relaxed pt-1">
-                      {item}
-                    </p>
-                  </div>
-                ))}
-              </div>
-            </div>
-          </ScrollReveal>
-
-          {/* ── Tujuan ── */}
-          <ScrollReveal delay={0.15}>
-            <div className="mt-12">
-              <div className="flex items-center gap-3 mb-8">
-                <div className="size-10 rounded-xl bg-accent flex items-center justify-center">
-                  <Building2 className="size-5 text-accent-foreground" />
-                </div>
-                <h2 className="font-heading text-2xl md:text-3xl font-bold text-neutral-900">
-                  Tujuan Sekolah
-                </h2>
-              </div>
-
-              <div className="grid sm:grid-cols-2 gap-3">
-                {TUJUAN.map((item, i) => (
-                  <div
-                    key={i}
-                    className="flex items-start gap-3 bg-neutral-50 rounded-xl p-4 border border-neutral-100"
-                  >
-                    <div className="size-6 rounded-full bg-accent/20 text-accent-foreground flex items-center justify-center text-xs font-bold shrink-0 mt-0.5">
-                      {i + 1}
-                    </div>
-                    <p className="text-neutral-600 text-sm leading-relaxed">
                       {item}
                     </p>
                   </div>
@@ -115,33 +99,58 @@ export default function ProfilPage() {
           </ScrollReveal>
 
           <div className="relative">
-            {/* Timeline line */}
-            <div className="absolute left-[19px] top-2 bottom-2 w-px bg-primary/20 hidden md:block" />
+            {/* Vertical timeline line */}
+            <div className="absolute left-[18px] md:left-[22px] top-0 bottom-0 w-0.5 bg-primary/15" />
 
-            <div className="space-y-8">
-              {TIMELINE.map((item, i) => (
-                <ScrollReveal key={i} delay={i * 0.08}>
-                  <div className="flex gap-6">
-                    {/* Year badge */}
-                    <div className="hidden md:flex shrink-0 h-10 px-3 rounded-full bg-primary text-white items-center justify-center text-sm font-bold shadow-lg shadow-primary/20 relative z-10">
+            {(profile.sejarah.length > 0
+              ? profile.sejarah
+              : [
+                  {
+                    year: "1980",
+                    title: "Periode Perintisan",
+                    description:
+                      "SMP Negeri 17 Denpasar berdiri pada 1 Juli 1980 berdasarkan SK Menteri Pendidikan dan Kebudayaan RI. Di awal berdirinya, sekolah hanya memiliki 3 ruang kelas dengan 120 siswa dan 8 tenaga pendidik. Kepala sekolah pertama adalah Drs. H. M. Yusuf. Meski fasilitas masih minim, semangat belajar siswa dan dedikasi guru menjadi modal utama membangun fondasi pendidikan di sekolah ini.",
+                  },
+                  {
+                    year: "1990",
+                    title: "Periode Pengembangan",
+                    description:
+                      "Memasuki dekade 90-an, sekolah mengalami perkembangan pesat. Ruang kelas bertambah menjadi 12, dilengkapi laboratorium IPA dan perpustakaan. Jumlah siswa meningkat menjadi 400 orang. Pada periode ini sekolah mulai meraih prestasi di tingkat kabupaten, khususnya di bidang olahraga dan pramuka. Program ekstrakurikuler mulai dirintis.",
+                  },
+                  {
+                    year: "2005",
+                    title: "Periode Modernisasi",
+                    description:
+                      "Era modernisasi ditandai dengan pembangunan gedung bertingkat, laboratorium komputer, masjid, dan berbagai fasilitas pendukung. Kurikulum Berbasis Kompetensi (KBK) dan KTSP diterapkan. Sekolah meraih akreditasi A untuk pertama kalinya pada tahun 2010. Prestasi siswa mulai merambah ke tingkat provinsi dan nasional di berbagai bidang.",
+                  },
+                  {
+                    year: "2020",
+                    title: "Periode Transformasi Digital",
+                    description:
+                      "Pandemi COVID-19 mendorong digitalisasi total. Sekolah menyiapkan infrastruktur e-learning, merancang kurikulum hybrid, dan membangun budaya digital. Setelah pandemi, sekolah melanjutkan inovasi dengan AI, robotika, dan pembelajaran adaptif berbasis teknologi.",
+                  },
+                ]
+            ).map((item, i) => (
+              <ScrollReveal key={i} delay={i * 0.1}>
+                <div className="relative flex gap-4 md:gap-6 mb-16 last:mb-4">
+                  {/* Year marker */}
+                  <div className="relative z-10 shrink-0">
+                    <div className="w-9 h-9 md:w-11 md:h-11 rounded-full bg-primary text-white flex items-center justify-center font-heading font-bold text-xs md:text-sm shadow-md">
                       {item.year}
                     </div>
-                    <div className="flex-1 bg-white rounded-2xl p-5 md:p-6 shadow-card border border-neutral-100">
-                      {/* Year shown on mobile */}
-                      <span className="md:hidden inline-block px-4 py-1.5 rounded-full bg-primary text-white text-sm font-bold mb-3">
-                        {item.year}
-                      </span>
-                      <h3 className="font-heading font-bold text-neutral-800 text-lg mb-2">
-                        {item.title}
-                      </h3>
-                      <p className="text-neutral-600 text-sm leading-relaxed">
-                        {item.description}
-                      </p>
-                    </div>
                   </div>
-                </ScrollReveal>
-              ))}
-            </div>
+                  {/* Content card */}
+                  <div className="flex-1 bg-white rounded-2xl p-5 md:p-6 border border-neutral-100 shadow-sm hover:shadow-card transition-shadow duration-300">
+                    <h3 className="font-heading font-bold text-base md:text-lg text-neutral-900 mb-2">
+                      {item.title}
+                    </h3>
+                    <p className="text-neutral-600 text-sm leading-relaxed">
+                      {item.description}
+                    </p>
+                  </div>
+                </div>
+              </ScrollReveal>
+            ))}
           </div>
         </div>
       </section>
@@ -197,18 +206,10 @@ export default function ProfilPage() {
             {/* Guru & Pegawai row */}
             <div className="grid grid-cols-2 gap-3 w-full max-w-md">
               <ScrollReveal delay={0.3}>
-                <OrgNode
-                  label="Guru"
-                  subtitle="30+ Tenaga Pendidik"
-                  variant="outline"
-                />
+                <OrgNode label="Guru" variant="outline" />
               </ScrollReveal>
               <ScrollReveal delay={0.35}>
-                <OrgNode
-                  label="Pegawai / Staf TU"
-                  subtitle="5+ Tenaga Kependidikan"
-                  variant="outline"
-                />
+                <OrgNode label="Pegawai / Staf TU" variant="outline" />
               </ScrollReveal>
             </div>
           </div>
@@ -264,49 +265,3 @@ function OrgNode({
     </div>
   );
 }
-
-const MISI = [
-  "Mewujudkan pembelajaran berkualitas yang inovatif, kreatif, dan menyenangkan berbasis teknologi informasi dan komunikasi.",
-  "Mengembangkan potensi peserta didik secara optimal melalui kegiatan akademik dan non-akademik yang terprogram.",
-  "Menanamkan nilai-nilai karakter dan budi pekerti luhur melalui pembiasaan, keteladanan, dan budaya sekolah.",
-  "Menciptakan lingkungan sekolah yang bersih, hijau, aman, dan nyaman sebagai sumber belajar.",
-  "Meningkatkan kompetensi pendidik dan tenaga kependidikan secara berkelanjutan melalui pelatihan dan pengembangan profesional.",
-  "Membangun kemitraan dengan orang tua, masyarakat, dan berbagai pemangku kepentingan untuk mendukung kemajuan sekolah.",
-  "Mengembangkan budaya literasi dan numerasi di seluruh warga sekolah.",
-  "Membekali peserta didik dengan keterampilan abad 21: berpikir kritis, kreativitas, kolaborasi, dan komunikasi.",
-];
-
-const TUJUAN = [
-  "Menghasilkan lulusan yang memiliki prestasi akademik unggul dan mampu melanjutkan ke jenjang pendidikan yang lebih tinggi.",
-  "Membentuk peserta didik yang beriman, bertakwa, dan berakhlak mulia.",
-  "Menghasilkan peserta didik yang peduli terhadap kelestarian lingkungan.",
-  "Mewujudkan warga sekolah yang disiplin, bertanggung jawab, dan memiliki jiwa nasionalisme.",
-  "Menghasilkan berbagai prestasi di bidang akademik, olahraga, seni, dan keterampilan di tingkat lokal, nasional, dan internasional.",
-];
-
-const TIMELINE = [
-  {
-    year: "1980",
-    title: "Periode Perintisan",
-    description:
-      "SMP Negeri 17 Denpasar berdiri pada 1 Juli 1980 berdasarkan SK Menteri Pendidikan dan Kebudayaan RI. Di awal berdirinya, sekolah hanya memiliki 3 ruang kelas dengan 120 siswa dan 8 tenaga pendidik. Kepala sekolah pertama adalah Drs. H. M. Yusuf. Meski fasilitas masih minim, semangat belajar siswa dan dedikasi guru menjadi modal utama membangun fondasi pendidikan di sekolah ini.",
-  },
-  {
-    year: "1990",
-    title: "Periode Pengembangan",
-    description:
-      "Memasuki dekade 90-an, sekolah mengalami perkembangan pesat. Ruang kelas bertambah menjadi 12, dilengkapi laboratorium IPA dan perpustakaan. Jumlah siswa meningkat menjadi 400 orang. Pada periode ini sekolah mulai meraih prestasi di tingkat kabupaten, khususnya di bidang olahraga dan pramuka. Program ekstrakurikuler mulai dirintis.",
-  },
-  {
-    year: "2005",
-    title: "Periode Modernisasi",
-    description:
-      "Era modernisasi ditandai dengan pembangunan gedung bertingkat, laboratorium komputer, masjid, dan berbagai fasilitas pendukung. Kurikulum Berbasis Kompetensi (KBK) dan KTSP diterapkan. Sekolah meraih akreditasi A untuk pertama kalinya pada tahun 2010. Prestasi siswa mulai merambah ke tingkat provinsi dan nasional di berbagai bidang.",
-  },
-  {
-    year: "2020",
-    title: "Transformasi Digital",
-    description:
-      "Di bawah kepemimpinan Drs. Ahmad Fauzi, M.Pd., sekolah memasuki era transformasi digital. Implementasi Kurikulum Merdeka, digitalisasi perpustakaan, smart classroom, dan berbagai inovasi pembelajaran diterapkan. Kini SMP Negeri 17 Denpasar memiliki lebih dari 500 siswa, 30+ guru dan staf, serta puluhan prestasi di tingkat kabupaten, provinsi, hingga nasional. Sekolah terus berkomitmen mencetak generasi unggul menuju Indonesia Emas 2045.",
-  },
-];

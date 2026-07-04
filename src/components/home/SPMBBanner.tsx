@@ -12,7 +12,7 @@ const HIGHLIGHTS = [
   {
     icon: CalendarCheck,
     title: "Jadwal Kegiatan",
-    description: "Dibuka 1 Juni — 30 Juni 2025",
+    description: "",
   },
   {
     icon: Banknote,
@@ -31,7 +31,7 @@ export default function SPMBBanner() {
         <ScrollReveal>
           <SectionHeading
             title="Pendaftaran Siswa Baru (SPMB)"
-            subtitle="Tahun Ajaran 2025/2026 — Pendaftaran dibuka mulai 1 Juni hingga 30 Juni 2025"
+            subtitle="Akses Sistem Penerimaan Murid Baru"
             light
           />
         </ScrollReveal>

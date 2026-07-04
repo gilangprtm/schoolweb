@@ -3,10 +3,14 @@
 import { useState } from "react"
 import { useRouter } from "next/navigation"
 import { PageHeader } from "@/components/admin/PageHeader"
-import { Select } from "@/components/admin/ui/Select"
+import { TextField, TextareaField, SelectField } from "@/components/admin/forms"
 import { Button } from "@/components/ui/button"
-import { Input } from "@/components/ui/input"
 import { createGallery } from "@/lib/actions/galleries"
+
+const typeOptions = [
+  { value: "photo", label: "Album Foto" },
+  { value: "video", label: "Album Video" },
+]
 
 export default function GaleriBaruPage() {
   const router = useRouter()
@@ -28,14 +32,20 @@ export default function GaleriBaruPage() {
   return (
     <div className="space-y-6">
       <PageHeader title="Tambah Album" breadcrumbs={[{ label: "Dashboard", href: "/admin" }, { label: "Galeri", href: "/admin/galeri" }, { label: "Tambah", href: "#" }]} />
-      <form onSubmit={handleSubmit} className="max-w-lg space-y-6">
-        <div className="rounded-xl border border-neutral-200 bg-white p-6 space-y-5">
-          <h2 className="text-sm font-semibold text-neutral-900 uppercase tracking-wider">Informasi Album</h2>
-          <div className="space-y-2"><label className="text-sm font-medium text-neutral-700">Judul Album <span className="text-red-500">*</span></label><Input value={title} onChange={e => setTitle(e.target.value)} placeholder="Nama album" required /></div>
-          <div className="space-y-2"><label className="text-sm font-medium text-neutral-700">Deskripsi</label><textarea rows={2} value={description} onChange={e => setDescription(e.target.value)} className="w-full rounded-lg border border-neutral-200 px-3 py-2 text-sm placeholder:text-neutral-400 focus:outline-none focus:ring-2 focus:ring-primary/20 resize-none" /></div>
-          <div className="space-y-2"><label className="text-sm font-medium text-neutral-700">Tipe</label><Select value={type} onChange={setType} options={[{ value: "photo", label: "Album Foto" }, { value: "video", label: "Album Video" }]} /></div>
+      <form onSubmit={handleSubmit} className="max-w-lg mx-auto space-y-6">
+        <div className="rounded-xl border border-border bg-card p-6 space-y-5">
+          <h2 className="text-sm font-semibold text-foreground uppercase tracking-wider">Informasi Album</h2>
+
+          <TextField label="Judul Album" value={title} onChange={setTitle} placeholder="Nama album" required />
+
+          <TextareaField label="Deskripsi" value={description} onChange={setDescription} rows={2} />
+
+          <SelectField label="Tipe" value={type} onChange={setType} options={typeOptions} />
         </div>
-        <div className="flex items-center gap-3"><Button type="submit" disabled={loading}>Simpan</Button><Button type="button" variant="outline" onClick={() => router.back()}>Batal</Button></div>
+        <div className="flex items-center gap-3">
+          <Button type="submit" disabled={loading}>{loading ? "Menyimpan..." : "Simpan"}</Button>
+          <Button type="button" variant="outline" onClick={() => router.back()}>Batal</Button>
+        </div>
       </form>
     </div>
   )

@@ -3,11 +3,15 @@
 import { useState } from "react"
 import { useRouter } from "next/navigation"
 import { PageHeader } from "@/components/admin/PageHeader"
-import { Select } from "@/components/admin/ui/Select"
 import { useToast } from "@/components/admin/ui/Toast"
 import { Button } from "@/components/ui/button"
-import { Input } from "@/components/ui/input"
+import { TextField, TextareaField, SelectField, SwitchField, DatePickerField } from "@/components/admin/forms"
 import { createPost } from "@/lib/actions/posts"
+
+const categoryOptions = [
+  { value: "news", label: "Berita" },
+  { value: "announcement", label: "Pengumuman" },
+]
 
 export default function BeritaBaruPage() {
   const router = useRouter()
@@ -22,14 +26,26 @@ export default function BeritaBaruPage() {
   const [imageUrl, setImageUrl] = useState("")
   const [imageId, setImageId] = useState("")
   const [loading, setLoading] = useState(false)
+  const [errors, setErrors] = useState<Record<string, string>>({})
 
   const handleTitleChange = (val: string) => {
     setTitle(val)
     setSlug(val.toLowerCase().replace(/[^a-z0-9]+/g, "-").replace(/(^-|-$)/g, ""))
   }
 
+  const validate = (): boolean => {
+    const errs: Record<string, string> = {}
+    if (!title.trim()) errs.title = "Judul wajib diisi"
+    if (!slug.trim()) errs.slug = "Slug wajib diisi"
+    if (!content.trim()) errs.content = "Konten wajib diisi"
+    setErrors(errs)
+    return Object.keys(errs).length === 0
+  }
+
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
+    if (!validate()) return
+
     setLoading(true)
     try {
       const formData = new FormData()
@@ -60,48 +76,70 @@ export default function BeritaBaruPage() {
         ]}
       />
 
-      <form onSubmit={handleSubmit} className="max-w-3xl space-y-6">
-        <div className="rounded-xl border border-neutral-200 bg-white p-6 space-y-5">
-          <h2 className="text-sm font-semibold text-neutral-900 uppercase tracking-wider">Informasi Berita</h2>
+      <form onSubmit={handleSubmit} className="max-w-3xl mx-auto space-y-6">
+        <div className="rounded-xl border border-border bg-card p-6 space-y-5">
+          <h2 className="text-sm font-semibold text-foreground uppercase tracking-wider">
+            Informasi Berita
+          </h2>
+
           <div className="grid sm:grid-cols-2 gap-4">
-            <div className="space-y-2 sm:col-span-2">
-              <label className="text-sm font-medium text-neutral-700">Judul <span className="text-red-500">*</span></label>
-              <Input value={title} onChange={e => handleTitleChange(e.target.value)} placeholder="Judul berita" required />
-            </div>
-            <div className="space-y-2">
-              <label className="text-sm font-medium text-neutral-700">Slug</label>
-              <Input value={slug} onChange={e => setSlug(e.target.value)} placeholder="slug-otomatis" />
-              <p className="text-xs text-neutral-400">Slug otomatis dari judul</p>
-            </div>
-            <div className="space-y-2">
-              <label className="text-sm font-medium text-neutral-700">Kategori</label>
-              <Select value={category} onChange={setCategory} options={[{ value: "news", label: "Berita" }, { value: "announcement", label: "Pengumuman" }]} />
-            </div>
-          </div>
-          <div className="space-y-2">
-            <label className="text-sm font-medium text-neutral-700">Ringkasan <span className="text-xs text-neutral-400">(maks 200 karakter)</span></label>
-            <textarea value={excerpt} onChange={e => setExcerpt(e.target.value.slice(0, 200))} rows={2} maxLength={200} className="w-full rounded-lg border border-neutral-200 px-3 py-2 text-sm placeholder:text-neutral-400 focus:outline-none focus:ring-2 focus:ring-primary/20 resize-none" placeholder="Ringkasan singkat berita..." />
-            <p className="text-xs text-neutral-400 text-right">{excerpt.length}/200</p>
-          </div>
-          <div className="space-y-2">
-            <label className="text-sm font-medium text-neutral-700">Gambar / Thumbnail</label>
-            <div className="flex gap-2">
-              <Input
-                placeholder="Google Docs ID (contoh: 1lEBtdYtwN0t32j...)"
-                value={imageId}
-                onChange={(e) => setImageId(e.target.value)}
-                className="flex-1"
+            <div className="sm:col-span-2">
+              <TextField
+                label="Judul"
+                value={title}
+                onChange={handleTitleChange}
+                placeholder="Judul berita"
+                required
+                error={errors.title}
               />
-              <a
-                href="https://drive.google.com"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="inline-flex items-center gap-1 px-3 py-2 text-xs text-primary hover:text-primary-700 font-medium shrink-0"
-              >
-                Cari ID
-              </a>
             </div>
-            <p className="text-xs text-neutral-400">Masukkan ID gambar dari Google Drive. Contoh: <code className="bg-neutral-100 px-1 rounded">1lEBtdYtwN0t32j...</code></p>
+            <TextField
+              label="Slug"
+              value={slug}
+              onChange={setSlug}
+              placeholder="slug-otomatis"
+              description="Slug otomatis dari judul"
+              error={errors.slug}
+            />
+            <SelectField
+              label="Kategori"
+              value={category}
+              onChange={setCategory}
+              options={categoryOptions}
+            />
+          </div>
+
+          <TextareaField
+            label="Ringkasan"
+            value={excerpt}
+            onChange={setExcerpt}
+            maxLength={200}
+            rows={2}
+            showCount
+            placeholder="Ringkasan singkat berita..."
+            description="Maksimal 200 karakter"
+          />
+
+          <div className="space-y-2">
+            <TextField
+              label="Gambar / Thumbnail"
+              value={imageId}
+              onChange={setImageId}
+              placeholder="Google Docs ID (contoh: 1lEBtdYtwN0t32j...)"
+              description={
+                <>
+                  Masukkan ID gambar dari Google Drive.{" "}
+                  <a
+                    href="https://drive.google.com"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="text-primary hover:text-primary/80 underline underline-offset-2"
+                  >
+                    Cari ID
+                  </a>
+                </>
+              }
+            />
             {imageId && (
               <div className="relative w-full max-w-xs aspect-video rounded-lg overflow-hidden border border-neutral-200 bg-neutral-50 mt-2">
                 {/* eslint-disable-next-line @next/next/no-img-element */}
@@ -120,32 +158,55 @@ export default function BeritaBaruPage() {
               </div>
             )}
           </div>
-          <div className="space-y-2">
-            <label className="text-sm font-medium text-neutral-700">Konten</label>
-            <textarea value={content} onChange={e => setContent(e.target.value)} rows={10} className="w-full rounded-lg border border-neutral-200 px-3 py-2 text-sm placeholder:text-neutral-400 focus:outline-none focus:ring-2 focus:ring-primary/20 resize-none font-mono" placeholder="Tulis konten berita di sini..." />
-          </div>
+
+          <TextareaField
+            label="Konten"
+            value={content}
+            onChange={setContent}
+            rows={10}
+            placeholder="Tulis konten berita di sini..."
+            error={errors.content}
+          />
         </div>
-        <div className="rounded-xl border border-neutral-200 bg-white p-6 space-y-5">
-          <h2 className="text-sm font-semibold text-neutral-900 uppercase tracking-wider">Pengaturan</h2>
+
+        <div className="rounded-xl border border-border bg-card p-6 space-y-5">
+          <h2 className="text-sm font-semibold text-foreground uppercase tracking-wider">
+            Pengaturan
+          </h2>
           <div className="grid sm:grid-cols-2 gap-6">
-            <div className="space-y-2">
-              <label className="text-sm font-medium text-neutral-700">Status</label>
-              <div className="flex items-center gap-3 pt-1">
-                <button type="button" role="switch" aria-checked={isPublished} onClick={() => setIsPublished(!isPublished)} className={`relative inline-flex h-6 w-11 shrink-0 cursor-pointer rounded-full border-2 border-transparent transition-colors duration-200 focus:outline-none focus:ring-2 focus:ring-primary/20 ${isPublished ? "bg-emerald-500" : "bg-neutral-300"}`}>
-                  <span className={`pointer-events-none inline-block h-5 w-5 transform rounded-full bg-white shadow-sm ring-0 transition-transform duration-200 ${isPublished ? "translate-x-5" : "translate-x-0"}`} />
-                </button>
-                <span className="text-sm text-neutral-500">{isPublished ? "Terbit" : "Draft"}</span>
-              </div>
-            </div>
-            <div className="space-y-2">
-              <label className="text-sm font-medium text-neutral-700">Tanggal Publikasi</label>
-              <Input type="date" value={publishedAt} onChange={e => setPublishedAt(e.target.value)} />
-            </div>
+            <SwitchField
+              label="Status"
+              checked={isPublished}
+              onChange={setIsPublished}
+              onLabel="Terbit"
+              offLabel="Draft"
+              description="Status publikasi berita"
+            />
+            <DatePickerField
+              label="Tanggal Publikasi"
+              value={publishedAt}
+              onChange={setPublishedAt}
+            />
           </div>
         </div>
+
         <div className="flex items-center gap-3">
-          <Button type="submit" disabled={loading}>{loading ? "Menyimpan..." : "Simpan Berita"}</Button>
-          <Button type="button" variant="outline" onClick={() => router.back()}>Batal</Button>
+          <Button type="submit" disabled={loading}>
+            {loading ? (
+              <span className="flex items-center gap-2">
+                <svg className="animate-spin h-4 w-4" viewBox="0 0 24 24" fill="none">
+                  <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4" />
+                  <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4z" />
+                </svg>
+                Menyimpan...
+              </span>
+            ) : (
+              "Simpan Berita"
+            )}
+          </Button>
+          <Button type="button" variant="outline" onClick={() => router.back()}>
+            Batal
+          </Button>
         </div>
       </form>
     </div>

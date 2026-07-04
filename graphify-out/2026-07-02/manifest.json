@@ -295,8 +295,8 @@
     "semantic_hash": "5b06242d615191289001925f5cde7998"
   },
   "README.md": {
-    "mtime": 1782966410.7973926,
-    "ast_hash": "8604031d3fae749a4a6d5155e4c2fce0",
+    "mtime": 1782966778.1544259,
+    "ast_hash": "888873f8e7fb5df5350316b3b1c0cd3f",
     "semantic_hash": ""
   },
   "assets/favicon/apple-touch-icon.png": {
@@ -735,8 +735,8 @@
     "semantic_hash": ""
   },
   "src/lib/auth-client.ts": {
-    "mtime": 1782790976.4410381,
-    "ast_hash": "d61f70ecbe95ed06a5431a72c2622990",
+    "mtime": 1782966777.679917,
+    "ast_hash": "fd07c7e8c19fea86b43fcb0a994f1e52",
     "semantic_hash": ""
   },
   "src/lib/auth.ts": {
@@ -865,8 +865,8 @@
     "semantic_hash": ""
   },
   "implementation_plan.md": {
-    "mtime": 1782802423.224922,
-    "ast_hash": "c5e73a6b7f5234a5eb4aaca920373c20",
+    "mtime": 1782966778.3450468,
+    "ast_hash": "4ead950ce1bbf96f6a4e59a1a66c59a1",
     "semantic_hash": ""
   },
   "playwright-report/index.html": {
@@ -965,13 +965,13 @@
     "semantic_hash": ""
   },
   "src/app/robots.ts": {
-    "mtime": 1782966232.1071494,
-    "ast_hash": "a3090744647f17c0a91caf09751ddc9a",
+    "mtime": 1782966777.5694313,
+    "ast_hash": "cc4206517591983244620b24123c85b6",
     "semantic_hash": ""
   },
   "src/app/sitemap.ts": {
-    "mtime": 1782966222.4780705,
-    "ast_hash": "bde1e92fe05cd473fd490ce0de47778b",
+    "mtime": 1782966777.5145717,
+    "ast_hash": "ead92ed57e785693d8b3cf50cf79cd33",
     "semantic_hash": ""
   }
 }

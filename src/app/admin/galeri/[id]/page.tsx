@@ -3,6 +3,7 @@
 import { useState, useEffect } from "react"
 import { useRouter, useParams } from "next/navigation"
 import { PageHeader } from "@/components/admin/PageHeader"
+import { TextField, TextareaField, SelectField } from "@/components/admin/forms"
 import { useToast } from "@/components/admin/ui/Toast"
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
@@ -10,12 +11,17 @@ import { X, Plus, Trash2 } from "lucide-react"
 import { getGalleryById, updateGallery, deleteMedia, addMediaToGallery, addVideoToGallery } from "@/lib/actions/galleries"
 import type { Gallery, Media } from "@/types"
 
+const typeOptions = [
+  { value: "photo", label: "Album Foto" },
+  { value: "video", label: "Album Video" },
+]
+
 export default function GaleriDetailPage() {
   const params = useParams(); const id = Number(params.id); const router = useRouter()
   const { toast } = useToast()
   const [title, setTitle] = useState("")
   const [description, setDescription] = useState("")
-  const [type, setType] = useState<"photo" | "video">("photo")
+  const [type, setType] = useState<string>("photo")
   const [mediaItems, setMediaItems] = useState<Media[]>([])
   const [photoUrl, setPhotoUrl] = useState("")
   const [photoId, setPhotoId] = useState("")
@@ -26,7 +32,7 @@ export default function GaleriDetailPage() {
 
   useEffect(() => {
     getGalleryById(id).then(g => {
-      if (g) { setTitle(g.title); setDescription(g.description); setType(g.type as "photo" | "video"); setMediaItems(g.media || []) }
+      if (g) { setTitle(g.title); setDescription(g.description); setType(g.type as string); setMediaItems(g.media || []) }
       setLoading(false)
     }).catch(() => setLoading(false))
   }, [id])
@@ -74,12 +80,17 @@ export default function GaleriDetailPage() {
   if (loading) return <div className="space-y-6"><div className="h-8 w-40 bg-neutral-200 animate-pulse rounded" /><div className="h-96 bg-neutral-100 animate-pulse rounded-xl" /></div>
 
   return (
-    <div>
+    <div className="space-y-6 max-w-2xl mx-auto">
       <PageHeader title={`Isi Album: ${title}`} breadcrumbs={[{ label: "Dashboard", href: "/admin" }, { label: "Galeri", href: "/admin/galeri" }, { label: title, href: "#" }]} />
-      <div className="max-w-2xl space-y-6">
-        <div className="rounded-lg border border-neutral-200 bg-white p-6 space-y-4">
-          <div className="space-y-2"><label className="text-sm font-medium text-neutral-700">Judul Album</label><Input value={title} onChange={e => setTitle(e.target.value)} /></div>
-          <div className="space-y-2"><label className="text-sm font-medium text-neutral-700">Deskripsi</label><textarea rows={2} value={description} onChange={e => setDescription(e.target.value)} className="w-full rounded-lg border border-neutral-200 px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-primary/20 resize-none" /></div>
+      <div className="max-w-2xl mx-auto space-y-6">
+        <div className="rounded-xl border border-border bg-card p-6 space-y-5">
+          <h2 className="text-sm font-semibold text-foreground uppercase tracking-wider">Informasi Album</h2>
+
+          <TextField label="Judul Album" value={title} onChange={setTitle} required />
+
+          <TextareaField label="Deskripsi" value={description} onChange={setDescription} rows={2} />
+
+          <SelectField label="Tipe" value={type} onChange={setType} options={typeOptions} />
         </div>
 
         {type === "photo" ? (

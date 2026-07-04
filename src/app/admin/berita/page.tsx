@@ -58,8 +58,8 @@ export default function BeritaPage() {
     { key: "publishedAt", label: "Tanggal", render: (p) => new Date(p.publishedAt).toLocaleDateString("id-ID") },
     { key: "id", label: "Aksi", render: (p) => (
       <div className="flex items-center gap-1">
-        <Link href={`/admin/berita/${p.id}`} className="rounded p-1.5 text-neutral-400 hover:bg-neutral-100 hover:text-primary"><Pencil className="h-4 w-4" /></Link>
-        <button onClick={() => setDeleteTarget(p)} className="rounded p-1.5 text-neutral-400 hover:bg-neutral-100 hover:text-red-600"><Trash2 className="h-4 w-4" /></button>
+        <Link href={`/admin/berita/${p.id}`} className="rounded p-1.5 text-neutral-400 hover:bg-muted hover:text-primary"><Pencil className="h-4 w-4" /></Link>
+        <button onClick={() => setDeleteTarget(p)} className="rounded p-1.5 text-neutral-400 hover:bg-muted hover:text-destructive"><Trash2 className="h-4 w-4" /></button>
       </div>
     )},
   ]
@@ -68,7 +68,9 @@ export default function BeritaPage() {
     <div>
       <PageHeader title="Berita & Pengumuman" breadcrumbs={[{ label: "Dashboard", href: "/admin" }, { label: "Berita", href: "/admin/berita" }]} actionLabel="Tambah Berita" actionHref="/admin/berita/baru" />
       {loading ? (
-        <div className="space-y-2">{Array.from({ length: 5 }).map((_, i) => <div key={i} className="h-12 bg-neutral-100 animate-pulse rounded-lg" />)}</div>
+        <div className="space-y-2">{Array.from({ length: 5 }).map((_, i) => <div key={i} className="h-12 bg-muted animate-pulse rounded-lg" />)}</div>
+      ) : filtered.length === 0 ? (
+        <EmptyState icon={Newspaper} title="Belum ada postingan" description="Mulai dengan menambahkan berita atau pengumuman pertama" actionLabel="Tambah Berita" actionHref="/admin/berita/baru" />
       ) : (
         <DataTable columns={columns} data={filtered} />
       )}

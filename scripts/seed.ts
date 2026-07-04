@@ -136,8 +136,44 @@ async function main() {
   }
   console.log(`  ✅ ${Object.keys(settingsData).length} settings created`);
 
-  // ═══════════════════════════════════════════
-  // 3. Pages
+    // ═══════════════════════════════════════════
+    // 3. School Profile (Visi, Misi, Sejarah)
+    // ═══════════════════════════════════════════
+    console.log("\n🏫 Creating school profile...");
+
+    const existingProfile = await db
+      .select()
+      .from(schema.schoolProfile)
+      .limit(1);
+
+    if (existingProfile.length === 0) {
+      await db.insert(schema.schoolProfile).values({
+        visi: "Terwujudnya peserta didik yang unggul dalam prestasi, berkarakter mulia, berwawasan lingkungan, dan mampu bersaing di era global.",
+        misi: JSON.stringify([
+          "Mewujudkan pembelajaran berkualitas yang inovatif, kreatif, dan menyenangkan berbasis teknologi informasi dan komunikasi.",
+          "Mengembangkan potensi peserta didik secara optimal melalui kegiatan akademik dan non-akademik yang terprogram.",
+          "Menanamkan nilai-nilai karakter dan budi pekerti luhur melalui pembiasaan, keteladanan, dan budaya sekolah.",
+          "Menciptakan lingkungan sekolah yang bersih, hijau, aman, dan nyaman sebagai sumber belajar.",
+          "Meningkatkan kompetensi pendidik dan tenaga kependidikan secara berkelanjutan melalui pelatihan dan pengembangan profesional.",
+          "Membangun kemitraan dengan orang tua, masyarakat, dan berbagai pemangku kepentingan untuk mendukung kemajuan sekolah.",
+          "Mengembangkan budaya literasi dan numerasi di seluruh warga sekolah.",
+          "Membekali peserta didik dengan keterampilan abad 21: berpikir kritis, kreativitas, kolaborasi, dan komunikasi.",
+        ]),
+        sejarah: JSON.stringify([
+          { year: "1980", title: "Periode Perintisan", description: "SMP Negeri 17 Denpasar berdiri pada 1 Juli 1980 berdasarkan SK Menteri Pendidikan dan Kebudayaan RI. Di awal berdirinya, sekolah hanya memiliki 3 ruang kelas dengan 120 siswa dan 8 tenaga pendidik. Kepala sekolah pertama adalah Drs. H. M. Yusuf. Meski fasilitas masih minim, semangat belajar siswa dan dedikasi guru menjadi modal utama membangun fondasi pendidikan di sekolah ini." },
+          { year: "1990", title: "Periode Pengembangan", description: "Memasuki dekade 90-an, sekolah mengalami perkembangan pesat. Ruang kelas bertambah menjadi 12, dilengkapi laboratorium IPA dan perpustakaan. Jumlah siswa meningkat menjadi 400 orang. Pada periode ini sekolah mulai meraih prestasi di tingkat kabupaten, khususnya di bidang olahraga dan pramuka. Program ekstrakurikuler mulai dirintis." },
+          { year: "2005", title: "Periode Modernisasi", description: "Era modernisasi ditandai dengan pembangunan gedung bertingkat, laboratorium komputer, masjid, dan berbagai fasilitas pendukung. Kurikulum Berbasis Kompetensi (KBK) dan KTSP diterapkan. Sekolah meraih akreditasi A untuk pertama kalinya pada tahun 2010. Prestasi siswa mulai merambah ke tingkat provinsi dan nasional di berbagai bidang." },
+          { year: "2020", title: "Periode Transformasi Digital", description: "Pandemi COVID-19 mendorong digitalisasi total. Sekolah menyiapkan infrastruktur e-learning, merancang kurikulum hybrid, dan membangun budaya digital. Setelah pandemi, sekolah melanjutkan inovasi dengan AI, robotika, dan pembelajaran adaptif berbasis teknologi." },
+        ]),
+        updatedAt: new Date(),
+      });
+      console.log("  ✅ school profile created");
+    } else {
+      console.log("  ⏭️  school profile already exists, skipping");
+    }
+
+    // ═══════════════════════════════════════════
+    // 4. Pages
   // ═══════════════════════════════════════════
   console.log("\n📄 Creating pages...");
 
