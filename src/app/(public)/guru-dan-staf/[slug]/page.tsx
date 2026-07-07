@@ -28,8 +28,8 @@ export default async function StaffDetailPage({
     person.role === "headmaster"
       ? "Kepala Sekolah"
       : person.role === "teacher"
-      ? "Guru"
-      : "Staf";
+        ? "Guru"
+        : "Staf";
 
   return (
     <article>
@@ -37,7 +37,10 @@ export default async function StaffDetailPage({
         <div className="absolute inset-0 bg-gradient-to-br from-primary-700 to-primary-900" />
         <div className="container-custom relative z-10 py-12 pt-24">
           <Breadcrumb
-            items={[{ label: "Guru & Staf", href: "/guru-dan-staf" }, { label: person.name }]}
+            items={[
+              { label: "Guru & Staf", href: "/guru-dan-staf" },
+              { label: person.name },
+            ]}
             className="text-white/70 mb-3"
           />
         </div>
@@ -48,8 +51,13 @@ export default async function StaffDetailPage({
           <div className="bg-white rounded-2xl shadow-card p-6 md:p-8 relative z-10">
             <div className="flex flex-col sm:flex-row gap-6 items-center sm:items-start">
               {/* Photo */}
-              <div className="size-36 md:size-44 rounded-2xl overflow-hidden shrink-0 shadow-lg">
-                <ImageWithFallback src={person.photoUrl} alt={person.name} aspect="1/1" rounded="rounded-2xl" />
+              <div className="w-36 h-72 md:w-44 md:h-[22rem] rounded-2xl overflow-hidden shrink-0 shadow-lg">
+                <ImageWithFallback
+                  src={person.photoUrl}
+                  alt={person.name}
+                  aspect="1/2"
+                  rounded="rounded-2xl"
+                />
               </div>
 
               {/* Info */}
@@ -57,14 +65,20 @@ export default async function StaffDetailPage({
                 <Badge
                   label={roleLabel}
                   variant={
-                    person.role === "headmaster" ? "accent" : person.role === "teacher" ? "primary" : "secondary"
+                    person.role === "headmaster"
+                      ? "accent"
+                      : person.role === "teacher"
+                        ? "primary"
+                        : "secondary"
                   }
                 />
                 <h1 className="font-heading font-bold text-2xl md:text-3xl text-neutral-800 mt-2 mb-1">
                   {person.name}
                 </h1>
                 {person.subject && (
-                  <p className="text-neutral-500 font-medium mb-3">{person.subject}</p>
+                  <p className="text-neutral-500 font-medium mb-3">
+                    {person.subject}
+                  </p>
                 )}
                 {person.email && (
                   <a
@@ -89,7 +103,10 @@ export default async function StaffDetailPage({
                 </h2>
                 <ul className="space-y-2">
                   {person.education.split("\n").map((edu, i) => (
-                    <li key={i} className="flex items-start gap-2 text-neutral-600">
+                    <li
+                      key={i}
+                      className="flex items-start gap-2 text-neutral-600"
+                    >
                       <span className="size-1.5 rounded-full bg-primary mt-2 shrink-0" />
                       {edu.trim()}
                     </li>
@@ -101,14 +118,19 @@ export default async function StaffDetailPage({
             {/* Bio */}
             {person.bio && (
               <div>
-                <h2 className="font-heading font-bold text-lg text-neutral-800 mb-3">Biografi</h2>
+                <h2 className="font-heading font-bold text-lg text-neutral-800 mb-3">
+                  Biografi
+                </h2>
                 <p className="text-neutral-600 leading-relaxed">{person.bio}</p>
               </div>
             )}
           </ScrollReveal>
 
           <div className="mt-10 pt-6 border-t border-neutral-200">
-            <Link href="/guru-dan-staf" className="inline-flex items-center gap-2 text-primary hover:text-primary-700 text-sm font-medium transition-colors">
+            <Link
+              href="/guru-dan-staf"
+              className="inline-flex items-center gap-2 text-primary hover:text-primary-700 text-sm font-medium transition-colors"
+            >
               <ArrowLeft className="size-4" />
               Kembali ke Guru & Staf
             </Link>
@@ -131,12 +153,21 @@ export default async function StaffDetailPage({
                     className="group block text-center bg-white rounded-2xl p-4 shadow-card hover:shadow-card-hover transition-all hover:-translate-y-1"
                   >
                     <div className="size-20 rounded-full overflow-hidden mx-auto mb-2">
-                      <ImageWithFallback src={r.photoUrl} alt={r.name} aspect="1/1" rounded="rounded-full" />
+                      <ImageWithFallback
+                        src={r.photoUrl}
+                        alt={r.name}
+                        aspect="1/1"
+                        rounded="rounded-full"
+                      />
                     </div>
                     <h3 className="font-heading font-semibold text-neutral-800 text-xs group-hover:text-primary transition-colors line-clamp-2">
                       {r.name}
                     </h3>
-                    {r.subject && <p className="text-neutral-500 text-xs mt-0.5">{r.subject}</p>}
+                    {r.subject && (
+                      <p className="text-neutral-500 text-xs mt-0.5">
+                        {r.subject}
+                      </p>
+                    )}
                   </Link>
                 </ScrollReveal>
               ))}
