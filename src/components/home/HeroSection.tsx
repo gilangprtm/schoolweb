@@ -27,8 +27,12 @@ export default function HeroSection() {
       .then(([settings, staff, achievements]) => {
         setSchoolName(settings.schoolName);
         setTagline(settings.tagline);
-        setStudentCount(settings.studentCount ? parseInt(settings.studentCount) : 500);
-        setEstablishedYear(settings.establishedYear ? parseInt(settings.establishedYear) : 15);
+        setStudentCount(
+          settings.studentCount ? parseInt(settings.studentCount) : 500,
+        );
+        setEstablishedYear(
+          settings.establishedYear ? parseInt(settings.establishedYear) : 15,
+        );
         setStaffCount(staff.length);
         setAchievementCount(achievements.data.length);
       })
@@ -113,8 +117,8 @@ export default function HeroSection() {
             />
             <StatsCounter
               value={establishedYear}
-              suffix=" Tahun"
-              label="Berdiri"
+              suffix="+"
+              label="Tahun Berdiri"
               icon={Building2}
             />
           </div>

@@ -1,7 +1,7 @@
 # Graph Report - schoolweb  (2026-07-07)
 
 ## Corpus Check
-- 210 files · ~541,043 words
+- 210 files · ~541,183 words
 - Verdict: corpus is large enough that graph structure adds value.
 
 ## Summary
@@ -10,7 +10,7 @@
 - Token cost: 0 input · 0 output
 
 ## Graph Freshness
-- Built from commit: `f58b4274`
+- Built from commit: `701fbc7f`
 - Run `git rev-parse HEAD` and compare to check if the graph is stale.
 - Run `graphify update .` after code changes (no API cost).
 
@@ -425,7 +425,7 @@ Cohesion: 0.32
 Nodes (5): EmbeddingOptions, EmbeddingResult, generateEmbedding(), hashToken(), tfidfEmbed()
 
 ## Knowledge Gaps
-- **586 isolated node(s):** `sessions`, `accounts`, `verifications`, `facilitiesRelations`, `facilityPhotosRelations` (+581 more)
+- **586 isolated node(s):** `StaffRole`, `AchievementCategory`, `GalleryType`, `ContactMessage`, `UserRole` (+581 more)
   These have ≤1 connection - possible missing edges or undocumented components.
 - **55 thin communities (<3 nodes) omitted from report** — run `graphify query` to explore isolated nodes.
 
@@ -433,16 +433,16 @@ Nodes (5): EmbeddingOptions, EmbeddingResult, generateEmbedding(), hashToken(), 
 _Questions this graph is uniquely positioned to answer:_
 
 - **Why does `cn()` connect `App Pages & Shared UI` to `Community 128`, `Community 129`, `Community 98`, `Staff & Homepage Data`, `Community 99`, `Community 133`, `Community 102`, `Achievements System`, `Community 96`, `Layout & Branding`, `Community 112`, `Community 114`, `Community 115`, `Community 87`, `Community 88`, `Community 127`?**
-  _High betweenness centrality (0.028) - this node is a cross-community bridge._
+  _High betweenness centrality (0.031) - this node is a cross-community bridge._
 - **Why does `db` connect `Community 90` to `Community 130`, `Community 99`, `Community 101`, `Profile & Navigation`, `Community 79`, `Community 116`, `Community 118`, `Community 92`, `Community 125`, `Community 94`?**
-  _High betweenness centrality (0.012) - this node is a cross-community bridge._
+  _High betweenness centrality (0.013) - this node is a cross-community bridge._
+- **Why does `Button()` connect `Achievements System` to `Community 112`, `App Pages & Shared UI`, `Layout & Branding`, `Community 99`?**
+  _High betweenness centrality (0.009) - this node is a cross-community bridge._
 - **Are the 14 inferred relationships involving `useToast()` (e.g. with `AkunBaruPage()` and `BeritaBaruPage()`) actually correct?**
   _`useToast()` has 14 INFERRED edges - model-reasoned connections that need verification._
-- **What connects `sessions`, `accounts`, `verifications` to the rest of the system?**
+- **What connects `StaffRole`, `AchievementCategory`, `GalleryType` to the rest of the system?**
   _590 weakly-connected nodes found - possible documentation gaps or missing edges._
 - **Should `App Pages & Shared UI` be split into smaller, more focused modules?**
   _Cohesion score 0.12631578947368421 - nodes in this community are weakly interconnected._
 - **Should `Achievements System` be split into smaller, more focused modules?**
   _Cohesion score 0.08417721518987342 - nodes in this community are weakly interconnected._
-- **Should `Dependencies & Build` be split into smaller, more focused modules?**
-  _Cohesion score 0.10526315789473684 - nodes in this community are weakly interconnected._
