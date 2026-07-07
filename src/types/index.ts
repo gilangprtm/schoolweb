@@ -14,6 +14,8 @@ export interface SiteSettings {
   akreditasi: string;
   logo_url: string;
   favicon_url: string;
+  studentCount: string;
+  establishedYear: string;
   social: {
     facebook?: string;
     instagram?: string;

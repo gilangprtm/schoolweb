@@ -45,6 +45,8 @@ export async function getAllSettings(): Promise<SiteSettings> {
     akreditasi: map.akreditasi || "",
     logo_url: map.logo_url || "",
     favicon_url: map.favicon_url || "",
+    studentCount: map.studentCount || "500",
+    establishedYear: map.establishedYear || "15",
     social: {
       facebook: map.social_facebook || "",
       instagram: map.social_instagram || "",
@@ -58,11 +60,15 @@ export async function getAllSettings(): Promise<SiteSettings> {
 
 // ── Admin Mutations (superadmin only) ──
 
-export async function updateSettings(data: Record<string, string>) {
+export async function updateSettings(updates: Partial<Record<string, string>>) {
   await requireSuperAdmin();
 
-  // Upsert each key-value pair
-  for (const [key, value] of Object.entries(data)) {
+  // Validate limits for studentCount and establishedYear if provided
+  if (updates.studentCount && updates.studentCount.length > 5) updates.studentCount = updates.studentCount.substring(0, 5);
+  if (updates.establishedYear && updates.establishedYear.length > 4) updates.establishedYear = updates.establishedYear.substring(0, 4);
+
+  const entries = Object.entries(updates);
+  for (const [key, value] of Object.entries(updates)) {
     const existing = await db
       .select()
       .from(settings)

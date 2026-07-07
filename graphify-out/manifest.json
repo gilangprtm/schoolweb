@@ -1115,8 +1115,8 @@
     "semantic_hash": ""
   },
   "src/app/admin/profil-sekolah/page.tsx": {
-    "mtime": 1783399215.7954772,
-    "ast_hash": "c619047c212a1707f01400aba591f499",
+    "mtime": 1783399963.573447,
+    "ast_hash": "defd1cffc00658c57e8ef98e591f73dc",
     "semantic_hash": ""
   },
   "src/app/api/search/route.ts": {

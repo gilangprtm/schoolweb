@@ -22,6 +22,8 @@ export default function PengaturanPage() {
   const [akreditasi, setAkreditasi] = useState("")
   const [logoUrl, setLogoUrl] = useState("")
   const [faviconUrl, setFaviconUrl] = useState("")
+  const [studentCount, setStudentCount] = useState("")
+  const [establishedYear, setEstablishedYear] = useState("")
   const [googleMapsUrl, setGoogleMapsUrl] = useState("")
   const [fb, setFb] = useState(""); const [ig, setIg] = useState(""); const [yt, setYt] = useState(""); const [tt, setTt] = useState(""); const [tw, setTw] = useState("")
   const [oldPass, setOldPass] = useState(""); const [newPass, setNewPass] = useState(""); const [confirmPass, setConfirmPass] = useState("")
@@ -31,6 +33,8 @@ export default function PengaturanPage() {
       setSchoolName(s.schoolName || ""); setTagline(s.tagline || ""); setAddress(s.address || "")
       setPhone(s.phone || ""); setEmail(s.email || ""); setJamOperasional(s.jamOperasional || "")
       setAkreditasi(s.akreditasi || ""); setLogoUrl(s.logo_url || ""); setFaviconUrl(s.favicon_url || "")
+      setStudentCount(s.studentCount || "500")
+      setEstablishedYear(s.establishedYear || "15")
       setGoogleMapsUrl(s.googleMapsEmbedUrl || "")
       setFb(s.social?.facebook || ""); setIg(s.social?.instagram || ""); setYt(s.social?.youtube || "")
       setTt(s.social?.tiktok || ""); setTw(s.social?.twitter || "")
@@ -40,7 +44,7 @@ export default function PengaturanPage() {
 
   const handleSaveIdentitas = async () => {
     try {
-      await updateSettings({ schoolName, tagline, address, phone, email, jamOperasional, akreditasi, logo_url: logoUrl, favicon_url: faviconUrl, googleMapsEmbedUrl: googleMapsUrl })
+      await updateSettings({ schoolName, tagline, address, phone, email, jamOperasional, akreditasi, logo_url: logoUrl, favicon_url: faviconUrl, studentCount, establishedYear, googleMapsEmbedUrl: googleMapsUrl })
       toast({ type: "success", title: "Identitas sekolah disimpan" })
     } catch { toast({ type: "error", title: "Gagal menyimpan" }) }
   }
@@ -87,6 +91,8 @@ export default function PengaturanPage() {
               <div className="space-y-2"><label className="text-sm font-medium text-neutral-700">Akreditasi</label><Input value={akreditasi} onChange={e => setAkreditasi(e.target.value)} /></div>
               <div className="space-y-2"><label className="text-sm font-medium text-neutral-700">URL Logo</label><Input value={logoUrl} onChange={e => setLogoUrl(e.target.value)} /></div>
               <div className="space-y-2"><label className="text-sm font-medium text-neutral-700">URL Favicon</label><Input value={faviconUrl} onChange={e => setFaviconUrl(e.target.value)} /></div>
+              <div className="space-y-2"><label className="text-sm font-medium text-neutral-700">Jumlah Siswa</label><Input value={studentCount} onChange={e => setStudentCount(e.target.value)} placeholder="Contoh: 500" /></div>
+              <div className="space-y-2"><label className="text-sm font-medium text-neutral-700">Tahun Berdiri (Lama)</label><Input value={establishedYear} onChange={e => setEstablishedYear(e.target.value)} placeholder="Contoh: 15" /></div>
               <div className="space-y-2 sm:col-span-2"><label className="text-sm font-medium text-neutral-700">Google Maps Embed URL</label><Input value={googleMapsUrl} onChange={e => setGoogleMapsUrl(e.target.value)} /></div>
             </div>
           </div>

@@ -13,6 +13,8 @@ import { getAchievements } from "@/lib/actions/achievements";
 export default function HeroSection() {
   const [schoolName, setSchoolName] = useState("SMP Negeri 17 Denpasar");
   const [tagline, setTagline] = useState("");
+  const [studentCount, setStudentCount] = useState(500);
+  const [establishedYear, setEstablishedYear] = useState(15);
   const [staffCount, setStaffCount] = useState(0);
   const [achievementCount, setAchievementCount] = useState(0);
 
@@ -25,6 +27,8 @@ export default function HeroSection() {
       .then(([settings, staff, achievements]) => {
         setSchoolName(settings.schoolName);
         setTagline(settings.tagline);
+        setStudentCount(settings.studentCount ? parseInt(settings.studentCount) : 500);
+        setEstablishedYear(settings.establishedYear ? parseInt(settings.establishedYear) : 15);
         setStaffCount(staff.length);
         setAchievementCount(achievements.data.length);
       })
@@ -90,7 +94,7 @@ export default function HeroSection() {
         <ScrollReveal delay={0.35}>
           <div className="grid grid-cols-2 md:grid-cols-4 gap-4 max-w-3xl mx-auto">
             <StatsCounter
-              value={500}
+              value={studentCount}
               suffix="+"
               label="Siswa Aktif"
               icon={Users}
@@ -108,9 +112,9 @@ export default function HeroSection() {
               icon={Trophy}
             />
             <StatsCounter
-              value={15}
-              suffix="+"
-              label="Tahun Berdiri"
+              value={establishedYear}
+              suffix=" Tahun"
+              label="Berdiri"
               icon={Building2}
             />
           </div>
