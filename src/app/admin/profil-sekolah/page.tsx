@@ -64,8 +64,9 @@ export default function ProfilSekolahPage() {
       })
       toast({ type: "success", title: "Profil sekolah disimpan" })
       router.refresh()
-    } catch {
-      toast({ type: "error", title: "Gagal menyimpan" })
+    } catch (err: any) {
+      console.error("Gagal simpan profil:", err)
+      toast({ type: "error", title: "Gagal menyimpan", message: err?.message || String(err) })
     } finally {
       setSaving(false)
     }
