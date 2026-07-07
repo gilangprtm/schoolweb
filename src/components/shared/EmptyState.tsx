@@ -26,7 +26,7 @@ export default function EmptyState({
     <div
       className={cn(
         "flex flex-col items-center justify-center text-center py-16 md:py-20 px-4",
-        className
+        className,
       )}
     >
       <div className="size-20 rounded-full bg-neutral-100 flex items-center justify-center mb-5">
@@ -37,14 +37,6 @@ export default function EmptyState({
       </h3>
       {description && (
         <p className="text-neutral-500 max-w-md mb-6">{description}</p>
-      )}
-      {action && (
-        <Link href={action.href}>
-          <Button variant="outline" className="gap-2 rounded-full">
-            {action.label}
-            <ArrowRight className="size-4" />
-          </Button>
-        </Link>
       )}
     </div>
   );
