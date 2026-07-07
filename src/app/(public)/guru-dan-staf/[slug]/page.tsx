@@ -51,12 +51,11 @@ export default async function StaffDetailPage({
           <div className="bg-white rounded-2xl shadow-card p-6 md:p-8 relative z-10">
             <div className="flex flex-col sm:flex-row gap-6 items-center sm:items-start">
               {/* Photo */}
-              <div className="w-36 h-72 md:w-44 md:h-[22rem] rounded-2xl overflow-hidden shrink-0 shadow-lg">
+              <div className="w-36 aspect-[3/4] md:w-44 rounded-2xl overflow-hidden shrink-0 shadow-lg">
                 <ImageWithFallback
                   src={person.photoUrl}
                   alt={person.name}
-                  aspect="1/2"
-                  rounded="rounded-2xl"
+                  aspect="3/4"
                 />
               </div>
 

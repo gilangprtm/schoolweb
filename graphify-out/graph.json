@@ -37,12 +37,32 @@
     {
       "label": "page.tsx",
       "file_type": "code",
+      "source_file": "src/app/(public)/guru-dan-staf/[slug]/page.tsx",
+      "source_location": "L1",
+      "_origin": "ast",
+      "id": "slug_page",
+      "community": 1,
+      "norm_label": "page.tsx"
+    },
+    {
+      "label": "StaffDetailPage()",
+      "file_type": "code",
+      "source_file": "src/app/(public)/guru-dan-staf/[slug]/page.tsx",
+      "source_location": "L10",
+      "_origin": "ast",
+      "id": "slug_page_staffdetailpage",
+      "community": 1,
+      "norm_label": "staffdetailpage()"
+    },
+    {
+      "label": "page.tsx",
+      "file_type": "code",
       "source_file": "src/app/admin/pengaturan/page.tsx",
       "source_location": "L1",
       "_origin": "ast",
-      "id": "pengaturan_page",
       "community": 3,
-      "norm_label": "page.tsx"
+      "norm_label": "page.tsx",
+      "id": "pengaturan_page"
     },
     {
       "label": "PengaturanPage()",
@@ -50,9 +70,9 @@
       "source_file": "src/app/admin/pengaturan/page.tsx",
       "source_location": "L13",
       "_origin": "ast",
-      "id": "pengaturan_page_pengaturanpage",
       "community": 3,
-      "norm_label": "pengaturanpage()"
+      "norm_label": "pengaturanpage()",
+      "id": "pengaturan_page_pengaturanpage"
     },
     {
       "label": "HeroSection.tsx",
@@ -60,9 +80,9 @@
       "source_file": "src/components/home/HeroSection.tsx",
       "source_location": "L1",
       "_origin": "ast",
-      "id": "home_herosection",
       "community": 1,
-      "norm_label": "herosection.tsx"
+      "norm_label": "herosection.tsx",
+      "id": "home_herosection"
     },
     {
       "label": "HeroSection()",
@@ -70,9 +90,9 @@
       "source_file": "src/components/home/HeroSection.tsx",
       "source_location": "L13",
       "_origin": "ast",
-      "id": "home_herosection_herosection",
       "community": 1,
-      "norm_label": "herosection()"
+      "norm_label": "herosection()",
+      "id": "home_herosection_herosection"
     },
     {
       "label": "settings.ts",
@@ -80,9 +100,9 @@
       "source_file": "src/lib/actions/settings.ts",
       "source_location": "L1",
       "_origin": "ast",
-      "id": "actions_settings",
-      "community": 92,
-      "norm_label": "settings.ts"
+      "community": 1,
+      "norm_label": "settings.ts",
+      "id": "actions_settings"
     },
     {
       "label": "requireSuperAdmin()",
@@ -90,9 +110,9 @@
       "source_file": "src/lib/actions/settings.ts",
       "source_location": "L11",
       "_origin": "ast",
-      "id": "actions_settings_requiresuperadmin",
-      "community": 92,
-      "norm_label": "requiresuperadmin()"
+      "community": 1,
+      "norm_label": "requiresuperadmin()",
+      "id": "actions_settings_requiresuperadmin"
     },
     {
       "label": "getAllSettings()",
@@ -100,9 +120,9 @@
       "source_file": "src/lib/actions/settings.ts",
       "source_location": "L30",
       "_origin": "ast",
-      "id": "actions_settings_getallsettings",
-      "community": 10,
-      "norm_label": "getallsettings()"
+      "community": 1,
+      "norm_label": "getallsettings()",
+      "id": "actions_settings_getallsettings"
     },
     {
       "label": "updateSettings()",
@@ -110,9 +130,9 @@
       "source_file": "src/lib/actions/settings.ts",
       "source_location": "L63",
       "_origin": "ast",
-      "id": "actions_settings_updatesettings",
-      "community": 92,
-      "norm_label": "updatesettings()"
+      "community": 1,
+      "norm_label": "updatesettings()",
+      "id": "actions_settings_updatesettings"
     },
     {
       "label": "index.ts",
@@ -120,9 +140,9 @@
       "source_file": "src/types/index.ts",
       "source_location": "L1",
       "_origin": "ast",
-      "id": "types_index",
-      "community": 88,
-      "norm_label": "index.ts"
+      "community": 87,
+      "norm_label": "index.ts",
+      "id": "types_index"
     },
     {
       "label": "SiteSettings",
@@ -130,9 +150,9 @@
       "source_file": "src/types/index.ts",
       "source_location": "L7",
       "_origin": "ast",
-      "id": "types_index_sitesettings",
-      "community": 92,
-      "norm_label": "sitesettings"
+      "community": 1,
+      "norm_label": "sitesettings",
+      "id": "types_index_sitesettings"
     },
     {
       "label": "Page",
@@ -140,9 +160,9 @@
       "source_file": "src/types/index.ts",
       "source_location": "L30",
       "_origin": "ast",
-      "id": "types_index_page",
-      "community": 131,
-      "norm_label": "page"
+      "community": 92,
+      "norm_label": "page",
+      "id": "types_index_page"
     },
     {
       "label": "PostCategory",
@@ -150,9 +170,9 @@
       "source_file": "src/types/index.ts",
       "source_location": "L39",
       "_origin": "ast",
-      "id": "types_index_postcategory",
-      "community": 88,
-      "norm_label": "postcategory"
+      "community": 87,
+      "norm_label": "postcategory",
+      "id": "types_index_postcategory"
     },
     {
       "label": "Post",
@@ -160,9 +180,9 @@
       "source_file": "src/types/index.ts",
       "source_location": "L41",
       "_origin": "ast",
-      "id": "types_index_post",
-      "community": 88,
-      "norm_label": "post"
+      "community": 113,
+      "norm_label": "post",
+      "id": "types_index_post"
     },
     {
       "label": "StaffRole",
@@ -170,9 +190,9 @@
       "source_file": "src/types/index.ts",
       "source_location": "L54",
       "_origin": "ast",
-      "id": "types_index_staffrole",
-      "community": 88,
-      "norm_label": "staffrole"
+      "community": 87,
+      "norm_label": "staffrole",
+      "id": "types_index_staffrole"
     },
     {
       "label": "Staff",
@@ -180,9 +200,9 @@
       "source_file": "src/types/index.ts",
       "source_location": "L56",
       "_origin": "ast",
-      "id": "types_index_staff",
-      "community": 112,
-      "norm_label": "staff"
+      "community": 87,
+      "norm_label": "staff",
+      "id": "types_index_staff"
     },
     {
       "label": "AchievementCategory",
@@ -190,9 +210,9 @@
       "source_file": "src/types/index.ts",
       "source_location": "L72",
       "_origin": "ast",
-      "id": "types_index_achievementcategory",
-      "community": 88,
-      "norm_label": "achievementcategory"
+      "community": 87,
+      "norm_label": "achievementcategory",
+      "id": "types_index_achievementcategory"
     },
     {
       "label": "AchievementLevel",
@@ -200,9 +220,9 @@
       "source_file": "src/types/index.ts",
       "source_location": "L73",
       "_origin": "ast",
-      "id": "types_index_achievementlevel",
       "community": 87,
-      "norm_label": "achievementlevel"
+      "norm_label": "achievementlevel",
+      "id": "types_index_achievementlevel"
     },
     {
       "label": "AchievementChampion",
@@ -210,9 +230,9 @@
       "source_file": "src/types/index.ts",
       "source_location": "L79",
       "_origin": "ast",
-      "id": "types_index_achievementchampion",
       "community": 87,
-      "norm_label": "achievementchampion"
+      "norm_label": "achievementchampion",
+      "id": "types_index_achievementchampion"
     },
     {
       "label": "Achievement",
@@ -220,9 +240,9 @@
       "source_file": "src/types/index.ts",
       "source_location": "L81",
       "_origin": "ast",
-      "id": "types_index_achievement",
-      "community": 87,
-      "norm_label": "achievement"
+      "community": 113,
+      "norm_label": "achievement",
+      "id": "types_index_achievement"
     },
     {
       "label": "FacilityCategory",
@@ -230,9 +250,9 @@
       "source_file": "src/types/index.ts",
       "source_location": "L97",
       "_origin": "ast",
-      "id": "types_index_facilitycategory",
-      "community": 102,
-      "norm_label": "facilitycategory"
+      "community": 87,
+      "norm_label": "facilitycategory",
+      "id": "types_index_facilitycategory"
     },
     {
       "label": "Facility",
@@ -240,9 +260,9 @@
       "source_file": "src/types/index.ts",
       "source_location": "L105",
       "_origin": "ast",
-      "id": "types_index_facility",
-      "community": 102,
-      "norm_label": "facility"
+      "community": 113,
+      "norm_label": "facility",
+      "id": "types_index_facility"
     },
     {
       "label": "FacilityPhoto",
@@ -250,9 +270,9 @@
       "source_file": "src/types/index.ts",
       "source_location": "L118",
       "_origin": "ast",
-      "id": "types_index_facilityphoto",
-      "community": 88,
-      "norm_label": "facilityphoto"
+      "community": 87,
+      "norm_label": "facilityphoto",
+      "id": "types_index_facilityphoto"
     },
     {
       "label": "GalleryType",
@@ -260,9 +280,9 @@
       "source_file": "src/types/index.ts",
       "source_location": "L128",
       "_origin": "ast",
-      "id": "types_index_gallerytype",
-      "community": 88,
-      "norm_label": "gallerytype"
+      "community": 87,
+      "norm_label": "gallerytype",
+      "id": "types_index_gallerytype"
     },
     {
       "label": "Gallery",
@@ -270,9 +290,9 @@
       "source_file": "src/types/index.ts",
       "source_location": "L130",
       "_origin": "ast",
-      "id": "types_index_gallery",
-      "community": 3,
-      "norm_label": "gallery"
+      "community": 127,
+      "norm_label": "gallery",
+      "id": "types_index_gallery"
     },
     {
       "label": "Media",
@@ -280,9 +300,9 @@
       "source_file": "src/types/index.ts",
       "source_location": "L139",
       "_origin": "ast",
-      "id": "types_index_media",
       "community": 127,
-      "norm_label": "media"
+      "norm_label": "media",
+      "id": "types_index_media"
     },
     {
       "label": "ContactMessage",
@@ -290,9 +310,9 @@
       "source_file": "src/types/index.ts",
       "source_location": "L149",
       "_origin": "ast",
-      "id": "types_index_contactmessage",
-      "community": 88,
-      "norm_label": "contactmessage"
+      "community": 87,
+      "norm_label": "contactmessage",
+      "id": "types_index_contactmessage"
     },
     {
       "label": "UserRole",
@@ -300,9 +320,9 @@
       "source_file": "src/types/index.ts",
       "source_location": "L157",
       "_origin": "ast",
-      "id": "types_index_userrole",
-      "community": 88,
-      "norm_label": "userrole"
+      "community": 87,
+      "norm_label": "userrole",
+      "id": "types_index_userrole"
     },
     {
       "label": "User",
@@ -310,9 +330,9 @@
       "source_file": "src/types/index.ts",
       "source_location": "L159",
       "_origin": "ast",
-      "id": "types_index_user",
-      "community": 88,
-      "norm_label": "user"
+      "community": 87,
+      "norm_label": "user",
+      "id": "types_index_user"
     },
     {
       "label": "page.tsx",
@@ -390,7 +410,7 @@
       "source_file": "src/lib/db/schema.ts",
       "source_location": "L74",
       "_origin": "ast",
-      "community": 101,
+      "community": 92,
       "norm_label": "pages",
       "id": "db_schema_pages"
     },
@@ -410,7 +430,7 @@
       "source_file": "src/lib/db/schema.ts",
       "source_location": "L102",
       "_origin": "ast",
-      "community": 125,
+      "community": 1,
       "norm_label": "staff",
       "id": "db_schema_staff"
     },
@@ -420,7 +440,7 @@
       "source_file": "src/lib/db/schema.ts",
       "source_location": "L123",
       "_origin": "ast",
-      "community": 130,
+      "community": 101,
       "norm_label": "achievements",
       "id": "db_schema_achievements"
     },
@@ -480,7 +500,7 @@
       "source_file": "src/lib/db/schema.ts",
       "source_location": "L202",
       "_origin": "ast",
-      "community": 92,
+      "community": 1,
       "norm_label": "settings",
       "id": "db_schema_settings"
     },
@@ -3240,7 +3260,7 @@
       "source_file": "src/components/admin/StatCard.tsx",
       "source_location": "L1",
       "_origin": "ast",
-      "community": 133,
+      "community": 96,
       "norm_label": "statcard.tsx",
       "id": "admin_statcard"
     },
@@ -3250,7 +3270,7 @@
       "source_file": "src/components/admin/StatCard.tsx",
       "source_location": "L4",
       "_origin": "ast",
-      "community": 133,
+      "community": 96,
       "norm_label": "statcardprops",
       "id": "admin_statcard_statcardprops"
     },
@@ -3260,7 +3280,7 @@
       "source_file": "src/components/admin/StatCard.tsx",
       "source_location": "L12",
       "_origin": "ast",
-      "community": 133,
+      "community": 96,
       "norm_label": "statcard()",
       "id": "admin_statcard_statcard"
     },
@@ -5058,7 +5078,7 @@
       "source_file": "src/app/(public)/berita/[slug]/page.tsx",
       "source_location": "L1",
       "_origin": "ast",
-      "community": 129,
+      "community": 87,
       "norm_label": "page.tsx",
       "id": "src_app_public_berita_slug_page_tsx_slug_page"
     },
@@ -5068,7 +5088,7 @@
       "source_file": "src/app/(public)/berita/[slug]/page.tsx",
       "source_location": "L11",
       "_origin": "ast",
-      "community": 129,
+      "community": 87,
       "norm_label": "beritadetailpage()",
       "id": "slug_page_beritadetailpage"
     },
@@ -5078,7 +5098,7 @@
       "source_file": "src/app/(public)/berita/page.tsx",
       "source_location": "L1",
       "_origin": "ast",
-      "community": 114,
+      "community": 87,
       "norm_label": "page.tsx",
       "id": "src_app_public_berita_page_tsx_berita_page"
     },
@@ -5088,7 +5108,7 @@
       "source_file": "src/app/(public)/berita/page.tsx",
       "source_location": "L4",
       "_origin": "ast",
-      "community": 114,
+      "community": 87,
       "norm_label": "beritapage()",
       "id": "src_app_public_berita_page_tsx_berita_page_beritapage"
     },
@@ -5098,7 +5118,7 @@
       "source_file": "src/app/(public)/fasilitas/[slug]/page.tsx",
       "source_location": "L1",
       "_origin": "ast",
-      "community": 102,
+      "community": 87,
       "norm_label": "page.tsx",
       "id": "src_app_public_fasilitas_slug_page_tsx_slug_page"
     },
@@ -5108,7 +5128,7 @@
       "source_file": "src/app/(public)/fasilitas/[slug]/page.tsx",
       "source_location": "L13",
       "_origin": "ast",
-      "community": 102,
+      "community": 87,
       "norm_label": "facilitydetailpage()",
       "id": "slug_page_facilitydetailpage"
     },
@@ -5118,7 +5138,7 @@
       "source_file": "src/app/(public)/fasilitas/page.tsx",
       "source_location": "L1",
       "_origin": "ast",
-      "community": 102,
+      "community": 87,
       "norm_label": "page.tsx",
       "id": "src_app_public_fasilitas_page_tsx_fasilitas_page"
     },
@@ -5128,7 +5148,7 @@
       "source_file": "src/app/(public)/fasilitas/page.tsx",
       "source_location": "L16",
       "_origin": "ast",
-      "community": 102,
+      "community": 87,
       "norm_label": "category_filters",
       "id": "fasilitas_page_category_filters"
     },
@@ -5138,7 +5158,7 @@
       "source_file": "src/app/(public)/fasilitas/page.tsx",
       "source_location": "L26",
       "_origin": "ast",
-      "community": 102,
+      "community": 87,
       "norm_label": "fasilitaspage()",
       "id": "src_app_public_fasilitas_page_tsx_fasilitas_page_fasilitaspage"
     },
@@ -5185,30 +5205,10 @@
     {
       "label": "page.tsx",
       "file_type": "code",
-      "source_file": "src/app/(public)/guru-dan-staf/[slug]/page.tsx",
-      "source_location": "L1",
-      "_origin": "ast",
-      "community": 129,
-      "norm_label": "page.tsx",
-      "id": "src_app_public_guru_dan_staf_slug_page_tsx_slug_page"
-    },
-    {
-      "label": "StaffDetailPage()",
-      "file_type": "code",
-      "source_file": "src/app/(public)/guru-dan-staf/[slug]/page.tsx",
-      "source_location": "L10",
-      "_origin": "ast",
-      "community": 129,
-      "norm_label": "staffdetailpage()",
-      "id": "slug_page_staffdetailpage"
-    },
-    {
-      "label": "page.tsx",
-      "file_type": "code",
       "source_file": "src/app/(public)/guru-dan-staf/page.tsx",
       "source_location": "L1",
       "_origin": "ast",
-      "community": 112,
+      "community": 87,
       "norm_label": "page.tsx",
       "id": "guru_dan_staf_page"
     },
@@ -5218,7 +5218,7 @@
       "source_file": "src/app/(public)/guru-dan-staf/page.tsx",
       "source_location": "L15",
       "_origin": "ast",
-      "community": 112,
+      "community": 87,
       "norm_label": "role_filters",
       "id": "guru_dan_staf_page_role_filters"
     },
@@ -5228,7 +5228,7 @@
       "source_file": "src/app/(public)/guru-dan-staf/page.tsx",
       "source_location": "L22",
       "_origin": "ast",
-      "community": 112,
+      "community": 87,
       "norm_label": "gurustaffpage()",
       "id": "guru_dan_staf_page_gurustaffpage"
     },
@@ -5238,7 +5238,7 @@
       "source_file": "src/app/(public)/guru-dan-staf/page.tsx",
       "source_location": "L144",
       "_origin": "ast",
-      "community": 112,
+      "community": 87,
       "norm_label": "staffcard()",
       "id": "guru_dan_staf_page_staffcard"
     },
@@ -5248,7 +5248,7 @@
       "source_file": "src/app/(public)/kontak/page.tsx",
       "source_location": "L1",
       "_origin": "ast",
-      "community": 99,
+      "community": 1,
       "norm_label": "page.tsx",
       "id": "kontak_page"
     },
@@ -5258,7 +5258,7 @@
       "source_file": "src/app/(public)/kontak/page.tsx",
       "source_location": "L14",
       "_origin": "ast",
-      "community": 99,
+      "community": 1,
       "norm_label": "kontakpage()",
       "id": "kontak_page_kontakpage"
     },
@@ -5268,7 +5268,7 @@
       "source_file": "src/app/(public)/kontak/page.tsx",
       "source_location": "L213",
       "_origin": "ast",
-      "community": 99,
+      "community": 1,
       "norm_label": "contactitem()",
       "id": "kontak_page_contactitem"
     },
@@ -5488,7 +5488,7 @@
       "source_file": "src/app/admin/galeri/page.tsx",
       "source_location": "L1",
       "_origin": "ast",
-      "community": 3,
+      "community": 113,
       "norm_label": "page.tsx",
       "id": "src_app_admin_galeri_page_tsx_galeri_page"
     },
@@ -5498,7 +5498,7 @@
       "source_file": "src/app/admin/galeri/page.tsx",
       "source_location": "L13",
       "_origin": "ast",
-      "community": 3,
+      "community": 113,
       "norm_label": "galeripage()",
       "id": "src_app_admin_galeri_page_tsx_galeri_page_galeripage"
     },
@@ -5548,7 +5548,7 @@
       "source_file": "src/app/admin/halaman/page.tsx",
       "source_location": "L1",
       "_origin": "ast",
-      "community": 131,
+      "community": 92,
       "norm_label": "page.tsx",
       "id": "halaman_page"
     },
@@ -5558,7 +5558,7 @@
       "source_file": "src/app/admin/halaman/page.tsx",
       "source_location": "L10",
       "_origin": "ast",
-      "community": 131,
+      "community": 92,
       "norm_label": "halamanpage()",
       "id": "halaman_page_halamanpage"
     },
@@ -5958,7 +5958,7 @@
       "source_file": "src/components/berita/NewsGrid.tsx",
       "source_location": "L1",
       "_origin": "ast",
-      "community": 88,
+      "community": 87,
       "norm_label": "newsgrid.tsx",
       "id": "berita_newsgrid"
     },
@@ -5968,7 +5968,7 @@
       "source_file": "src/components/berita/NewsGrid.tsx",
       "source_location": "L17",
       "_origin": "ast",
-      "community": 88,
+      "community": 87,
       "norm_label": "category_filters",
       "id": "berita_newsgrid_category_filters"
     },
@@ -5978,7 +5978,7 @@
       "source_file": "src/components/berita/NewsGrid.tsx",
       "source_location": "L25",
       "_origin": "ast",
-      "community": 88,
+      "community": 87,
       "norm_label": "newsgrid()",
       "id": "berita_newsgrid_newsgrid"
     },
@@ -5988,7 +5988,7 @@
       "source_file": "src/components/fasilitas/FacilityGallery.tsx",
       "source_location": "L1",
       "_origin": "ast",
-      "community": 88,
+      "community": 87,
       "norm_label": "facilitygallery.tsx",
       "id": "fasilitas_facilitygallery"
     },
@@ -5998,7 +5998,7 @@
       "source_file": "src/components/fasilitas/FacilityGallery.tsx",
       "source_location": "L8",
       "_origin": "ast",
-      "community": 88,
+      "community": 87,
       "norm_label": "facilitygalleryprops",
       "id": "fasilitas_facilitygallery_facilitygalleryprops"
     },
@@ -6008,7 +6008,7 @@
       "source_file": "src/components/fasilitas/FacilityGallery.tsx",
       "source_location": "L12",
       "_origin": "ast",
-      "community": 88,
+      "community": 87,
       "norm_label": "facilitygallery()",
       "id": "fasilitas_facilitygallery_facilitygallery"
     },
@@ -6038,7 +6038,7 @@
       "source_file": "src/components/home/FacilityHighlight.tsx",
       "source_location": "L1",
       "_origin": "ast",
-      "community": 102,
+      "community": 87,
       "norm_label": "facilityhighlight.tsx",
       "id": "home_facilityhighlight"
     },
@@ -6048,7 +6048,7 @@
       "source_file": "src/components/home/FacilityHighlight.tsx",
       "source_location": "L12",
       "_origin": "ast",
-      "community": 102,
+      "community": 87,
       "norm_label": "facilityhighlight()",
       "id": "home_facilityhighlight_facilityhighlight"
     },
@@ -6078,7 +6078,7 @@
       "source_file": "src/components/home/NewsSection.tsx",
       "source_location": "L1",
       "_origin": "ast",
-      "community": 129,
+      "community": 87,
       "norm_label": "newssection.tsx",
       "id": "home_newssection"
     },
@@ -6088,7 +6088,7 @@
       "source_file": "src/components/home/NewsSection.tsx",
       "source_location": "L11",
       "_origin": "ast",
-      "community": 129,
+      "community": 87,
       "norm_label": "newssection()",
       "id": "home_newssection_newssection"
     },
@@ -6098,7 +6098,7 @@
       "source_file": "src/components/home/WelcomeSection.tsx",
       "source_location": "L1",
       "_origin": "ast",
-      "community": 1,
+      "community": 87,
       "norm_label": "welcomesection.tsx",
       "id": "home_welcomesection"
     },
@@ -6118,7 +6118,7 @@
       "source_file": "src/components/layout/MobileMenu.tsx",
       "source_location": "L1",
       "_origin": "ast",
-      "community": 10,
+      "community": 88,
       "norm_label": "mobilemenu.tsx",
       "id": "layout_mobilemenu"
     },
@@ -6128,7 +6128,7 @@
       "source_file": "src/components/layout/MobileMenu.tsx",
       "source_location": "L10",
       "_origin": "ast",
-      "community": 10,
+      "community": 88,
       "norm_label": "navitem",
       "id": "layout_mobilemenu_navitem"
     },
@@ -6138,7 +6138,7 @@
       "source_file": "src/components/layout/MobileMenu.tsx",
       "source_location": "L16",
       "_origin": "ast",
-      "community": 10,
+      "community": 88,
       "norm_label": "mobilemenuprops",
       "id": "layout_mobilemenu_mobilemenuprops"
     },
@@ -6148,7 +6148,7 @@
       "source_file": "src/components/layout/MobileMenu.tsx",
       "source_location": "L23",
       "_origin": "ast",
-      "community": 10,
+      "community": 88,
       "norm_label": "mobilemenu()",
       "id": "layout_mobilemenu_mobilemenu"
     },
@@ -6158,7 +6158,7 @@
       "source_file": "src/components/layout/Navbar.tsx",
       "source_location": "L1",
       "_origin": "ast",
-      "community": 10,
+      "community": 88,
       "norm_label": "navbar.tsx",
       "id": "layout_navbar"
     },
@@ -6168,7 +6168,7 @@
       "source_file": "src/components/layout/Navbar.tsx",
       "source_location": "L13",
       "_origin": "ast",
-      "community": 10,
+      "community": 88,
       "norm_label": "nav_items",
       "id": "layout_navbar_nav_items"
     },
@@ -6178,7 +6178,7 @@
       "source_file": "src/components/layout/Navbar.tsx",
       "source_location": "L30",
       "_origin": "ast",
-      "community": 10,
+      "community": 88,
       "norm_label": "navbar()",
       "id": "layout_navbar_navbar"
     },
@@ -6208,7 +6208,7 @@
       "source_file": "src/components/shared/Badge.tsx",
       "source_location": "L1",
       "_origin": "ast",
-      "community": 129,
+      "community": 87,
       "norm_label": "badge.tsx",
       "id": "shared_badge"
     },
@@ -6218,7 +6218,7 @@
       "source_file": "src/components/shared/Badge.tsx",
       "source_location": "L4",
       "_origin": "ast",
-      "community": 129,
+      "community": 87,
       "norm_label": "badgeprops",
       "id": "shared_badge_badgeprops"
     },
@@ -6228,7 +6228,7 @@
       "source_file": "src/components/shared/Badge.tsx",
       "source_location": "L10",
       "_origin": "ast",
-      "community": 129,
+      "community": 87,
       "norm_label": "variantstyles",
       "id": "shared_badge_variantstyles"
     },
@@ -6238,7 +6238,7 @@
       "source_file": "src/components/shared/Badge.tsx",
       "source_location": "L19",
       "_origin": "ast",
-      "community": 129,
+      "community": 87,
       "norm_label": "badge()",
       "id": "shared_badge_badge"
     },
@@ -6248,7 +6248,7 @@
       "source_file": "src/components/shared/Breadcrumb.tsx",
       "source_location": "L1",
       "_origin": "ast",
-      "community": 114,
+      "community": 87,
       "norm_label": "breadcrumb.tsx",
       "id": "shared_breadcrumb"
     },
@@ -6258,7 +6258,7 @@
       "source_file": "src/components/shared/Breadcrumb.tsx",
       "source_location": "L5",
       "_origin": "ast",
-      "community": 114,
+      "community": 87,
       "norm_label": "breadcrumbitem",
       "id": "shared_breadcrumb_breadcrumbitem"
     },
@@ -6268,7 +6268,7 @@
       "source_file": "src/components/shared/Breadcrumb.tsx",
       "source_location": "L10",
       "_origin": "ast",
-      "community": 114,
+      "community": 87,
       "norm_label": "breadcrumbprops",
       "id": "shared_breadcrumb_breadcrumbprops"
     },
@@ -6278,7 +6278,7 @@
       "source_file": "src/components/shared/Breadcrumb.tsx",
       "source_location": "L15",
       "_origin": "ast",
-      "community": 0,
+      "community": 87,
       "norm_label": "breadcrumb()",
       "id": "shared_breadcrumb_breadcrumb"
     },
@@ -6318,7 +6318,7 @@
       "source_file": "src/components/shared/EmptyState.tsx",
       "source_location": "L1",
       "_origin": "ast",
-      "community": 112,
+      "community": 87,
       "norm_label": "emptystate.tsx",
       "id": "shared_emptystate"
     },
@@ -6328,7 +6328,7 @@
       "source_file": "src/components/shared/EmptyState.tsx",
       "source_location": "L7",
       "_origin": "ast",
-      "community": 112,
+      "community": 87,
       "norm_label": "emptystateprops",
       "id": "shared_emptystate_emptystateprops"
     },
@@ -6348,7 +6348,7 @@
       "source_file": "src/components/shared/FilterPills.tsx",
       "source_location": "L1",
       "_origin": "ast",
-      "community": 112,
+      "community": 87,
       "norm_label": "filterpills.tsx",
       "id": "shared_filterpills"
     },
@@ -6358,7 +6358,7 @@
       "source_file": "src/components/shared/FilterPills.tsx",
       "source_location": "L6",
       "_origin": "ast",
-      "community": 112,
+      "community": 87,
       "norm_label": "filterpill",
       "id": "shared_filterpills_filterpill"
     },
@@ -6368,7 +6368,7 @@
       "source_file": "src/components/shared/FilterPills.tsx",
       "source_location": "L11",
       "_origin": "ast",
-      "community": 112,
+      "community": 87,
       "norm_label": "filterpillsprops",
       "id": "shared_filterpills_filterpillsprops"
     },
@@ -6378,7 +6378,7 @@
       "source_file": "src/components/shared/FilterPills.tsx",
       "source_location": "L18",
       "_origin": "ast",
-      "community": 0,
+      "community": 87,
       "norm_label": "filterpills()",
       "id": "shared_filterpills_filterpills"
     },
@@ -6388,7 +6388,7 @@
       "source_file": "src/components/shared/ImageWithFallback.tsx",
       "source_location": "L1",
       "_origin": "ast",
-      "community": 102,
+      "community": 87,
       "norm_label": "imagewithfallback.tsx",
       "id": "shared_imagewithfallback"
     },
@@ -6398,7 +6398,7 @@
       "source_file": "src/components/shared/ImageWithFallback.tsx",
       "source_location": "L8",
       "_origin": "ast",
-      "community": 102,
+      "community": 87,
       "norm_label": "imagewithfallbackprops",
       "id": "shared_imagewithfallback_imagewithfallbackprops"
     },
@@ -6418,7 +6418,7 @@
       "source_file": "src/components/shared/MiniHeroBanner.tsx",
       "source_location": "L1",
       "_origin": "ast",
-      "community": 114,
+      "community": 87,
       "norm_label": "miniherobanner.tsx",
       "id": "shared_miniherobanner"
     },
@@ -6428,7 +6428,7 @@
       "source_file": "src/components/shared/MiniHeroBanner.tsx",
       "source_location": "L5",
       "_origin": "ast",
-      "community": 114,
+      "community": 87,
       "norm_label": "miniherobannerprops",
       "id": "shared_miniherobanner_miniherobannerprops"
     },
@@ -6438,7 +6438,7 @@
       "source_file": "src/components/shared/MiniHeroBanner.tsx",
       "source_location": "L12",
       "_origin": "ast",
-      "community": 0,
+      "community": 87,
       "norm_label": "miniherobanner()",
       "id": "shared_miniherobanner_miniherobanner"
     },
@@ -6448,7 +6448,7 @@
       "source_file": "src/components/shared/Pagination.tsx",
       "source_location": "L1",
       "_origin": "ast",
-      "community": 0,
+      "community": 87,
       "norm_label": "pagination.tsx",
       "id": "shared_pagination"
     },
@@ -6458,7 +6458,7 @@
       "source_file": "src/components/shared/Pagination.tsx",
       "source_location": "L7",
       "_origin": "ast",
-      "community": 0,
+      "community": 87,
       "norm_label": "paginationprops",
       "id": "shared_pagination_paginationprops"
     },
@@ -6478,7 +6478,7 @@
       "source_file": "src/components/shared/ScrollReveal.tsx",
       "source_location": "L1",
       "_origin": "ast",
-      "community": 1,
+      "community": 87,
       "norm_label": "scrollreveal.tsx",
       "id": "shared_scrollreveal"
     },
@@ -6488,7 +6488,7 @@
       "source_file": "src/components/shared/ScrollReveal.tsx",
       "source_location": "L7",
       "_origin": "ast",
-      "community": 1,
+      "community": 87,
       "norm_label": "scrollrevealprops",
       "id": "shared_scrollreveal_scrollrevealprops"
     },
@@ -6498,7 +6498,7 @@
       "source_file": "src/components/shared/ScrollReveal.tsx",
       "source_location": "L16",
       "_origin": "ast",
-      "community": 1,
+      "community": 87,
       "norm_label": "directionmap",
       "id": "shared_scrollreveal_directionmap"
     },
@@ -6508,7 +6508,7 @@
       "source_file": "src/components/shared/ScrollReveal.tsx",
       "source_location": "L24",
       "_origin": "ast",
-      "community": 1,
+      "community": 87,
       "norm_label": "scrollreveal()",
       "id": "shared_scrollreveal_scrollreveal"
     },
@@ -6518,7 +6518,7 @@
       "source_file": "src/components/shared/SectionHeading.tsx",
       "source_location": "L1",
       "_origin": "ast",
-      "community": 1,
+      "community": 87,
       "norm_label": "sectionheading.tsx",
       "id": "shared_sectionheading"
     },
@@ -6528,7 +6528,7 @@
       "source_file": "src/components/shared/SectionHeading.tsx",
       "source_location": "L3",
       "_origin": "ast",
-      "community": 1,
+      "community": 87,
       "norm_label": "sectionheadingprops",
       "id": "shared_sectionheading_sectionheadingprops"
     },
@@ -6578,7 +6578,7 @@
       "source_file": "src/components/ui/badge.tsx",
       "source_location": "L1",
       "_origin": "ast",
-      "community": 0,
+      "community": 102,
       "norm_label": "badge.tsx",
       "id": "src_components_ui_badge_tsx_ui_badge"
     },
@@ -6588,7 +6588,7 @@
       "source_file": "src/components/ui/badge.tsx",
       "source_location": "L7",
       "_origin": "ast",
-      "community": 0,
+      "community": 102,
       "norm_label": "badgevariants",
       "id": "ui_badge_badgevariants"
     },
@@ -6598,7 +6598,7 @@
       "source_file": "src/components/ui/badge.tsx",
       "source_location": "L30",
       "_origin": "ast",
-      "community": 0,
+      "community": 102,
       "norm_label": "badge()",
       "id": "src_components_ui_badge_tsx_ui_badge_badge"
     },
@@ -6648,7 +6648,7 @@
       "source_file": "src/components/ui/card.tsx",
       "source_location": "L49",
       "_origin": "ast",
-      "community": 96,
+      "community": 0,
       "norm_label": "carddescription()",
       "id": "ui_card_carddescription"
     },
@@ -6658,7 +6658,7 @@
       "source_file": "src/components/ui/card.tsx",
       "source_location": "L59",
       "_origin": "ast",
-      "community": 96,
+      "community": 0,
       "norm_label": "cardaction()",
       "id": "ui_card_cardaction"
     },
@@ -6678,7 +6678,7 @@
       "source_file": "src/components/ui/card.tsx",
       "source_location": "L82",
       "_origin": "ast",
-      "community": 96,
+      "community": 0,
       "norm_label": "cardfooter()",
       "id": "ui_card_cardfooter"
     },
@@ -6768,7 +6768,7 @@
       "source_file": "src/components/ui/textarea.tsx",
       "source_location": "L1",
       "_origin": "ast",
-      "community": 99,
+      "community": 1,
       "norm_label": "textarea.tsx",
       "id": "ui_textarea"
     },
@@ -6778,7 +6778,7 @@
       "source_file": "src/components/ui/textarea.tsx",
       "source_location": "L5",
       "_origin": "ast",
-      "community": 99,
+      "community": 1,
       "norm_label": "textarea()",
       "id": "ui_textarea_textarea"
     },
@@ -6788,7 +6788,7 @@
       "source_file": "src/lib/actions/achievements.ts",
       "source_location": "L1",
       "_origin": "ast",
-      "community": 130,
+      "community": 87,
       "norm_label": "achievements.ts",
       "id": "actions_achievements"
     },
@@ -6798,7 +6798,7 @@
       "source_file": "src/lib/actions/achievements.ts",
       "source_location": "L15",
       "_origin": "ast",
-      "community": 130,
+      "community": 87,
       "norm_label": "requireauth()",
       "id": "actions_achievements_requireauth"
     },
@@ -6828,7 +6828,7 @@
       "source_file": "src/lib/actions/achievements.ts",
       "source_location": "L87",
       "_origin": "ast",
-      "community": 130,
+      "community": 87,
       "norm_label": "getachievementbyid()",
       "id": "actions_achievements_getachievementbyid"
     },
@@ -6848,7 +6848,7 @@
       "source_file": "src/lib/actions/achievements.ts",
       "source_location": "L110",
       "_origin": "ast",
-      "community": 130,
+      "community": 96,
       "norm_label": "getachievementcount()",
       "id": "actions_achievements_getachievementcount"
     },
@@ -6858,7 +6858,7 @@
       "source_file": "src/lib/actions/achievements.ts",
       "source_location": "L120",
       "_origin": "ast",
-      "community": 130,
+      "community": 87,
       "norm_label": "createachievement()",
       "id": "actions_achievements_createachievement"
     },
@@ -6868,7 +6868,7 @@
       "source_file": "src/lib/actions/achievements.ts",
       "source_location": "L145",
       "_origin": "ast",
-      "community": 130,
+      "community": 87,
       "norm_label": "updateachievement()",
       "id": "actions_achievements_updateachievement"
     },
@@ -6878,7 +6878,7 @@
       "source_file": "src/lib/actions/achievements.ts",
       "source_location": "L185",
       "_origin": "ast",
-      "community": 130,
+      "community": 87,
       "norm_label": "deleteachievement()",
       "id": "actions_achievements_deleteachievement"
     },
@@ -6908,7 +6908,7 @@
       "source_file": "src/lib/actions/contacts.ts",
       "source_location": "L23",
       "_origin": "ast",
-      "community": 99,
+      "community": 1,
       "norm_label": "createcontact()",
       "id": "actions_contacts_createcontact"
     },
@@ -6998,7 +6998,7 @@
       "source_file": "src/lib/actions/facilities.ts",
       "source_location": "L25",
       "_origin": "ast",
-      "community": 102,
+      "community": 87,
       "norm_label": "getfacilities()",
       "id": "actions_facilities_getfacilities"
     },
@@ -7008,7 +7008,7 @@
       "source_file": "src/lib/actions/facilities.ts",
       "source_location": "L58",
       "_origin": "ast",
-      "community": 102,
+      "community": 87,
       "norm_label": "getfacilitybyslug()",
       "id": "actions_facilities_getfacilitybyslug"
     },
@@ -7028,7 +7028,7 @@
       "source_file": "src/lib/actions/facilities.ts",
       "source_location": "L96",
       "_origin": "ast",
-      "community": 102,
+      "community": 87,
       "norm_label": "getfeaturedfacilities()",
       "id": "actions_facilities_getfeaturedfacilities"
     },
@@ -7118,7 +7118,7 @@
       "source_file": "src/lib/actions/galleries.ts",
       "source_location": "L25",
       "_origin": "ast",
-      "community": 3,
+      "community": 127,
       "norm_label": "getgalleries()",
       "id": "actions_galleries_getgalleries"
     },
@@ -7228,7 +7228,7 @@
       "source_file": "src/lib/actions/pages.ts",
       "source_location": "L1",
       "_origin": "ast",
-      "community": 101,
+      "community": 92,
       "norm_label": "pages.ts",
       "id": "actions_pages"
     },
@@ -7238,7 +7238,7 @@
       "source_file": "src/lib/actions/pages.ts",
       "source_location": "L12",
       "_origin": "ast",
-      "community": 101,
+      "community": 92,
       "norm_label": "requireauth()",
       "id": "actions_pages_requireauth"
     },
@@ -7248,7 +7248,7 @@
       "source_file": "src/lib/actions/pages.ts",
       "source_location": "L24",
       "_origin": "ast",
-      "community": 101,
+      "community": 127,
       "norm_label": "getpagebyslug()",
       "id": "actions_pages_getpagebyslug"
     },
@@ -7258,7 +7258,7 @@
       "source_file": "src/lib/actions/pages.ts",
       "source_location": "L33",
       "_origin": "ast",
-      "community": 131,
+      "community": 92,
       "norm_label": "getallpages()",
       "id": "actions_pages_getallpages"
     },
@@ -7268,7 +7268,7 @@
       "source_file": "src/lib/actions/pages.ts",
       "source_location": "L37",
       "_origin": "ast",
-      "community": 101,
+      "community": 92,
       "norm_label": "getpagebyid()",
       "id": "actions_pages_getpagebyid"
     },
@@ -7278,7 +7278,7 @@
       "source_file": "src/lib/actions/pages.ts",
       "source_location": "L48",
       "_origin": "ast",
-      "community": 101,
+      "community": 92,
       "norm_label": "updatepage()",
       "id": "actions_pages_updatepage"
     },
@@ -7328,7 +7328,7 @@
       "source_file": "src/lib/actions/posts.ts",
       "source_location": "L81",
       "_origin": "ast",
-      "community": 129,
+      "community": 87,
       "norm_label": "getpostbyslug()",
       "id": "actions_posts_getpostbyslug"
     },
@@ -7338,7 +7338,7 @@
       "source_file": "src/lib/actions/posts.ts",
       "source_location": "L90",
       "_origin": "ast",
-      "community": 129,
+      "community": 87,
       "norm_label": "getlatestposts()",
       "id": "actions_posts_getlatestposts"
     },
@@ -7388,7 +7388,7 @@
       "source_file": "src/lib/actions/staff.ts",
       "source_location": "L1",
       "_origin": "ast",
-      "community": 125,
+      "community": 1,
       "norm_label": "staff.ts",
       "id": "actions_staff"
     },
@@ -7398,7 +7398,7 @@
       "source_file": "src/lib/actions/staff.ts",
       "source_location": "L12",
       "_origin": "ast",
-      "community": 125,
+      "community": 1,
       "norm_label": "requireauth()",
       "id": "actions_staff_requireauth"
     },
@@ -7418,7 +7418,7 @@
       "source_file": "src/lib/actions/staff.ts",
       "source_location": "L32",
       "_origin": "ast",
-      "community": 129,
+      "community": 1,
       "norm_label": "getstaffbyslug()",
       "id": "actions_staff_getstaffbyslug"
     },
@@ -7428,7 +7428,7 @@
       "source_file": "src/lib/actions/staff.ts",
       "source_location": "L41",
       "_origin": "ast",
-      "community": 125,
+      "community": 1,
       "norm_label": "getstaffbyid()",
       "id": "actions_staff_getstaffbyid"
     },
@@ -7448,7 +7448,7 @@
       "source_file": "src/lib/actions/staff.ts",
       "source_location": "L78",
       "_origin": "ast",
-      "community": 125,
+      "community": 1,
       "norm_label": "getstaffcount()",
       "id": "actions_staff_getstaffcount"
     },
@@ -7458,7 +7458,7 @@
       "source_file": "src/lib/actions/staff.ts",
       "source_location": "L88",
       "_origin": "ast",
-      "community": 125,
+      "community": 1,
       "norm_label": "createstaff()",
       "id": "actions_staff_createstaff"
     },
@@ -7468,7 +7468,7 @@
       "source_file": "src/lib/actions/staff.ts",
       "source_location": "L104",
       "_origin": "ast",
-      "community": 125,
+      "community": 1,
       "norm_label": "updatestaff()",
       "id": "actions_staff_updatestaff"
     },
@@ -7478,7 +7478,7 @@
       "source_file": "src/lib/actions/staff.ts",
       "source_location": "L134",
       "_origin": "ast",
-      "community": 125,
+      "community": 1,
       "norm_label": "deletestaff()",
       "id": "actions_staff_deletestaff"
     },
@@ -7638,7 +7638,7 @@
       "source_file": "src/lib/db/index.ts",
       "source_location": "L14",
       "_origin": "ast",
-      "community": 90,
+      "community": 92,
       "norm_label": "db",
       "id": "db_index_db"
     },
@@ -7818,7 +7818,7 @@
       "source_file": "src/lib/utils.ts",
       "source_location": "L19",
       "_origin": "ast",
-      "community": 129,
+      "community": 87,
       "norm_label": "formatdate()",
       "id": "lib_utils_formatdate"
     },
@@ -7878,7 +7878,7 @@
       "source_file": "src/lib/utils.ts",
       "source_location": "L91",
       "_origin": "ast",
-      "community": 102,
+      "community": 87,
       "norm_label": "getfacilityicon()",
       "id": "lib_utils_getfacilityicon"
     },
@@ -7888,7 +7888,7 @@
       "source_file": "src/lib/utils.ts",
       "source_location": "L103",
       "_origin": "ast",
-      "community": 102,
+      "community": 87,
       "norm_label": "getfacilitycategorylabel()",
       "id": "lib_utils_getfacilitycategorylabel"
     },
@@ -7948,7 +7948,7 @@
       "source_file": "src/lib/validations.ts",
       "source_location": "L24",
       "_origin": "ast",
-      "community": 125,
+      "community": 1,
       "norm_label": "staffschema",
       "id": "lib_validations_staffschema"
     },
@@ -7958,7 +7958,7 @@
       "source_file": "src/lib/validations.ts",
       "source_location": "L38",
       "_origin": "ast",
-      "community": 125,
+      "community": 1,
       "norm_label": "staffupdateschema",
       "id": "lib_validations_staffupdateschema"
     },
@@ -7968,7 +7968,7 @@
       "source_file": "src/lib/validations.ts",
       "source_location": "L44",
       "_origin": "ast",
-      "community": 130,
+      "community": 95,
       "norm_label": "achievementschema",
       "id": "lib_validations_achievementschema"
     },
@@ -7978,7 +7978,7 @@
       "source_file": "src/lib/validations.ts",
       "source_location": "L60",
       "_origin": "ast",
-      "community": 130,
+      "community": 95,
       "norm_label": "achievementupdateschema",
       "id": "lib_validations_achievementupdateschema"
     },
@@ -8028,7 +8028,7 @@
       "source_file": "src/lib/validations.ts",
       "source_location": "L97",
       "_origin": "ast",
-      "community": 101,
+      "community": 92,
       "norm_label": "pageupdateschema",
       "id": "lib_validations_pageupdateschema"
     },
@@ -12154,6 +12154,60 @@
     }
   ],
   "links": [
+    {
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "src/app/(public)/guru-dan-staf/[slug]/page.tsx",
+      "source_location": "L8",
+      "weight": 1.0,
+      "source": "slug_page",
+      "target": "actions_staff_getactivestaff",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "src/app/(public)/guru-dan-staf/[slug]/page.tsx",
+      "source_location": "L8",
+      "weight": 1.0,
+      "source": "slug_page",
+      "target": "actions_staff_getstaffbyslug",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "src/app/(public)/guru-dan-staf/[slug]/page.tsx",
+      "source_location": "L10",
+      "weight": 1.0,
+      "source": "slug_page",
+      "target": "slug_page_staffdetailpage",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "calls",
+      "context": "call",
+      "confidence": "INFERRED",
+      "confidence_score": 0.8,
+      "source_file": "src/app/(public)/guru-dan-staf/[slug]/page.tsx",
+      "source_location": "L22",
+      "weight": 1.0,
+      "source": "slug_page_staffdetailpage",
+      "target": "actions_staff_getactivestaff"
+    },
+    {
+      "relation": "calls",
+      "context": "call",
+      "confidence": "INFERRED",
+      "confidence_score": 0.8,
+      "source_file": "src/app/(public)/guru-dan-staf/[slug]/page.tsx",
+      "source_location": "L16",
+      "weight": 1.0,
+      "source": "slug_page_staffdetailpage",
+      "target": "actions_staff_getstaffbyslug"
+    },
     {
       "relation": "imports_from",
       "context": "import",
@@ -23678,126 +23732,6 @@
       "relation": "imports_from",
       "context": "import",
       "confidence": "EXTRACTED",
-      "source_file": "src/app/(public)/guru-dan-staf/[slug]/page.tsx",
-      "source_location": "L8",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "src_app_public_guru_dan_staf_slug_page_tsx_slug_page",
-      "target": "actions_staff"
-    },
-    {
-      "relation": "imports",
-      "context": "import",
-      "confidence": "EXTRACTED",
-      "source_file": "src/app/(public)/guru-dan-staf/[slug]/page.tsx",
-      "source_location": "L8",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "src_app_public_guru_dan_staf_slug_page_tsx_slug_page",
-      "target": "actions_staff_getactivestaff"
-    },
-    {
-      "relation": "imports",
-      "context": "import",
-      "confidence": "EXTRACTED",
-      "source_file": "src/app/(public)/guru-dan-staf/[slug]/page.tsx",
-      "source_location": "L8",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "src_app_public_guru_dan_staf_slug_page_tsx_slug_page",
-      "target": "actions_staff_getstaffbyslug"
-    },
-    {
-      "relation": "imports_from",
-      "context": "import",
-      "confidence": "EXTRACTED",
-      "source_file": "src/app/(public)/guru-dan-staf/[slug]/page.tsx",
-      "source_location": "L6",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "src_app_public_guru_dan_staf_slug_page_tsx_slug_page",
-      "target": "shared_badge"
-    },
-    {
-      "relation": "imports",
-      "context": "import",
-      "confidence": "EXTRACTED",
-      "source_file": "src/app/(public)/guru-dan-staf/[slug]/page.tsx",
-      "source_location": "L6",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "src_app_public_guru_dan_staf_slug_page_tsx_slug_page",
-      "target": "shared_badge_badge"
-    },
-    {
-      "relation": "imports_from",
-      "context": "import",
-      "confidence": "EXTRACTED",
-      "source_file": "src/app/(public)/guru-dan-staf/[slug]/page.tsx",
-      "source_location": "L5",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "src_app_public_guru_dan_staf_slug_page_tsx_slug_page",
-      "target": "shared_breadcrumb"
-    },
-    {
-      "relation": "imports_from",
-      "context": "import",
-      "confidence": "EXTRACTED",
-      "source_file": "src/app/(public)/guru-dan-staf/[slug]/page.tsx",
-      "source_location": "L7",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "src_app_public_guru_dan_staf_slug_page_tsx_slug_page",
-      "target": "shared_imagewithfallback"
-    },
-    {
-      "relation": "imports_from",
-      "context": "import",
-      "confidence": "EXTRACTED",
-      "source_file": "src/app/(public)/guru-dan-staf/[slug]/page.tsx",
-      "source_location": "L4",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "src_app_public_guru_dan_staf_slug_page_tsx_slug_page",
-      "target": "shared_scrollreveal"
-    },
-    {
-      "relation": "contains",
-      "confidence": "EXTRACTED",
-      "source_file": "src/app/(public)/guru-dan-staf/[slug]/page.tsx",
-      "source_location": "L10",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "src_app_public_guru_dan_staf_slug_page_tsx_slug_page",
-      "target": "slug_page_staffdetailpage"
-    },
-    {
-      "relation": "calls",
-      "context": "call",
-      "confidence": "INFERRED",
-      "confidence_score": 0.8,
-      "source_file": "src/app/(public)/guru-dan-staf/[slug]/page.tsx",
-      "source_location": "L22",
-      "weight": 1.0,
-      "source": "slug_page_staffdetailpage",
-      "target": "actions_staff_getactivestaff"
-    },
-    {
-      "relation": "calls",
-      "context": "call",
-      "confidence": "INFERRED",
-      "confidence_score": 0.8,
-      "source_file": "src/app/(public)/guru-dan-staf/[slug]/page.tsx",
-      "source_location": "L16",
-      "weight": 1.0,
-      "source": "slug_page_staffdetailpage",
-      "target": "actions_staff_getstaffbyslug"
-    },
-    {
-      "relation": "imports_from",
-      "context": "import",
-      "confidence": "EXTRACTED",
       "source_file": "src/app/(public)/guru-dan-staf/page.tsx",
       "source_location": "L12",
       "weight": 1.0,
@@ -33072,5 +33006,5 @@
       "source_file": "FRONTEND_PLAN.md"
     }
   ],
-  "built_at_commit": "701fbc7f213542ddebeec502dc1bf807acc5628a"
+  "built_at_commit": "4ca7bad1c85dde5debfe6c11d6eacb2284113d0b"
 }
