@@ -21,9 +21,9 @@ export default function ProfilSekolahPage() {
   useEffect(() => {
     getSchoolProfile()
       .then((p) => {
-        setVisi(p.visi)
-        setMisi(p.misi.length > 0 ? p.misi : [""])
-        setSejarah(Array.isArray(p.sejarah) && p.sejarah.length > 0 ? p.sejarah : ["" as any])
+        setVisi(p.visi || "")
+        setMisi(p.misi && p.misi.length > 0 ? p.misi : [""])
+        setSejarah(Array.isArray(p.sejarah) && p.sejarah.length > 0 ? p.sejarah : [{ year: "", title: "", description: "" }])
       })
       .catch(() => {})
       .finally(() => setLoading(false))
@@ -58,9 +58,11 @@ export default function ProfilSekolahPage() {
     setSaving(true)
     try {
       await updateSchoolProfile({
-        visi,
-        misi: misi.filter((m) => m.trim() !== ""),
-        sejarah: sejarah.filter((s) => s.year.trim() !== "" && s.title.trim() !== ""),
+        visi: visi || "",
+        misi: (misi || []).filter((m) => typeof m === "string" && m.trim() !== ""),
+        sejarah: (sejarah || []).filter(
+          (s) => s && typeof s.year === "string" && s.year.trim() !== "" && typeof s.title === "string" && s.title.trim() !== ""
+        ),
       })
       toast({ type: "success", title: "Profil sekolah disimpan" })
       router.refresh()
