@@ -1,0 +1,497 @@
+2026-Jul-07 04:33:57.411461 Docker 29.6.0 with BuildKit and Buildx detected on deployment server (localhost).
+2026-Jul-07 04:33:57.421423 Starting deployment of gilangprtm/schoolweb:master to localhost.
+2026-Jul-07 04:33:57.933332 Preparing container with helper image: ghcr.io/coollabsio/coolify-helper:1.0.14
+2026-Jul-07 04:33:58.078299 [CMD]: docker stop --time=30 k1v07eeodnzu1wpwjy79popd
+2026-Jul-07 04:33:58.078299 Flag --time has been deprecated, use --timeout instead
+2026-Jul-07 04:33:58.082492 Error response from daemon: No such container: k1v07eeodnzu1wpwjy79popd
+2026-Jul-07 04:33:58.276905 [CMD]: docker run -d --network 'coolify' --name k1v07eeodnzu1wpwjy79popd --rm -v /root/.docker/buildx:/root/.docker/buildx -v /var/run/docker.sock:/var/run/docker.sock ghcr.io/coollabsio/coolify-helper:1.0.14
+2026-Jul-07 04:33:58.276905 ee229c9276708aba6934edb7585e0ff111af8ecd00256c5120499f159986a500
+2026-Jul-07 04:34:05.470271 [CMD]: docker exec k1v07eeodnzu1wpwjy79popd bash -c 'GIT_SSH_COMMAND="ssh -o ConnectTimeout=30 -p 22 -o Port=22 -o LogLevel=ERROR -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null" git ls-remote '\''https://x-access-token:<REDACTED>@github.com/gilangprtm/schoolweb.git'\'' '\''refs/heads/master'\'''
+2026-Jul-07 04:34:05.470271 be397cc0285353649870fab46a645ed41717ed7d refs/heads/master
+2026-Jul-07 04:34:07.075455 ----------------------------------------
+2026-Jul-07 04:34:07.082780 Importing gilangprtm/schoolweb:master (commit sha be397cc0285353649870fab46a645ed41717ed7d) to /artifacts/k1v07eeodnzu1wpwjy79popd.
+2026-Jul-07 04:34:07.292490 [CMD]: docker exec k1v07eeodnzu1wpwjy79popd bash -c 'git -c '\''url.https://x-access-token:<REDACTED>@github.com/.insteadOf=https://github.com/'\'' -c http.version=HTTP/1.1 clone --depth=1 --recurse-submodules --shallow-submodules -b '\''master'\'' '\''https:<REDACTED>@github.com/gilangprtm/schoolweb.git'\'' '\''/artifacts/k1v07eeodnzu1wpwjy79popd'\'' && cd '\''/artifacts/k1v07eeodnzu1wpwjy79popd'\'' && GIT_SSH_COMMAND="ssh -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null" git -c '\''url.https://x-access-token:<REDACTED>@github.com/.insteadOf=https://github.com/'\'' -c http.version=HTTP/1.1 fetch --depth=1 origin '\''be397cc0285353649870fab46a645ed41717ed7d'\'' && git -c '\''url.https:<REDACTED>@github.com/.insteadOf=https://github.com/'\'' -c http.version=HTTP/1.1 -c advice.detachedHead=false checkout '\''be397cc0285353649870fab46a645ed41717ed7d'\'' >/dev/null 2>&1 && cd '\''/artifacts/k1v07eeodnzu1wpwjy79popd'\'' && if [ -f .gitmodules ]; then git -c '\''url.https:<REDACTED>@github.com/.insteadOf=https://github.com/'\'' -c http.version=HTTP/1.1 submodule sync && GIT_SSH_COMMAND="ssh -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null" git -c '\''url.https:<REDACTED>@github.com/.insteadOf=https://github.com/'\'' -c http.version=HTTP/1.1 submodule update --init --recursive --depth=1; fi && cd '\''/artifacts/k1v07eeodnzu1wpwjy79popd'\'' && GIT_SSH_COMMAND="ssh -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null" git -c '\''url.https:<REDACTED>@github.com/.insteadOf=https://github.com/'\'' -c http.version=HTTP/1.1 lfs pull'
+2026-Jul-07 04:34:07.292490 Cloning into '/artifacts/k1v07eeodnzu1wpwjy79popd'...
+2026-Jul-07 04:34:13.785488 From https://github.com/gilangprtm/schoolweb
+2026-Jul-07 04:34:13.785488 * branch be397cc0285353649870fab46a645ed41717ed7d -> FETCH_HEAD
+2026-Jul-07 04:34:14.836716 [CMD]: docker exec k1v07eeodnzu1wpwjy79popd bash -c 'cd /artifacts/k1v07eeodnzu1wpwjy79popd && git log -1 '\''be397cc0285353649870fab46a645ed41717ed7d'\'' --pretty=%B'
+2026-Jul-07 04:34:14.836716 fix: add error logging to profile save
+2026-Jul-07 04:34:15.011089 Image not found (e13oyeizp0f9eu8hzvqu9fsq:be397cc0285353649870fab46a645ed41717ed7d). Building new image.
+2026-Jul-07 04:34:15.853861 [CMD]: docker exec k1v07eeodnzu1wpwjy79popd bash -c 'cat /artifacts/k1v07eeodnzu1wpwjy79popd/Dockerfile'
+2026-Jul-07 04:34:15.853861 # ── Builder stage ──
+2026-Jul-07 04:34:15.853861 FROM node:22-alpine AS builder
+2026-Jul-07 04:34:15.853861
+2026-Jul-07 04:34:15.853861 WORKDIR /app
+2026-Jul-07 04:34:15.853861
+2026-Jul-07 04:34:15.853861 COPY package.json package-lock.json* ./
+2026-Jul-07 04:34:15.853861 RUN npm ci 2>/dev/null || npm install --no-audit --no-fund
+2026-Jul-07 04:34:15.853861
+2026-Jul-07 04:34:15.853861 COPY . .
+2026-Jul-07 04:34:15.853861
+2026-Jul-07 04:34:15.853861 ENV NEXT_TELEMETRY_DISABLED=1
+2026-Jul-07 04:34:15.853861 ENV NODE_OPTIONS="--max-old-space-size=1024"
+2026-Jul-07 04:34:15.853861
+2026-Jul-07 04:34:15.853861 # Build-time args — injected via Coolify
+2026-Jul-07 04:34:15.853861 ARG DATABASE_URL
+2026-Jul-07 04:34:15.853861 ARG BETTER_AUTH_SECRET
+2026-Jul-07 04:34:15.853861 ARG BETTER_AUTH_URL
+2026-Jul-07 04:34:15.853861
+2026-Jul-07 04:34:15.853861 ENV DATABASE_URL=${DATABASE_URL}
+2026-Jul-07 04:34:15.853861 ENV BETTER_AUTH_SECRET=${BETTER_AUTH_SECRET}
+2026-Jul-07 04:34:15.853861 ENV BETTER_AUTH_URL=${BETTER_AUTH_URL}
+2026-Jul-07 04:34:15.853861
+2026-Jul-07 04:34:15.853861 RUN npm run build
+2026-Jul-07 04:34:15.853861
+2026-Jul-07 04:34:15.853861 # ── Runner stage ──
+2026-Jul-07 04:34:15.853861 FROM node:22-alpine AS runner
+2026-Jul-07 04:34:15.853861
+2026-Jul-07 04:34:15.853861 WORKDIR /app
+2026-Jul-07 04:34:15.853861
+2026-Jul-07 04:34:15.853861 ENV NODE_ENV=production
+2026-Jul-07 04:34:15.853861 ENV NEXT_TELEMETRY_DISABLED=1
+2026-Jul-07 04:34:15.853861 ENV PORT=3000
+2026-Jul-07 04:34:15.853861 ENV HOSTNAME="0.0.0.0"
+2026-Jul-07 04:34:15.853861
+2026-Jul-07 04:34:15.853861 RUN addgroup --system --gid 1001 nodejs \
+2026-Jul-07 04:34:15.853861 && adduser --system --uid 1001 nextjs
+2026-Jul-07 04:34:15.853861
+2026-Jul-07 04:34:15.853861 # Copy all build output in one layer to reduce memory
+2026-Jul-07 04:34:15.853861 COPY --from=builder --chown=nextjs:nodejs \
+2026-Jul-07 04:34:15.853861 /app/public ./public
+2026-Jul-07 04:34:15.853861
+2026-Jul-07 04:34:15.853861 COPY --from=builder --chown=nextjs:nodejs \
+2026-Jul-07 04:34:15.853861 /app/.next/standalone ./
+2026-Jul-07 04:34:15.853861
+2026-Jul-07 04:34:15.853861 COPY --from=builder --chown=nextjs:nodejs \
+2026-Jul-07 04:34:15.853861 /app/.next/static ./.next/static
+2026-Jul-07 04:34:15.853861
+2026-Jul-07 04:34:15.853861 # Migration + scripts
+2026-Jul-07 04:34:15.853861 COPY --from=builder --chown=nextjs:nodejs \
+2026-Jul-07 04:34:15.853861 /app/src/lib/db/migrations ./src/lib/db/migrations
+2026-Jul-07 04:34:15.853861
+2026-Jul-07 04:34:15.853861 COPY --from=builder --chown=nextjs:nodejs \
+2026-Jul-07 04:34:15.853861 /app/scripts/migrate.mjs ./scripts/migrate.mjs
+2026-Jul-07 04:34:15.853861
+2026-Jul-07 04:34:15.853861 COPY --from=builder --chown=nextjs:nodejs \
+2026-Jul-07 04:34:15.853861 /app/scripts/start.sh ./start.sh
+2026-Jul-07 04:34:15.853861
+2026-Jul-07 04:34:15.853861 RUN chmod +x ./start.sh
+2026-Jul-07 04:34:15.853861
+2026-Jul-07 04:34:15.853861 # DB drivers (standalone fix)
+2026-Jul-07 04:34:15.853861 COPY --from=builder --chown=nextjs:nodejs \
+2026-Jul-07 04:34:15.853861 /app/node_modules/postgres ./node_modules/postgres
+2026-Jul-07 04:34:15.853861
+2026-Jul-07 04:34:15.853861 COPY --from=builder --chown=nextjs:nodejs \
+2026-Jul-07 04:34:15.853861 /app/node_modules/drizzle-orm ./node_modules/drizzle-orm
+2026-Jul-07 04:34:15.853861
+2026-Jul-07 04:34:15.853861 USER nextjs
+2026-Jul-07 04:34:15.853861 EXPOSE 3000
+2026-Jul-07 04:34:15.853861
+2026-Jul-07 04:34:15.853861 HEALTHCHECK --interval=30s --timeout=5s --start-period=15s --retries=5 \
+2026-Jul-07 04:34:15.853861 CMD wget -qO- http://127.0.0.1:3000/api/health || exit 1
+2026-Jul-07 04:34:15.853861
+2026-Jul-07 04:34:15.853861 CMD ["./start.sh"]
+2026-Jul-07 04:34:16.179217 Creating build-time .env file in /artifacts (outside Docker context).
+2026-Jul-07 04:34:16.976345 [CMD]: docker exec k1v07eeodnzu1wpwjy79popd bash -c 'cat /artifacts/k1v07eeodnzu1wpwjy79popd/Dockerfile'
+2026-Jul-07 04:34:16.976345 # ── Builder stage ──
+2026-Jul-07 04:34:16.976345 FROM node:22-alpine AS builder
+2026-Jul-07 04:34:16.976345
+2026-Jul-07 04:34:16.976345 WORKDIR /app
+2026-Jul-07 04:34:16.976345
+2026-Jul-07 04:34:16.976345 COPY package.json package-lock.json* ./
+2026-Jul-07 04:34:16.976345 RUN npm ci 2>/dev/null || npm install --no-audit --no-fund
+2026-Jul-07 04:34:16.976345
+2026-Jul-07 04:34:16.976345 COPY . .
+2026-Jul-07 04:34:16.976345
+2026-Jul-07 04:34:16.976345 ENV NEXT_TELEMETRY_DISABLED=1
+2026-Jul-07 04:34:16.976345 ENV NODE_OPTIONS="--max-old-space-size=1024"
+2026-Jul-07 04:34:16.976345
+2026-Jul-07 04:34:16.976345 # Build-time args — injected via Coolify
+2026-Jul-07 04:34:16.976345 ARG DATABASE_URL
+2026-Jul-07 04:34:16.976345 ARG BETTER_AUTH_SECRET
+2026-Jul-07 04:34:16.976345 ARG BETTER_AUTH_URL
+2026-Jul-07 04:34:16.976345
+2026-Jul-07 04:34:16.976345 ENV DATABASE_URL=${DATABASE_URL}
+2026-Jul-07 04:34:16.976345 ENV BETTER_AUTH_SECRET=${BETTER_AUTH_SECRET}
+2026-Jul-07 04:34:16.976345 ENV BETTER_AUTH_URL=${BETTER_AUTH_URL}
+2026-Jul-07 04:34:16.976345
+2026-Jul-07 04:34:16.976345 RUN npm run build
+2026-Jul-07 04:34:16.976345
+2026-Jul-07 04:34:16.976345 # ── Runner stage ──
+2026-Jul-07 04:34:16.976345 FROM node:22-alpine AS runner
+2026-Jul-07 04:34:16.976345
+2026-Jul-07 04:34:16.976345 WORKDIR /app
+2026-Jul-07 04:34:16.976345
+2026-Jul-07 04:34:16.976345 ENV NODE_ENV=production
+2026-Jul-07 04:34:16.976345 ENV NEXT_TELEMETRY_DISABLED=1
+2026-Jul-07 04:34:16.976345 ENV PORT=3000
+2026-Jul-07 04:34:16.976345 ENV HOSTNAME="0.0.0.0"
+2026-Jul-07 04:34:16.976345
+2026-Jul-07 04:34:16.976345 RUN addgroup --system --gid 1001 nodejs \
+2026-Jul-07 04:34:16.976345 && adduser --system --uid 1001 nextjs
+2026-Jul-07 04:34:16.976345
+2026-Jul-07 04:34:16.976345 # Copy all build output in one layer to reduce memory
+2026-Jul-07 04:34:16.976345 COPY --from=builder --chown=nextjs:nodejs \
+2026-Jul-07 04:34:16.976345 /app/public ./public
+2026-Jul-07 04:34:16.976345
+2026-Jul-07 04:34:16.976345 COPY --from=builder --chown=nextjs:nodejs \
+2026-Jul-07 04:34:16.976345 /app/.next/standalone ./
+2026-Jul-07 04:34:16.976345
+2026-Jul-07 04:34:16.976345 COPY --from=builder --chown=nextjs:nodejs \
+2026-Jul-07 04:34:16.976345 /app/.next/static ./.next/static
+2026-Jul-07 04:34:16.976345
+2026-Jul-07 04:34:16.976345 # Migration + scripts
+2026-Jul-07 04:34:16.976345 COPY --from=builder --chown=nextjs:nodejs \
+2026-Jul-07 04:34:16.976345 /app/src/lib/db/migrations ./src/lib/db/migrations
+2026-Jul-07 04:34:16.976345
+2026-Jul-07 04:34:16.976345 COPY --from=builder --chown=nextjs:nodejs \
+2026-Jul-07 04:34:16.976345 /app/scripts/migrate.mjs ./scripts/migrate.mjs
+2026-Jul-07 04:34:16.976345
+2026-Jul-07 04:34:16.976345 COPY --from=builder --chown=nextjs:nodejs \
+2026-Jul-07 04:34:16.976345 /app/scripts/start.sh ./start.sh
+2026-Jul-07 04:34:16.976345
+2026-Jul-07 04:34:16.976345 RUN chmod +x ./start.sh
+2026-Jul-07 04:34:16.976345
+2026-Jul-07 04:34:16.976345 # DB drivers (standalone fix)
+2026-Jul-07 04:34:16.976345 COPY --from=builder --chown=nextjs:nodejs \
+2026-Jul-07 04:34:16.976345 /app/node_modules/postgres ./node_modules/postgres
+2026-Jul-07 04:34:16.976345
+2026-Jul-07 04:34:16.976345 COPY --from=builder --chown=nextjs:nodejs \
+2026-Jul-07 04:34:16.976345 /app/node_modules/drizzle-orm ./node_modules/drizzle-orm
+2026-Jul-07 04:34:16.976345
+2026-Jul-07 04:34:16.976345 USER nextjs
+2026-Jul-07 04:34:16.976345 EXPOSE 3000
+2026-Jul-07 04:34:16.976345
+2026-Jul-07 04:34:16.976345 HEALTHCHECK --interval=30s --timeout=5s --start-period=15s --retries=5 \
+2026-Jul-07 04:34:16.976345 CMD wget -qO- http://127.0.0.1:3000/api/health || exit 1
+2026-Jul-07 04:34:16.976345
+2026-Jul-07 04:34:16.976345 CMD ["./start.sh"]
+2026-Jul-07 04:34:17.032337 Final Dockerfile:
+2026-Jul-07 04:34:18.280905 [CMD]: docker exec k1v07eeodnzu1wpwjy79popd bash -c 'cat /artifacts/k1v07eeodnzu1wpwjy79popd/Dockerfile'
+2026-Jul-07 04:34:18.280905 # ── Builder stage ──
+2026-Jul-07 04:34:18.280905 FROM node:22-alpine AS builder
+2026-Jul-07 04:34:18.280905 ARG DATABASE_URL
+2026-Jul-07 04:34:18.280905 ARG BETTER_AUTH_SECRET=4b5b9930ba5fd7cbd070356d41cbcd1878950e90f86d7af7a7346cfdc8fb62e9
+2026-Jul-07 04:34:18.280905 ARG BETTER_AUTH_URL=https://smpn17denpasar.my.id
+2026-Jul-07 04:34:18.280905 ARG COOLIFY_URL=https://smpn17denpasar.my.id
+2026-Jul-07 04:34:18.280905 ARG COOLIFY_FQDN=smpn17denpasar.my.id
+2026-Jul-07 04:34:18.280905 ARG COOLIFY_BRANCH='master'
+2026-Jul-07 04:34:18.280905 ARG COOLIFY_RESOURCE_UUID=e13oyeizp0f9eu8hzvqu9fsq
+2026-Jul-07 04:34:18.280905
+2026-Jul-07 04:34:18.280905 WORKDIR /app
+2026-Jul-07 04:34:18.280905
+2026-Jul-07 04:34:18.280905 COPY package.json package-lock.json* ./
+2026-Jul-07 04:34:18.280905 RUN npm ci 2>/dev/null || npm install --no-audit --no-fund
+2026-Jul-07 04:34:18.280905
+2026-Jul-07 04:34:18.280905 COPY . .
+2026-Jul-07 04:34:18.280905
+2026-Jul-07 04:34:18.280905 ENV NEXT_TELEMETRY_DISABLED=1
+2026-Jul-07 04:34:18.280905 ENV NODE_OPTIONS="--max-old-space-size=1024"
+2026-Jul-07 04:34:18.280905
+2026-Jul-07 04:34:18.280905 # Build-time args — injected via Coolify
+2026-Jul-07 04:34:18.280905 ARG DATABASE_URL
+2026-Jul-07 04:34:18.280905 ARG BETTER_AUTH_SECRET
+2026-Jul-07 04:34:18.280905 ARG BETTER_AUTH_URL
+2026-Jul-07 04:34:18.280905
+2026-Jul-07 04:34:18.280905 ENV DATABASE_URL=${DATABASE_URL}
+2026-Jul-07 04:34:18.280905 ENV BETTER_AUTH_SECRET=${BETTER_AUTH_SECRET}
+2026-Jul-07 04:34:18.280905 ENV BETTER_AUTH_URL=${BETTER_AUTH_URL}
+2026-Jul-07 04:34:18.280905
+2026-Jul-07 04:34:18.280905 RUN npm run build
+2026-Jul-07 04:34:18.280905
+2026-Jul-07 04:34:18.280905 # ── Runner stage ──
+2026-Jul-07 04:34:18.280905 FROM node:22-alpine AS runner
+2026-Jul-07 04:34:18.280905 ARG DATABASE_URL
+2026-Jul-07 04:34:18.280905 ARG BETTER_AUTH_SECRET=4b5b9930ba5fd7cbd070356d41cbcd1878950e90f86d7af7a7346cfdc8fb62e9
+2026-Jul-07 04:34:18.280905 ARG BETTER_AUTH_URL=https://smpn17denpasar.my.id
+2026-Jul-07 04:34:18.280905 ARG COOLIFY_URL=https://smpn17denpasar.my.id
+2026-Jul-07 04:34:18.280905 ARG COOLIFY_FQDN=smpn17denpasar.my.id
+2026-Jul-07 04:34:18.280905 ARG COOLIFY_BRANCH='master'
+2026-Jul-07 04:34:18.280905 ARG COOLIFY_RESOURCE_UUID=e13oyeizp0f9eu8hzvqu9fsq
+2026-Jul-07 04:34:18.280905
+2026-Jul-07 04:34:18.280905 WORKDIR /app
+2026-Jul-07 04:34:18.280905
+2026-Jul-07 04:34:18.280905 ENV NODE_ENV=production
+2026-Jul-07 04:34:18.280905 ENV NEXT_TELEMETRY_DISABLED=1
+2026-Jul-07 04:34:18.280905 ENV PORT=3000
+2026-Jul-07 04:34:18.280905 ENV HOSTNAME="0.0.0.0"
+2026-Jul-07 04:34:18.280905
+2026-Jul-07 04:34:18.280905 RUN addgroup --system --gid 1001 nodejs \
+2026-Jul-07 04:34:18.280905 && adduser --system --uid 1001 nextjs
+2026-Jul-07 04:34:18.280905
+2026-Jul-07 04:34:18.280905 # Copy all build output in one layer to reduce memory
+2026-Jul-07 04:34:18.280905 COPY --from=builder --chown=nextjs:nodejs \
+2026-Jul-07 04:34:18.280905 /app/public ./public
+2026-Jul-07 04:34:18.280905
+2026-Jul-07 04:34:18.280905 COPY --from=builder --chown=nextjs:nodejs \
+2026-Jul-07 04:34:18.280905 /app/.next/standalone ./
+2026-Jul-07 04:34:18.280905
+2026-Jul-07 04:34:18.280905 COPY --from=builder --chown=nextjs:nodejs \
+2026-Jul-07 04:34:18.280905 /app/.next/static ./.next/static
+2026-Jul-07 04:34:18.280905
+2026-Jul-07 04:34:18.280905 # Migration + scripts
+2026-Jul-07 04:34:18.280905 COPY --from=builder --chown=nextjs:nodejs \
+2026-Jul-07 04:34:18.280905 /app/src/lib/db/migrations ./src/lib/db/migrations
+2026-Jul-07 04:34:18.280905
+2026-Jul-07 04:34:18.280905 COPY --from=builder --chown=nextjs:nodejs \
+2026-Jul-07 04:34:18.280905 /app/scripts/migrate.mjs ./scripts/migrate.mjs
+2026-Jul-07 04:34:18.280905
+2026-Jul-07 04:34:18.280905 COPY --from=builder --chown=nextjs:nodejs \
+2026-Jul-07 04:34:18.280905 /app/scripts/start.sh ./start.sh
+2026-Jul-07 04:34:18.280905
+2026-Jul-07 04:34:18.280905 RUN chmod +x ./start.sh
+2026-Jul-07 04:34:18.280905
+2026-Jul-07 04:34:18.280905 # DB drivers (standalone fix)
+2026-Jul-07 04:34:18.280905 COPY --from=builder --chown=nextjs:nodejs \
+2026-Jul-07 04:34:18.280905 /app/node_modules/postgres ./node_modules/postgres
+2026-Jul-07 04:34:18.280905
+2026-Jul-07 04:34:18.280905 COPY --from=builder --chown=nextjs:nodejs \
+2026-Jul-07 04:34:18.280905 /app/node_modules/drizzle-orm ./node_modules/drizzle-orm
+2026-Jul-07 04:34:18.280905
+2026-Jul-07 04:34:18.280905 USER nextjs
+2026-Jul-07 04:34:18.280905 EXPOSE 3000
+2026-Jul-07 04:34:18.280905
+2026-Jul-07 04:34:18.280905 HEALTHCHECK --interval=30s --timeout=5s --start-period=15s --retries=5 \
+2026-Jul-07 04:34:18.280905 CMD wget -qO- http://127.0.0.1:3000/api/health || exit 1
+2026-Jul-07 04:34:18.280905
+2026-Jul-07 04:34:18.280905 CMD ["./start.sh"]
+2026-Jul-07 04:34:18.326260 ----------------------------------------
+2026-Jul-07 04:34:18.352344 Building docker image started.
+2026-Jul-07 04:34:18.378271 To check the current progress, click on Show Debug Logs.
+2026-Jul-07 04:34:19.372550 [CMD]: docker exec k1v07eeodnzu1wpwjy79popd bash -c 'cat /artifacts/build.sh'
+2026-Jul-07 04:34:19.372550 cd /artifacts/k1v07eeodnzu1wpwjy79popd && set -a && source /artifacts/build-time.env && set +a && DOCKER_BUILDKIT=1 docker build --add-host coolify:10.0.1.10 --add-host coolify-db:10.0.1.7 --add-host coolify-realtime:10.0.1.2 --add-host coolify-redis:10.0.1.8 --add-host pgadmin-ffx61zclu7v1gnr63a6wglex:10.0.1.4 --add-host schoolweb:10.0.1.5 --add-host tepji0kn9cd339vpuypd95nd:10.0.1.6 --add-host tepji0kn9cd339vpuypd95nd-proxy:10.0.1.3 --network host -f /artifacts/k1v07eeodnzu1wpwjy79popd/Dockerfile --progress plain -t e13oyeizp0f9eu8hzvqu9fsq:be397cc0285353649870fab46a645ed41717ed7d --build-arg COOLIFY_URL --build-arg COOLIFY_FQDN --build-arg COOLIFY_BRANCH --build-arg COOLIFY_RESOURCE_UUID --build-arg DATABASE_URL --build-arg BETTER_AUTH_SECRET --build-arg BETTER_AUTH_URL --build-arg COOLIFY_BUILD_SECRETS_HASH=ef64fe5999c497f47072330c2b612712b2709f2d620789bbf915329a98be4363 --build-arg 'COOLIFY_URL' --build-arg 'COOLIFY_FQDN' --build-arg 'COOLIFY_BRANCH' --build-arg 'COOLIFY_RESOURCE_UUID' /artifacts/k1v07eeodnzu1wpwjy79popd
+2026-Jul-07 04:34:20.458681 [CMD]: docker exec k1v07eeodnzu1wpwjy79popd bash -c 'bash /artifacts/build.sh'
+2026-Jul-07 04:34:20.458681 #0 building with "default" instance using docker driver
+2026-Jul-07 04:34:20.458681
+2026-Jul-07 04:34:20.458681 #1 [internal] load build definition from Dockerfile
+2026-Jul-07 04:34:20.458681 #1 transferring dockerfile: 2.42kB done
+2026-Jul-07 04:34:20.458681 #1 DONE 0.0s
+2026-Jul-07 04:34:20.458681
+2026-Jul-07 04:34:20.458681 #2 [internal] load metadata for docker.io/library/node:22-alpine
+2026-Jul-07 04:34:22.765461 #2 DONE 2.5s
+2026-Jul-07 04:34:22.868910 #3 [internal] load .dockerignore
+2026-Jul-07 04:34:22.868910 #3 transferring context: 443B done
+2026-Jul-07 04:34:22.868910 #3 DONE 0.0s
+2026-Jul-07 04:34:22.874947 #4 [internal] load build context
+2026-Jul-07 04:34:22.874947 #4 DONE 0.0s
+2026-Jul-07 04:34:22.874947
+2026-Jul-07 04:34:22.874947 #5 [builder 1/6] FROM docker.io/library/node:22-alpine@sha256:16e22a550f3863206a3f701448c45f7912c6896a62de43add43bb9c86130c3e2
+2026-Jul-07 04:34:22.874947 #5 resolve docker.io/library/node:22-alpine@sha256:16e22a550f3863206a3f701448c45f7912c6896a62de43add43bb9c86130c3e2 0.0s done
+2026-Jul-07 04:34:22.874947 #5 DONE 0.0s
+2026-Jul-07 04:34:22.992525
+2026-Jul-07 04:34:22.999932 #4 [internal] load build context
+2026-Jul-07 04:34:23.107523 #4 ...
+2026-Jul-07 04:34:23.107523
+2026-Jul-07 04:34:23.107523 #5 [builder 1/6] FROM docker.io/library/node:22-alpine@sha256:16e22a550f3863206a3f701448c45f7912c6896a62de43add43bb9c86130c3e2
+2026-Jul-07 04:34:23.107523 #5 DONE 0.2s
+2026-Jul-07 04:34:23.107523
+2026-Jul-07 04:34:23.107523 #4 [internal] load build context
+2026-Jul-07 04:34:23.351929 #4 ...
+2026-Jul-07 04:34:23.351929
+2026-Jul-07 04:34:23.351929 #6 [builder 2/6] WORKDIR /app
+2026-Jul-07 04:34:23.351929 #6 DONE 0.3s
+2026-Jul-07 04:34:23.351929
+2026-Jul-07 04:34:23.351929 #4 [internal] load build context
+2026-Jul-07 04:34:23.970322 #4 ...
+2026-Jul-07 04:34:23.970322
+2026-Jul-07 04:34:23.970322 #7 [runner 3/12] RUN addgroup --system --gid 1001 nodejs && adduser --system --uid 1001 nextjs
+2026-Jul-07 04:34:23.970322 #7 DONE 0.6s
+2026-Jul-07 04:34:23.970322
+2026-Jul-07 04:34:23.970322 #4 [internal] load build context
+2026-Jul-07 04:34:24.106475 #4 transferring context: 18.08MB 1.1s done
+2026-Jul-07 04:34:24.116264 #4 DONE 1.2s
+2026-Jul-07 04:34:24.116264
+2026-Jul-07 04:34:24.116264 #8 [builder 3/6] COPY package.json package-lock.json* ./
+2026-Jul-07 04:34:24.116264 #8 DONE 0.1s
+2026-Jul-07 04:34:24.262523
+2026-Jul-07 04:34:24.269771 #9 [builder 4/6] RUN npm ci 2>/dev/null || npm install --no-audit --no-fund
+2026-Jul-07 04:36:11.659247 #9 107.3
+2026-Jul-07 04:36:11.659247 #9 107.3 added 693 packages in 1m
+2026-Jul-07 04:36:12.063214 #9 DONE 107.8s
+2026-Jul-07 04:36:12.063214
+2026-Jul-07 04:36:12.063214 #10 [builder 5/6] COPY . .
+2026-Jul-07 04:36:13.995725 #10 DONE 2.1s
+2026-Jul-07 04:36:14.150360 #11 [builder 6/6] RUN npm run build
+2026-Jul-07 04:36:14.858318 #11 0.865
+2026-Jul-07 04:36:14.858318 #11 0.865 > schoolweb@0.1.0 build
+2026-Jul-07 04:36:14.858318 #11 0.865 > next build
+2026-Jul-07 04:36:14.858318 #11 0.865
+2026-Jul-07 04:36:16.016779 #11 2.024 ▲ Next.js 16.2.9 (Turbopack)
+2026-Jul-07 04:36:16.231876 #11 2.027
+2026-Jul-07 04:36:16.231876 #11 2.089 Creating an optimized production build ...
+2026-Jul-07 04:37:45.803107 #11 91.70 ✓ Compiled successfully in 89s
+2026-Jul-07 04:37:45.975466 #11 91.71 Running TypeScript ...
+2026-Jul-07 04:38:46.968881 #11 153.0 Failed to type check.
+2026-Jul-07 04:38:46.968881 #11 153.0
+2026-Jul-07 04:38:47.135350 #11 153.0 ./src/app/admin/profil-sekolah/page.tsx:69:56
+2026-Jul-07 04:38:47.135350 #11 153.0 Type error: Object literal may only specify known properties, and 'message' does not exist in type 'Omit<Toast, "id">'.
+2026-Jul-07 04:38:47.135350 #11 153.0
+2026-Jul-07 04:38:47.135350 #11 153.0 67 | ...(err: any) {
+2026-Jul-07 04:38:47.135350 #11 153.0 68 | ...e.error("Gagal simpan profil:", err)
+2026-Jul-07 04:38:47.135350 #11 153.0 > 69 | ...{ type: "error", title: "Gagal menyimpan", message: err?.message || String(err) })
+2026-Jul-07 04:38:47.135350 #11 153.0 | ^
+2026-Jul-07 04:38:47.135350 #11 153.0 70 | ...y {
+2026-Jul-07 04:38:47.135350 #11 153.0 71 | ...ing(false)
+2026-Jul-07 04:38:47.135350 #11 153.0 72 | ...
+2026-Jul-07 04:38:47.254686 #11 153.3 Next.js build worker exited with code: 1 and signal: null
+2026-Jul-07 04:38:48.000116 #11 ERROR: process "/bin/sh -c npm run build" did not complete successfully: exit code: 1
+2026-Jul-07 04:38:48.605212 ------
+2026-Jul-07 04:38:48.605212 > [builder 6/6] RUN npm run build:
+2026-Jul-07 04:38:48.605212 153.0 Type error: Object literal may only specify known properties, and 'message' does not exist in type 'Omit<Toast, "id">'.
+2026-Jul-07 04:38:48.605212 153.0
+2026-Jul-07 04:38:48.605212 153.0 67 | ...(err: any) {
+2026-Jul-07 04:38:48.605212 153.0 68 | ...e.error("Gagal simpan profil:", err)
+2026-Jul-07 04:38:48.605212 153.0 > 69 | ...{ type: "error", title: "Gagal menyimpan", message: err?.message || String(err) })
+2026-Jul-07 04:38:48.605212 153.0 | ^
+2026-Jul-07 04:38:48.605212 153.0 70 | ...y {
+2026-Jul-07 04:38:48.605212 153.0 71 | ...ing(false)
+2026-Jul-07 04:38:48.605212 153.0 72 | ...
+2026-Jul-07 04:38:48.605212 153.3 Next.js build worker exited with code: 1 and signal: null
+2026-Jul-07 04:38:48.605212 ------
+2026-Jul-07 04:38:48.605212
+2026-Jul-07 04:38:48.605212 8 warnings found (use docker --debug to expand):
+2026-Jul-07 04:38:48.605212 - SecretsUsedInArgOrEnv: Do not use ARG or ENV instructions for sensitive data (ENV "BETTER_AUTH_URL") (line 28)
+2026-Jul-07 04:38:48.605212 - SecretsUsedInArgOrEnv: Do not use ARG or ENV instructions for sensitive data (ARG "BETTER_AUTH_SECRET") (line 35)
+2026-Jul-07 04:38:48.605212 - SecretsUsedInArgOrEnv: Do not use ARG or ENV instructions for sensitive data (ARG "BETTER_AUTH_URL") (line 36)
+2026-Jul-07 04:38:48.605212 - SecretsUsedInArgOrEnv: Do not use ARG or ENV instructions for sensitive data (ARG "BETTER_AUTH_SECRET") (line 4)
+2026-Jul-07 04:38:48.605212 - SecretsUsedInArgOrEnv: Do not use ARG or ENV instructions for sensitive data (ARG "BETTER_AUTH_URL") (line 5)
+2026-Jul-07 04:38:48.605212 - SecretsUsedInArgOrEnv: Do not use ARG or ENV instructions for sensitive data (ARG "BETTER_AUTH_SECRET") (line 23)
+2026-Jul-07 04:38:48.605212 - SecretsUsedInArgOrEnv: Do not use ARG or ENV instructions for sensitive data (ARG "BETTER_AUTH_URL") (line 24)
+2026-Jul-07 04:38:48.605212 - SecretsUsedInArgOrEnv: Do not use ARG or ENV instructions for sensitive data (ENV "BETTER_AUTH_SECRET") (line 27)
+2026-Jul-07 04:38:48.742101 Dockerfile:30
+2026-Jul-07 04:38:48.742101 --------------------
+2026-Jul-07 04:38:48.742101 28 | ENV BETTER_AUTH_URL=${BETTER_AUTH_URL}
+2026-Jul-07 04:38:48.742101 29 |
+2026-Jul-07 04:38:48.742101 30 | >>> RUN npm run build
+2026-Jul-07 04:38:48.742101 31 |
+2026-Jul-07 04:38:48.742101 32 | # ── Runner stage ──
+2026-Jul-07 04:38:48.742101 --------------------
+2026-Jul-07 04:38:48.742101 ERROR: failed to build: failed to solve: process "/bin/sh -c npm run build" did not complete successfully: exit code: 1
+2026-Jul-07 04:38:48.783261 exit status 1
+2026-Jul-07 04:38:49.625923 ========================================
+2026-Jul-07 04:38:49.645564 Deployment failed: Command execution failed (exit code 1): docker exec k1v07eeodnzu1wpwjy79popd bash -c 'bash /artifacts/build.sh'
+2026-Jul-07 04:38:49.645564 Error: #0 building with "default" instance using docker driver
+2026-Jul-07 04:38:49.645564
+2026-Jul-07 04:38:49.645564 #1 [internal] load build definition from Dockerfile
+2026-Jul-07 04:38:49.645564 #1 transferring dockerfile: 2.42kB done
+2026-Jul-07 04:38:49.645564 #1 DONE 0.0s
+2026-Jul-07 04:38:49.645564
+2026-Jul-07 04:38:49.645564 #2 [internal] load metadata for docker.io/library/node:22-alpine
+2026-Jul-07 04:38:49.645564 #2 DONE 2.5s
+2026-Jul-07 04:38:49.645564
+2026-Jul-07 04:38:49.645564 #3 [internal] load .dockerignore
+2026-Jul-07 04:38:49.645564 #3 transferring context: 443B done
+2026-Jul-07 04:38:49.645564 #3 DONE 0.0s
+2026-Jul-07 04:38:49.645564
+2026-Jul-07 04:38:49.645564 #4 [internal] load build context
+2026-Jul-07 04:38:49.645564 #4 DONE 0.0s
+2026-Jul-07 04:38:49.645564
+2026-Jul-07 04:38:49.645564 #5 [builder 1/6] FROM docker.io/library/node:22-alpine@sha256:16e22a550f3863206a3f701448c45f7912c6896a62de43add43bb9c86130c3e2
+2026-Jul-07 04:38:49.645564 #5 resolve docker.io/library/node:22-alpine@sha256:16e22a550f3863206a3f701448c45f7912c6896a62de43add43bb9c86130c3e2 0.0s done
+2026-Jul-07 04:38:49.645564 #5 DONE 0.0s
+2026-Jul-07 04:38:49.645564
+2026-Jul-07 04:38:49.645564 #4 [internal] load build context
+2026-Jul-07 04:38:49.645564 #4 ...
+2026-Jul-07 04:38:49.645564
+2026-Jul-07 04:38:49.645564 #5 [builder 1/6] FROM docker.io/library/node:22-alpine@sha256:16e22a550f3863206a3f701448c45f7912c6896a62de43add43bb9c86130c3e2
+2026-Jul-07 04:38:49.645564 #5 DONE 0.2s
+2026-Jul-07 04:38:49.645564
+2026-Jul-07 04:38:49.645564 #4 [internal] load build context
+2026-Jul-07 04:38:49.645564 #4 ...
+2026-Jul-07 04:38:49.645564
+2026-Jul-07 04:38:49.645564 #6 [builder 2/6] WORKDIR /app
+2026-Jul-07 04:38:49.645564 #6 DONE 0.3s
+2026-Jul-07 04:38:49.645564
+2026-Jul-07 04:38:49.645564 #4 [internal] load build context
+2026-Jul-07 04:38:49.645564 #4 ...
+2026-Jul-07 04:38:49.645564
+2026-Jul-07 04:38:49.645564 #7 [runner 3/12] RUN addgroup --system --gid 1001 nodejs && adduser --system --uid 1001 nextjs
+2026-Jul-07 04:38:49.645564 #7 DONE 0.6s
+2026-Jul-07 04:38:49.645564
+2026-Jul-07 04:38:49.645564 #4 [internal] load build context
+2026-Jul-07 04:38:49.645564 #4 transferring context: 18.08MB 1.1s done
+2026-Jul-07 04:38:49.645564 #4 DONE 1.2s
+2026-Jul-07 04:38:49.645564
+2026-Jul-07 04:38:49.645564 #8 [builder 3/6] COPY package.json package-lock.json* ./
+2026-Jul-07 04:38:49.645564 #8 DONE 0.1s
+2026-Jul-07 04:38:49.645564
+2026-Jul-07 04:38:49.645564 #9 [builder 4/6] RUN npm ci 2>/dev/null || npm install --no-audit --no-fund
+2026-Jul-07 04:38:49.645564 #9 107.3
+2026-Jul-07 04:38:49.645564 #9 107.3 added 693 packages in 1m
+2026-Jul-07 04:38:49.645564 #9 DONE 107.8s
+2026-Jul-07 04:38:49.645564
+2026-Jul-07 04:38:49.645564 #10 [builder 5/6] COPY . .
+2026-Jul-07 04:38:49.645564 #10 DONE 2.1s
+2026-Jul-07 04:38:49.645564
+2026-Jul-07 04:38:49.645564 #11 [builder 6/6] RUN npm run build
+2026-Jul-07 04:38:49.645564 #11 0.865
+2026-Jul-07 04:38:49.645564 #11 0.865 > schoolweb@0.1.0 build
+2026-Jul-07 04:38:49.645564 #11 0.865 > next build
+2026-Jul-07 04:38:49.645564 #11 0.865
+2026-Jul-07 04:38:49.645564 #11 2.024 ▲ Next.js 16.2.9 (Turbopack)
+2026-Jul-07 04:38:49.645564 #11 2.027
+2026-Jul-07 04:38:49.645564 #11 2.089 Creating an optimized production build ...
+2026-Jul-07 04:38:49.645564 #11 91.70 ✓ Compiled successfully in 89s
+2026-Jul-07 04:38:49.645564 #11 91.71 Running TypeScript ...
+2026-Jul-07 04:38:49.645564 #11 153.0 Failed to type check.
+2026-Jul-07 04:38:49.645564 #11 153.0
+2026-Jul-07 04:38:49.645564 #11 153.0 ./src/app/admin/profil-sekolah/page.tsx:69:56
+2026-Jul-07 04:38:49.645564 #11 153.0 Type error: Object literal may only specify known properties, and 'message' does not exist in type 'Omit<Toast, "id">'.
+2026-Jul-07 04:38:49.645564 #11 153.0
+2026-Jul-07 04:38:49.645564 #11 153.0 67 | ...(err: any) {
+2026-Jul-07 04:38:49.645564 #11 153.0 68 | ...e.error("Gagal simpan profil:", err)
+2026-Jul-07 04:38:49.645564 #11 153.0 > 69 | ...{ type: "error", title: "Gagal menyimpan", message: err?.message || String(err) })
+2026-Jul-07 04:38:49.645564 #11 153.0 | ^
+2026-Jul-07 04:38:49.645564 #11 153.0 70 | ...y {
+2026-Jul-07 04:38:49.645564 #11 153.0 71 | ...ing(false)
+2026-Jul-07 04:38:49.645564 #11 153.0 72 | ...
+2026-Jul-07 04:38:49.645564 #11 153.3 Next.js build worker exited with code: 1 and signal: null
+2026-Jul-07 04:38:49.645564 #11 ERROR: process "/bin/sh -c npm run build" did not complete successfully: exit code: 1
+2026-Jul-07 04:38:49.645564 ------
+2026-Jul-07 04:38:49.645564 > [builder 6/6] RUN npm run build:
+2026-Jul-07 04:38:49.645564 153.0 Type error: Object literal may only specify known properties, and 'message' does not exist in type 'Omit<Toast, "id">'.
+2026-Jul-07 04:38:49.645564 153.0
+2026-Jul-07 04:38:49.645564 153.0 67 | ...(err: any) {
+2026-Jul-07 04:38:49.645564 153.0 68 | ...e.error("Gagal simpan profil:", err)
+2026-Jul-07 04:38:49.645564 153.0 > 69 | ...{ type: "error", title: "Gagal menyimpan", message: err?.message || String(err) })
+2026-Jul-07 04:38:49.645564 153.0 | ^
+2026-Jul-07 04:38:49.645564 153.0 70 | ...y {
+2026-Jul-07 04:38:49.645564 153.0 71 | ...ing(false)
+2026-Jul-07 04:38:49.645564 153.0 72 | ...
+2026-Jul-07 04:38:49.645564 153.3 Next.js build worker exited with code: 1 and signal: null
+2026-Jul-07 04:38:49.645564 ------
+2026-Jul-07 04:38:49.645564
+2026-Jul-07 04:38:49.645564 8 warnings found (use docker --debug to expand):
+2026-Jul-07 04:38:49.645564 - SecretsUsedInArgOrEnv: Do not use ARG or ENV instructions for sensitive data (ENV "BETTER_AUTH_URL") (line 28)
+2026-Jul-07 04:38:49.645564 - SecretsUsedInArgOrEnv: Do not use ARG or ENV instructions for sensitive data (ARG "BETTER_AUTH_SECRET") (line 35)
+2026-Jul-07 04:38:49.645564 - SecretsUsedInArgOrEnv: Do not use ARG or ENV instructions for sensitive data (ARG "BETTER_AUTH_URL") (line 36)
+2026-Jul-07 04:38:49.645564 - SecretsUsedInArgOrEnv: Do not use ARG or ENV instructions for sensitive data (ARG "BETTER_AUTH_SECRET") (line 4)
+2026-Jul-07 04:38:49.645564 - SecretsUsedInArgOrEnv: Do not use ARG or ENV instructions for sensitive data (ARG "BETTER_AUTH_URL") (line 5)
+2026-Jul-07 04:38:49.645564 - SecretsUsedInArgOrEnv: Do not use ARG or ENV instructions for sensitive data (ARG "BETTER_AUTH_SECRET") (line 23)
+2026-Jul-07 04:38:49.645564 - SecretsUsedInArgOrEnv: Do not use ARG or ENV instructions for sensitive data (ARG "BETTER_AUTH_URL") (line 24)
+2026-Jul-07 04:38:49.645564 - SecretsUsedInArgOrEnv: Do not use ARG or ENV instructions for sensitive data (ENV "BETTER_AUTH_SECRET") (line 27)
+2026-Jul-07 04:38:49.645564 Dockerfile:30
+2026-Jul-07 04:38:49.645564 --------------------
+2026-Jul-07 04:38:49.645564 28 | ENV BETTER_AUTH_URL=${BETTER_AUTH_URL}
+2026-Jul-07 04:38:49.645564 29 |
+2026-Jul-07 04:38:49.645564 30 | >>> RUN npm run build
+2026-Jul-07 04:38:49.645564 31 |
+2026-Jul-07 04:38:49.645564 32 | # ── Runner stage ──
+2026-Jul-07 04:38:49.645564 --------------------
+2026-Jul-07 04:38:49.645564 ERROR: failed to build: failed to solve: process "/bin/sh -c npm run build" did not complete successfully: exit code: 1
+2026-Jul-07 04:38:49.645564 exit status 1
+2026-Jul-07 04:38:49.666458 Error type: App\Exceptions\DeploymentException
+2026-Jul-07 04:38:49.696076 Error code: 0
+2026-Jul-07 04:38:49.724345 Location: /var/www/html/app/Traits/ExecuteRemoteCommand.php:242
+2026-Jul-07 04:38:49.756153 Stack trace (first 5 lines):
+2026-Jul-07 04:38:49.785379 #0 /var/www/html/app/Traits/ExecuteRemoteCommand.php(106): App\Jobs\ApplicationDeploymentJob->executeCommandWithProcess()
+2026-Jul-07 04:38:49.816667 #1 /var/www/html/vendor/laravel/framework/src/Illuminate/Collections/Traits/EnumeratesValues.php(275): App\Jobs\ApplicationDeploymentJob->{closure:App\Traits\ExecuteRemoteCommand::execute_remote_command():72}()
+2026-Jul-07 04:38:49.844291 #2 /var/www/html/app/Traits/ExecuteRemoteCommand.php(72): Illuminate\Support\Collection->each()
+2026-Jul-07 04:38:49.877116 #3 /var/www/html/app/Jobs/ApplicationDeploymentJob.php(3821): App\Jobs\ApplicationDeploymentJob->execute_remote_command()
+2026-Jul-07 04:38:49.896018 #4 /var/www/html/app/Jobs/ApplicationDeploymentJob.php(912): App\Jobs\ApplicationDeploymentJob->build_image()
+2026-Jul-07 04:38:49.905384 ========================================
+2026-Jul-07 04:38:49.921396 Deployment failed. Removing the new version of your application.
+2026-Jul-07 04:38:51.804491 Gracefully shutting down build container: k1v07eeodnzu1wpwjy79popd
+2026-Jul-07 04:38:51.954114 [CMD]: docker stop --time=30 k1v07eeodnzu1wpwjy79popd
+2026-Jul-07 04:38:51.954114 Flag --time has been deprecated, use --timeout instead
+2026-Jul-07 04:38:52.222575 k1v07eeodnzu1wpwjy79popd
