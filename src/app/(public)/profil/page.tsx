@@ -175,7 +175,6 @@ export default async function ProfilPage() {
             <ScrollReveal>
               <OrgNode
                 label="Kepala Sekolah"
-                subtitle="Drs. Ahmad Fauzi, M.Pd."
                 variant="primary"
               />
             </ScrollReveal>
