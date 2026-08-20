@@ -1,7 +1,7 @@
 import { MetadataRoute } from 'next';
 
 export default function sitemap(): MetadataRoute.Sitemap {
-  const baseUrl = process.env.NEXT_PUBLIC_SITE_URL || 'https://smpn17denpasar.my.id';
+  const baseUrl = process.env.NEXT_PUBLIC_SITE_URL || 'https://smpn17denpasar.sch.id';
   
   // Static pages
   const staticPages = [
