@@ -6,6 +6,7 @@ import { PageHeader } from "@/components/admin/PageHeader"
 import { Button } from "@/components/ui/button"
 import { TextField, TextareaField, SelectField, SwitchField } from "@/components/admin/forms"
 import { createStaff } from "@/lib/actions/staff"
+import ImagePreview from "@/components/admin/ImagePreview"
 
 const roleOptions = [
   { value: "headmaster", label: "Kepala Sekolah" },
@@ -116,16 +117,7 @@ export default function GuruBaruPage() {
             placeholder="Google Docs ID..."
             description="Masukkan ID gambar dari Google Drive"
           />
-          {photoId && (
-            <div className="relative w-32 h-32 rounded-full overflow-hidden border-2 border-neutral-200 mx-auto">
-              {/* eslint-disable-next-line @next/next/no-img-element */}
-              <img
-                src={`https://docs.google.com/uc?id=${photoId}`}
-                alt="Preview"
-                className="w-full h-full object-cover"
-              />
-            </div>
-          )}
+          {photoId && <ImagePreview src={photoId} alt="preview" aspect="square" className="mx-auto" />}
 
           <div className="grid sm:grid-cols-2 gap-4">
             <TextField

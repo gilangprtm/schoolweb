@@ -5,8 +5,9 @@ import { useRouter } from "next/navigation"
 import { PageHeader } from "@/components/admin/PageHeader"
 import { useToast } from "@/components/admin/ui/Toast"
 import { Button } from "@/components/ui/button"
-import { TextField, TextareaField, SelectField, SwitchField, DatePickerField } from "@/components/admin/forms"
+import { TextField, TextareaField, SelectField, SwitchField, DatePickerField, RichTextEditor } from "@/components/admin/forms"
 import { createAchievement } from "@/lib/actions/achievements"
+import ImagePreview from "@/components/admin/ImagePreview"
 
 const categoryOptions = [
   { value: "student", label: "Siswa" },
@@ -105,21 +106,22 @@ export default function PrestasiBaruPage() {
             <DatePickerField label="Tanggal" value={date} onChange={setDate} />
           </div>
 
-          <TextareaField
-            label="Deskripsi"
-            value={description}
-            onChange={setDescription}
-            rows={3}
-            placeholder="Deskripsi prestasi..."
-          />
+          <div className="space-y-2">
+            <label className="text-sm font-medium text-foreground">Deskripsi</label>
+            <RichTextEditor
+              value={description}
+              onChange={setDescription}
+              placeholder="Tulis deskripsi prestasi di sini..."
+            />
+          </div>
 
           <TextField
             label="Foto / Sertifikat"
             value={imageId}
             onChange={setImageId}
-            placeholder="Google Docs ID..."
+            placeholder="Google Docs ID atau URL..."
           />
-          {imageId && <img src={`https://docs.google.com/uc?id=${imageId}`} alt="preview" className="w-full max-w-xs aspect-video object-cover rounded-lg border" />}
+          {imageId && <ImagePreview src={imageId} alt="preview" aspect="video" />}
         </div>
 
         <div className="rounded-xl border border-border bg-card p-6 space-y-5">

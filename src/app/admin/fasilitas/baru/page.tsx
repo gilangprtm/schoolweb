@@ -3,9 +3,10 @@
 import { useState } from "react"
 import { useRouter } from "next/navigation"
 import { PageHeader } from "@/components/admin/PageHeader"
-import { TextField, TextareaField, SelectField, SwitchField } from "@/components/admin/forms"
+import { TextField, TextareaField, SelectField, SwitchField, RichTextEditor } from "@/components/admin/forms"
 import { Button } from "@/components/ui/button"
 import { createFacility } from "@/lib/actions/facilities"
+import ImagePreview from "@/components/admin/ImagePreview"
 
 const categoryOptions = [
   { value: "akademik", label: "Akademik" },
@@ -62,15 +63,22 @@ export default function FasilitasBaruPage() {
             <TextField label="Urutan Tampil" value={String(sortOrder)} onChange={(v) => setSortOrder(Number(v))} type="number" min={1} />
           </div>
 
-          <TextareaField label="Deskripsi" value={description} onChange={setDescription} rows={3} placeholder="Deskripsi fasilitas..." />
+          <div className="space-y-2">
+            <label className="text-sm font-medium text-foreground">Deskripsi</label>
+            <RichTextEditor
+              value={description}
+              onChange={setDescription}
+              placeholder="Deskripsi fasilitas..."
+            />
+          </div>
 
           <TextField
             label="Foto Cover"
             value={photoId}
             onChange={setPhotoId}
-            placeholder="Google Docs ID..."
+            placeholder="Google Docs ID atau URL..."
           />
-          {photoId && <img src={`https://docs.google.com/uc?id=${photoId}`} alt="preview" className="w-full max-w-xs aspect-video object-cover rounded-lg border" />}
+          {photoId && <ImagePreview src={photoId} alt="preview" aspect="video" />}
         </div>
 
         <div className="rounded-xl border border-border bg-card p-6 space-y-5">

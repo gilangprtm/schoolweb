@@ -65,9 +65,13 @@ export default async function FacilityDetailPage({
         <div className="container-custom max-w-3xl">
           <ScrollReveal>
             <div className="prose-content">
-              {facility.description.split("\n").map((p, i) => (
-                <p key={i}>{p}</p>
-              ))}
+              {/<[a-z][\s\S]*>/i.test(facility.description) ? (
+                <div dangerouslySetInnerHTML={{ __html: facility.description }} />
+              ) : (
+                facility.description.split("\n").map((p, i) => (
+                  <p key={i}>{p}</p>
+                ))
+              )}
             </div>
           </ScrollReveal>
 

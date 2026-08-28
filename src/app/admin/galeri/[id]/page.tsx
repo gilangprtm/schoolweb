@@ -9,6 +9,7 @@ import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 import { X, Plus, Trash2 } from "lucide-react"
 import { getGalleryById, updateGallery, deleteMedia, addMediaToGallery, addVideoToGallery } from "@/lib/actions/galleries"
+import ImagePreview from "@/components/admin/ImagePreview"
 import type { Gallery, Media } from "@/types"
 
 const typeOptions = [
@@ -101,13 +102,13 @@ export default function GaleriDetailPage() {
               <Button type="button" onClick={handleAddPhoto}><Plus className="h-4 w-4 mr-1" /> Tambah</Button>
             </div>
             {photoId && (
-              <img src={`https://docs.google.com/uc?id=${photoId}`} alt="Preview" className="w-full max-w-xs aspect-video object-cover rounded-lg border" />
+              <ImagePreview src={photoId} alt="Preview" aspect="video" />
             )}
             {mediaItems.length > 0 ? (
               <div className="grid grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-3">
                 {mediaItems.map(m => (
                   <div key={m.id} className="relative group aspect-square rounded-lg bg-neutral-100 overflow-hidden">
-                    {m.url ? <img src={m.url} alt={m.caption || "Foto"} className="w-full h-full object-cover" /> : <div className="w-full h-full flex items-center justify-center"><span className="text-xs text-neutral-400">Kosong</span></div>}
+                    {m.url ? <ImagePreview src={m.url} alt={m.caption || "Foto"} aspect="square" className="!max-w-none !w-full !h-full !aspect-auto" imgClassName="!aspect-auto" /> : <div className="w-full h-full flex items-center justify-center"><span className="text-xs text-neutral-400">Kosong</span></div>}
                     <button onClick={() => handleDeleteMedia(m.id)} className="absolute top-1 right-1 rounded-full bg-red-500 p-0.5 text-white opacity-0 group-hover:opacity-100 transition-opacity"><X className="h-3 w-3" /></button>
                   </div>
                 ))}

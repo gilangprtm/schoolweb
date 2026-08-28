@@ -7,6 +7,7 @@ import { Select } from "@/components/admin/ui/Select"
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 import { getStaffById, updateStaff } from "@/lib/actions/staff"
+import ImagePreview from "@/components/admin/ImagePreview"
 
 export default function GuruEditPage() {
   const router = useRouter(); const params = useParams(); const id = Number(params.id)
@@ -50,7 +51,7 @@ export default function GuruEditPage() {
             <div className="space-y-2"><label className="text-sm font-medium text-neutral-700">Role</label><Select value={role} onChange={setRole} options={[{ value: "headmaster", label: "Kepala Sekolah" }, { value: "teacher", label: "Guru" }, { value: "staff", label: "Staf" }]} /></div>
             {role === "teacher" && <div className="space-y-2"><label className="text-sm font-medium text-neutral-700">Mata Pelajaran</label><Input value={subject} onChange={e => setSubject(e.target.value)} /></div>}
           </div>
-          <div className="space-y-2"><label className="text-sm font-medium text-neutral-700">Foto Profil</label><Input placeholder="Google Docs ID..." value={photoId} onChange={e => setPhotoId(e.target.value)} />{photoId && <img src={`https://docs.google.com/uc?id=${photoId}`} alt="preview" className="w-full max-w-xs aspect-square object-cover rounded-lg border" />}</div>
+          <div className="space-y-2"><label className="text-sm font-medium text-neutral-700">Foto Profil</label><Input placeholder="Google Docs ID atau URL..." value={photoId} onChange={e => setPhotoId(e.target.value)} />{photoId && <ImagePreview src={photoId} alt="preview" aspect="square" />}</div>
           <div className="grid sm:grid-cols-2 gap-4">
             <div className="space-y-2"><label className="text-sm font-medium text-neutral-700">Email</label><Input type="email" value={email} onChange={e => setEmail(e.target.value)} /></div>
             <div className="space-y-2"><label className="text-sm font-medium text-neutral-700">Telepon</label><Input value={phone} onChange={e => setPhone(e.target.value)} /></div>

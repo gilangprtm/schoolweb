@@ -95,7 +95,10 @@ export default async function AchievementDetailPage({
 
           {/* Description */}
           <ScrollReveal>
-            <div className="prose-content">{achievement.description}</div>
+            <div
+              className="prose-content"
+              dangerouslySetInnerHTML={{ __html: achievement.description }}
+            />
           </ScrollReveal>
 
           <div className="mt-10 pt-6 border-t border-neutral-200">

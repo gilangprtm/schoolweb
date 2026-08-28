@@ -5,8 +5,9 @@ import { useRouter } from "next/navigation"
 import { PageHeader } from "@/components/admin/PageHeader"
 import { useToast } from "@/components/admin/ui/Toast"
 import { Button } from "@/components/ui/button"
-import { TextField, TextareaField, SelectField, SwitchField, DatePickerField } from "@/components/admin/forms"
+import { TextField, TextareaField, SelectField, SwitchField, DatePickerField, RichTextEditor } from "@/components/admin/forms"
 import { createPost } from "@/lib/actions/posts"
+import ImagePreview from "@/components/admin/ImagePreview"
 
 const categoryOptions = [
   { value: "news", label: "Berita" },
@@ -54,7 +55,8 @@ export default function BeritaBaruPage() {
       formData.append("category", category)
       formData.append("excerpt", excerpt)
       formData.append("content", content)
-      formData.append("imageUrl", imageId ? `https://docs.google.com/uc?id=${imageId}` : "")
+      const normalizedImageId = imageId.match(/[?&]id=([^&]+)/)?.[1] || imageId.match(/\/d\/([^/]+)/)?.[1] || imageId.trim()
+      formData.append("imageUrl", normalizedImageId ? `https://docs.google.com/uc?id=${normalizedImageId}` : "")
       formData.append("isPublished", String(isPublished))
       formData.append("publishedAt", publishedAt)
       await createPost(formData)
@@ -140,33 +142,21 @@ export default function BeritaBaruPage() {
                 </>
               }
             />
-            {imageId && (
-              <div className="relative w-full max-w-xs aspect-video rounded-lg overflow-hidden border border-neutral-200 bg-neutral-50 mt-2">
-                {/* eslint-disable-next-line @next/next/no-img-element */}
-                <img
-                  src={`https://docs.google.com/uc?id=${imageId}`}
-                  alt="Preview"
-                  className="w-full h-full object-cover"
-                  onError={(e) => {
-                    (e.target as HTMLImageElement).style.display = "none";
-                    (e.target as HTMLImageElement).nextElementSibling?.classList.remove("hidden");
-                  }}
-                />
-                <div className="hidden absolute inset-0 flex items-center justify-center text-xs text-red-500">
-                  Gagal memuat gambar — periksa ID
-                </div>
-              </div>
-            )}
+            {imageId && <ImagePreview src={imageId} alt="Preview" aspect="video" />}
           </div>
 
-          <TextareaField
-            label="Konten"
-            value={content}
-            onChange={setContent}
-            rows={10}
-            placeholder="Tulis konten berita di sini..."
-            error={errors.content}
-          />
+          <div className="space-y-2">
+            <label className="text-sm font-medium text-foreground">
+              Konten <span className="text-destructive">*</span>
+            </label>
+            <RichTextEditor
+              value={content}
+              onChange={setContent}
+              placeholder="Tulis konten berita di sini..."
+              error={errors.content}
+            />
+            {errors.content && <p className="text-sm text-destructive">{errors.content}</p>}
+          </div>
         </div>
 
         <div className="rounded-xl border border-border bg-card p-6 space-y-5">

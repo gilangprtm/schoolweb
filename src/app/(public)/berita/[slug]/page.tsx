@@ -34,7 +34,7 @@ export default async function BeritaDetailPage({
             alt={post.title}
             fill
             rounded="rounded-none"
-            className="opacity-50"
+            className="opacity-50 h-full"
           />
           <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/30 to-black/40" />
         </div>
@@ -63,6 +63,18 @@ export default async function BeritaDetailPage({
       {/* Content */}
       <section className="section-py bg-white">
         <div className="container-custom max-w-3xl">
+          {post.imageUrl && (
+            <div className="relative aspect-video rounded-xl overflow-hidden shadow-card bg-neutral-100 mb-8">
+              <ImageWithFallback
+                src={post.imageUrl}
+                alt={post.title}
+                fill
+                rounded="rounded-none"
+                className="h-full"
+              />
+            </div>
+          )}
+
           <ScrollReveal>
             <div
               className="prose-content"
