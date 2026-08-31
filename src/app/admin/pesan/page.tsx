@@ -2,7 +2,6 @@
 
 import { useState, useEffect } from "react";
 import { PageHeader } from "@/components/admin/PageHeader";
-import { Badge } from "@/components/admin/ui/Badge";
 import { Mail, MailOpen, Trash2, ChevronDown, ChevronUp } from "lucide-react";
 import { useToast } from "@/components/admin/ui/Toast";
 import { getContacts, markAsRead, deleteContact } from "@/lib/actions/contacts";
@@ -17,8 +16,11 @@ interface Message {
   createdAt: Date;
 }
 
+type MessageFilter = "all" | "unread" | "read";
+
 export default function PesanPage() {
   const [expanded, setExpanded] = useState<number | null>(null);
+  const [filter, setFilter] = useState<MessageFilter>("unread");
   const [messages, setMessages] = useState<Message[]>([]);
   const [loading, setLoading] = useState(true);
   const { toast } = useToast();
@@ -53,6 +55,19 @@ export default function PesanPage() {
   };
 
   const unread = messages.filter((m) => !m.isRead).length;
+  const read = messages.length - unread;
+  const visibleMessages =
+    filter === "unread"
+      ? messages.filter((m) => !m.isRead)
+      : filter === "read"
+        ? messages.filter((m) => m.isRead)
+        : messages;
+
+  const filterTabs: { value: MessageFilter; label: string; count: number }[] = [
+    { value: "all", label: "Semua", count: messages.length },
+    { value: "unread", label: "Belum Dibaca", count: unread },
+    { value: "read", label: "Sudah Dibaca", count: read },
+  ];
 
   return (
     <div>
@@ -64,20 +79,49 @@ export default function PesanPage() {
         ]}
       />
 
+      <div className="mb-5 flex flex-wrap gap-2" role="tablist" aria-label="Filter pesan">
+        {filterTabs.map((tab) => (
+          <button
+            key={tab.value}
+            type="button"
+            role="tab"
+            aria-selected={filter === tab.value}
+            onClick={() => {
+              setFilter(tab.value)
+              setExpanded(null)
+            }}
+            className={`rounded-full border px-3 py-1.5 text-sm transition-colors ${
+              filter === tab.value
+                ? "border-primary bg-primary text-primary-foreground"
+                : "border-border bg-card text-muted-foreground hover:bg-muted hover:text-foreground"
+            }`}
+          >
+            {tab.label}
+            <span className="ml-1.5 tabular-nums">{tab.count}</span>
+          </button>
+        ))}
+      </div>
+
       {loading ? (
         <div className="space-y-2">
           {Array.from({ length: 3 }).map((_, i) => (
             <div key={i} className="h-16 bg-muted animate-pulse rounded-lg" />
           ))}
         </div>
-      ) : messages.length === 0 ? (
+      ) : visibleMessages.length === 0 ? (
         <div className="rounded-xl border border-border bg-card py-16 text-center">
-          <p className="text-sm text-muted-foreground">Tidak ada pesan masuk</p>
+          <p className="text-sm text-muted-foreground">
+            {filter === "unread"
+              ? "Tidak ada pesan belum dibaca"
+              : filter === "read"
+                ? "Tidak ada pesan sudah dibaca"
+                : "Tidak ada pesan masuk"}
+          </p>
           <p className="text-2xl font-bold text-card-foreground mt-2">0</p>
         </div>
       ) : (
         <div className="space-y-2">
-          {messages.map((m) => (
+          {visibleMessages.map((m) => (
             <div
               key={m.id}
               className="rounded-xl border border-border bg-card overflow-hidden"
