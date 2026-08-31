@@ -9,6 +9,7 @@ import {
   getLevelBadgeColor,
   getFacilityIcon,
   getFacilityCategoryLabel,
+  getGoogleDriveImageUrl,
   slugify,
   truncate,
 } from '@/lib/utils';
@@ -95,6 +96,20 @@ describe('getFacilityCategoryLabel', () => {
   it('should return labels', () => {
     expect(getFacilityCategoryLabel('akademik')).toBe('Akademik');
     expect(getFacilityCategoryLabel('lainnya')).toBe('Lainnya');
+  });
+});
+
+describe('getGoogleDriveImageUrl', () => {
+  it('normalizes a Google Drive ID to an image URL', () => {
+    expect(getGoogleDriveImageUrl('abc123')).toBe('https://docs.google.com/uc?id=abc123');
+  });
+
+  it('preserves a full image URL', () => {
+    expect(getGoogleDriveImageUrl('https://example.com/photo.jpg')).toBe('https://example.com/photo.jpg');
+  });
+
+  it('returns empty string for blank input', () => {
+    expect(getGoogleDriveImageUrl('  ')).toBe('');
   });
 });
 

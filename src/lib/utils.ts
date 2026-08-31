@@ -127,6 +127,14 @@ export function slugify(text: string): string {
     .replace(/^-+|-+$/g, ""); // trim hyphens
 }
 
+export function getGoogleDriveImageUrl(value: string): string {
+  const trimmed = value.trim();
+  if (!trimmed) return "";
+  return trimmed.includes("://")
+    ? trimmed
+    : `https://docs.google.com/uc?id=${trimmed}`;
+}
+
 // ── Misc ──
 
 /**
