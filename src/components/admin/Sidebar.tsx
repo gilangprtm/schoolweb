@@ -4,6 +4,7 @@ import { useState } from "react"
 import Link from "next/link"
 import { usePathname, useRouter } from "next/navigation"
 import { cn } from "@/lib/utils"
+import { authClient, useSession } from "@/lib/auth-client"
 import {
   LayoutDashboard, FileText, Newspaper, Users, Trophy,
   Building2, Image, MessageSquare, Settings, ChevronLeft,
@@ -32,19 +33,36 @@ interface SidebarProps {
 export function Sidebar({ collapsed }: SidebarProps) {
   const pathname = usePathname()
   const router = useRouter()
+  const { data: session } = useSession()
 
-  const getRole = (): string => {
-    if (typeof document === "undefined") return "admin"
-    const match = document.cookie.match(/auth_token=fake-token-(\w+)/)
-    return match?.[1] ?? "admin"
-  }
+  const user = session?.user as { name?: string | null; role?: string } | undefined
+  const userName = user?.name?.trim() || "Admin"
+  const userRole = user?.role || "admin"
+  const roleLabel = userRole === "superadmin" ? "Super Admin" : "Admin"
+  const initials = userName
+    .split(/\s+/)
+    .filter(Boolean)
+    .slice(0, 2)
+    .map(part => part[0]?.toUpperCase() ?? "")
+    .join("") || "A"
 
-  const role = getRole()
-  const filteredNav = role === "admin" ? navItems : navItems.filter(item => item.href === "/admin")
+  // Superadmin sees all menus. Admin sees content menus, minus superadmin-only pages
+  // (Akun, Pengaturan) whose server actions are guarded to superadmin in
+  // src/lib/actions/users.ts and settings.ts.
+  const superadminOnlyHrefs = ["/admin/akun", "/admin/pengaturan"]
+  const filteredNav =
+    userRole === "superadmin"
+      ? navItems
+      : navItems.filter(item => !superadminOnlyHrefs.includes(item.href))
 
-  const handleLogout = () => {
-    document.cookie = "auth_token=; path=/; max-age=0"
-    router.push("/login")
+  const handleLogout = async () => {
+    try {
+      await authClient.signOut()
+    } finally {
+      document.cookie = "auth_token=; path=/; max-age=0"
+      router.push("/login")
+      router.refresh()
+    }
   }
 
   const isActive = (href: string) => {
@@ -127,11 +145,11 @@ export function Sidebar({ collapsed }: SidebarProps) {
         {!collapsed ? (
           <div className="flex items-center gap-3">
             <div className="w-9 h-9 rounded-xl bg-primary/10 flex items-center justify-center text-sm font-semibold text-primary ring-1 ring-primary/20">
-              AG
+              {initials}
             </div>
             <div className="flex-1 min-w-0">
-              <p className="text-sm font-medium text-sidebar-foreground truncate">Admin</p>
-              <p className="text-[11px] text-muted-foreground truncate">Superadmin</p>
+              <p className="text-sm font-medium text-sidebar-foreground truncate">{userName}</p>
+              <p className="text-[11px] text-muted-foreground truncate">{roleLabel}</p>
             </div>
             <button
               onClick={handleLogout}
@@ -147,7 +165,7 @@ export function Sidebar({ collapsed }: SidebarProps) {
             className="w-9 h-9 rounded-xl bg-primary/10 flex items-center justify-center text-sm font-semibold text-primary ring-1 ring-primary/20 hover:bg-destructive/10 hover:text-destructive hover:ring-destructive/20 transition-all duration-200"
             title="Keluar"
           >
-            AG
+            {initials}
           </button>
         )}
       </div>

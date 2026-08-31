@@ -4,6 +4,7 @@ import { usePathname, useRouter } from "next/navigation"
 import { ChevronRight, Home, Bell, LogOut, User, PanelLeft, PanelLeftClose } from "lucide-react"
 import Link from "next/link"
 import { useState } from "react"
+import { authClient } from "@/lib/auth-client"
 
 const pathLabels: Record<string, string> = {
   "": "Dashboard",
@@ -29,9 +30,14 @@ export function AdminHeader({ collapsed, onToggleCollapse }: AdminHeaderProps) {
   const pathname = usePathname()
   const router = useRouter()
 
-  const handleLogout = () => {
-    document.cookie = "auth_token=; path=/; max-age=0"
-    router.push("/login")
+  const handleLogout = async () => {
+    try {
+      await authClient.signOut()
+    } finally {
+      document.cookie = "auth_token=; path=/; max-age=0"
+      router.push("/login")
+      router.refresh()
+    }
   }
 
   const segments = pathname.replace("/admin/", "").split("/").filter(Boolean)
