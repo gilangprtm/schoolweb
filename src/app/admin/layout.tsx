@@ -13,6 +13,7 @@ export default function AdminLayout({
   children: React.ReactNode;
 }) {
   const [collapsed, setCollapsed] = useState(false);
+  const [mobileOpen, setMobileOpen] = useState(false);
   const [checking, setChecking] = useState(true);
   const router = useRouter();
 
@@ -45,16 +46,22 @@ export default function AdminLayout({
   return (
     <ToastProvider>
       <div className="min-h-screen bg-background">
-        <Sidebar collapsed={collapsed} />
+        <Sidebar
+          collapsed={collapsed}
+          mobileOpen={mobileOpen}
+          onMobileClose={() => setMobileOpen(false)}
+        />
         <div
-          className="flex flex-col min-h-screen transition-all duration-300 ease-in-out"
-          style={{ marginLeft: collapsed ? "4.5rem" : "16rem" }}
+          className="flex min-h-screen flex-col transition-all duration-300 ease-in-out lg:ml-[var(--admin-sidebar-width)]"
+          style={{ "--admin-sidebar-width": collapsed ? "4.5rem" : "16rem" } as React.CSSProperties}
         >
           <AdminHeader
             collapsed={collapsed}
+            mobileOpen={mobileOpen}
             onToggleCollapse={() => setCollapsed(!collapsed)}
+            onToggleMobile={() => setMobileOpen(!mobileOpen)}
           />
-          <main className="flex-1 p-4 md:p-6 lg:p-8">{children}</main>
+          <main className="min-w-0 flex-1 overflow-x-hidden p-4 md:p-6 lg:p-8">{children}</main>
         </div>
       </div>
     </ToastProvider>

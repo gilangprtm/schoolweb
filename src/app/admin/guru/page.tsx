@@ -11,8 +11,26 @@ import { Users, Pencil, Trash2 } from "lucide-react"
 import { getAllStaff, deleteStaff } from "@/lib/actions/staff"
 import type { Staff } from "@/types"
 
-const roleLabels: Record<string, string> = { headmaster: "Kepala Sekolah", teacher: "Guru", staff: "Staf" }
-const roleVariant: Record<string, "info" | "success" | "secondary"> = { headmaster: "info", teacher: "success", staff: "secondary" }
+const roleLabels: Record<string, string> = {
+  headmaster: "Kepala Sekolah",
+  teacher: "Guru",
+  staff: "TU",
+  waka_kesiswaan: "Waka Kesiswaan",
+  waka_kurikulum: "Waka Kurikulum",
+  waka_humas: "Waka Humas",
+  waka_sarpras: "Waka Sarpras",
+  ktu: "KTU",
+}
+const roleVariant: Record<string, "info" | "success" | "secondary"> = {
+  headmaster: "info",
+  teacher: "success",
+  staff: "secondary",
+  waka_kesiswaan: "info",
+  waka_kurikulum: "info",
+  waka_humas: "info",
+  waka_sarpras: "info",
+  ktu: "secondary",
+}
 
 export default function GuruPage() {
   const [filter, setFilter] = useState("all")
@@ -49,7 +67,7 @@ export default function GuruPage() {
     <div>
       <PageHeader title="Guru & Staf" breadcrumbs={[{ label: "Dashboard", href: "/admin" }, { label: "Guru & Staf", href: "/admin/guru" }]} actionLabel="Tambah" actionHref="/admin/guru/baru" />
       <div className="flex gap-2 mb-4">
-        {["all", "headmaster", "teacher", "staff"].map(r => (
+        {["all", "headmaster", "teacher", "staff", "waka_kesiswaan", "waka_kurikulum", "waka_humas", "waka_sarpras", "ktu"].map(r => (
           <button key={r} onClick={() => setFilter(r)} className={`px-4 py-1.5 rounded-full text-xs font-medium transition-colors ${filter === r ? "bg-primary text-white" : "bg-neutral-100 text-neutral-600 hover:bg-neutral-200"}`}>
             {r === "all" ? "Semua" : roleLabels[r]}
           </button>

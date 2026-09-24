@@ -1,7 +1,7 @@
 "use client"
 
 import { usePathname, useRouter } from "next/navigation"
-import { ChevronRight, Home, Bell, LogOut, User, PanelLeft, PanelLeftClose } from "lucide-react"
+import { ChevronRight, Home, Bell, LogOut, User, PanelLeft, PanelLeftClose, Menu, X } from "lucide-react"
 import Link from "next/link"
 import { useState } from "react"
 import { authClient } from "@/lib/auth-client"
@@ -23,10 +23,12 @@ const pathLabels: Record<string, string> = {
 
 interface AdminHeaderProps {
   collapsed: boolean
+  mobileOpen: boolean
   onToggleCollapse: () => void
+  onToggleMobile: () => void
 }
 
-export function AdminHeader({ collapsed, onToggleCollapse }: AdminHeaderProps) {
+export function AdminHeader({ collapsed, mobileOpen, onToggleCollapse, onToggleMobile }: AdminHeaderProps) {
   const pathname = usePathname()
   const router = useRouter()
 
@@ -53,6 +55,15 @@ export function AdminHeader({ collapsed, onToggleCollapse }: AdminHeaderProps) {
   return (
       <header className="flex h-16 items-center justify-between border-b border-sidebar-border bg-sidebar px-4 lg:px-6 sticky top-0 z-40">
       <div className="flex items-center gap-2">
+        <button
+          onClick={onToggleMobile}
+          className="flex h-10 w-10 items-center justify-center rounded-lg text-muted-foreground hover:bg-muted hover:text-foreground transition-colors lg:hidden"
+          title={mobileOpen ? "Tutup menu" : "Buka menu"}
+          aria-label={mobileOpen ? "Tutup menu navigasi" : "Buka menu navigasi"}
+          aria-expanded={mobileOpen}
+        >
+          {mobileOpen ? <X className="h-5 w-5" /> : <Menu className="h-5 w-5" />}
+        </button>
         <button
           onClick={onToggleCollapse}
           className="hidden lg:flex items-center justify-center w-8 h-8 rounded-lg text-muted-foreground hover:text-foreground hover:bg-muted transition-all duration-200"

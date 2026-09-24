@@ -24,12 +24,16 @@ export default async function StaffDetailPage({
     .filter((r) => r.role === person.role && r.id !== person.id)
     .slice(0, 4);
 
-  const roleLabel =
-    person.role === "headmaster"
-      ? "Kepala Sekolah"
-      : person.role === "teacher"
-        ? "Guru"
-        : "Staf";
+  const roleLabel = ({
+    headmaster: "Kepala Sekolah",
+    teacher: "Guru",
+    staff: "TU",
+    waka_kesiswaan: "Waka Kesiswaan",
+    waka_kurikulum: "Waka Kurikulum",
+    waka_humas: "Waka Humas",
+    waka_sarpras: "Waka Sarpras",
+    ktu: "KTU",
+  } as Record<string, string>)[person.role] || "Staf";
 
   return (
     <article>

@@ -28,9 +28,11 @@ const navItems = [
 
 interface SidebarProps {
   collapsed: boolean
+  mobileOpen?: boolean
+  onMobileClose?: () => void
 }
 
-export function Sidebar({ collapsed }: SidebarProps) {
+export function Sidebar({ collapsed, mobileOpen = false, onMobileClose }: SidebarProps) {
   const pathname = usePathname()
   const router = useRouter()
   const { data: session } = useSession()
@@ -117,6 +119,7 @@ export function Sidebar({ collapsed }: SidebarProps) {
             <Link
               key={item.href}
               href={item.href}
+              onClick={onMobileClose}
               className={cn(
                 "flex items-center rounded-xl text-sm font-medium transition-all duration-200 relative group",
                 collapsed ? "justify-center px-0 py-2.5 w-10 mx-auto" : "gap-3 px-3 py-2.5",
@@ -173,6 +176,22 @@ export function Sidebar({ collapsed }: SidebarProps) {
   )
 
   return (
-    <div className="hidden lg:block fixed left-0 top-0 z-40 h-screen">{sidebarContent}</div>
+    <>
+      <div
+        aria-hidden="true"
+        onClick={onMobileClose}
+        className={cn(
+          "fixed inset-0 z-40 bg-black/40 transition-opacity lg:hidden",
+          mobileOpen ? "opacity-100" : "pointer-events-none opacity-0",
+        )}
+      />
+      <div className={cn(
+        "fixed left-0 top-0 z-50 h-screen transition-transform duration-300 lg:hidden",
+        mobileOpen ? "translate-x-0" : "-translate-x-full",
+      )}>
+        {sidebarContent}
+      </div>
+      <div className="fixed left-0 top-0 z-40 hidden h-screen lg:block">{sidebarContent}</div>
+    </>
   )
 }

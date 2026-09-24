@@ -120,9 +120,9 @@ export default function AdminDashboard() {
   }
 
   return (
-    <div className="space-y-8">
+    <div className="min-w-0 space-y-6 pb-[calc(2rem+env(safe-area-inset-bottom))] md:space-y-8">
       {/* Header */}
-      <div className="flex items-end justify-between">
+      <div className="flex min-w-0 flex-col gap-3 sm:flex-row sm:items-end sm:justify-between">
         <div>
           <div className="flex items-center gap-2 mb-1">
             <Activity className="w-5 h-5 text-primary" />
@@ -137,21 +137,21 @@ export default function AdminDashboard() {
       </div>
 
       {/* Stats Grid */}
-      <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
+      <div className="grid min-w-0 grid-cols-2 gap-3 sm:gap-4 md:grid-cols-3 lg:grid-cols-4">
         {stats.map(s => <StatCard key={s.title} {...s} />)}
       </div>
 
-      <div className="grid lg:grid-cols-3 gap-6">
+      <div className="grid min-w-0 gap-6 lg:grid-cols-3">
         {/* Left — Main Content */}
-        <div className="lg:col-span-2 space-y-6">
+        <div className="min-w-0 space-y-6 lg:col-span-2">
           {/* Recent Posts */}
           <Card>
-            <CardHeader className="flex-row items-center justify-between border-b pb-4">
-              <div className="flex items-center gap-2">
-                <TrendingUp className="w-4 h-4 text-primary" />
-                <CardTitle className="text-base">Postingan Terbaru</CardTitle>
+            <CardHeader className="flex flex-col gap-3 border-b pb-4 sm:flex-row sm:items-center sm:justify-between">
+              <div className="flex min-w-0 items-center gap-2">
+                <TrendingUp className="h-4 w-4 shrink-0 text-primary" />
+                <CardTitle className="truncate text-base">Postingan Terbaru</CardTitle>
               </div>
-              <Link href="/admin/berita" className="text-sm text-primary hover:text-primary/80 font-medium flex items-center gap-1 transition-colors">
+              <Link href="/admin/berita" className="flex min-h-11 shrink-0 items-center gap-1 text-sm font-medium text-primary transition-colors hover:text-primary/80">
                 Lihat semua <ArrowRight className="w-3.5 h-3.5" />
               </Link>
             </CardHeader>
@@ -164,10 +164,10 @@ export default function AdminDashboard() {
                     <Link
                       key={i}
                       href={`/admin/berita/${p.id}`}
-                      className="flex items-center justify-between px-5 py-4 hover:bg-muted/30 transition-colors group"
+                      className="flex min-w-0 items-start justify-between gap-3 px-4 py-4 transition-colors hover:bg-muted/30 group sm:px-5"
                     >
-                      <div className="min-w-0 flex-1 mr-4">
-                        <p className="text-sm font-medium text-card-foreground truncate group-hover:text-primary transition-colors">
+                      <div className="min-w-0 flex-1">
+                        <p className="break-words text-sm font-medium leading-5 text-card-foreground group-hover:text-primary transition-colors">
                           {p.title}
                         </p>
                         <div className="flex items-center gap-2 mt-1.5">

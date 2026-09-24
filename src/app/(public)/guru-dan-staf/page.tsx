@@ -15,9 +15,24 @@ import type { Staff } from "@/types";
 const ROLE_FILTERS = [
   { label: "Semua", value: "all" },
   { label: "Kepala Sekolah", value: "headmaster" },
+  { label: "Wakil Kepala Sekolah", value: "waka" },
   { label: "Guru", value: "teacher" },
-  { label: "Staf", value: "staff" },
+  { label: "TU", value: "staff" },
+  { label: "KTU", value: "ktu" },
 ];
+
+const wakaRoles = ["waka_kesiswaan", "waka_kurikulum", "waka_humas", "waka_sarpras"];
+
+const roleLabel = (role: string) => ({
+  headmaster: "Kepala Sekolah",
+  teacher: "Guru",
+  staff: "TU",
+  waka_kesiswaan: "Waka Kesiswaan",
+  waka_kurikulum: "Waka Kurikulum",
+  waka_humas: "Waka Humas",
+  waka_sarpras: "Waka Sarpras",
+  ktu: "KTU",
+}[role] || "Staf");
 
 export default function GuruStaffPage() {
   const [role, setRole] = useState("all");
@@ -32,9 +47,15 @@ export default function GuruStaffPage() {
   }, []);
 
   const headmaster = allStaff.find((s) => s.role === "headmaster");
-  const filteredStaff = role === "all" ? allStaff : allStaff.filter((s) => s.role === role);
+  const filteredStaff = role === "waka"
+    ? allStaff.filter((s) => wakaRoles.includes(s.role))
+    : role === "all"
+      ? allStaff
+      : allStaff.filter((s) => s.role === role);
   const teachers = filteredStaff.filter((s) => s.role === "teacher");
-  const staffList = filteredStaff.filter((s) => s.role === "staff");
+  const wakaList = filteredStaff.filter((s) => wakaRoles.includes(s.role));
+  const tuList = filteredStaff.filter((s) => s.role === "staff");
+  const ktuList = filteredStaff.filter((s) => s.role === "ktu");
   const showHeadmaster = role === "all" || role === "headmaster";
 
   return (
@@ -100,6 +121,22 @@ export default function GuruStaffPage() {
                 </ScrollReveal>
               )}
 
+              {/* Wakil Kepala Sekolah */}
+              {wakaList.length > 0 && (
+                <>
+                  <h2 className="font-heading text-xl font-bold text-neutral-800 mb-6">
+                    Wakil Kepala Sekolah
+                  </h2>
+                  <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-4 mb-10">
+                    {wakaList.map((person, index) => (
+                      <ScrollReveal key={person.id} delay={index * 0.05}>
+                        <StaffCard person={person} />
+                      </ScrollReveal>
+                    ))}
+                  </div>
+                </>
+              )}
+
               {/* Teachers */}
               {teachers.length > 0 && (
                 <>
@@ -116,12 +153,26 @@ export default function GuruStaffPage() {
                 </>
               )}
 
-              {/* Staff */}
-              {staffList.length > 0 && (
+              {/* TU */}
+              {tuList.length > 0 && (
                 <>
-                  <h2 className="font-heading text-xl font-bold text-neutral-800 mb-6">Staf</h2>
+                  <h2 className="font-heading text-xl font-bold text-neutral-800 mb-6">TU</h2>
+                  <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-4 mb-10">
+                    {tuList.map((person, index) => (
+                      <ScrollReveal key={person.id} delay={index * 0.05}>
+                        <StaffCard person={person} />
+                      </ScrollReveal>
+                    ))}
+                  </div>
+                </>
+              )}
+
+              {/* KTU */}
+              {ktuList.length > 0 && (
+                <>
+                  <h2 className="font-heading text-xl font-bold text-neutral-800 mb-6">KTU</h2>
                   <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-4">
-                    {staffList.map((person, index) => (
+                    {ktuList.map((person, index) => (
                       <ScrollReveal key={person.id} delay={index * 0.05}>
                         <StaffCard person={person} />
                       </ScrollReveal>
@@ -159,7 +210,7 @@ function StaffCard({ person }: { person: Staff }) {
         {person.name}
       </h3>
       <Badge
-        label={person.role === "headmaster" ? "Kepala Sekolah" : person.role === "teacher" ? "Guru" : "Staf"}
+        label={roleLabel(person.role)}
         variant={person.role === "headmaster" ? "accent" : person.role === "teacher" ? "primary" : "secondary"}
       />
       {person.subject && (

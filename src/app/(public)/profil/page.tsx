@@ -2,9 +2,13 @@ import { Target, Flag, MapPin, Building2 } from "lucide-react";
 import MiniHeroBanner from "@/components/shared/MiniHeroBanner";
 import ScrollReveal from "@/components/shared/ScrollReveal";
 import { getSchoolProfile } from "@/lib/actions/school-profile";
+import { getActiveStaff } from "@/lib/actions/staff";
+import ImageWithFallback from "@/components/shared/ImageWithFallback";
 
 export default async function ProfilPage() {
   const profile = await getSchoolProfile();
+  const organizationStaff = await getActiveStaff();
+  const staffByRole = new Map(organizationStaff.map((person) => [person.role, person]));
 
   return (
     <>
@@ -175,6 +179,7 @@ export default async function ProfilPage() {
             <ScrollReveal>
               <OrgNode
                 label="Kepala Sekolah"
+                person={staffByRole.get("headmaster")}
                 variant="primary"
               />
             </ScrollReveal>
@@ -190,8 +195,8 @@ export default async function ProfilPage() {
             {/* Wakasek row */}
             <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-3 w-full max-w-4xl mt-2">
               {WAKASEK.map((item, i) => (
-                <ScrollReveal key={i} delay={i * 0.06}>
-                  <OrgNode label={item} variant="secondary" compact />
+                <ScrollReveal key={item.role} delay={i * 0.06}>
+                  <OrgNode label={item.label} person={staffByRole.get(item.role)} variant="secondary" compact />
                 </ScrollReveal>
               ))}
             </div>
@@ -208,7 +213,7 @@ export default async function ProfilPage() {
                 <OrgNode label="Guru" variant="outline" />
               </ScrollReveal>
               <ScrollReveal delay={0.35}>
-                <OrgNode label="Pegawai / Staf TU" variant="outline" />
+                <OrgNode label="TU" variant="outline" />
               </ScrollReveal>
             </div>
           </div>
@@ -219,21 +224,28 @@ export default async function ProfilPage() {
 }
 
 const WAKASEK = [
-  "Waka Kurikulum",
-  "Waka Kesiswaan",
-  "Waka Sarpras",
-  "Waka Humas",
-  "Kepala TU",
+  { label: "Waka Kurikulum", role: "waka_kurikulum" },
+  { label: "Waka Kesiswaan", role: "waka_kesiswaan" },
+  { label: "Waka Sarpras", role: "waka_sarpras" },
+  { label: "Waka Humas", role: "waka_humas" },
+  { label: "KTU", role: "ktu" },
 ];
+
+type OrganizationPerson = {
+  name: string;
+  photoUrl: string;
+};
 
 function OrgNode({
   label,
   subtitle,
+  person,
   variant = "primary",
   compact = false,
 }: {
   label: string;
   subtitle?: string;
+  person?: OrganizationPerson;
   variant?: "primary" | "secondary" | "outline";
   compact?: boolean;
 }) {
@@ -251,6 +263,14 @@ function OrgNode({
 
   return (
     <div className={[base, variants[variant]].join(" ")}>
+      {person && (
+        <>
+          <div className="mx-auto mb-2 size-16 overflow-hidden rounded-full border-2 border-white/70 bg-white/20">
+            <ImageWithFallback src={person.photoUrl} alt={person.name} aspect="1/1" rounded="rounded-full" />
+          </div>
+          <div className="mb-2 text-xs font-medium opacity-90">{person.name}</div>
+        </>
+      )}
       <div
         className={
           compact

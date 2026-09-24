@@ -24,7 +24,16 @@ export const PostUpdateSchema = PostSchema.partial();
 export const StaffSchema = z.object({
   name: z.string().min(1, "Nama wajib diisi"),
   slug: z.string().min(1, "Slug wajib diisi"),
-  role: z.enum(["headmaster", "teacher", "staff"]).default("teacher"),
+  role: z.enum([
+    "headmaster",
+    "teacher",
+    "staff",
+    "waka_kesiswaan",
+    "waka_kurikulum",
+    "waka_humas",
+    "waka_sarpras",
+    "ktu",
+  ]).default("teacher"),
   subject: z.string().optional().default(""),
   photoUrl: z.string().optional().default(""),
   education: z.string().optional().default(""),

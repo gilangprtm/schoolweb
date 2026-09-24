@@ -245,7 +245,14 @@ async function searchStaff(
         ? "Kepala Sekolah"
         : r.role === "teacher"
           ? `Guru ${r.subject || ""}`
-          : "Staf",
+          : ({
+              staff: "TU",
+              waka_kesiswaan: "Waka Kesiswaan",
+              waka_kurikulum: "Waka Kurikulum",
+              waka_humas: "Waka Humas",
+              waka_sarpras: "Waka Sarpras",
+              ktu: "KTU",
+            }[r.role] || "Staf"),
     }))
     .filter((r) => r.score >= minScore);
 }

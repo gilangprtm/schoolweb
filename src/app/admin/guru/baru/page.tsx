@@ -11,7 +11,12 @@ import ImagePreview from "@/components/admin/ImagePreview"
 const roleOptions = [
   { value: "headmaster", label: "Kepala Sekolah" },
   { value: "teacher", label: "Guru" },
-  { value: "staff", label: "Staf" },
+  { value: "staff", label: "TU" },
+  { value: "waka_kesiswaan", label: "Waka Kesiswaan" },
+  { value: "waka_kurikulum", label: "Waka Kurikulum" },
+  { value: "waka_humas", label: "Waka Humas" },
+  { value: "waka_sarpras", label: "Waka Sarpras" },
+  { value: "ktu", label: "KTU" },
 ]
 
 export default function GuruBaruPage() {
@@ -34,7 +39,8 @@ export default function GuruBaruPage() {
   const validate = (): boolean => {
     const errs: Record<string, string> = {}
     if (!name.trim()) errs.name = "Nama wajib diisi"
-    if (role === "teacher" && !subject.trim()) errs.subject = "Mata pelajaran wajib diisi untuk guru"
+    const needsSubject = role === "teacher" || role.startsWith("waka_")
+    if (needsSubject && !subject.trim()) errs.subject = "Mata pelajaran wajib diisi untuk guru atau wakil kepala sekolah"
     if (email && !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) errs.email = "Format email tidak valid"
     setErrors(errs)
     return Object.keys(errs).length === 0
@@ -98,7 +104,7 @@ export default function GuruBaruPage() {
               onChange={setRole}
               options={roleOptions}
             />
-            {role === "teacher" && (
+            {(role === "teacher" || role.startsWith("waka_")) && (
               <TextField
                 label="Mata Pelajaran"
                 value={subject}

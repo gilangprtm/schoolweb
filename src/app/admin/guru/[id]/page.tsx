@@ -48,8 +48,8 @@ export default function GuruEditPage() {
           <h2 className="text-sm font-semibold text-neutral-900 uppercase tracking-wider">Informasi</h2>
           <div className="space-y-2"><label className="text-sm font-medium text-neutral-700">Nama <span className="text-red-500">*</span></label><Input value={name} onChange={e => setName(e.target.value)} required /></div>
           <div className="grid sm:grid-cols-2 gap-4">
-            <div className="space-y-2"><label className="text-sm font-medium text-neutral-700">Role</label><Select value={role} onChange={setRole} options={[{ value: "headmaster", label: "Kepala Sekolah" }, { value: "teacher", label: "Guru" }, { value: "staff", label: "Staf" }]} /></div>
-            {role === "teacher" && <div className="space-y-2"><label className="text-sm font-medium text-neutral-700">Mata Pelajaran</label><Input value={subject} onChange={e => setSubject(e.target.value)} /></div>}
+            <div className="space-y-2"><label className="text-sm font-medium text-neutral-700">Role</label><Select value={role} onChange={setRole} options={[{ value: "headmaster", label: "Kepala Sekolah" }, { value: "teacher", label: "Guru" }, { value: "staff", label: "TU" }, { value: "waka_kesiswaan", label: "Waka Kesiswaan" }, { value: "waka_kurikulum", label: "Waka Kurikulum" }, { value: "waka_humas", label: "Waka Humas" }, { value: "waka_sarpras", label: "Waka Sarpras" }, { value: "ktu", label: "KTU" }]} /></div>
+            {(role === "teacher" || role.startsWith("waka_")) && <div className="space-y-2"><label className="text-sm font-medium text-neutral-700">Mata Pelajaran</label><Input value={subject} onChange={e => setSubject(e.target.value)} /></div>}
           </div>
           <div className="space-y-2"><label className="text-sm font-medium text-neutral-700">Foto Profil</label><Input placeholder="Google Docs ID atau URL..." value={photoId} onChange={e => setPhotoId(e.target.value)} />{photoId && <ImagePreview src={photoId} alt="preview" aspect="square" />}</div>
           <div className="grid sm:grid-cols-2 gap-4">

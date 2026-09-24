@@ -51,7 +51,15 @@ export interface Post {
 }
 
 // ── Staff (Guru & Staf) ──
-export type StaffRole = "headmaster" | "teacher" | "staff";
+export type StaffRole =
+  | "headmaster"
+  | "teacher"
+  | "staff"
+  | "waka_kesiswaan"
+  | "waka_kurikulum"
+  | "waka_humas"
+  | "waka_sarpras"
+  | "ktu";
 
 export interface Staff {
   id: number;
