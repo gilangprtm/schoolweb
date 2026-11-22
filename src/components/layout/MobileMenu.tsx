@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import Image from "next/image";
 import Link from "next/link";
 import { motion, AnimatePresence } from "framer-motion";
 import { X, ChevronDown, Phone } from "lucide-react";
@@ -61,9 +62,13 @@ export default function MobileMenu({
                 className="flex items-center gap-2"
                 onClick={onClose}
               >
-                <div className="w-8 h-8 rounded-lg bg-primary text-white flex items-center justify-center font-bold text-sm">
-                  S1
-                </div>
+                <Image
+                  src="/images/logo.png"
+                  alt="Logo SMPN 17 Denpasar"
+                  width={40}
+                  height={40}
+                  className="h-10 w-10 shrink-0 object-contain"
+                />
                 <span className="font-heading font-bold text-sm">
                   SMPN 17 Denpasar
                 </span>
