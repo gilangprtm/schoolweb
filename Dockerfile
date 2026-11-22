@@ -64,6 +64,9 @@ COPY --from=builder --chown=nextjs:nodejs \
 COPY --from=builder --chown=nextjs:nodejs \
   /app/node_modules/drizzle-orm ./node_modules/drizzle-orm
 
+RUN mkdir -p /app/storage && chown nextjs:nodejs /app/storage
+
+ENV STORAGE_DIR=/app/storage
 USER nextjs
 EXPOSE 3000
 

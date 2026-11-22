@@ -8,6 +8,8 @@ import { Button } from "@/components/ui/button"
 import { TextField, TextareaField, SelectField, SwitchField, DatePickerField, RichTextEditor } from "@/components/admin/forms"
 import { getPostById, updatePost } from "@/lib/actions/posts"
 import ImagePreview from "@/components/admin/ImagePreview"
+import ImageUploadField from "@/components/admin/ImageUploadField"
+import { normalizeAdminImageUrl } from "@/lib/image-url"
 
 const categoryOptions = [
   { value: "news", label: "Berita" },
@@ -41,10 +43,8 @@ export default function BeritaEditPage() {
         setExcerpt(post.excerpt)
         setContent(post.content)
         setIsPublished(post.isPublished)
-        setPublishedAt(post.publishedAt ? new Date(post.publishedAt).toISOString().split("T")[0] : "")
-        const url = post.imageUrl || ""
-        const match = url.match(/[?&]id=([^&]+)/) || url.match(/\/d\/([^/]+)/)
-        setImageId(match ? match[1] : url.trim())
+        setPublishedAt(post.publishedAt ? new Date(post.publishedAt).toISOString().slice(0, 10) : "")
+        setImageId(post.imageUrl || "")
       }
       setLoading(false)
     }).catch(() => setLoading(false))
@@ -77,8 +77,7 @@ export default function BeritaEditPage() {
       formData.append("category", category)
       formData.append("excerpt", excerpt)
       formData.append("content", content)
-      const normalizedImageId = imageId.match(/[?&]id=([^&]+)/)?.[1] || imageId.match(/\/d\/([^/]+)/)?.[1] || imageId.trim()
-      formData.append("imageUrl", normalizedImageId ? `https://docs.google.com/uc?id=${normalizedImageId}` : "")
+      formData.append("imageUrl", normalizeAdminImageUrl(imageId))
       formData.append("isPublished", String(isPublished))
       formData.append("publishedAt", publishedAt)
       await updatePost(id, formData)
@@ -159,6 +158,7 @@ export default function BeritaEditPage() {
             }
           />
           {imageId && <ImagePreview src={imageId} alt="Preview" aspect="video" />}
+          <ImageUploadField onUploaded={setImageId} />
 
           <div className="space-y-2">
             <label className="text-sm font-medium text-foreground">

@@ -8,7 +8,7 @@ import { FacilitySchema, FacilityUpdateSchema } from "@/lib/validations";
 import { auth } from "@/lib/auth";
 import { eq, and, asc, count } from "drizzle-orm";
 import { headers } from "next/headers";
-import { deleteFile } from "@/lib/upload";
+import { removeOwnedImage } from "@/lib/public-image-storage";
 
 async function requireAuth() {
   const session = await auth.api.getSession({
@@ -166,7 +166,9 @@ export async function updateFacility(id: number, data: FormData) {
   }
 
   if (Object.keys(updateData).length > 0) {
+    const existing = await db.select({ photoUrl: facilities.photoUrl }).from(facilities).where(eq(facilities.id, id)).limit(1);
     await db.update(facilities).set(updateData).where(eq(facilities.id, id));
+    if (updateData.photoUrl !== undefined && existing[0]?.photoUrl !== updateData.photoUrl) await removeOwnedImage(existing[0]?.photoUrl);
   }
 
   revalidatePath("/fasilitas");
@@ -177,20 +179,13 @@ export async function updateFacility(id: number, data: FormData) {
 
 export async function deleteFacility(id: number) {
   await requireAuth();
-
-  // Clean up photos from disk
-  const photos = await db
-    .select()
-    .from(facilityPhotos)
-    .where(eq(facilityPhotos.facilityId, id));
-
-  for (const photo of photos) {
-    await deleteFile(photo.url);
+  const facility = await db.select({ photoUrl: facilities.photoUrl }).from(facilities).where(eq(facilities.id, id)).limit(1);
+  const photos = await db.select().from(facilityPhotos).where(eq(facilityPhotos.facilityId, id));
+  if (facility[0]) {
+    await db.delete(facilities).where(eq(facilities.id, id));
+    await removeOwnedImage(facility[0].photoUrl);
+    for (const photo of photos) await removeOwnedImage(photo.url);
   }
-
-  // DB cascade handles facility_photos deletion
-  await db.delete(facilities).where(eq(facilities.id, id));
-
   revalidatePath("/fasilitas");
   revalidatePath("/admin/fasilitas");
   revalidatePath("/");
@@ -226,8 +221,8 @@ export async function deleteFacilityPhoto(photoId: number) {
     .limit(1);
 
   if (photos_result[0]) {
-    await deleteFile(photos_result[0].url);
     await db.delete(facilityPhotos).where(eq(facilityPhotos.id, photoId));
+    await removeOwnedImage(photos_result[0].url);
   }
 
   revalidatePath("/fasilitas");

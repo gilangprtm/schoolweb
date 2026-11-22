@@ -8,6 +8,7 @@ import { PostSchema, PostUpdateSchema } from "@/lib/validations";
 import { auth } from "@/lib/auth";
 import { eq, and, ilike, desc, count } from "drizzle-orm";
 import { headers } from "next/headers";
+import { removeOwnedImage } from "@/lib/public-image-storage";
 
 // ── Auth Helper ──
 
@@ -155,7 +156,9 @@ export async function updatePost(id: number, data: FormData) {
   }
 
   if (Object.keys(updateData).length > 0) {
+    const existing = await db.select({ imageUrl: posts.imageUrl }).from(posts).where(eq(posts.id, id)).limit(1);
     await db.update(posts).set(updateData).where(eq(posts.id, id));
+    if (updateData.imageUrl !== undefined && existing[0]?.imageUrl !== updateData.imageUrl) await removeOwnedImage(existing[0]?.imageUrl);
   }
 
   revalidatePath("/berita");
@@ -163,10 +166,11 @@ export async function updatePost(id: number, data: FormData) {
   revalidatePath("/");
   redirect("/admin/berita");
 }
-
 export async function deletePost(id: number) {
   await requireAuth();
+  const existing = await db.select({ imageUrl: posts.imageUrl }).from(posts).where(eq(posts.id, id)).limit(1);
   await db.delete(posts).where(eq(posts.id, id));
+  await removeOwnedImage(existing[0]?.imageUrl);
   revalidatePath("/berita");
   revalidatePath("/admin/berita");
   revalidatePath("/");

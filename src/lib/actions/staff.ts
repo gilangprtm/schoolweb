@@ -7,6 +7,7 @@ import { staff } from "@/lib/db/schema";
 import { StaffSchema, StaffUpdateSchema } from "@/lib/validations";
 import { auth } from "@/lib/auth";
 import { eq, and, asc, count } from "drizzle-orm";
+import { removeOwnedImage } from "@/lib/public-image-storage";
 import { headers } from "next/headers";
 
 async function requireAuth() {
@@ -123,7 +124,9 @@ export async function updateStaff(id: number, data: FormData) {
   }
 
   if (Object.keys(updateData).length > 0) {
+    const existing = await db.select({ photoUrl: staff.photoUrl }).from(staff).where(eq(staff.id, id)).limit(1);
     await db.update(staff).set(updateData).where(eq(staff.id, id));
+    if (updateData.photoUrl !== undefined && existing[0]?.photoUrl !== updateData.photoUrl) await removeOwnedImage(existing[0]?.photoUrl);
   }
 
   revalidatePath("/guru-dan-staf");
@@ -133,7 +136,9 @@ export async function updateStaff(id: number, data: FormData) {
 
 export async function deleteStaff(id: number) {
   await requireAuth();
+  const existing = await db.select({ photoUrl: staff.photoUrl }).from(staff).where(eq(staff.id, id)).limit(1);
   await db.delete(staff).where(eq(staff.id, id));
+  await removeOwnedImage(existing[0]?.photoUrl);
   revalidatePath("/guru-dan-staf");
   revalidatePath("/admin/guru");
 }

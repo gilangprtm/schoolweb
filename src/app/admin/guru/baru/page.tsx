@@ -6,6 +6,8 @@ import { PageHeader } from "@/components/admin/PageHeader"
 import { Button } from "@/components/ui/button"
 import { TextField, TextareaField, SelectField, SwitchField } from "@/components/admin/forms"
 import { createStaff } from "@/lib/actions/staff"
+import ImageUploadField from "@/components/admin/ImageUploadField"
+import { normalizeAdminImageUrl } from "@/lib/image-url"
 import ImagePreview from "@/components/admin/ImagePreview"
 
 const roleOptions = [
@@ -56,7 +58,7 @@ export default function GuruBaruPage() {
       formData.append("slug", slug)
       formData.append("role", role)
       if (subject) formData.append("subject", subject)
-      formData.append("photoUrl", photoId ? `https://docs.google.com/uc?id=${photoId}` : "")
+      formData.append("photoUrl", normalizeAdminImageUrl(photoId))
       formData.append("education", education)
       formData.append("bio", bio)
       formData.append("email", email)
@@ -124,6 +126,7 @@ export default function GuruBaruPage() {
             description="Masukkan ID gambar dari Google Drive"
           />
           {photoId && <ImagePreview src={photoId} alt="preview" aspect="square" className="mx-auto" />}
+          <ImageUploadField onUploaded={setPhotoId} />
 
           <div className="grid sm:grid-cols-2 gap-4">
             <TextField

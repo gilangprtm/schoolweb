@@ -7,6 +7,8 @@ import { TextField, TextareaField, SelectField, SwitchField, RichTextEditor } fr
 import { Button } from "@/components/ui/button"
 import { createFacility } from "@/lib/actions/facilities"
 import ImagePreview from "@/components/admin/ImagePreview"
+import ImageUploadField from "@/components/admin/ImageUploadField"
+import { normalizeAdminImageUrl } from "@/lib/image-url"
 
 const categoryOptions = [
   { value: "akademik", label: "Akademik" },
@@ -35,7 +37,7 @@ export default function FasilitasBaruPage() {
     try {
       const formData = new FormData()
       formData.append("name", name); formData.append("slug", slug); formData.append("category", category)
-      formData.append("description", description); formData.append("photoUrl", photoId ? `https://docs.google.com/uc?id=${photoId}` : "")
+      formData.append("description", description); formData.append("photoUrl", normalizeAdminImageUrl(photoId))
       formData.append("sortOrder", String(sortOrder))
       formData.append("isFeatured", String(isFeatured)); formData.append("isPublished", String(isPublished))
       await createFacility(formData)
@@ -79,6 +81,7 @@ export default function FasilitasBaruPage() {
             placeholder="Google Docs ID atau URL..."
           />
           {photoId && <ImagePreview src={photoId} alt="preview" aspect="video" />}
+          <ImageUploadField onUploaded={setPhotoId} />
         </div>
 
         <div className="rounded-xl border border-border bg-card p-6 space-y-5">

@@ -8,6 +8,8 @@ import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 import { getStaffById, updateStaff } from "@/lib/actions/staff"
 import ImagePreview from "@/components/admin/ImagePreview"
+import ImageUploadField from "@/components/admin/ImageUploadField"
+import { normalizeAdminImageUrl } from "@/lib/image-url"
 
 export default function GuruEditPage() {
   const router = useRouter(); const params = useParams(); const id = Number(params.id)
@@ -19,7 +21,7 @@ export default function GuruEditPage() {
 
   useEffect(() => {
     getStaffById(id).then(s => {
-      if (s) { setName(s.name); setRole(s.role); setSubject(s.subject ?? ""); const match = (s.photoUrl || "").match(/[?&]id=([^&]+)/) || (s.photoUrl || "").match(/\/d\/([^/]+)/); setPhotoId(match ? match[1] : s.photoUrl); setEducation(s.education); setBio(s.bio); setEmail(s.email ?? ""); setPhone(s.phone ?? ""); setSortOrder(s.sortOrder); setIsActive(s.isActive) }
+      if (s) { setName(s.name); setRole(s.role); setSubject(s.subject ?? ""); setPhotoId(s.photoUrl || ""); setEducation(s.education); setBio(s.bio); setEmail(s.email ?? ""); setPhone(s.phone ?? ""); setSortOrder(s.sortOrder); setIsActive(s.isActive) }
       setLoading(false)
     }).catch(() => setLoading(false))
   }, [id])
@@ -30,7 +32,7 @@ export default function GuruEditPage() {
       const formData = new FormData()
       formData.append("name", name); formData.append("slug", slug); formData.append("role", role)
       if (subject) formData.append("subject", subject)
-      formData.append("photoUrl", photoId ? `https://docs.google.com/uc?id=${photoId}` : ""); formData.append("education", education); formData.append("bio", bio)
+      formData.append("photoUrl", normalizeAdminImageUrl(photoId)); formData.append("education", education); formData.append("bio", bio)
       formData.append("email", email); formData.append("phone", phone)
       formData.append("sortOrder", String(sortOrder)); formData.append("isActive", String(isActive))
       await updateStaff(id, formData)
@@ -52,6 +54,7 @@ export default function GuruEditPage() {
             {(role === "teacher" || role.startsWith("waka_")) && <div className="space-y-2"><label className="text-sm font-medium text-neutral-700">Mata Pelajaran</label><Input value={subject} onChange={e => setSubject(e.target.value)} /></div>}
           </div>
           <div className="space-y-2"><label className="text-sm font-medium text-neutral-700">Foto Profil</label><Input placeholder="Google Docs ID atau URL..." value={photoId} onChange={e => setPhotoId(e.target.value)} />{photoId && <ImagePreview src={photoId} alt="preview" aspect="square" />}</div>
+          <ImageUploadField onUploaded={setPhotoId} />
           <div className="grid sm:grid-cols-2 gap-4">
             <div className="space-y-2"><label className="text-sm font-medium text-neutral-700">Email</label><Input type="email" value={email} onChange={e => setEmail(e.target.value)} /></div>
             <div className="space-y-2"><label className="text-sm font-medium text-neutral-700">Telepon</label><Input value={phone} onChange={e => setPhone(e.target.value)} /></div>

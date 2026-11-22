@@ -7,6 +7,8 @@ import { useToast } from "@/components/admin/ui/Toast"
 import { Button } from "@/components/ui/button"
 import { TextField, TextareaField, SelectField, SwitchField, DatePickerField, RichTextEditor } from "@/components/admin/forms"
 import { createAchievement } from "@/lib/actions/achievements"
+import ImageUploadField from "@/components/admin/ImageUploadField"
+import { normalizeAdminImageUrl } from "@/lib/image-url"
 import ImagePreview from "@/components/admin/ImagePreview"
 
 const categoryOptions = [
@@ -70,7 +72,7 @@ export default function PrestasiBaruPage() {
       formData.append("organizer", organizer)
       formData.append("date", date)
       formData.append("description", description)
-      formData.append("imageUrl", imageId ? `https://docs.google.com/uc?id=${imageId}` : "")
+      formData.append("imageUrl", normalizeAdminImageUrl(imageId))
       formData.append("isFeatured", String(isFeatured))
       formData.append("isPublished", String(isPublished))
       await createAchievement(formData)
@@ -122,6 +124,7 @@ export default function PrestasiBaruPage() {
             placeholder="Google Docs ID atau URL..."
           />
           {imageId && <ImagePreview src={imageId} alt="preview" aspect="video" />}
+          <ImageUploadField onUploaded={setImageId} />
         </div>
 
         <div className="rounded-xl border border-border bg-card p-6 space-y-5">

@@ -34,7 +34,7 @@ export default function ImagePreview({
 
   const displaySrc = driveMatch
     ? `https://lh3.googleusercontent.com/d/${driveMatch[1]}=w1200`
-    : src.includes("://")
+    : src.startsWith("/") || src.includes("://")
       ? src
       : `https://lh3.googleusercontent.com/d/${src.trim()}=w1200`
 

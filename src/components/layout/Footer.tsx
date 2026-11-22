@@ -213,9 +213,6 @@ export default async function Footer() {
           <p>
             &copy; {currentYear} {settings.schoolName}. Hak cipta dilindungi.
           </p>
-          <p>
-            Dikembangkan dengan ❤️ untuk pendidikan Indonesia
-          </p>
         </div>
       </div>
     </footer>

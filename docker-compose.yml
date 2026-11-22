@@ -21,18 +21,20 @@ services:
     build: .
     ports:
       - "3000:3000"
+    depends_on:
+      db:
+        condition: service_healthy
     environment:
       DATABASE_URL: postgresql://postgres:***@db:5432/schoolweb
       BETTER_AUTH_SECRET: ${BETTER_AUTH_SECRET:-dev-secret-change-me}
       BETTER_AUTH_URL: http://localhost:3000
       NODE_ENV: development
-    depends_on:
-      db:
-        condition: service_healthy
+      STORAGE_DIR: /app/storage
     volumes:
       - .:/app
       - /app/node_modules
       - /app/.next
-
+      - schoolweb-images:/app/storage
 volumes:
+  schoolweb-images:
   pgdata:

@@ -11,6 +11,7 @@ import {
 import { auth } from "@/lib/auth";
 import { eq, and, desc, count, gte } from "drizzle-orm";
 import { headers } from "next/headers";
+import { removeOwnedImage } from "@/lib/public-image-storage";
 
 async function requireAuth() {
   const session = await auth.api.getSession({
@@ -170,10 +171,9 @@ export async function updateAchievement(id: number, data: FormData) {
   }
 
   if (Object.keys(updateData).length > 0) {
-    await db
-      .update(achievements)
-      .set(updateData)
-      .where(eq(achievements.id, id));
+    const existing = await db.select({ imageUrl: achievements.imageUrl }).from(achievements).where(eq(achievements.id, id)).limit(1);
+    await db.update(achievements).set(updateData).where(eq(achievements.id, id));
+    if (updateData.imageUrl !== undefined && existing[0]?.imageUrl !== updateData.imageUrl) await removeOwnedImage(existing[0]?.imageUrl);
   }
 
   revalidatePath("/prestasi");
@@ -181,10 +181,11 @@ export async function updateAchievement(id: number, data: FormData) {
   revalidatePath("/");
   redirect("/admin/prestasi");
 }
-
 export async function deleteAchievement(id: number) {
   await requireAuth();
+  const existing = await db.select({ imageUrl: achievements.imageUrl }).from(achievements).where(eq(achievements.id, id)).limit(1);
   await db.delete(achievements).where(eq(achievements.id, id));
+  await removeOwnedImage(existing[0]?.imageUrl);
   revalidatePath("/prestasi");
   revalidatePath("/admin/prestasi");
   revalidatePath("/");

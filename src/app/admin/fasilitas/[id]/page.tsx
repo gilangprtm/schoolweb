@@ -11,6 +11,8 @@ import { getFacilityById, updateFacility, addFacilityPhoto, deleteFacilityPhoto 
 import { getGoogleDriveImageUrl } from "@/lib/utils"
 import ImagePreview from "@/components/admin/ImagePreview"
 import { useToast } from "@/components/admin/ui/Toast"
+import ImageUploadField from "@/components/admin/ImageUploadField"
+import { normalizeAdminImageUrl } from "@/lib/image-url"
 import type { FacilityPhoto } from "@/types"
 
 const categoryOptions = [
@@ -36,7 +38,7 @@ export default function FasilitasEditPage() {
 
   useEffect(() => {
     getFacilityById(id).then(f => {
-      if (f) { setName(f.name); setCategory(f.category); setSortOrder(f.sortOrder); setDescription(f.description); const match = (f.photoUrl || "").match(/[?&]id=([^&]+)/) || (f.photoUrl || "").match(/\/d\/([^/]+)/); setPhotoId(match ? match[1] : f.photoUrl); setIsFeatured(f.isFeatured); setIsPublished(f.isPublished); setPhotos(f.photos || []) }
+      if (f) { setName(f.name); setCategory(f.category); setSortOrder(f.sortOrder); setDescription(f.description); setPhotoId(f.photoUrl || ""); setIsFeatured(f.isFeatured); setIsPublished(f.isPublished); setPhotos(f.photos || []) }
       setLoading(false)
     }).catch(() => setLoading(false))
   }, [id])
@@ -49,8 +51,8 @@ export default function FasilitasEditPage() {
     setGalleryLoading(true)
     try {
       await addFacilityPhoto(id, {
-        filename: value,
-        url: getGoogleDriveImageUrl(value),
+        filename: value.startsWith("/api/public-images/") ? value.split("/").pop()! : value,
+        url: value.startsWith("/api/public-images/") ? value : getGoogleDriveImageUrl(value),
         caption: galleryCaption.trim() || undefined,
         sortOrder: photos.length,
       })
@@ -81,7 +83,7 @@ export default function FasilitasEditPage() {
     try {
       const formData = new FormData()
       formData.append("name", name); formData.append("slug", slug); formData.append("category", category)
-      formData.append("description", description); formData.append("photoUrl", photoId ? `https://docs.google.com/uc?id=${photoId}` : "")
+      formData.append("description", description); formData.append("photoUrl", normalizeAdminImageUrl(photoId))
       formData.append("sortOrder", String(sortOrder))
       formData.append("isFeatured", String(isFeatured)); formData.append("isPublished", String(isPublished))
       await updateFacility(id, formData)
@@ -116,6 +118,7 @@ export default function FasilitasEditPage() {
 
           <TextField label="Foto Cover" value={photoId} onChange={setPhotoId} placeholder="Google Docs ID atau URL..." />
           {photoId && <ImagePreview src={photoId} alt="preview" aspect="video" />}
+          <ImageUploadField onUploaded={setPhotoId} />
         </div>
 
         <div className="rounded-xl border border-border bg-card p-6 space-y-5">
@@ -147,6 +150,7 @@ export default function FasilitasEditPage() {
               {galleryLoading ? "Menambah..." : "Tambah"}
             </Button>
           </div>
+          <ImageUploadField onUploaded={setGalleryPhotoId} />
           {galleryPhotoId && (
             <ImagePreview src={galleryPhotoId} alt="Preview foto galeri" aspect="video" />
           )}

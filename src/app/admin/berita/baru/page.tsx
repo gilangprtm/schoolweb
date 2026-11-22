@@ -8,6 +8,8 @@ import { Button } from "@/components/ui/button"
 import { TextField, TextareaField, SelectField, SwitchField, DatePickerField, RichTextEditor } from "@/components/admin/forms"
 import { createPost } from "@/lib/actions/posts"
 import ImagePreview from "@/components/admin/ImagePreview"
+import ImageUploadField from "@/components/admin/ImageUploadField"
+import { normalizeAdminImageUrl } from "@/lib/image-url"
 
 const categoryOptions = [
   { value: "news", label: "Berita" },
@@ -24,7 +26,6 @@ export default function BeritaBaruPage() {
   const [content, setContent] = useState("")
   const [isPublished, setIsPublished] = useState(true)
   const [publishedAt, setPublishedAt] = useState(new Date().toISOString().split("T")[0])
-  const [imageUrl, setImageUrl] = useState("")
   const [imageId, setImageId] = useState("")
   const [loading, setLoading] = useState(false)
   const [errors, setErrors] = useState<Record<string, string>>({})
@@ -55,8 +56,7 @@ export default function BeritaBaruPage() {
       formData.append("category", category)
       formData.append("excerpt", excerpt)
       formData.append("content", content)
-      const normalizedImageId = imageId.match(/[?&]id=([^&]+)/)?.[1] || imageId.match(/\/d\/([^/]+)/)?.[1] || imageId.trim()
-      formData.append("imageUrl", normalizedImageId ? `https://docs.google.com/uc?id=${normalizedImageId}` : "")
+      formData.append("imageUrl", normalizeAdminImageUrl(imageId))
       formData.append("isPublished", String(isPublished))
       formData.append("publishedAt", publishedAt)
       await createPost(formData)
@@ -143,6 +143,7 @@ export default function BeritaBaruPage() {
               }
             />
             {imageId && <ImagePreview src={imageId} alt="Preview" aspect="video" />}
+            <ImageUploadField onUploaded={setImageId} />
           </div>
 
           <div className="space-y-2">
